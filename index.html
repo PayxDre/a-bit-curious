@@ -4788,21 +4788,28 @@ async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label){
   try {
     var cur = vsCurrency === 'gold' ? 'usd' : vsCurrency;
     // Calculate days since Bitcoin genesis (Jan 3, 2009)
-    var daysSinceGenesis = Math.ceil((Date.now() - new Date('2009-01-03').getTime()) / 86400000);
-    // Try full history first, then progressively smaller windows
-    var res;
-    var attempts = [daysSinceGenesis, 1825, 365];
-    for(var ai = 0; ai < attempts.length; ai++){
+    // Fetch full history since inception — omit interval param so CoinGecko returns all data
+    // (free tier with interval=daily caps at ~365 days; without it, auto-granularity returns full history)
+    var data = null;
+    var urls = [
+      'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + cur + '&days=max',
+      'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + cur + '&days=max&interval=daily',
+      'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + cur + '&days=1825'
+    ];
+    for(var ai = 0; ai < urls.length; ai++){
       try {
-        res = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + cur + '&days=' + attempts[ai] + '&interval=daily');
-        if(res.ok) break;
-        res = null;
+        var r = await fetch(urls[ai]);
+        if(r.ok){
+          var parsed = await r.json();
+          if(parsed.prices && parsed.prices.length > 400){
+            data = parsed;
+            break;
+          }
+        }
       } catch(e){}
-      if(ai < attempts.length - 1) await new Promise(function(r){ setTimeout(r, 1500); });
+      if(ai < urls.length - 1) await new Promise(function(resolve){ setTimeout(resolve, 1500); });
     }
-    if(!res || !res.ok) throw new Error('All chart API attempts failed');
-    if(!res.ok) throw new Error('HTTP ' + res.status);
-    var data = await res.json();
+    if(!data) throw new Error('Could not fetch sufficient chart data');
     var prices = data.prices;
 
     if(!prices || prices.length < 2){
@@ -4815,7 +4822,7 @@ async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label){
       var gp = goldPrice || 2400;
       try {
         await new Promise(function(r){ setTimeout(r, 1200); }); // brief delay to avoid rate limit
-        var gRes = await fetch('https://api.coingecko.com/api/v3/coins/tether-gold/market_chart?vs_currency=usd&days=' + daysSinceGenesis + '&interval=daily');
+        var gRes = await fetch('https://api.coingecko.com/api/v3/coins/tether-gold/market_chart?vs_currency=usd&days=max');
         if(gRes.ok){
           var gData = await gRes.json();
           if(gData.prices && gData.prices.length > 10){
@@ -5013,6 +5020,33 @@ function renderChart(cvs, series, label, hoverIdx){
 //   INIT
 // ═══════════════════════════════════════
 showSection('welcome');
+
+// ── Bibliography reference link handler ──
+// Intercept clicks on [N] superscript links, switch to bibliography section, then scroll to ref
+document.addEventListener('click', function(e){
+  var link = e.target.closest('a[href^="#ref-"]');
+  if(!link) return;
+  e.preventDefault();
+  var refId = link.getAttribute('href').slice(1); // "ref-1"
+  showSection('bibliography');
+  // Wait for section to become visible, then scroll to the reference
+  requestAnimationFrame(function(){
+    setTimeout(function(){
+      var el = document.getElementById(refId);
+      if(el){
+        el.scrollIntoView({behavior:'smooth', block:'center'});
+        // Flash highlight
+        el.style.transition = 'background 0.3s, border-color 0.3s';
+        el.style.background = 'rgba(245,158,11,0.15)';
+        el.style.borderColor = 'var(--orange)';
+        setTimeout(function(){
+          el.style.background = '';
+          el.style.borderColor = '';
+        }, 2000);
+      }
+    }, 100);
+  });
+});
 </script>
 
 <!-- ═══════════════ PRICE CHART MODAL ═══════════════ -->
