@@ -873,7 +873,7 @@
     <div class="flex items-center gap-2" aria-label="Bitcoin price ticker">
       <span class="pulse-badge" aria-hidden="true"></span>
       <span class="hidden sm:inline" style="font-size:12px;color:var(--muted);">BTC/USD</span>
-      <span class="ticker-num" id="btcPrice" aria-live="polite">$0</span>
+      <span class="ticker-num" id="btcPrice" aria-live="polite">...</span>
     </div>
     <div class="hidden md:flex items-center gap-2" aria-label="Bitcoin gold price">
       <span style="font-size:12px;color:var(--muted);">BTC/Gold</span>
@@ -2614,7 +2614,17 @@ async function fetchBtcPrice(){
     btcChange = data.bitcoin.usd_24h_change;
     renderTicker();
   } catch(e) {
-    console.warn('BTC price fetch failed:', e);
+    console.warn('CoinGecko BTC price failed, trying fallback:', e);
+    try {
+      const res2 = await fetch('https://mempool.space/api/v1/prices');
+      const data2 = await res2.json();
+      if(data2.USD && btcPrice === 0){
+        btcPrice = data2.USD;
+        renderTicker();
+      }
+    } catch(e2) {
+      console.warn('Fallback BTC price also failed:', e2);
+    }
   }
 }
 async function fetchGoldPrice(){
@@ -2627,6 +2637,7 @@ async function fetchGoldPrice(){
     console.warn('Gold price fetch failed:', e);
   }
 }
+renderTicker(); // Show "..." immediately instead of "$0"
 fetchBtcPrice();
 fetchGoldPrice();
 _timers.ticker = setInterval(() => { fetchBtcPrice(); fetchGoldPrice(); }, 30000);
@@ -3143,7 +3154,7 @@ function getModalContent(section){
         <div class="flex gap-3">
           <button id="mineBtn" class="btn-orange flex-1">\u26CF Start Mining</button>
           <div class="text-xs flex flex-col justify-center" style="color:var(--muted);">
-            <div>Hash rate: <span id="hashRate" style="color:var(--orange);">0 H/s</span></div>
+            <div>Hash rate: <span id="mineHashRate" style="color:var(--orange);">0 H/s</span></div>
             <div>Time: <span id="mineTime" style="color:var(--orange);">0s</span></div>
           </div>
         </div>
@@ -3786,7 +3797,7 @@ function startMining(){
         document.getElementById('mineTime').textContent = ((Date.now()-startTime)/1000).toFixed(1)+'s';
         document.getElementById('mineProgress').style.width = Math.min((nonce/50000)*100,99)+'%';
         const now = Date.now();
-        document.getElementById('hashRate').textContent = Math.floor((nonce-lastNonce)/((now-lastTime)/1000)).toLocaleString()+' H/s';
+        document.getElementById('mineHashRate').textContent = Math.floor((nonce-lastNonce)/((now-lastTime)/1000)).toLocaleString()+' H/s';
         lastNonce = nonce; lastTime = now;
       }
     }
