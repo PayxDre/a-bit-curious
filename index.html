@@ -164,10 +164,24 @@
     font-size:12px;
     color:var(--text);
     width:220px;
+    max-width:85vw;
     z-index:9999;
     line-height:1.55;
     pointer-events:none;
     box-shadow:0 8px 32px rgba(0,0,0,0.8), 0 0 16px var(--orange-glow);
+  }
+  /* Keep tooltips on-screen on mobile */
+  @media(max-width:640px){
+    .tooltip-box{
+      position:fixed;
+      bottom:auto;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:85vw;
+      max-width:320px;
+      pointer-events:auto;
+    }
   }
   .tooltip-word:hover .tooltip-box,
   .tooltip-word:focus .tooltip-box,
@@ -854,13 +868,16 @@
   <div class="flex items-center gap-3">
     <button id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="left-sidebar">&#9776;</button>
     <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;">A <span class="logo-glow glow-text">&#8383;</span>it Curious</span>
-    <span class="ml-1 text-xs px-2 py-0.5 rounded-full hidden sm:inline-block" style="background:var(--orange-dim);color:var(--orange);font-family:'Space Mono',monospace;">2026</span>
   </div>
   <div class="flex items-center gap-4">
     <div class="flex items-center gap-2" aria-label="Bitcoin price ticker">
       <span class="pulse-badge" aria-hidden="true"></span>
       <span class="hidden sm:inline" style="font-size:12px;color:var(--muted);">BTC/USD</span>
       <span class="ticker-num" id="btcPrice" aria-live="polite">$0</span>
+    </div>
+    <div class="hidden md:flex items-center gap-2" aria-label="Bitcoin gold price">
+      <span style="font-size:12px;color:var(--muted);">BTC/Gold</span>
+      <span id="btcGold" style="font-family:'Space Mono',monospace;font-size:12px;color:var(--orange-bright);">... oz</span>
     </div>
     <div class="hidden md:flex items-center gap-2">
       <span style="font-size:11px;color:var(--muted);">24h</span>
@@ -903,6 +920,7 @@
     <button class="nav-item" data-section="security" id="nav-security" aria-describedby="nav-group-start">&#128272; Security</button>
     <button class="nav-item" data-section="altcoins" id="nav-altcoins" aria-describedby="nav-group-start">&#128302; Bitcoin vs Other Cryptos</button>
     <button class="nav-item" data-section="myths" id="nav-myths" aria-describedby="nav-group-start">&#128165; 5 Bitcoin Myths Debunked</button>
+    <button class="nav-item" data-section="adoption" id="nav-adoption" aria-describedby="nav-group-start">&#128640; Bitcoin Adoption</button>
 
     <div class="neon-divider mx-3"></div>
     <div class="nav-group-label" id="nav-group-system">III. How Bitcoin Works</div>
@@ -1649,7 +1667,18 @@
 
       <p class="body-text">This is <span class="tooltip-word" tabindex="0">Jeff Booth's<span class="tooltip-box">Author of "The Price of Tomorrow." Booth argues that technology's exponential deflationary force is on a collision course with the inflationary requirements of debt-based fiat. One must win. Bitcoin is his answer.</span></span> thesis: technology is an exponentially deflationary force, but fiat <em>requires</em> inflation to service ever-growing debt. Every year, technology pushes prices down; money printing pushes them up. The winners? Banks and governments. The losers? Everyone else &mdash; workers, savers, the poor &mdash; who should be enjoying cheaper goods but instead watch prices climb.</p>
 
-      <p class="body-text">Bitcoin breaks this cycle. With a fixed supply, Bitcoin lets technology's natural gift &mdash; <strong style="color:var(--orange);">falling prices and rising abundance</strong> &mdash; reach you directly. When AI makes manufacturing 10% more efficient, goods actually become 10% cheaper. Productivity gains flow to the people who created them, not the money printers who intercepted them. Saving becomes a winning strategy.</p>
+      <!-- ── Why Fiat CANNOT Allow Deflation ── -->
+      <div class="glass p-5 my-6" style="border-left:3px solid #f87171;">
+        <div class="text-sm font-bold mb-3" style="color:#f87171;">&#9888;&#65039; Why the Fiat System Cannot Let Deflation Win</div>
+        <p class="body-text" style="margin-bottom:10px;">Here's the critical insight most people miss: the fiat monetary system is built on <strong style="color:#f87171;">debt</strong>. Every dollar in existence was borrowed into existence. Governments, corporations, and households owe more than $300 trillion globally. All of that debt assumes that future dollars will be worth <em>less</em> than today's dollars &mdash; i.e., that inflation will continue.</p>
+        <p class="body-text" style="margin-bottom:10px;">If technology's deflation were ever allowed to exceed the rate of monetary inflation, <span class="tooltip-word" tabindex="0">the entire leverage system collapses<span class="tooltip-box">In a deflationary environment, the real value of debt increases. Borrowers owe more in real terms, defaults cascade, banks fail, credit freezes. This is why central banks are terrified of deflation and will print unlimited money to prevent it.</span></span>. Falling prices mean debts become <em>harder</em> to repay in real terms. Borrowers default. Banks holding those loans fail. Credit markets seize. The cascading liquidations make 2008 look like a rehearsal.</p>
+        <p class="body-text" style="margin-bottom:10px;">This is why central banks <strong style="color:#f87171;">must</strong> print money &mdash; it's not a choice, it's structural. The fiat system requires perpetual monetary inflation just to keep the debt pyramid from imploding. The 2% inflation target isn't about "price stability" &mdash; it's the minimum rate of theft required to prevent the system from eating itself. As Jeff Booth puts it: <em style="color:var(--orange);">"The system needs inflation more than you need your savings."</em></p>
+        <div class="text-xs p-3 rounded-xl mt-3" style="background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);color:var(--text2);line-height:1.7;">
+          <strong style="color:#f87171;">The trap:</strong> Technology wants to make your life cheaper. But the debt-based monetary system will destroy itself if it lets that happen. So central banks print money to offset deflation, stealing the productivity gains that should be yours. The more technology improves, the more money they have to print. It's a treadmill that can only end one way &mdash; the currency breaks.
+        </div>
+      </div>
+
+      <p class="body-text">Bitcoin breaks this cycle. With a fixed supply, Bitcoin lets technology's natural gift &mdash; <strong style="color:var(--orange);">falling prices and rising abundance</strong> &mdash; reach you directly. When AI makes manufacturing 10% more efficient, goods actually become 10% cheaper. Productivity gains flow to the people who created them, not the money printers who intercepted them. Saving becomes a winning strategy. There is no debt pyramid requiring perpetual debasement. Bitcoin is simply <em>honest money</em> &mdash; and in an honest monetary system, technology's deflation is a gift, not a threat.</p>
 
       <div class="neon-divider"></div>
       <button class="btn-orange" data-modal="deflation">Start Interactive Lesson &rarr;</button>
@@ -1846,12 +1875,133 @@
       <div class="neon-divider"></div>
       <button class="btn-orange" data-modal="myths">Start Interactive Lesson &rarr;</button>
 
+      <!-- Bridge to Adoption -->
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">"But <span class="glow-text">nobody</span> actually uses Bitcoin..."</div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Think again. From Wall Street ETFs to everyday payments, Bitcoin adoption is accelerating everywhere.</p>
+        <button class="btn-orange" data-section="adoption" style="font-size:15px;padding:14px 32px;">See Who's Using Bitcoin &#128640; &rarr;</button>
+      </div>
+    </div>
+
+    <!-- ════ "WELL, NO ONE USES BITCOIN" ════ -->
+    <div class="section-content" id="sec-adoption">
+      <h2 class="section-title">&#128640; <span class="glow-text">"Well, No One Uses Bitcoin"</span></h2>
+      <div class="section-subtitle">// The adoption wave hiding in plain sight</div>
+
+      <div class="highlight-box">
+        <span class="font-bold" style="color:var(--orange);">One of the most persistent myths is that Bitcoin is just a speculative toy.</span> In reality, the world's largest companies, financial institutions, and payment processors are racing to integrate it. Here's what's actually happening.
+      </div>
+
+      <!-- Block / Square -->
+      <div class="glass p-5 my-5" style="border-left:3px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:var(--orange-dim);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">PAYMENTS</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Block (Square) Opens Bitcoin to Every Merchant</span>
+        </div>
+        <p class="body-text" style="margin-bottom:10px;">Jack Dorsey's Block has given <strong style="color:var(--orange);">every Square merchant</strong> the ability to accept Bitcoin payments. Millions of small businesses &mdash; coffee shops, restaurants, retail stores &mdash; can now receive Bitcoin directly. Cash App, also owned by Block, has enabled tens of millions of users to buy, sell, and send Bitcoin instantly. Block is also investing heavily in Bitcoin mining hardware and open-source Bitcoin development, making their commitment structural, not speculative.</p>
+      </div>
+
+      <!-- Lightning Network -->
+      <div class="glass p-5 my-5" style="border-left:3px solid #4ade80;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:rgba(74,222,128,0.15);color:#4ade80;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">LIGHTNING</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Lightning Network: Instant, Nearly Free Payments</span>
+        </div>
+        <p class="body-text" style="margin-bottom:10px;">The <span class="tooltip-word" tabindex="0">Lightning Network<span class="tooltip-box">A "Layer 2" protocol built on top of Bitcoin that enables instant, high-volume micropayments. Transactions settle in milliseconds for fractions of a penny.</span></span> has turned Bitcoin into a real-time payment rail. Transactions settle in <strong style="color:#4ade80;">milliseconds</strong> for fractions of a penny. El Salvador's Chivo wallet runs on Lightning. Strike uses it for cross-border remittances that are faster and cheaper than Western Union. Businesses like Fold, Bitrefill, and thousands of merchants worldwide accept Lightning payments daily. What Visa does for the dollar, Lightning does for Bitcoin &mdash; but without the middlemen taking 2-3% of every transaction.</p>
+      </div>
+
+      <!-- MicroStrategy -->
+      <div class="glass p-5 my-5" style="border-left:3px solid #60a5fa;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:rgba(96,165,250,0.15);color:#60a5fa;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">TREASURY</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Strategy (MicroStrategy): Bitcoin as a Treasury Reserve</span>
+        </div>
+        <p class="body-text" style="margin-bottom:10px;">Michael Saylor's Strategy (formerly MicroStrategy) has accumulated over <strong style="color:#60a5fa;">500,000+ BTC</strong>, making it the largest corporate holder of Bitcoin in the world. Why? Because holding cash on a balance sheet means losing 7-10% of purchasing power per year to real inflation. Bitcoin offers a treasury asset with a <em>fixed supply</em>, <em>no counterparty risk</em>, <em>24/7 global liquidity</em>, and a 16-year track record of outperforming every other asset class. The playbook is simple: instead of watching your cash reserves melt, convert them to the hardest money ever created. Since adopting this strategy, dozens of other public companies &mdash; including Tesla, Marathon Digital, and Metaplanet &mdash; have followed suit.</p>
+      </div>
+
+      <!-- Why Bitcoin is a strong treasury asset -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#127974; Why Bitcoin Makes a Strong Treasury Asset</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="text-align:center;padding:14px 10px;border-radius:12px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);">
+            <div style="font-size:24px;margin-bottom:4px;">&#128274;</div>
+            <div style="font-size:12px;font-weight:700;color:var(--orange);">Fixed Supply</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4;">Only 21M will ever exist. No board, no government, no CEO can dilute it.</div>
+          </div>
+          <div style="text-align:center;padding:14px 10px;border-radius:12px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);">
+            <div style="font-size:24px;margin-bottom:4px;">&#127760;</div>
+            <div style="font-size:12px;font-weight:700;color:var(--orange);">24/7 Liquidity</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4;">Trades around the clock, every day. No market hours. No settlement delays.</div>
+          </div>
+          <div style="text-align:center;padding:14px 10px;border-radius:12px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);">
+            <div style="font-size:24px;margin-bottom:4px;">&#9989;</div>
+            <div style="font-size:12px;font-weight:700;color:var(--orange);">No Counterparty Risk</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4;">Self-custodied Bitcoin depends on no bank, no broker, no institution to hold your value.</div>
+          </div>
+          <div style="text-align:center;padding:14px 10px;border-radius:12px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);">
+            <div style="font-size:24px;margin-bottom:4px;">&#128200;</div>
+            <div style="font-size:12px;font-weight:700;color:var(--orange);">Asymmetric Upside</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4;">Still early in its adoption curve. Cash guarantees loss. Bitcoin offers the possibility of generational gains.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IBIT ETF -->
+      <div class="glass p-5 my-5" style="border-left:3px solid #a78bfa;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:rgba(167,139,250,0.15);color:#a78bfa;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">WALL STREET</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">IBIT: The Most Successful ETP Launch in History</span>
+        </div>
+        <p class="body-text" style="margin-bottom:10px;">When the SEC approved spot Bitcoin ETFs in January 2024, BlackRock's <strong style="color:#a78bfa;">iShares Bitcoin Trust (IBIT)</strong> shattered every record in ETP history. It reached $10 billion in assets faster than any ETF ever launched &mdash; faster than gold ETFs, S&amp;P 500 ETFs, bond ETFs, everything. Within months, the Bitcoin spot ETFs collectively held more Bitcoin than Satoshi Nakamoto's estimated stash. This wasn't retail speculation &mdash; this was pension funds, endowments, and sovereign wealth funds gaining exposure to Bitcoin through the world's most trusted financial infrastructure. Wall Street didn't kill Bitcoin. Wall Street <em>adopted</em> it.</p>
+      </div>
+
+      <!-- Strike -->
+      <div class="glass p-5 my-5" style="border-left:3px solid #fbbf24;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:rgba(251,191,36,0.15);color:#fbbf24;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">FINANCIAL PRODUCTS</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Strike: Borrow Against Your Bitcoin, Never Sell</span>
+        </div>
+        <p class="body-text" style="margin-bottom:10px;">Strike has built lending products that let you <strong style="color:#fbbf24;">borrow against your Bitcoin</strong> without ever selling it. Need cash for a house, a car, or an emergency? Put up your BTC as collateral, get a loan in dollars, and keep your upside exposure. When the loan is paid off, your Bitcoin comes back &mdash; and it may be worth far more than when you borrowed against it. This is the <span class="tooltip-word" tabindex="0">"never sell" strategy<span class="tooltip-box">By borrowing against Bitcoin instead of selling, you avoid triggering capital gains taxes, keep your long-term position intact, and benefit from future appreciation. This is how the wealthy have always managed assets &mdash; borrow against, never sell.</span></span> that the ultra-wealthy have used for generations with stocks and real estate &mdash; now available to anyone with Bitcoin.</p>
+      </div>
+
+      <!-- Summary visual -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#127919; The Adoption Scoreboard</div>
+        <div class="space-y-2">
+          <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
+            <span style="color:var(--orange);font-weight:700;min-width:90px;">Payments</span>
+            <span style="color:var(--text2);">Block/Square, Lightning Network, BTCPay Server, Strike</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
+            <span style="color:var(--orange);font-weight:700;min-width:90px;">Treasuries</span>
+            <span style="color:var(--text2);">Strategy, Tesla, Marathon, Metaplanet, Semler Scientific</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
+            <span style="color:var(--orange);font-weight:700;min-width:90px;">Wall Street</span>
+            <span style="color:var(--text2);">BlackRock IBIT, Fidelity, ARK, VanEck, Invesco spot ETFs</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
+            <span style="color:var(--orange);font-weight:700;min-width:90px;">Nations</span>
+            <span style="color:var(--text2);">El Salvador (legal tender), US Strategic Bitcoin Reserve</span>
+          </div>
+          <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
+            <span style="color:var(--orange);font-weight:700;min-width:90px;">Lending</span>
+            <span style="color:var(--text2);">Strike, Unchained, Ledn &mdash; borrow against BTC, never sell</span>
+          </div>
+        </div>
+        <div class="text-xs text-center mt-3" style="color:var(--muted);">"No one uses Bitcoin" is the new "no one uses the internet" &mdash; said in 1995 while the revolution was already underway.</div>
+      </div>
+
+      <div class="neon-divider"></div>
+
       <!-- Bridge to Chapter III -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
         <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next &mdash; Chapter III</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">Now let's see <span class="glow-text">how it works</span>.</div>
-        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You know the why, you know the how-to, and you've seen through the myths. Time to explore the engine under the hood &mdash; the network, miners, and blockchain.</p>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You know the why, you've seen through the myths, and you've seen the adoption wave. Time to explore the engine under the hood &mdash; the network, miners, and blockchain.</p>
         <button class="btn-orange" data-section="network" style="font-size:15px;padding:14px 32px;">Explore How Bitcoin Works &#127760; &rarr;</button>
       </div>
     </div>
@@ -2281,7 +2431,7 @@
         </div>
         <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Network Nodes</span>
-          <span style="color:var(--orange-bright);font-family:'Space Mono',monospace;">~19,200</span>
+          <span id="networkNodes" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">~19,200</span>
         </div>
         <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Total Supply</span>
@@ -2289,7 +2439,11 @@
         </div>
         <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Mined So Far</span>
-          <span style="color:var(--orange-bright);font-family:'Space Mono',monospace;">19,847,300</span>
+          <span id="minedSupply" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">19,847,300</span>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span style="color:var(--muted);">Hash Rate</span>
+          <span id="hashRate" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">...</span>
         </div>
         <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Next Halving</span>
@@ -2319,10 +2473,10 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','fiatgraveyard','digimoney','inflation','deflation','pizza','wallets','exchanges','sending','security','altcoins','myths','network','node','mining','blockchain','blocks','difficulty','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','perspective'];
+const sectionOrder = ['welcome','money','fiatgraveyard','digimoney','inflation','deflation','pizza','wallets','exchanges','sending','security','altcoins','myths','adoption','network','node','mining','blockchain','blocks','difficulty','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','perspective'];
 
 const sectionNames = {
-  welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', inflation:'Monetary Inflation', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
+  welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', inflation:'Monetary Inflation', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
   money:'Nature of Money', network:'Bitcoin Network', node:'Node', mining:'Mining',
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
@@ -2334,6 +2488,7 @@ let currentSection = 'welcome';
 let didYouKnowIndex = 0;
 let btcPrice = 0;
 let btcChange = 0;
+let goldPrice = 0;
 let _scrollY = 0;
 
 // Timers (stored so they can be cleaned up)
@@ -2445,6 +2600,11 @@ function renderTicker(){
   const changeEl = document.getElementById('btcChange');
   changeEl.textContent = (btcChange >= 0 ? '+' : '') + btcChange.toFixed(2) + '%';
   changeEl.style.color = btcChange >= 0 ? '#4ade80' : '#f87171';
+  // BTC priced in gold ounces
+  const goldEl = document.getElementById('btcGold');
+  if(btcPrice > 0 && goldPrice > 0){
+    goldEl.textContent = (btcPrice / goldPrice).toFixed(1) + ' oz';
+  }
 }
 async function fetchBtcPrice(){
   try {
@@ -2457,19 +2617,48 @@ async function fetchBtcPrice(){
     console.warn('BTC price fetch failed:', e);
   }
 }
+async function fetchGoldPrice(){
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=tether-gold&vs_currencies=usd');
+    const data = await res.json();
+    goldPrice = data['tether-gold'].usd;
+    renderTicker();
+  } catch(e) {
+    console.warn('Gold price fetch failed:', e);
+  }
+}
 fetchBtcPrice();
-_timers.ticker = setInterval(fetchBtcPrice, 30000);
+fetchGoldPrice();
+_timers.ticker = setInterval(() => { fetchBtcPrice(); fetchGoldPrice(); }, 30000);
 
-// Simulate block height and mempool
-_timers.stats = setInterval(() => {
-  if(document.hidden) return; // skip if tab hidden
-  const bh = document.getElementById('blockHeight');
-  const mt = document.getElementById('mempoolTx');
-  const cur = parseInt(bh.textContent.replace(/,/g,''));
-  if(Math.random() < 0.02) bh.textContent = (cur + 1).toLocaleString();
-  const curM = parseInt(mt.textContent.replace(/,/g,''));
-  mt.textContent = Math.max(1000, curM + Math.floor((Math.random()-0.45)*200)).toLocaleString();
-}, 4000);
+// ═══════════════════════════════════════
+//   LIVE BITCOIN STATS (mempool.space API)
+// ═══════════════════════════════════════
+async function fetchLiveStats(){
+  try {
+    // Block height
+    const tipRes = await fetch('https://mempool.space/api/blocks/tip/height');
+    const tipHeight = await tipRes.json();
+    document.getElementById('blockHeight').textContent = Number(tipHeight).toLocaleString();
+
+    // Mempool size
+    const mempoolRes = await fetch('https://mempool.space/api/mempool');
+    const mempoolData = await mempoolRes.json();
+    document.getElementById('mempoolTx').textContent = Number(mempoolData.count).toLocaleString();
+
+    // Hash rate (from mining stats)
+    const hashRes = await fetch('https://mempool.space/api/v1/mining/hashrate/3d');
+    const hashData = await hashRes.json();
+    if(hashData.currentHashrate){
+      const ehps = hashData.currentHashrate / 1e18;
+      document.getElementById('hashRate').textContent = ehps.toFixed(1) + ' EH/s';
+    }
+  } catch(e) {
+    console.warn('Live stats fetch failed:', e);
+  }
+}
+fetchLiveStats();
+_timers.stats = setInterval(fetchLiveStats, 60000);
 
 // ═══════════════════════════════════════
 //   TEACHING NOTES & DID YOU KNOW
@@ -2483,6 +2672,7 @@ const teachingNotes = {
   inflation: `\uD83C\uDF93 This section bridges the gap between "money is broken" (Nature of Money) and "here's the alternative" (Bitcoin). Students need to understand that the inflation numbers they see on the news are actively manipulated.\n\n\uD83D\uDCA1 The ShadowStats comparison is powerful \u2014 show the divergence between official CPI and the 1980 methodology. The gap is not subtle.\n\n\uD83C\uDFAF Key insight: if real inflation is 8\u201312%, holding cash loses half its value in 6\u20139 years, not 24\u201336 years.`,
   deflation: `\uD83C\uDF93 Jeff Booth's thesis is the intellectual capstone of Chapter I. Technology = deflation. Fiat = inflation. The two are at war. Bitcoin lets deflation win.\n\n\uD83D\uDCA1 The key equation to drive home: 5% tech deflation + 7% money printing = "2% reported CPI." That single formula makes students see through the illusion.\n\n\uD83C\uDFAF After this section, students should feel genuine urgency to learn how Bitcoin works in practice.`,
   pizza: `\uD83C\uDF93 The pizza analogy is the single best response to "there aren't enough Bitcoin." It reframes the entire debate: the issue isn't quantity, it's dilution.\n\n\uD83D\uDCA1 The key line: "You can cut a pizza smaller, but you can't make more pizza." Let that land. Then show the numbers: 2.1 quadrillion sats. 262,000 per person.\n\n\uD83C\uDFAF Drive home that deflation under a gold standard powered the industrial revolution. "We need inflation" is propaganda, not economics.`,
+  adoption: `\uD83C\uDF93 This section is the perfect response to "but nobody uses Bitcoin." Walk through each example slowly \u2014 the breadth of adoption shocks most beginners.\n\n\uD83D\uDCA1 Key insight: adoption is happening simultaneously at every level \u2014 individual (Cash App, Strike), merchant (Square), corporate treasury (Strategy), institutional (BlackRock IBIT), and sovereign (El Salvador). No technology in history has been adopted across all these layers this fast.\n\n\uD83C\uDFAF The "never sell" strategy via borrowing against BTC is a powerful reframe. It shifts the conversation from "when do I take profits?" to "why would I ever sell the hardest asset?"`,
   myths: `\uD83C\uDF93 Students arrive with these myths pre-loaded from media. Don't dismiss them \u2014 acknowledge them, then systematically dismantle them with facts.\n\n\uD83D\uDCA1 The pattern observation at the end is powerful: every myth follows the same lazy template. Once students see the pattern, they become immune to new myths.\n\n\uD83C\uDFAF The myth-buster interactive lesson lets students try to "attack" Bitcoin and see why each attack fails. Very engaging.`,
   wallets: `\ud83c\udf93 A great analogy: a wallet is like a keychain, not a piggy bank. It holds the KEYS to your money, not the money itself.\n\n\ud83d\udca1 Tip: Start with the wallet generator below to make it concrete.`,
   exchanges: `\ud83c\udf93 Most beginners start on exchanges. Key teaching moment: exchange Bitcoin is like a "receipt" \u2014 it's a promise, not the real thing.\n\n\ud83d\udca1 The airport currency analogy works brilliantly here.`,
