@@ -4564,277 +4564,251 @@ document.getElementById('main-content').addEventListener('click', function(e){
 })();
 
 // ═══════════════════════════════════════
+// ═══════════════════════════════════════
 //   PRICE CHART MODAL (BTC/USD & BTC/Gold)
 // ═══════════════════════════════════════
+var _chartData = null;
+
 function openPriceChart(type){
-  const overlay = document.getElementById('priceChartOverlay');
-  const title = document.getElementById('priceChartTitle');
-  const canvas = document.getElementById('priceChartCanvas');
-  const info = document.getElementById('priceChartInfo');
-  const loading = document.getElementById('priceChartLoading');
+  var overlay = document.getElementById('priceChartOverlay');
+  var titleEl = document.getElementById('priceChartTitle');
+  var cvs = document.getElementById('priceChartCanvas');
+  var infoEl = document.getElementById('priceChartInfo');
+  var loadEl = document.getElementById('priceChartLoading');
 
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
-  loading.style.display = 'block';
-  canvas.style.display = 'none';
-  info.textContent = '';
+  loadEl.style.display = 'block';
+  loadEl.textContent = 'Loading chart data...';
+  cvs.style.display = 'none';
+  infoEl.textContent = '';
+  _chartData = null;
 
   if(type === 'btcusd'){
-    title.textContent = 'BTC / USD — All Time';
-    fetchAndDrawChart(canvas, info, loading, 'usd', 'USD');
+    titleEl.textContent = 'BTC / USD \u2014 All Time';
+    fetchChartData(cvs, infoEl, loadEl, 'usd', 'USD');
   } else {
-    title.textContent = 'BTC / Gold (oz) — All Time';
-    fetchAndDrawChart(canvas, info, loading, 'gold', 'oz Gold');
+    titleEl.textContent = 'BTC / Gold (oz) \u2014 All Time';
+    fetchChartData(cvs, infoEl, loadEl, 'gold', 'oz Gold');
   }
 }
 
 function closePriceChart(){
   document.getElementById('priceChartOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  _chartData = null;
+  var cvs = document.getElementById('priceChartCanvas');
+  if(cvs){ cvs.onmousemove = null; cvs.onmouseleave = null; cvs.ontouchmove = null; }
 }
 
-async function fetchAndDrawChart(canvas, info, loading, vsCurrency, label){
+async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label){
   try {
-    // CoinGecko free: max days for daily data
-    const url = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + (vsCurrency === 'gold' ? 'usd' : vsCurrency) + '&days=max&interval=daily';
-    const res = await fetch(url);
-    const data = await res.json();
-    let prices = data.prices; // [[timestamp, price], ...]
-
-    // For BTC/Gold: also fetch gold prices and divide
-    let goldPrices = null;
-    if(vsCurrency === 'gold'){
-      try {
-        const gRes = await fetch('https://api.coingecko.com/api/v3/coins/tether-gold/market_chart?vs_currency=usd&days=max&interval=daily');
-        const gData = await gRes.json();
-        goldPrices = gData.prices;
-      } catch(e){
-        // Fallback: use a fixed recent gold price for historical approximation
-        goldPrices = null;
-      }
-    }
+    var cur = vsCurrency === 'gold' ? 'usd' : vsCurrency;
+    var res = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + cur + '&days=max&interval=daily');
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    var data = await res.json();
+    var prices = data.prices;
 
     if(!prices || prices.length < 2){
-      loading.textContent = 'No data available';
+      loadEl.textContent = 'No data available.';
       return;
     }
 
-    // Build the series
-    let series = [];
-    if(vsCurrency === 'gold' && goldPrices && goldPrices.length > 10){
-      // Create a gold price lookup by date
-      const goldMap = new Map();
-      goldPrices.forEach(p => {
-        const day = new Date(p[0]).toISOString().slice(0,10);
-        goldMap.set(day, p[1]);
-      });
-      // Only use dates where we have both BTC and gold data
-      prices.forEach(p => {
-        const day = new Date(p[0]).toISOString().slice(0,10);
-        const gp = goldMap.get(day);
-        if(gp && gp > 0){
-          series.push([p[0], p[1] / gp]);
+    var series;
+    if(vsCurrency === 'gold'){
+      var gp = goldPrice || 2400;
+      try {
+        var gRes = await fetch('https://api.coingecko.com/api/v3/coins/tether-gold/market_chart?vs_currency=usd&days=max&interval=daily');
+        if(gRes.ok){
+          var gData = await gRes.json();
+          if(gData.prices && gData.prices.length > 10){
+            var goldMap = new Map();
+            gData.prices.forEach(function(p){ goldMap.set(new Date(p[0]).toISOString().slice(0,10), p[1]); });
+            series = [];
+            prices.forEach(function(p){
+              var day = new Date(p[0]).toISOString().slice(0,10);
+              var gpDay = goldMap.get(day);
+              if(gpDay && gpDay > 0) series.push([p[0], p[1] / gpDay]);
+            });
+            if(series.length < prices.length * 0.3) series = null;
+          }
         }
-      });
-      // If gold data is sparse, fall back to using latest gold price
-      if(series.length < prices.length * 0.3){
-        const latestGold = goldPrice || 2400;
-        series = prices.map(p => [p[0], p[1] / latestGold]);
-      }
-    } else if(vsCurrency === 'gold'){
-      // No gold price history, use current gold price
-      const gp = goldPrice || 2400;
-      series = prices.map(p => [p[0], p[1] / gp]);
+      } catch(e){}
+      if(!series) series = prices.map(function(p){ return [p[0], p[1] / gp]; });
     } else {
       series = prices;
     }
 
-    loading.style.display = 'none';
-    canvas.style.display = 'block';
+    loadEl.style.display = 'none';
+    cvs.style.display = 'block';
 
-    drawPriceChart(canvas, series, label);
+    _chartData = {series: series, label: label, cvs: cvs};
+    renderChart(cvs, series, label, -1);
 
-    // Info line
-    const first = series[0];
-    const last = series[series.length - 1];
-    const startDate = new Date(first[0]).toLocaleDateString('en-US',{year:'numeric',month:'short'});
-    const endDate = new Date(last[0]).toLocaleDateString('en-US',{year:'numeric',month:'short'});
-    const change = ((last[1] - first[1]) / first[1] * 100);
-    const fmt = vsCurrency === 'gold'
-      ? (v) => v.toFixed(1) + ' oz'
-      : (v) => '$' + v.toLocaleString('en-US',{maximumFractionDigits:0});
-    info.innerHTML = '<span style="color:var(--muted);">' + startDate + ' \u2192 ' + endDate + '</span> &nbsp; <span style="color:var(--orange);">' + fmt(first[1]) + ' \u2192 ' + fmt(last[1]) + '</span> &nbsp; <span style="color:' + (change >= 0 ? '#4ade80' : '#f87171') + ';">(' + (change >= 0 ? '+' : '') + change.toFixed(0) + '%)</span>';
+    var first = series[0], last = series[series.length - 1];
+    var startDate = new Date(first[0]).toLocaleDateString('en-US',{year:'numeric',month:'short'});
+    var endDate = new Date(last[0]).toLocaleDateString('en-US',{year:'numeric',month:'short'});
+    var change = ((last[1] - first[1]) / first[1] * 100);
+    var fmtV = function(v){ return label === 'oz Gold' ? v.toFixed(1) + ' oz' : '$' + v.toLocaleString('en-US',{maximumFractionDigits:0}); };
+    infoEl.innerHTML = '<span style="color:#8888b8;">' + startDate + ' \u2192 ' + endDate + '</span> &nbsp; <span style="color:#f59e0b;">' + fmtV(first[1]) + ' \u2192 ' + fmtV(last[1]) + '</span> &nbsp; <span style="color:' + (change >= 0 ? '#4ade80' : '#f87171') + ';">(' + (change >= 0 ? '+' : '') + change.toFixed(0) + '%)</span>';
+
+    cvs.onmousemove = function(e){
+      var rect = cvs.getBoundingClientRect();
+      handleChartHover(e.clientX - rect.left, rect.width);
+    };
+    cvs.ontouchmove = function(e){
+      e.preventDefault();
+      var rect = cvs.getBoundingClientRect();
+      handleChartHover(e.touches[0].clientX - rect.left, rect.width);
+    };
+    cvs.onmouseleave = function(){
+      if(_chartData) renderChart(_chartData.cvs, _chartData.series, _chartData.label, -1);
+    };
 
   } catch(e){
     console.warn('Chart fetch failed:', e);
-    loading.textContent = 'Failed to load chart data. Try again later.';
+    loadEl.textContent = 'Failed to load chart data. Try again.';
   }
 }
 
-function drawPriceChart(canvas, series, label){
-  const ctx = canvas.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.parentElement.getBoundingClientRect();
-  const W = Math.min(rect.width - 32, 800);
-  const H = Math.min(320, W * 0.45);
-  canvas.width = W * dpr;
-  canvas.height = H * dpr;
-  canvas.style.width = W + 'px';
-  canvas.style.height = H + 'px';
-  ctx.scale(dpr, dpr);
+function handleChartHover(mx, displayWidth){
+  if(!_chartData) return;
+  var d = _chartData;
+  var padLeft = 70, padRight = 16;
+  var cw = displayWidth - padLeft - padRight;
+  if(mx < padLeft || mx > padLeft + cw) return;
+  var pct = (mx - padLeft) / cw;
+  var idx = Math.min(d.series.length - 1, Math.max(0, Math.round(pct * (d.series.length - 1))));
+  renderChart(d.cvs, d.series, d.label, idx);
+}
 
-  const pad = {top:20, right:16, bottom:40, left:70};
-  const cw = W - pad.left - pad.right;
-  const ch = H - pad.top - pad.bottom;
+function renderChart(cvs, series, label, hoverIdx){
+  var c = cvs.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var parentW = cvs.parentElement.getBoundingClientRect().width;
+  var W = Math.min(parentW - 32, 800);
+  var H = Math.min(320, W * 0.45);
+  cvs.width = W * dpr;
+  cvs.height = H * dpr;
+  cvs.style.width = W + 'px';
+  cvs.style.height = H + 'px';
+  c.scale(dpr, dpr);
 
-  // Data bounds
-  const vals = series.map(s => s[1]);
-  let minV = Math.min(...vals);
-  let maxV = Math.max(...vals);
-  if(maxV === minV){ maxV = minV + 1; }
-  const timeMin = series[0][0];
-  const timeMax = series[series.length-1][0];
-  const timeRange = timeMax - timeMin;
+  var pad = {top:20, right:16, bottom:40, left:70};
+  var cw = W - pad.left - pad.right;
+  var ch = H - pad.top - pad.bottom;
 
-  // Clear
-  ctx.clearRect(0, 0, W, H);
+  var minV = Infinity, maxV = -Infinity;
+  for(var i = 0; i < series.length; i++){
+    if(series[i][1] < minV) minV = series[i][1];
+    if(series[i][1] > maxV) maxV = series[i][1];
+  }
+  if(maxV === minV) maxV = minV + 1;
+  var timeMin = series[0][0], timeMax = series[series.length-1][0];
+  var timeRange = timeMax - timeMin;
 
-  // Grid lines
-  ctx.strokeStyle = 'rgba(245,158,11,0.08)';
-  ctx.lineWidth = 1;
-  const gridLines = 5;
-  for(let i = 0; i <= gridLines; i++){
-    const y = pad.top + (ch / gridLines) * i;
-    ctx.beginPath();
-    ctx.moveTo(pad.left, y);
-    ctx.lineTo(pad.left + cw, y);
-    ctx.stroke();
+  c.clearRect(0, 0, W, H);
 
-    // Y-axis labels
-    const val = maxV - (maxV - minV) * (i / gridLines);
-    ctx.fillStyle = 'rgba(184,184,216,0.6)';
-    ctx.font = '10px "Space Mono", monospace';
-    ctx.textAlign = 'right';
-    const yLabel = label === 'oz Gold' ? val.toFixed(0) + ' oz' : (val >= 1000 ? '$' + (val/1000).toFixed(0) + 'k' : '$' + val.toFixed(0));
-    ctx.fillText(yLabel, pad.left - 8, y + 3);
+  // Grid
+  c.strokeStyle = 'rgba(245,158,11,0.08)';
+  c.lineWidth = 1;
+  for(var g = 0; g <= 5; g++){
+    var gy = pad.top + (ch / 5) * g;
+    c.beginPath(); c.moveTo(pad.left, gy); c.lineTo(pad.left + cw, gy); c.stroke();
+    var val = maxV - (maxV - minV) * (g / 5);
+    c.fillStyle = '#8888b8';
+    c.font = '10px "Space Mono", monospace';
+    c.textAlign = 'right';
+    var yLbl = label === 'oz Gold' ? val.toFixed(0) + ' oz' : (val >= 1000 ? '$' + (val/1000).toFixed(0) + 'k' : '$' + val.toFixed(0));
+    c.fillText(yLbl, pad.left - 8, gy + 3);
   }
 
-  // X-axis labels (years)
-  ctx.textAlign = 'center';
-  ctx.fillStyle = 'rgba(184,184,216,0.5)';
-  const startYear = new Date(timeMin).getFullYear();
-  const endYear = new Date(timeMax).getFullYear();
-  for(let yr = startYear + 1; yr <= endYear; yr += Math.max(1, Math.floor((endYear - startYear) / 8))){
-    const t = new Date(yr, 0, 1).getTime();
-    const x = pad.left + ((t - timeMin) / timeRange) * cw;
-    if(x > pad.left + 20 && x < pad.left + cw - 20){
-      ctx.fillText(yr.toString(), x, H - pad.bottom + 20);
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(245,158,11,0.06)';
-      ctx.moveTo(x, pad.top);
-      ctx.lineTo(x, pad.top + ch);
-      ctx.stroke();
+  // X-axis years
+  c.textAlign = 'center';
+  c.fillStyle = '#6868a8';
+  var startYr = new Date(timeMin).getFullYear();
+  var endYr = new Date(timeMax).getFullYear();
+  var step = Math.max(1, Math.floor((endYr - startYr) / 8));
+  for(var yr = startYr + 1; yr <= endYr; yr += step){
+    var t = new Date(yr, 0, 1).getTime();
+    var xx = pad.left + ((t - timeMin) / timeRange) * cw;
+    if(xx > pad.left + 20 && xx < pad.left + cw - 20){
+      c.fillText(yr.toString(), xx, H - pad.bottom + 20);
     }
   }
 
-  // Gradient fill under the line
-  const grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + ch);
-  grad.addColorStop(0, 'rgba(245,158,11,0.25)');
-  grad.addColorStop(1, 'rgba(245,158,11,0.02)');
+  function px(i){ return pad.left + ((series[i][0] - timeMin) / timeRange) * cw; }
+  function py(i){ return pad.top + ch - ((series[i][1] - minV) / (maxV - minV)) * ch; }
 
-  // Draw fill
-  ctx.beginPath();
-  ctx.moveTo(pad.left, pad.top + ch);
-  series.forEach((p, i) => {
-    const x = pad.left + ((p[0] - timeMin) / timeRange) * cw;
-    const y = pad.top + ch - ((p[1] - minV) / (maxV - minV)) * ch;
-    if(i === 0) ctx.lineTo(x, y);
-    else ctx.lineTo(x, y);
-  });
-  ctx.lineTo(pad.left + cw, pad.top + ch);
-  ctx.closePath();
-  ctx.fillStyle = grad;
-  ctx.fill();
+  // Gradient fill
+  var grad = c.createLinearGradient(0, pad.top, 0, pad.top + ch);
+  grad.addColorStop(0, 'rgba(245,158,11,0.22)');
+  grad.addColorStop(1, 'rgba(245,158,11,0.01)');
+  c.beginPath();
+  c.moveTo(px(0), pad.top + ch);
+  for(var i = 0; i < series.length; i++) c.lineTo(px(i), py(i));
+  c.lineTo(px(series.length-1), pad.top + ch);
+  c.closePath();
+  c.fillStyle = grad;
+  c.fill();
 
-  // Draw line
-  ctx.beginPath();
-  ctx.strokeStyle = '#f59e0b';
-  ctx.lineWidth = 2;
-  ctx.lineJoin = 'round';
-  series.forEach((p, i) => {
-    const x = pad.left + ((p[0] - timeMin) / timeRange) * cw;
-    const y = pad.top + ch - ((p[1] - minV) / (maxV - minV)) * ch;
-    if(i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  });
-  ctx.stroke();
+  // Line
+  c.beginPath();
+  c.strokeStyle = '#f59e0b';
+  c.lineWidth = 2;
+  c.lineJoin = 'round';
+  for(var i = 0; i < series.length; i++){
+    if(i === 0) c.moveTo(px(i), py(i));
+    else c.lineTo(px(i), py(i));
+  }
+  c.stroke();
 
-  // Hover tooltip
-  canvas.onmousemove = function(e){
-    const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    if(mx < pad.left || mx > pad.left + cw) return;
-    const pct = (mx - pad.left) / cw;
-    const idx = Math.min(series.length - 1, Math.max(0, Math.round(pct * (series.length - 1))));
-    const pt = series[idx];
-    const date = new Date(pt[0]).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
-    const val = label === 'oz Gold' ? pt[1].toFixed(1) + ' oz' : '$' + pt[1].toLocaleString('en-US',{maximumFractionDigits:0});
+  // Hover crosshair + tooltip
+  if(hoverIdx >= 0 && hoverIdx < series.length){
+    var hx = px(hoverIdx), hy = py(hoverIdx);
 
-    // Redraw + crosshair
-    drawPriceChart.__noHover = true;
-    drawPriceChart(canvas, series, label);
-    drawPriceChart.__noHover = false;
+    c.beginPath();
+    c.strokeStyle = 'rgba(245,158,11,0.3)';
+    c.lineWidth = 1;
+    c.setLineDash([4,4]);
+    c.moveTo(hx, pad.top);
+    c.lineTo(hx, pad.top + ch);
+    c.stroke();
+    c.setLineDash([]);
 
-    const px = pad.left + ((pt[0] - timeMin) / timeRange) * cw;
-    const py = pad.top + ch - ((pt[1] - minV) / (maxV - minV)) * ch;
+    c.beginPath();
+    c.arc(hx, hy, 5, 0, Math.PI*2);
+    c.fillStyle = '#f59e0b';
+    c.fill();
+    c.strokeStyle = '#0b0b18';
+    c.lineWidth = 2;
+    c.stroke();
 
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(245,158,11,0.3)';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([4,4]);
-    ctx.moveTo(px, pad.top);
-    ctx.lineTo(px, pad.top + ch);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    var pt = series[hoverIdx];
+    var dateStr = new Date(pt[0]).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
+    var valStr = label === 'oz Gold' ? pt[1].toFixed(1) + ' oz' : '$' + pt[1].toLocaleString('en-US',{maximumFractionDigits:0});
 
-    ctx.beginPath();
-    ctx.arc(px, py, 4, 0, Math.PI*2);
-    ctx.fillStyle = '#f59e0b';
-    ctx.fill();
-    ctx.strokeStyle = '#000';
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
+    var tw = 170, th = 42;
+    var ttx = hx + 14, tty = hy - 50;
+    if(ttx + tw > W - pad.right) ttx = hx - tw - 14;
+    if(tty < pad.top) tty = hy + 14;
 
-    // Tooltip box
-    ctx.fillStyle = 'rgba(11,11,24,0.92)';
-    ctx.strokeStyle = 'rgba(245,158,11,0.5)';
-    ctx.lineWidth = 1;
-    const tw = 160, th = 38;
-    let tx = px + 12, ty = py - 44;
-    if(tx + tw > W - pad.right) tx = px - tw - 12;
-    if(ty < pad.top) ty = py + 12;
-    ctx.beginPath();
-    ctx.roundRect(tx, ty, tw, th, 6);
-    ctx.fill();
-    ctx.stroke();
+    c.fillStyle = 'rgba(11,11,24,0.93)';
+    c.strokeStyle = 'rgba(245,158,11,0.5)';
+    c.lineWidth = 1;
+    c.beginPath();
+    if(c.roundRect) c.roundRect(ttx, tty, tw, th, 6);
+    else c.rect(ttx, tty, tw, th);
+    c.fill();
+    c.stroke();
 
-    ctx.fillStyle = 'var(--muted)';
-    ctx.font = '10px "Space Mono", monospace';
-    ctx.textAlign = 'left';
-    ctx.fillStyle = '#b8b8d8';
-    ctx.fillText(date, tx + 8, ty + 14);
-    ctx.fillStyle = '#f59e0b';
-    ctx.font = '12px "Space Mono", monospace';
-    ctx.fillText(val, tx + 8, ty + 30);
-  };
-
-  if(!drawPriceChart.__noHover){
-    canvas.onmouseleave = function(){
-      drawPriceChart.__noHover = true;
-      drawPriceChart(canvas, series, label);
-      drawPriceChart.__noHover = false;
-    };
+    c.font = '10px "Space Mono", monospace';
+    c.textAlign = 'left';
+    c.fillStyle = '#b8b8d8';
+    c.fillText(dateStr, ttx + 10, tty + 16);
+    c.fillStyle = '#f59e0b';
+    c.font = 'bold 13px "Space Mono", monospace';
+    c.fillText(valStr, ttx + 10, tty + 34);
   }
 }
 
