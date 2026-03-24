@@ -2332,8 +2332,8 @@ const sectionNames = {
 
 let currentSection = 'welcome';
 let didYouKnowIndex = 0;
-let btcPrice = 98247 + Math.random() * 4000;
-let btcChange = 2.34;
+let btcPrice = 0;
+let btcChange = 0;
 let _scrollY = 0;
 
 // Timers (stored so they can be cleaned up)
@@ -2435,23 +2435,30 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 
 // ═══════════════════════════════════════
-//   BTC PRICE TICKER
+//   BTC PRICE TICKER (live from CoinGecko)
 // ═══════════════════════════════════════
 function formatPrice(p){
   return '$' + p.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
-function updateTicker(){
-  btcPrice += (Math.random() - 0.47) * 35;
-  if(btcPrice < 90000) btcPrice = 90000;
-  btcChange += (Math.random() - 0.45) * 0.08;
-  btcChange = Math.max(-2, Math.min(8, btcChange));
-  document.getElementById('btcPrice').textContent = formatPrice(btcPrice);
+function renderTicker(){
+  document.getElementById('btcPrice').textContent = btcPrice > 0 ? formatPrice(btcPrice) : '...';
   const changeEl = document.getElementById('btcChange');
   changeEl.textContent = (btcChange >= 0 ? '+' : '') + btcChange.toFixed(2) + '%';
   changeEl.style.color = btcChange >= 0 ? '#4ade80' : '#f87171';
 }
-updateTicker();
-_timers.ticker = setInterval(updateTicker, 3000);
+async function fetchBtcPrice(){
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+    const data = await res.json();
+    btcPrice = data.bitcoin.usd;
+    btcChange = data.bitcoin.usd_24h_change;
+    renderTicker();
+  } catch(e) {
+    console.warn('BTC price fetch failed:', e);
+  }
+}
+fetchBtcPrice();
+_timers.ticker = setInterval(fetchBtcPrice, 30000);
 
 // Simulate block height and mempool
 _timers.stats = setInterval(() => {
