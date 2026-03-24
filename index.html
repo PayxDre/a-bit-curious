@@ -4768,10 +4768,10 @@ function openPriceChart(type){
   _chartData = null;
 
   if(type === 'btcusd'){
-    titleEl.textContent = 'BTC / USD \u2014 Past Year';
+    titleEl.textContent = 'BTC / USD \u2014 Since 2009';
     fetchChartData(cvs, infoEl, loadEl, 'usd', 'USD');
   } else {
-    titleEl.textContent = 'BTC / Gold (oz) \u2014 Past Year';
+    titleEl.textContent = 'BTC / Gold (oz) \u2014 Since 2009';
     fetchChartData(cvs, infoEl, loadEl, 'gold', 'oz Gold');
   }
 }
@@ -4787,21 +4787,20 @@ function closePriceChart(){
 async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label){
   try {
     var cur = vsCurrency === 'gold' ? 'usd' : vsCurrency;
-    // Try 365 days first (more reliable), then full history
+    // Calculate days since Bitcoin genesis (Jan 3, 2009)
+    var daysSinceGenesis = Math.ceil((Date.now() - new Date('2009-01-03').getTime()) / 86400000);
+    // Try full history first, then progressively smaller windows
     var res;
-    try {
-      res = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + cur + '&days=365&interval=daily');
-      if(!res.ok) throw new Error('365d failed');
-    } catch(e1){
-      // Retry with smaller window after a short delay
-      await new Promise(function(r){ setTimeout(r, 1500); });
+    var attempts = [daysSinceGenesis, 1825, 365];
+    for(var ai = 0; ai < attempts.length; ai++){
       try {
-        res = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + cur + '&days=90&interval=daily');
-        if(!res.ok) throw new Error('90d failed');
-      } catch(e2){
-        throw new Error('All chart API attempts failed');
-      }
+        res = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + cur + '&days=' + attempts[ai] + '&interval=daily');
+        if(res.ok) break;
+        res = null;
+      } catch(e){}
+      if(ai < attempts.length - 1) await new Promise(function(r){ setTimeout(r, 1500); });
     }
+    if(!res || !res.ok) throw new Error('All chart API attempts failed');
     if(!res.ok) throw new Error('HTTP ' + res.status);
     var data = await res.json();
     var prices = data.prices;
@@ -4815,7 +4814,8 @@ async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label){
     if(vsCurrency === 'gold'){
       var gp = goldPrice || 2400;
       try {
-        var gRes = await fetch('https://api.coingecko.com/api/v3/coins/tether-gold/market_chart?vs_currency=usd&days=365&interval=daily');
+        await new Promise(function(r){ setTimeout(r, 1200); }); // brief delay to avoid rate limit
+        var gRes = await fetch('https://api.coingecko.com/api/v3/coins/tether-gold/market_chart?vs_currency=usd&days=' + daysSinceGenesis + '&interval=daily');
         if(gRes.ok){
           var gData = await gRes.json();
           if(gData.prices && gData.prices.length > 10){
