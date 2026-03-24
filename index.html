@@ -870,12 +870,12 @@
     <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;">A <span class="logo-glow glow-text">&#8383;</span>it Curious</span>
   </div>
   <div class="flex items-center gap-4">
-    <div class="flex items-center gap-2" aria-label="Bitcoin price ticker">
+    <div class="flex items-center gap-2" aria-label="Bitcoin price ticker" style="cursor:pointer;" onclick="openPriceChart('btcusd')" title="Click to view BTC/USD historical chart">
       <span class="pulse-badge" aria-hidden="true"></span>
       <span class="hidden sm:inline" style="font-size:12px;color:var(--muted);">BTC/USD</span>
       <span class="ticker-num" id="btcPrice" aria-live="polite">...</span>
     </div>
-    <div class="hidden md:flex items-center gap-2" aria-label="Bitcoin gold price">
+    <div class="hidden md:flex items-center gap-2" aria-label="Bitcoin gold price" style="cursor:pointer;" onclick="openPriceChart('btcgold')" title="Click to view BTC/Gold historical chart">
       <span style="font-size:12px;color:var(--muted);">BTC/Gold</span>
       <span id="btcGold" style="font-family:'Space Mono',monospace;font-size:12px;color:var(--orange-bright);">... oz</span>
     </div>
@@ -3436,7 +3436,7 @@ function getModalContent(section){
               <div class="flex justify-between text-xs mt-1" style="color:var(--muted);"><span>1%</span><span id="techDeflLabel" style="color:#4ade80;">5%</span><span>15%</span></div>
             </div>
             <div>
-              <label for="monetaryInflation" class="text-xs mb-1 block" style="color:#f87171;">\uD83C\uDFE6 Fiat Monetary Inflation (money supply growth / year)</label>
+              <label for="monetaryInflation" class="text-xs mb-1 block" style="color:#f87171;">\uD83C\uDFE6 Fiat Monetary Inflation <span style="color:var(--muted);font-size:10px;">(auto-adjusts \u2014 debt system must respond)</span></label>
               <input type="range" id="monetaryInflation" min="1" max="20" value="7" class="w-full" style="accent-color:#f87171;"/>
               <div class="flex justify-between text-xs mt-1" style="color:var(--muted);"><span>1%</span><span id="monInflLabel" style="color:#f87171;">7%</span><span>20%</span></div>
             </div>
@@ -3455,6 +3455,7 @@ function getModalContent(section){
               <div id="cpiDisp" style="color:var(--orange);font-family:'Space Mono',monospace;font-size:18px;font-weight:bold;">=2%</div>
             </div>
           </div>
+          <div id="forcedPrintNote" class="text-xs p-2 rounded-lg mb-2" style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);color:var(--muted);line-height:1.5;display:none;"></div>
           <div id="deflExplanation" class="text-xs p-3 rounded-xl" style="background:rgba(0,0,0,0.3);border:1px solid var(--glass-border);color:var(--muted);line-height:1.6;"></div>
         </div>
         <div class="glass p-4 rounded-xl">
@@ -4160,6 +4161,15 @@ modalInitFns.inflation = function(){
 };
 
 // ── Deflation Modal ──
+// When tech deflation rises, the fiat system MUST print more to service debt.
+// Monetary inflation auto-adjusts: base 3% + techDefl * 1.3 (clamped to slider max).
+let deflManualOverride = false;
+
+function calcForcedInflation(techDefl){
+  // Fiat debt system needs at least enough printing to mask deflation + service $300T debt
+  return Math.min(20, Math.max(4, Math.round(techDefl * 1.3 + 3)));
+}
+
 function runDeflSim(){
   const techDefl = parseInt(document.getElementById('techDeflation')?.value) || 5;
   const monInfl = parseInt(document.getElementById('monetaryInflation')?.value) || 7;
@@ -4172,10 +4182,25 @@ function runDeflSim(){
   document.getElementById('cpiDisp').style.color = cpi > 0 ? 'var(--orange)' : '#4ade80';
   document.getElementById('btcDeflBenefit').textContent = techDefl + '%';
 
+  // Show the "forced printing" indicator
+  const forceEl = document.getElementById('forcedPrintNote');
+  if(forceEl){
+    const forced = calcForcedInflation(techDefl);
+    if(monInfl <= forced){
+      forceEl.innerHTML = '\u26a0\ufe0f <span style="color:#f87171;font-weight:600;">Debt system response:</span> At ' + techDefl + '% tech deflation, central banks <em>must</em> print at least ' + forced + '% to prevent the $300T debt pyramid from collapsing. They have no choice \u2014 deflation kills debt-based money.';
+      forceEl.style.display = 'block';
+      forceEl.style.borderColor = 'rgba(248,113,113,0.4)';
+    } else {
+      forceEl.innerHTML = '\uD83D\uDD0D The system is printing ' + monInfl + '% \u2014 more than the ' + forced + '% minimum needed. The excess (' + (monInfl - forced) + '%) is pure hidden wealth transfer from savers to money printers.';
+      forceEl.style.display = 'block';
+      forceEl.style.borderColor = 'rgba(245,158,11,0.3)';
+    }
+  }
+
   const exp = document.getElementById('deflExplanation');
   if(cpi > 0) exp.innerHTML = '<span style="color:#f87171;">Money printing wins.</span> Technology reduced costs by ' + techDefl + '%, but ' + monInfl + '% money printing overwhelmed it. You experience ' + cpi + '% price increases. The ' + techDefl + '% productivity gain was stolen.';
   else if(cpi === 0) exp.innerHTML = '<span style="color:var(--orange);">Perfect balance \u2014 on paper.</span> Prices appear stable, but technology created ' + techDefl + '% deflation that you should be enjoying as cheaper goods. Instead, money printing absorbed it entirely.';
-  else exp.innerHTML = '<span style="color:#4ade80;">Technology wins!</span> Even with ' + monInfl + '% money printing, technology\'s ' + techDefl + '% deflation is strong enough to push prices down ' + Math.abs(cpi) + '%. This rarely happens under fiat.';
+  else exp.innerHTML = '<span style="color:#4ade80;">Technology wins!</span> Even with ' + monInfl + '% money printing, technology\u2019s ' + techDefl + '% deflation is strong enough to push prices down ' + Math.abs(cpi) + '%. This rarely happens under fiat.';
 
   // Winners/losers
   const wl = document.getElementById('deflWinners');
@@ -4192,10 +4217,37 @@ function runDeflSim(){
 }
 
 modalInitFns.deflation = function(){
+  deflManualOverride = false;
   runDeflSim();
-  document.getElementById('techDeflation')?.addEventListener('input', runDeflSim);
-  document.getElementById('monetaryInflation')?.addEventListener('input', runDeflSim);
+
+  const techSlider = document.getElementById('techDeflation');
+  const monSlider = document.getElementById('monetaryInflation');
+
+  // When tech deflation changes, FORCE monetary inflation up (debt system must respond)
+  techSlider?.addEventListener('input', function(){
+    const techDefl = parseInt(this.value);
+    const forced = calcForcedInflation(techDefl);
+    const currentMon = parseInt(monSlider.value);
+    // Always push monetary inflation to at least the forced minimum
+    if(currentMon < forced || !deflManualOverride){
+      monSlider.value = forced;
+      deflManualOverride = false;
+    }
+    runDeflSim();
+  });
+
+  // User CAN drag monetary slider up (override), but it can never go below forced min
+  monSlider?.addEventListener('input', function(){
+    deflManualOverride = true;
+    const techDefl = parseInt(techSlider.value);
+    const forced = calcForcedInflation(techDefl);
+    if(parseInt(this.value) < forced){
+      this.value = forced; // snap back - system won\u2019t allow it
+    }
+    runDeflSim();
+  });
 };
+
 
 // ── Quick Address Generator (Wallets section) ──
 document.getElementById('main-content').addEventListener('click', function handler(e){
@@ -4512,9 +4564,297 @@ document.getElementById('main-content').addEventListener('click', function(e){
 })();
 
 // ═══════════════════════════════════════
+//   PRICE CHART MODAL (BTC/USD & BTC/Gold)
+// ═══════════════════════════════════════
+function openPriceChart(type){
+  const overlay = document.getElementById('priceChartOverlay');
+  const title = document.getElementById('priceChartTitle');
+  const canvas = document.getElementById('priceChartCanvas');
+  const info = document.getElementById('priceChartInfo');
+  const loading = document.getElementById('priceChartLoading');
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  loading.style.display = 'block';
+  canvas.style.display = 'none';
+  info.textContent = '';
+
+  if(type === 'btcusd'){
+    title.textContent = 'BTC / USD — All Time';
+    fetchAndDrawChart(canvas, info, loading, 'usd', 'USD');
+  } else {
+    title.textContent = 'BTC / Gold (oz) — All Time';
+    fetchAndDrawChart(canvas, info, loading, 'gold', 'oz Gold');
+  }
+}
+
+function closePriceChart(){
+  document.getElementById('priceChartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+async function fetchAndDrawChart(canvas, info, loading, vsCurrency, label){
+  try {
+    // CoinGecko free: max days for daily data
+    const url = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=' + (vsCurrency === 'gold' ? 'usd' : vsCurrency) + '&days=max&interval=daily';
+    const res = await fetch(url);
+    const data = await res.json();
+    let prices = data.prices; // [[timestamp, price], ...]
+
+    // For BTC/Gold: also fetch gold prices and divide
+    let goldPrices = null;
+    if(vsCurrency === 'gold'){
+      try {
+        const gRes = await fetch('https://api.coingecko.com/api/v3/coins/tether-gold/market_chart?vs_currency=usd&days=max&interval=daily');
+        const gData = await gRes.json();
+        goldPrices = gData.prices;
+      } catch(e){
+        // Fallback: use a fixed recent gold price for historical approximation
+        goldPrices = null;
+      }
+    }
+
+    if(!prices || prices.length < 2){
+      loading.textContent = 'No data available';
+      return;
+    }
+
+    // Build the series
+    let series = [];
+    if(vsCurrency === 'gold' && goldPrices && goldPrices.length > 10){
+      // Create a gold price lookup by date
+      const goldMap = new Map();
+      goldPrices.forEach(p => {
+        const day = new Date(p[0]).toISOString().slice(0,10);
+        goldMap.set(day, p[1]);
+      });
+      // Only use dates where we have both BTC and gold data
+      prices.forEach(p => {
+        const day = new Date(p[0]).toISOString().slice(0,10);
+        const gp = goldMap.get(day);
+        if(gp && gp > 0){
+          series.push([p[0], p[1] / gp]);
+        }
+      });
+      // If gold data is sparse, fall back to using latest gold price
+      if(series.length < prices.length * 0.3){
+        const latestGold = goldPrice || 2400;
+        series = prices.map(p => [p[0], p[1] / latestGold]);
+      }
+    } else if(vsCurrency === 'gold'){
+      // No gold price history, use current gold price
+      const gp = goldPrice || 2400;
+      series = prices.map(p => [p[0], p[1] / gp]);
+    } else {
+      series = prices;
+    }
+
+    loading.style.display = 'none';
+    canvas.style.display = 'block';
+
+    drawPriceChart(canvas, series, label);
+
+    // Info line
+    const first = series[0];
+    const last = series[series.length - 1];
+    const startDate = new Date(first[0]).toLocaleDateString('en-US',{year:'numeric',month:'short'});
+    const endDate = new Date(last[0]).toLocaleDateString('en-US',{year:'numeric',month:'short'});
+    const change = ((last[1] - first[1]) / first[1] * 100);
+    const fmt = vsCurrency === 'gold'
+      ? (v) => v.toFixed(1) + ' oz'
+      : (v) => '$' + v.toLocaleString('en-US',{maximumFractionDigits:0});
+    info.innerHTML = '<span style="color:var(--muted);">' + startDate + ' \u2192 ' + endDate + '</span> &nbsp; <span style="color:var(--orange);">' + fmt(first[1]) + ' \u2192 ' + fmt(last[1]) + '</span> &nbsp; <span style="color:' + (change >= 0 ? '#4ade80' : '#f87171') + ';">(' + (change >= 0 ? '+' : '') + change.toFixed(0) + '%)</span>';
+
+  } catch(e){
+    console.warn('Chart fetch failed:', e);
+    loading.textContent = 'Failed to load chart data. Try again later.';
+  }
+}
+
+function drawPriceChart(canvas, series, label){
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const W = Math.min(rect.width - 32, 800);
+  const H = Math.min(320, W * 0.45);
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  const pad = {top:20, right:16, bottom:40, left:70};
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  // Data bounds
+  const vals = series.map(s => s[1]);
+  let minV = Math.min(...vals);
+  let maxV = Math.max(...vals);
+  if(maxV === minV){ maxV = minV + 1; }
+  const timeMin = series[0][0];
+  const timeMax = series[series.length-1][0];
+  const timeRange = timeMax - timeMin;
+
+  // Clear
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(245,158,11,0.08)';
+  ctx.lineWidth = 1;
+  const gridLines = 5;
+  for(let i = 0; i <= gridLines; i++){
+    const y = pad.top + (ch / gridLines) * i;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + cw, y);
+    ctx.stroke();
+
+    // Y-axis labels
+    const val = maxV - (maxV - minV) * (i / gridLines);
+    ctx.fillStyle = 'rgba(184,184,216,0.6)';
+    ctx.font = '10px "Space Mono", monospace';
+    ctx.textAlign = 'right';
+    const yLabel = label === 'oz Gold' ? val.toFixed(0) + ' oz' : (val >= 1000 ? '$' + (val/1000).toFixed(0) + 'k' : '$' + val.toFixed(0));
+    ctx.fillText(yLabel, pad.left - 8, y + 3);
+  }
+
+  // X-axis labels (years)
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(184,184,216,0.5)';
+  const startYear = new Date(timeMin).getFullYear();
+  const endYear = new Date(timeMax).getFullYear();
+  for(let yr = startYear + 1; yr <= endYear; yr += Math.max(1, Math.floor((endYear - startYear) / 8))){
+    const t = new Date(yr, 0, 1).getTime();
+    const x = pad.left + ((t - timeMin) / timeRange) * cw;
+    if(x > pad.left + 20 && x < pad.left + cw - 20){
+      ctx.fillText(yr.toString(), x, H - pad.bottom + 20);
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(245,158,11,0.06)';
+      ctx.moveTo(x, pad.top);
+      ctx.lineTo(x, pad.top + ch);
+      ctx.stroke();
+    }
+  }
+
+  // Gradient fill under the line
+  const grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + ch);
+  grad.addColorStop(0, 'rgba(245,158,11,0.25)');
+  grad.addColorStop(1, 'rgba(245,158,11,0.02)');
+
+  // Draw fill
+  ctx.beginPath();
+  ctx.moveTo(pad.left, pad.top + ch);
+  series.forEach((p, i) => {
+    const x = pad.left + ((p[0] - timeMin) / timeRange) * cw;
+    const y = pad.top + ch - ((p[1] - minV) / (maxV - minV)) * ch;
+    if(i === 0) ctx.lineTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.lineTo(pad.left + cw, pad.top + ch);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Draw line
+  ctx.beginPath();
+  ctx.strokeStyle = '#f59e0b';
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
+  series.forEach((p, i) => {
+    const x = pad.left + ((p[0] - timeMin) / timeRange) * cw;
+    const y = pad.top + ch - ((p[1] - minV) / (maxV - minV)) * ch;
+    if(i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Hover tooltip
+  canvas.onmousemove = function(e){
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    if(mx < pad.left || mx > pad.left + cw) return;
+    const pct = (mx - pad.left) / cw;
+    const idx = Math.min(series.length - 1, Math.max(0, Math.round(pct * (series.length - 1))));
+    const pt = series[idx];
+    const date = new Date(pt[0]).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
+    const val = label === 'oz Gold' ? pt[1].toFixed(1) + ' oz' : '$' + pt[1].toLocaleString('en-US',{maximumFractionDigits:0});
+
+    // Redraw + crosshair
+    drawPriceChart.__noHover = true;
+    drawPriceChart(canvas, series, label);
+    drawPriceChart.__noHover = false;
+
+    const px = pad.left + ((pt[0] - timeMin) / timeRange) * cw;
+    const py = pad.top + ch - ((pt[1] - minV) / (maxV - minV)) * ch;
+
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(245,158,11,0.3)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4,4]);
+    ctx.moveTo(px, pad.top);
+    ctx.lineTo(px, pad.top + ch);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.arc(px, py, 4, 0, Math.PI*2);
+    ctx.fillStyle = '#f59e0b';
+    ctx.fill();
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Tooltip box
+    ctx.fillStyle = 'rgba(11,11,24,0.92)';
+    ctx.strokeStyle = 'rgba(245,158,11,0.5)';
+    ctx.lineWidth = 1;
+    const tw = 160, th = 38;
+    let tx = px + 12, ty = py - 44;
+    if(tx + tw > W - pad.right) tx = px - tw - 12;
+    if(ty < pad.top) ty = py + 12;
+    ctx.beginPath();
+    ctx.roundRect(tx, ty, tw, th, 6);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = 'var(--muted)';
+    ctx.font = '10px "Space Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#b8b8d8';
+    ctx.fillText(date, tx + 8, ty + 14);
+    ctx.fillStyle = '#f59e0b';
+    ctx.font = '12px "Space Mono", monospace';
+    ctx.fillText(val, tx + 8, ty + 30);
+  };
+
+  if(!drawPriceChart.__noHover){
+    canvas.onmouseleave = function(){
+      drawPriceChart.__noHover = true;
+      drawPriceChart(canvas, series, label);
+      drawPriceChart.__noHover = false;
+    };
+  }
+}
+
+// ═══════════════════════════════════════
 //   INIT
 // ═══════════════════════════════════════
 showSection('welcome');
 </script>
+
+<!-- ═══════════════ PRICE CHART MODAL ═══════════════ -->
+<div id="priceChartOverlay" class="modal-overlay" onclick="if(event.target===this)closePriceChart();">
+  <div class="modal-box" style="max-width:860px;">
+    <button class="modal-close" onclick="closePriceChart();" aria-label="Close chart">&times;</button>
+    <div id="priceChartTitle" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--orange);margin-bottom:4px;"></div>
+    <div id="priceChartInfo" style="font-family:'Space Mono',monospace;font-size:12px;margin-bottom:16px;"></div>
+    <div id="priceChartLoading" style="text-align:center;padding:40px 0;color:var(--muted);font-family:'Space Mono',monospace;font-size:13px;">Loading chart data...</div>
+    <canvas id="priceChartCanvas" style="display:none;width:100%;"></canvas>
+    <div style="margin-top:12px;font-size:11px;color:var(--muted);text-align:center;">Data from CoinGecko. Hover for details. Click outside to close.</div>
+  </div>
+</div>
+
 </body>
 </html>
