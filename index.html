@@ -142,8 +142,148 @@
     padding:14px 14px 4px;
   }
   /* ── Section content ── */
-  .section-content{display:none;}
+  .section-content{display:none;position:relative;}
   .section-content.active{display:block;}
+
+  /* ── Blockchain page transition ── */
+  #main-content{overflow:hidden;position:relative;}
+
+  /* The chain overlay that appears between blocks */
+  .chain-overlay{
+    position:fixed;top:0;left:0;width:100vw;height:100vh;
+    pointer-events:none;z-index:9999;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .chain-link-container{
+    display:flex;align-items:center;gap:0;
+    transform:translateX(60vw);
+    transition:transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .chain-link-container.slide-in{ transform:translateX(0); }
+  .chain-link-container.slide-out{ transform:translateX(-60vw); }
+  .chain-link-container.reverse-start{ transform:translateX(-60vw); }
+  .chain-link-container.reverse-in{ transform:translateX(0); }
+  .chain-link-container.reverse-out{ transform:translateX(60vw); }
+
+  .chain-block{
+    width:140px;height:90px;
+    border-radius:14px;
+    border:2px solid var(--orange);
+    background:rgba(15,15,38,0.95);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    box-shadow:0 0 20px rgba(245,158,11,0.3), inset 0 0 15px rgba(245,158,11,0.05);
+    position:relative;
+    flex-shrink:0;
+  }
+  .chain-block .block-hash{
+    font-family:'Space Mono',monospace;
+    font-size:8px;color:var(--muted);
+    letter-spacing:.05em;
+    margin-bottom:4px;
+    opacity:0.7;
+  }
+  .chain-block .block-label{
+    font-family:'Syne',sans-serif;
+    font-size:12px;font-weight:700;
+    color:var(--orange-bright);
+    text-align:center;
+    padding:0 8px;
+    max-width:130px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .chain-block .block-num{
+    font-family:'Space Mono',monospace;
+    font-size:9px;color:var(--muted);
+    margin-top:4px;
+    opacity:0.5;
+  }
+  .chain-block.departing{
+    border-color:rgba(245,158,11,0.4);
+    opacity:0.7;
+  }
+  .chain-block.arriving{
+    border-color:var(--orange-bright);
+    box-shadow:0 0 30px rgba(245,158,11,0.5), 0 0 60px rgba(245,158,11,0.15), inset 0 0 20px rgba(245,158,11,0.08);
+  }
+
+  /* Chain links between blocks */
+  .chain-segment{
+    display:flex;align-items:center;gap:0;flex-shrink:0;
+  }
+  .chain-ring{
+    width:22px;height:14px;
+    border:2.5px solid var(--orange);
+    border-radius:7px;
+    margin:0 -3px;
+    opacity:0.8;
+    box-shadow:0 0 8px rgba(245,158,11,0.3);
+  }
+  .chain-ring:nth-child(even){
+    transform:rotate(15deg);
+  }
+  .chain-ring:nth-child(odd){
+    transform:rotate(-15deg);
+  }
+
+  /* Nonce animation in arriving block */
+  .nonce-ticker{
+    font-family:'Space Mono',monospace;
+    font-size:8px;
+    color:var(--orange);
+    opacity:0.6;
+    margin-top:2px;
+  }
+
+  /* Fade the main content during transition */
+  .section-content.block-exit-forward{
+    animation:blockExitForward 0.45s ease-in forwards;
+  }
+  .section-content.block-enter-forward{
+    animation:blockEnterForward 0.45s ease-out forwards;
+  }
+  .section-content.block-exit-backward{
+    animation:blockExitBackward 0.45s ease-in forwards;
+  }
+  .section-content.block-enter-backward{
+    animation:blockEnterBackward 0.45s ease-out forwards;
+  }
+
+  @keyframes blockExitForward{
+    0%{opacity:1;transform:translateX(0) scale(1);}
+    100%{opacity:0;transform:translateX(-80px) scale(0.97);}
+  }
+  @keyframes blockEnterForward{
+    0%{opacity:0;transform:translateX(80px) scale(0.97);}
+    100%{opacity:1;transform:translateX(0) scale(1);}
+  }
+  @keyframes blockExitBackward{
+    0%{opacity:1;transform:translateX(0) scale(1);}
+    100%{opacity:0;transform:translateX(80px) scale(0.97);}
+  }
+  @keyframes blockEnterBackward{
+    0%{opacity:0;transform:translateX(-80px) scale(0.97);}
+    100%{opacity:1;transform:translateX(0) scale(1);}
+  }
+
+  /* Particle sparks at chain connection point */
+  .chain-spark{
+    position:absolute;
+    width:3px;height:3px;
+    background:var(--orange-bright);
+    border-radius:50%;
+    pointer-events:none;
+    box-shadow:0 0 6px var(--orange);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .section-content.block-exit-forward,
+    .section-content.block-enter-forward,
+    .section-content.block-exit-backward,
+    .section-content.block-enter-backward{animation:none;}
+    .chain-link-container{transition:none;}
+  }
   /* ── Tooltip (hover + focus accessible) ── */
   .tooltip-word{
     color:var(--orange);
@@ -2802,7 +2942,7 @@ const sectionOrder = ['welcome','money','fiatgraveyard','digimoney','inflation',
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', inflation:'Monetary Inflation', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
-  money:'Nature of Money', network:'Bitcoin Network', node:'Node', mining:'Mining',
+  money:'Nature of Money', pizza:'The Pizza Dilemma', myths:'5 Myths Debunked', network:'Bitcoin Network', node:'Node', mining:'Mining',
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
@@ -2811,6 +2951,7 @@ const sectionNames = {
 
 let currentSection = 'welcome';
 let didYouKnowIndex = 0;
+let isTransitioning = false; // block transition lock
 let btcPrice = 0;
 let btcChange = 0;
 let goldPrice = 0;
@@ -3058,15 +3199,121 @@ const didYouKnow = [
 // ═══════════════════════════════════════
 //   NAVIGATION (event delegation, not inline)
 // ═══════════════════════════════════════
-function showSection(id){
-  document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+// Generate a fake block hash for the transition visual
+function fakeHash(){
+  const chars = '0123456789abcdef';
+  let h = '0x';
+  for(let i=0;i<8;i++) h += chars[Math.floor(Math.random()*16)];
+  return h + '...';
+}
 
-  const sec = document.getElementById('sec-' + id);
+// Create chain overlay DOM
+function createChainOverlay(fromId, toId, direction){
+  const overlay = document.createElement('div');
+  overlay.className = 'chain-overlay';
+  overlay.setAttribute('aria-hidden','true');
+
+  const container = document.createElement('div');
+  container.className = 'chain-link-container';
+
+  const fromIdx = sectionOrder.indexOf(fromId);
+  const toIdx = sectionOrder.indexOf(toId);
+
+  // Departing block
+  const fromBlock = document.createElement('div');
+  fromBlock.className = 'chain-block departing';
+  fromBlock.innerHTML = `
+    <div class="block-hash">${fakeHash()}</div>
+    <div class="block-label">${sectionNames[fromId] || fromId}</div>
+    <div class="block-num">Block #${fromIdx}</div>
+  `;
+
+  // Chain links
+  const chain = document.createElement('div');
+  chain.className = 'chain-segment';
+  for(let i=0;i<5;i++){
+    const ring = document.createElement('div');
+    ring.className = 'chain-ring';
+    ring.style.animationDelay = (i * 0.05) + 's';
+    chain.appendChild(ring);
+  }
+
+  // Arriving block
+  const toBlock = document.createElement('div');
+  toBlock.className = 'chain-block arriving';
+  toBlock.innerHTML = `
+    <div class="block-hash">${fakeHash()}</div>
+    <div class="block-label">${sectionNames[toId] || toId}</div>
+    <div class="block-num">Block #${toIdx}</div>
+    <div class="nonce-ticker"></div>
+  `;
+
+  if(direction === 'forward'){
+    container.appendChild(fromBlock);
+    container.appendChild(chain);
+    container.appendChild(toBlock);
+  } else {
+    container.appendChild(toBlock);
+    container.appendChild(chain);
+    container.appendChild(fromBlock);
+  }
+
+  overlay.appendChild(container);
+  document.body.appendChild(overlay);
+
+  return { overlay, container, toBlock };
+}
+
+// Nonce ticker animation in the arriving block
+function animateNonce(block, duration){
+  const ticker = block.querySelector('.nonce-ticker');
+  if(!ticker) return;
+  const start = Date.now();
+  const iv = setInterval(()=>{
+    const elapsed = Date.now() - start;
+    if(elapsed >= duration){ clearInterval(iv); ticker.textContent = 'VALID \u2713'; ticker.style.color = '#4ade80'; return; }
+    ticker.textContent = 'nonce: ' + Math.floor(Math.random() * 999999).toString().padStart(6,'0');
+  }, 50);
+}
+
+// Spawn sparks at the chain connection point
+function spawnChainSparks(overlay){
+  const rect = overlay.getBoundingClientRect();
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
+  for(let i=0;i<8;i++){
+    const spark = document.createElement('div');
+    spark.className = 'chain-spark';
+    const angle = (Math.PI * 2 * i) / 8;
+    const dist = 20 + Math.random() * 30;
+    spark.style.left = cx + 'px';
+    spark.style.top = cy + 'px';
+    spark.style.transition = 'all 0.5s ease-out';
+    overlay.appendChild(spark);
+    requestAnimationFrame(()=>{
+      spark.style.left = (cx + Math.cos(angle) * dist) + 'px';
+      spark.style.top = (cy + Math.sin(angle) * dist) + 'px';
+      spark.style.opacity = '0';
+    });
+  }
+}
+
+function showSection(id){
+  if(isTransitioning) return;
+
+  const prevSection = currentSection;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isInitial = (prevSection === id);
+
+  // Determine direction
+  const prevIdx = sectionOrder.indexOf(prevSection);
+  const nextIdx = sectionOrder.indexOf(id);
+  const direction = nextIdx >= prevIdx ? 'forward' : 'backward';
+
+  // Update nav highlights immediately
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   const nav = document.getElementById('nav-' + id);
-  if(sec) sec.classList.add('active');
   if(nav) nav.classList.add('active');
-  currentSection = id;
 
   // Update teaching note
   const tn = document.getElementById('teachingNote');
@@ -3078,33 +3325,101 @@ function showSection(id){
   if(dyk) dyk.textContent = didYouKnow[didYouKnowIndex];
 
   // Update progress
-  const idx = sectionOrder.indexOf(id);
   const total = sectionOrder.length;
-  const pct = ((idx+1)/total)*100;
-  document.getElementById('progressLabel').textContent = `${idx+1}/${total}`;
+  const pct = ((nextIdx+1)/total)*100;
+  document.getElementById('progressLabel').textContent = `${nextIdx+1}/${total}`;
   document.getElementById('progressBar').style.width = `${pct}%`;
   document.getElementById('progressBar').parentElement.setAttribute('aria-valuenow', Math.round(pct));
 
-  // Update mobile bottom nav label + button states
+  // Update mobile bottom nav
   const lbl = document.getElementById('mobile-section-label');
   if(lbl) lbl.textContent = sectionNames[id] || id;
   const prevBtn = document.getElementById('mob-prev-btn');
   const nextBtn = document.getElementById('mob-next-btn');
-  if(prevBtn) prevBtn.disabled = (idx === 0);
-  if(nextBtn) nextBtn.disabled = (idx === total - 1);
+  if(prevBtn) prevBtn.disabled = (nextIdx === 0);
+  if(nextBtn) nextBtn.disabled = (nextIdx === total - 1);
 
-  // Close drawer on mobile after selecting
+  // Close drawer on mobile
   closeDrawer();
 
-  // Scroll to top
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  // If same section, reduced motion, or initial load — just swap instantly
+  if(isInitial || reducedMotion){
+    document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
+    const sec = document.getElementById('sec-' + id);
+    if(sec) sec.classList.add('active');
+    currentSection = id;
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    return;
+  }
+
+  // === BLOCKCHAIN TRANSITION ===
+  isTransitioning = true;
+
+  const oldSec = document.getElementById('sec-' + prevSection);
+  const newSec = document.getElementById('sec-' + id);
+
+  // Phase 1: Exit animation on current page
+  const exitClass = direction === 'forward' ? 'block-exit-forward' : 'block-exit-backward';
+  const enterClass = direction === 'forward' ? 'block-enter-forward' : 'block-enter-backward';
+
+  if(oldSec) oldSec.classList.add(exitClass);
+
+  // Phase 2: Show chain overlay after brief delay
+  setTimeout(()=>{
+    const { overlay, container, toBlock } = createChainOverlay(prevSection, id, direction);
+
+    // Animate nonce ticker
+    animateNonce(toBlock, 600);
+
+    // Slide chain in
+    requestAnimationFrame(()=>{
+      if(direction === 'forward'){
+        container.classList.add('slide-in');
+      } else {
+        container.className = 'chain-link-container reverse-start';
+        requestAnimationFrame(()=> container.classList.replace('reverse-start','reverse-in'));
+      }
+    });
+
+    // Spark at midpoint
+    setTimeout(()=> spawnChainSparks(overlay), 350);
+
+    // Phase 3: Slide chain through and swap content
+    setTimeout(()=>{
+      if(direction === 'forward'){
+        container.classList.replace('slide-in','slide-out');
+      } else {
+        container.classList.replace('reverse-in','reverse-out');
+      }
+
+      // Swap sections
+      document.querySelectorAll('.section-content').forEach(el => {
+        el.classList.remove('active', 'block-exit-forward', 'block-exit-backward', 'block-enter-forward', 'block-enter-backward');
+      });
+      if(newSec){
+        newSec.classList.add('active', enterClass);
+      }
+      currentSection = id;
+      window.scrollTo({top: 0});
+
+      // Cleanup
+      setTimeout(()=>{
+        overlay.remove();
+        if(newSec) newSec.classList.remove(enterClass);
+        isTransitioning = false;
+      }, 500);
+
+    }, 700);
+
+  }, 200);
 
   // Celebration effect for final section
-  if(id === 'perspective' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    for(let i = 0; i < 20; i++) setTimeout(() => spawnCoin(), i * 80);
-    // Pulse the star
-    const star = document.getElementById('perspectiveCelebration');
-    if(star){ star.style.transition = 'transform .6s'; star.style.transform = 'scale(1.3)'; setTimeout(()=>{ star.style.transform = 'scale(1)'; }, 600); }
+  if(id === 'perspective'){
+    setTimeout(()=>{
+      for(let i = 0; i < 20; i++) setTimeout(() => spawnCoin(), i * 80);
+      const star = document.getElementById('perspectiveCelebration');
+      if(star){ star.style.transition = 'transform .6s'; star.style.transform = 'scale(1.3)'; setTimeout(()=>{ star.style.transform = 'scale(1)'; }, 600); }
+    }, 1200);
   }
 }
 
