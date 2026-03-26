@@ -25,7 +25,7 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/"/>
 <meta property="og:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 30 interactive lessons. Free. No account needed."/>
+<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 31 interactive lessons. Free. No account needed."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -35,7 +35,7 @@
 <!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 30 interactive lessons. Free."/>
+<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 31 interactive lessons. Free."/>
 <meta name="twitter:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <title>A ₿it Curious</title>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -1101,6 +1101,7 @@
 
     <div class="neon-divider mx-3"></div>
     <div class="nav-group-label" id="nav-group-future">V. The Future</div>
+    <button class="nav-item" data-section="toolate" id="nav-toolate" aria-describedby="nav-group-future">&#9203; Am I Too Late?</button>
     <button class="nav-item" data-section="perspective" id="nav-perspective" aria-describedby="nav-group-future">&#127775; A &#8383;it New Perspective</button>
     <button class="nav-item" data-section="bibliography" id="nav-bibliography" aria-describedby="nav-group-future">&#128218; Bibliography</button>
 
@@ -1145,7 +1146,7 @@
             Every section is designed to be visual, engaging, and jargon-free. Hover over highlighted words for instant definitions. Take interactive quizzes to test your understanding. And move at your own pace &mdash; there are no tests, no grades, and no judgment.
           </p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;">
-            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">5 chapters</strong> &bull; 30 interactive lessons</div>
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">5 chapters</strong> &bull; 31 interactive lessons</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">Zero</strong> prior knowledge needed</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">100%</strong> free &bull; No account required</div>
           </div>
@@ -1189,7 +1190,7 @@
 
         <!-- Course roadmap reflecting 5-chapter structure -->
         <div class="welcome-roadmap">
-          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 5 chapters, 30 interactive lessons</div>
+          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 5 chapters, 31 interactive lessons</div>
           <div class="roadmap-track" role="img" aria-label="Course roadmap: Why Bitcoin, Getting Started, How It Works, Transactions & Cryptography, The Future">
             <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">I. Why Bitcoin?</div></div>
             <div class="roadmap-line" style="background:linear-gradient(90deg,var(--orange),var(--muted2));"></div>
@@ -3676,6 +3677,227 @@
       <button class="btn-orange" data-modal="segwit">Start Interactive Lesson &rarr;</button>
     </div>
 
+    <!-- ════ AM I TOO LATE? ════ -->
+    <div class="section-content" id="sec-toolate">
+      <h2 class="section-title">&#9203; <span class="glow-text">Am I Too Late?</span></h2>
+      <div class="section-subtitle">// Bitcoin's market cap is still a rounding error</div>
+      <!-- Section illustration: Bitcoin tiny slice vs global assets -->
+      <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
+        <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+          <rect width="800" height="180" fill="#0b0b18"/>
+          <!-- Giant bar for global wealth -->
+          <g transform="translate(50,25)">
+            <text x="0" y="12" font-family="monospace" font-size="11" fill="#f59e0b" font-weight="bold">GLOBAL STORE-OF-VALUE ASSETS</text>
+            <rect x="0" y="22" width="700" height="40" rx="6" fill="#f59e0b" fill-opacity="0.06" stroke="#f59e0b" stroke-width="0.5"/>
+            <text x="350" y="47" text-anchor="middle" font-family="monospace" font-size="12" fill="#6b7280">~$900 TRILLION</text>
+            <!-- Tiny Bitcoin sliver -->
+            <rect x="0" y="22" width="12" height="40" rx="3" fill="#f59e0b" fill-opacity="0.8"/>
+            <line x1="12" y1="68" x2="12" y2="85" stroke="#f59e0b" stroke-width="0.5" opacity="0.5"/>
+            <text x="12" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#f59e0b">₿itcoin</text>
+            <text x="12" y="107" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">~$1.7T</text>
+            <text x="12" y="118" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">(0.19%)</text>
+            <!-- Labels for other assets -->
+            <text x="200" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">Real Estate $330T</text>
+            <text x="400" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">Fixed Income $130T</text>
+            <text x="560" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">Equities $115T</text>
+            <text x="680" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">Gold $18T</text>
+            <!-- Bottom line -->
+            <text x="350" y="140" text-anchor="middle" font-family="monospace" font-size="10" fill="#f59e0b" opacity="0.7">Bitcoin has captured less than 0.2% of global store-of-value assets</text>
+          </g>
+        </svg>
+      </div>
+
+      <p class="body-text">People have been saying "it's too late to buy Bitcoin" since it was <strong style="color:var(--orange);">$1</strong>. Then $100. Then $1,000. Then $10,000. Every time, they were wrong. Here's why that might still be true today.</p>
+
+      <p class="body-text">The world holds roughly <strong style="color:var(--orange);">$900 trillion</strong> in store-of-value assets &mdash; real estate, bonds, equities, gold, art, treasuries. Bitcoin's entire market cap is around <strong style="color:var(--orange);">$1.7 trillion</strong>. That's less than <strong>0.2%</strong>. If you walked into a room of 500 people representing global wealth, Bitcoin wouldn't even be a full person yet.</p>
+
+      <!-- ── Asset Comparison Grid ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.2);">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#127760; Bitcoin vs. Global Asset Classes</div>
+        <div style="display:grid;grid-template-columns:1fr;gap:10px;" id="assetBars">
+          <!-- Real Estate -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#127968; Real Estate</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">$330T</span>
+            </div>
+            <div style="height:18px;background:rgba(245,158,11,0.06);border-radius:9px;overflow:hidden;position:relative;">
+              <div style="width:100%;height:100%;background:linear-gradient(90deg,rgba(245,158,11,0.15),rgba(245,158,11,0.25));border-radius:9px;"></div>
+            </div>
+          </div>
+          <!-- Fixed Income / Bonds -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#128196; Fixed Income & Bonds</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">$130T</span>
+            </div>
+            <div style="height:18px;background:rgba(245,158,11,0.06);border-radius:9px;overflow:hidden;">
+              <div style="width:39.4%;height:100%;background:linear-gradient(90deg,rgba(245,158,11,0.15),rgba(245,158,11,0.25));border-radius:9px;"></div>
+            </div>
+          </div>
+          <!-- Equities -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#128200; Global Equities</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">$115T</span>
+            </div>
+            <div style="height:18px;background:rgba(245,158,11,0.06);border-radius:9px;overflow:hidden;">
+              <div style="width:34.8%;height:100%;background:linear-gradient(90deg,rgba(245,158,11,0.15),rgba(245,158,11,0.25));border-radius:9px;"></div>
+            </div>
+          </div>
+          <!-- US Treasuries -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#127963;&#65039; US Treasuries</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">$27T</span>
+            </div>
+            <div style="height:18px;background:rgba(245,158,11,0.06);border-radius:9px;overflow:hidden;">
+              <div style="width:8.2%;height:100%;background:linear-gradient(90deg,rgba(245,158,11,0.15),rgba(245,158,11,0.25));border-radius:9px;"></div>
+            </div>
+          </div>
+          <!-- Gold -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#129351; Gold</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">$18T</span>
+            </div>
+            <div style="height:18px;background:rgba(245,158,11,0.06);border-radius:9px;overflow:hidden;">
+              <div style="width:5.5%;height:100%;background:linear-gradient(90deg,rgba(245,158,11,0.3),rgba(245,158,11,0.5));border-radius:9px;"></div>
+            </div>
+          </div>
+          <!-- Art & Collectibles -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#127912; Art & Collectibles</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);">$6T</span>
+            </div>
+            <div style="height:18px;background:rgba(245,158,11,0.06);border-radius:9px;overflow:hidden;">
+              <div style="width:1.8%;height:100%;background:linear-gradient(90deg,rgba(245,158,11,0.15),rgba(245,158,11,0.25));border-radius:9px;"></div>
+            </div>
+          </div>
+          <!-- Bitcoin -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);font-weight:700;">&#8383; Bitcoin</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);font-weight:700;" id="btcMarketCapLabel">~$1.7T</span>
+            </div>
+            <div style="height:18px;background:rgba(245,158,11,0.06);border-radius:9px;overflow:hidden;">
+              <div style="width:0.5%;min-width:4px;height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-bright));border-radius:9px;box-shadow:0 0 8px var(--orange-glow);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-xs mt-3" style="color:var(--muted);text-align:center;">Bitcoin is the thin orange line. It hasn't even started yet.</div>
+      </div>
+
+      <p class="body-text">Think about that. Every other asset on this list has serious drawbacks as a store of value:</p>
+
+      <!-- ── Why Bitcoin beats each asset ── -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#9878;&#65039; Why Value Migrates to Bitcoin</div>
+        <div style="display:grid;gap:14px;">
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px;">&#127968; Real Estate &mdash; illiquid, taxed, local</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">You can't send a house across the world in 10 minutes. Property taxes mean you never truly own it. Governments can seize it. Maintenance costs eat returns. Bitcoin has zero carrying cost, moves globally in minutes, and can't be confiscated if stored properly.</div>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px;">&#128196; Bonds & Treasuries &mdash; guaranteed to lose purchasing power</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">When inflation runs at 7% and your bond yields 4%, you're losing 3% per year in real terms. Bonds are IOUs from governments that can (and do) print more money. You're lending to the very entity devaluing what they'll repay you with.</div>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px;">&#129351; Gold &mdash; heavy, hard to verify, slow to move</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Gold has been money for 5,000 years, but it failed because it's impractical. You can't divide a gold bar to buy coffee. Verifying purity is expensive. Storing it safely costs money. Central banks confiscated it in 1933. Bitcoin is digital gold that fixes every one of these problems &mdash; with a supply cap that's actually enforced by math, not trust.</div>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px;">&#127912; Art & Collectibles &mdash; subjective, illiquid, gatekept</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">A Picasso's value is whatever someone will pay for it. You need experts to verify authenticity, warehouses to store it, and wealthy buyers to exit. Bitcoin is objectively scarce, instantly verifiable by anyone, and liquid 24/7/365 on global markets.</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="body-text">Bitcoin has something no other asset in history has ever had: <strong style="color:var(--orange);">absolute, mathematically enforced scarcity</strong> combined with <strong style="color:var(--orange);">perfect portability</strong>. There will only ever be 21 million. No CEO, president, or central bank can change that. And you can carry a billion dollars in your head with a 12-word seed phrase.</p>
+
+      <!-- ── Interactive: What if Bitcoin captures...? ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.3);">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#128302; What If Bitcoin Captures a Share of These Assets?</div>
+        <div class="text-xs mb-4" style="color:var(--muted);">Use the sliders to explore what Bitcoin's price could be if it absorbs a fraction of each asset class. These aren't predictions &mdash; they're math.</div>
+
+        <div style="display:grid;gap:16px;" id="captureSliders">
+          <!-- Gold -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#129351; Gold ($18T)</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);" id="goldPctLabel">0%</span>
+            </div>
+            <input type="range" id="goldCapture" min="0" max="100" value="0" class="w-full" style="accent-color:var(--orange);"/>
+          </div>
+          <!-- Real Estate (store of value portion) -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#127968; Real Estate – store of value ($100T est.)</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);" id="realEstatePctLabel">0%</span>
+            </div>
+            <input type="range" id="realEstateCapture" min="0" max="50" value="0" class="w-full" style="accent-color:var(--orange);"/>
+          </div>
+          <!-- Bonds -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#128196; Bonds & Fixed Income ($130T)</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);" id="bondsPctLabel">0%</span>
+            </div>
+            <input type="range" id="bondsCapture" min="0" max="30" value="0" class="w-full" style="accent-color:var(--orange);"/>
+          </div>
+          <!-- Art -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text2);">&#127912; Art & Collectibles ($6T)</span>
+              <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--orange);" id="artPctLabel">0%</span>
+            </div>
+            <input type="range" id="artCapture" min="0" max="100" value="0" class="w-full" style="accent-color:var(--orange);"/>
+          </div>
+        </div>
+
+        <div class="neon-divider" style="margin:20px 0;"></div>
+
+        <!-- Results display -->
+        <div style="text-align:center;">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Implied Bitcoin Market Cap</div>
+          <div style="font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:var(--orange);margin-bottom:4px;" id="impliedMarketCap">$1.7T</div>
+          <div style="display:flex;justify-content:center;gap:24px;margin-top:12px;">
+            <div style="text-align:center;">
+              <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Price per Bitcoin</div>
+              <div style="font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:var(--orange-bright);" id="impliedPrice">$87,000</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Multiple from today</div>
+              <div style="font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:#4ade80;" id="impliedMultiple">1.0x</div>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--muted);margin-top:12px;">Based on 19.8M BTC in circulation (of 21M max supply)</div>
+        </div>
+
+        <div class="neon-divider" style="margin:20px 0;"></div>
+
+        <!-- Quick scenario buttons -->
+        <div style="text-align:center;">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">Quick scenarios:</div>
+          <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;">
+            <button class="scenario-btn" onclick="setScenario(50,0,0,0)" style="font-family:'Space Mono',monospace;font-size:10px;padding:8px 14px;border-radius:8px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:var(--orange);cursor:pointer;">&#129351; "Digital Gold"</button>
+            <button class="scenario-btn" onclick="setScenario(100,5,0,0)" style="font-family:'Space Mono',monospace;font-size:10px;padding:8px 14px;border-radius:8px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:var(--orange);cursor:pointer;">&#127968; Gold + some RE</button>
+            <button class="scenario-btn" onclick="setScenario(100,10,5,50)" style="font-family:'Space Mono',monospace;font-size:10px;padding:8px 14px;border-radius:8px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);color:var(--orange);cursor:pointer;">&#128302; Global reserve</button>
+            <button class="scenario-btn" onclick="setScenario(0,0,0,0)" style="font-family:'Space Mono',monospace;font-size:10px;padding:8px 14px;border-radius:8px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);color:var(--muted);cursor:pointer;">&#128260; Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="body-text">Even the "Digital Gold" scenario &mdash; where Bitcoin simply matches gold's market cap &mdash; puts the price at roughly <strong style="color:var(--orange);">$450,000 per coin</strong>. And that's the <em>conservative</em> case. Gold can't do what Bitcoin does. It can't be sent over the internet, programmed into smart contracts, or divided into 100 million pieces.</p>
+
+      <p class="body-text">Michael Saylor puts it simply: <em style="color:var(--orange-bright);">"Bitcoin is a swarm of cyber hornets serving the goddess of wisdom, feeding on the fire of truth, exponentially growing ever smarter, faster, and stronger behind a wall of encrypted energy."</em> Dramatic? Sure. But the math checks out. Every dollar that flows out of inferior stores of value and into Bitcoin reprices it higher &mdash; and there are <strong>hundreds of trillions</strong> of dollars in assets with worse properties than Bitcoin.</p>
+
+      <p class="body-text">The question isn't whether you're too late. <strong style="color:var(--orange);">The question is whether Bitcoin has finished absorbing value from inferior assets.</strong> At 0.2% penetration, the answer is almost certainly no.</p>
+
+      <div class="neon-divider"></div>
+    </div>
+
     <!-- ════ A ₿IT NEW PERSPECTIVE ════ -->
     <div class="section-content" id="sec-perspective">
       <h2 class="section-title">&#127775; <span class="glow-text">A &#8383;it New Perspective</span></h2>
@@ -4042,7 +4264,7 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','deflation','fiatgraveyard','pizza','digimoney','altcoins','myths','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','perspective','bibliography'];
+const sectionOrder = ['welcome','money','inflation','deflation','fiatgraveyard','pizza','digimoney','altcoins','myths','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','toolate','perspective','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', inflation:'Monetary Inflation', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
@@ -4050,7 +4272,7 @@ const sectionNames = {
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
-  signatures:'Digital Signatures', segwit:'SegWit', perspective:'A \u20BFit New Perspective'
+  signatures:'Digital Signatures', segwit:'SegWit', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective'
 };
 
 let currentSection = 'welcome';
@@ -6605,6 +6827,55 @@ document.addEventListener('click', function(e){
     }, 100);
   });
 });
+
+/* ═══ Am I Too Late? — Interactive Market Cap Calculator ═══ */
+(function(){
+  const BTC_CIRCULATING = 19_800_000;
+  const CURRENT_MCAP = 1_700_000_000_000;
+  const CURRENT_PRICE = 87_000;
+  const ASSETS = {gold:18_000_000_000_000, realEstate:100_000_000_000_000, bonds:130_000_000_000_000, art:6_000_000_000_000};
+
+  function fmt$(n){
+    if(n>=1e12) return '$'+(n/1e12).toFixed(1)+'T';
+    if(n>=1e9) return '$'+(n/1e9).toFixed(0)+'B';
+    return '$'+n.toLocaleString('en-US');
+  }
+
+  function updateCalc(){
+    var gp=+document.getElementById('goldCapture').value;
+    var rp=+document.getElementById('realEstateCapture').value;
+    var bp=+document.getElementById('bondsCapture').value;
+    var ap=+document.getElementById('artCapture').value;
+    document.getElementById('goldPctLabel').textContent=gp+'%';
+    document.getElementById('realEstatePctLabel').textContent=rp+'%';
+    document.getElementById('bondsPctLabel').textContent=bp+'%';
+    document.getElementById('artPctLabel').textContent=ap+'%';
+    var captured=ASSETS.gold*(gp/100)+ASSETS.realEstate*(rp/100)+ASSETS.bonds*(bp/100)+ASSETS.art*(ap/100);
+    var impliedMcap=CURRENT_MCAP+captured;
+    var impliedPrice=Math.round(impliedMcap/BTC_CIRCULATING);
+    var multiple=(impliedPrice/CURRENT_PRICE).toFixed(1);
+    document.getElementById('impliedMarketCap').textContent=fmt$(impliedMcap);
+    document.getElementById('impliedPrice').textContent='$'+impliedPrice.toLocaleString('en-US');
+    document.getElementById('impliedMultiple').textContent=multiple+'x';
+    var multEl=document.getElementById('impliedMultiple');
+    if(parseFloat(multiple)>=5) multEl.style.color='#4ade80';
+    else if(parseFloat(multiple)>=2) multEl.style.color='var(--orange-bright)';
+    else multEl.style.color='var(--orange)';
+  }
+
+  window.setScenario=function(g,r,b,a){
+    document.getElementById('goldCapture').value=g;
+    document.getElementById('realEstateCapture').value=r;
+    document.getElementById('bondsCapture').value=b;
+    document.getElementById('artCapture').value=a;
+    updateCalc();
+  };
+
+  ['goldCapture','realEstateCapture','bondsCapture','artCapture'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.addEventListener('input',updateCalc);
+  });
+})();
 </script>
 
 <!-- ═══════════════ PRICE CHART MODAL ═══════════════ -->
