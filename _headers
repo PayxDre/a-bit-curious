@@ -1,0 +1,7 @@
+# Allow social media crawlers and link preview bots to access the site
+/*
+  X-Robots-Tag: all
+
+/og-image.png
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
