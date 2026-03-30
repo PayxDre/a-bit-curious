@@ -4433,7 +4433,7 @@ async function fetchGoldPrice(){
     goldPrice = data['tether-gold'].usd;
     renderTicker();
   } catch(e) {
-    goldPrice = goldPrice || 2400; // fallback estimate
+    goldPrice = goldPrice || 3100; // fallback estimate
     console.warn('Gold price fetch failed, using estimate:', e);
   }
 }
@@ -6577,44 +6577,59 @@ function closePriceChart(){
 
 async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label){
   try {
-    // ── Fetch BTC/USD history from CoinCap (free, no API key, full history) ──
-    // CoinCap v2 /history endpoint: interval=d1 gives daily candles
-    var startMs = new Date('2009-01-03').getTime();
-    var endMs = Date.now();
     var prices = null;
 
-    // Strategy: try CoinCap first (full history), then CoinGecko as fallback
-    var apis = [
-      { name:'CoinCap', url:'https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=' + startMs + '&end=' + endMs },
-      { name:'CoinGecko', url:'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=max' }
-    ];
-
-    for(var ai = 0; ai < apis.length; ai++){
-      try {
-        var r = await fetch(apis[ai].url);
+    // Strategy: fetch from CoinCap in yearly chunks (avoids timeout on full history)
+    // then fall back to CoinGecko with shorter range
+    try {
+      var allData = [];
+      var startYear = 2010;
+      var now = new Date();
+      var endYear = now.getFullYear();
+      // Fetch in 2-year chunks to stay within API limits
+      for(var y = startYear; y <= endYear; y += 2){
+        var s = new Date(y + '-01-01').getTime();
+        var e2 = Math.min(new Date(Math.min(y + 2, endYear + 1) + '-01-01').getTime(), Date.now());
+        var url = 'https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=' + s + '&end=' + e2;
+        var r = await fetch(url);
         if(r.ok){
           var parsed = await r.json();
-          if(apis[ai].name === 'CoinCap' && parsed.data && parsed.data.length > 400){
-            prices = parsed.data.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
-            break;
-          } else if(apis[ai].name === 'CoinGecko' && parsed.prices && parsed.prices.length > 400){
-            prices = parsed.prices;
-            break;
+          if(parsed.data && parsed.data.length > 0){
+            allData = allData.concat(parsed.data);
           }
         }
-      } catch(e){ console.warn(apis[ai].name + ' chart fetch failed:', e); }
-      if(ai < apis.length - 1) await new Promise(function(resolve){ setTimeout(resolve, 1000); });
+        // Small delay to avoid rate limiting
+        if(y + 2 <= endYear) await new Promise(function(resolve){ setTimeout(resolve, 300); });
+      }
+      if(allData.length > 100){
+        prices = allData.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
+      }
+    } catch(e){ console.warn('CoinCap chunked fetch failed:', e); }
+
+    // Fallback: CoinGecko with 365 days (free tier supports this)
+    if(!prices || prices.length < 100){
+      try {
+        await new Promise(function(resolve){ setTimeout(resolve, 500); });
+        var r2 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365');
+        if(r2.ok){
+          var parsed2 = await r2.json();
+          if(parsed2.prices && parsed2.prices.length > 50){
+            prices = parsed2.prices;
+          }
+        }
+      } catch(e){ console.warn('CoinGecko fallback failed:', e); }
     }
 
     if(!prices || prices.length < 2){
-      loadEl.textContent = 'No chart data available.';
+      loadEl.textContent = 'Chart data unavailable. API rate limit — try again in 60s.';
       return;
     }
 
     var series;
     if(vsCurrency === 'gold'){
       // Divide BTC/USD by gold price to get BTC/Gold(oz)
-      var gp = goldPrice || 2400;
+      // Note: uses current gold price for the ratio — approximate for historical data
+      var gp = goldPrice || 3100;
       series = prices.map(function(p){ return [p[0], p[1] / gp]; });
     } else {
       series = prices;
