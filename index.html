@@ -6905,11 +6905,11 @@ function openPriceChart(type){
   _chartData = null;
 
   if(type === 'btcusd'){
-    titleEl.textContent = 'BTC / USD \u2014 Since 2009';
-    fetchChartData(cvs, infoEl, loadEl, 'usd', 'USD');
+    titleEl.textContent = 'BTC / USD — Full History';
+    fetchChartData(cvs, infoEl, loadEl, 'usd', 'USD', titleEl);
   } else {
-    titleEl.textContent = 'BTC / Gold (oz) \u2014 Since 2009';
-    fetchChartData(cvs, infoEl, loadEl, 'gold', 'oz Gold');
+    titleEl.textContent = 'BTC / Gold (oz) — Full History';
+    fetchChartData(cvs, infoEl, loadEl, 'gold', 'oz Gold', titleEl);
   }
 }
 
@@ -6921,49 +6921,69 @@ function closePriceChart(){
   if(cvs){ cvs.onmousemove = null; cvs.onmouseleave = null; cvs.ontouchmove = null; }
 }
 
-async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label){
+async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label, titleEl){
   try {
     var prices = null;
 
-    // Strategy: fetch from CoinCap in yearly chunks (avoids timeout on full history)
-    // then fall back to CoinGecko with shorter range
+    // Strategy 1: CoinGecko days=max (weekly data points for full history)
     try {
-      var allData = [];
-      var startYear = 2010;
-      var now = new Date();
-      var endYear = now.getFullYear();
-      // Fetch in 2-year chunks to stay within API limits
-      for(var y = startYear; y <= endYear; y += 2){
-        var s = new Date(y + '-01-01').getTime();
-        var e2 = Math.min(new Date(Math.min(y + 2, endYear + 1) + '-01-01').getTime(), Date.now());
-        var url = 'https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=' + s + '&end=' + e2;
-        var r = await fetch(url);
-        if(r.ok){
-          var parsed = await r.json();
-          if(parsed.data && parsed.data.length > 0){
-            allData = allData.concat(parsed.data);
+      var r1 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=max&interval=daily');
+      if(r1.ok){
+        var p1 = await r1.json();
+        if(p1.prices && p1.prices.length > 500) prices = p1.prices;
+      }
+    } catch(e){ console.warn('CoinGecko max failed:', e); }
+
+    // Strategy 2: CoinCap weekly interval (single request, full history)
+    if(!prices){
+      try {
+        await new Promise(function(resolve){ setTimeout(resolve, 400); });
+        var startMs = new Date('2010-07-01').getTime();
+        var endMs = Date.now();
+        var r2 = await fetch('https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=' + startMs + '&end=' + endMs);
+        if(r2.ok){
+          var p2 = await r2.json();
+          if(p2.data && p2.data.length > 500){
+            prices = p2.data.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
           }
         }
-        // Small delay to avoid rate limiting
-        if(y + 2 <= endYear) await new Promise(function(resolve){ setTimeout(resolve, 300); });
-      }
-      if(allData.length > 100){
-        prices = allData.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
-      }
-    } catch(e){ console.warn('CoinCap chunked fetch failed:', e); }
+      } catch(e){ console.warn('CoinCap full failed:', e); }
+    }
 
-    // Fallback: CoinGecko with 365 days (free tier supports this)
-    if(!prices || prices.length < 100){
+    // Strategy 3: CoinCap in 4-year chunks with weekly interval
+    if(!prices){
+      try {
+        var allData = [];
+        var chunks = [
+          ['2010-07-01','2014-01-01'],['2014-01-01','2018-01-01'],
+          ['2018-01-01','2022-01-01'],['2022-01-01','2030-01-01']
+        ];
+        for(var ci = 0; ci < chunks.length; ci++){
+          var cs = new Date(chunks[ci][0]).getTime();
+          var ce = Math.min(new Date(chunks[ci][1]).getTime(), Date.now());
+          var cr = await fetch('https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=' + cs + '&end=' + ce);
+          if(cr.ok){
+            var cp = await cr.json();
+            if(cp.data) allData = allData.concat(cp.data);
+          }
+          if(ci < chunks.length - 1) await new Promise(function(resolve){ setTimeout(resolve, 500); });
+        }
+        if(allData.length > 200){
+          prices = allData.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
+        }
+      } catch(e){ console.warn('CoinCap chunked failed:', e); }
+    }
+
+    // Strategy 4: CoinGecko 365 days as last resort
+    if(!prices){
       try {
         await new Promise(function(resolve){ setTimeout(resolve, 500); });
-        var r2 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365');
-        if(r2.ok){
-          var parsed2 = await r2.json();
-          if(parsed2.prices && parsed2.prices.length > 50){
-            prices = parsed2.prices;
-          }
+        var r4 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365');
+        if(r4.ok){
+          var p4 = await r4.json();
+          if(p4.prices && p4.prices.length > 50) prices = p4.prices;
         }
-      } catch(e){ console.warn('CoinGecko fallback failed:', e); }
+      } catch(e){ console.warn('CoinGecko 365 fallback failed:', e); }
     }
 
     if(!prices || prices.length < 2){
@@ -6990,6 +7010,11 @@ async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label){
     var first = series[0], last = series[series.length - 1];
     var startDate = new Date(first[0]).toLocaleDateString('en-US',{year:'numeric',month:'short'});
     var endDate = new Date(last[0]).toLocaleDateString('en-US',{year:'numeric',month:'short'});
+    var startYear = new Date(first[0]).getFullYear();
+    if(titleEl){
+      var prefix = label === 'oz Gold' ? 'BTC / Gold (oz)' : 'BTC / USD';
+      titleEl.textContent = prefix + ' \u2014 Since ' + startYear;
+    }
     var change = ((last[1] - first[1]) / first[1] * 100);
     var fmtV = function(v){ return label === 'oz Gold' ? v.toFixed(1) + ' oz' : '$' + v.toLocaleString('en-US',{maximumFractionDigits:0}); };
     infoEl.innerHTML = '<span style="color:#8888b8;">' + startDate + ' \u2192 ' + endDate + '</span> &nbsp; <span style="color:#f59e0b;">' + fmtV(first[1]) + ' \u2192 ' + fmtV(last[1]) + '</span> &nbsp; <span style="color:' + (change >= 0 ? '#4ade80' : '#f87171') + ';">(' + (change >= 0 ? '+' : '') + change.toFixed(0) + '%)</span>';
