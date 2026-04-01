@@ -25,7 +25,7 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/"/>
 <meta property="og:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 33 interactive lessons. Free. No account needed."/>
+<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 34 interactive lessons. Free. No account needed."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -35,7 +35,7 @@
 <!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 33 interactive lessons. Free."/>
+<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 34 interactive lessons. Free."/>
 <meta name="twitter:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <title>A ₿it Curious</title>
 <link rel="stylesheet" href="/styles.css"/>
@@ -1097,6 +1097,7 @@
     <button class="nav-item" data-section="publickeys" id="nav-publickeys" aria-describedby="nav-group-crypto">&#128226; Public Keys</button>
     <button class="nav-item" data-section="signatures" id="nav-signatures" aria-describedby="nav-group-crypto">&#9997;&#65039; Digital Signatures</button>
     <button class="nav-item" data-section="segwit" id="nav-segwit" aria-describedby="nav-group-crypto">&#9889; SegWit</button>
+    <button class="nav-item" data-section="lightning" id="nav-lightning" aria-describedby="nav-group-crypto">&#9889; Lightning Network</button>
 
     <div class="neon-divider mx-3"></div>
     <div class="nav-group-label" id="nav-group-future">V. The Future</div>
@@ -1145,7 +1146,7 @@
             Every section is designed to be visual, engaging, and jargon-free. Hover over highlighted words for instant definitions. Take interactive quizzes to test your understanding. And move at your own pace &mdash; there are no tests, no grades, and no judgment.
           </p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;">
-            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">5 chapters</strong> &bull; 33 interactive lessons</div>
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">5 chapters</strong> &bull; 34 interactive lessons</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">Zero</strong> prior knowledge needed</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">100%</strong> free &bull; No account required</div>
           </div>
@@ -1189,7 +1190,7 @@
 
         <!-- Course roadmap reflecting 5-chapter structure -->
         <div class="welcome-roadmap">
-          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 5 chapters, 33 interactive lessons</div>
+          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 5 chapters, 34 interactive lessons</div>
           <div class="roadmap-track" role="img" aria-label="Course roadmap: Why Bitcoin, Getting Started, How It Works, Transactions & Cryptography, The Future">
             <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">I. Why Bitcoin?</div></div>
             <div class="roadmap-line" style="background:linear-gradient(90deg,var(--orange),var(--muted2));"></div>
@@ -4107,6 +4108,196 @@
       <button class="btn-orange" data-modal="segwit">Start Interactive Lesson &rarr;</button>
     </div>
 
+    <!-- ════ LIGHTNING NETWORK ════ -->
+    <div class="section-content" id="sec-lightning">
+      <h2 class="section-title">&#9889; <span class="glow-text">The Lightning Network</span></h2>
+      <div class="section-subtitle">// Bitcoin's instant payment layer</div>
+      <!-- Section illustration: Layer 1 and Layer 2 -->
+      <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
+        <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+          <rect width="800" height="180" fill="#0b0b18"/>
+          <!-- Layer 1: Bitcoin base layer -->
+          <g transform="translate(50,110)">
+            <rect x="0" y="0" width="700" height="50" rx="8" fill="#f59e0b" fill-opacity="0.06" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="350" y="22" text-anchor="middle" font-family="monospace" font-size="11" fill="#f59e0b" font-weight="bold">LAYER 1 — BITCOIN BLOCKCHAIN</text>
+            <text x="350" y="38" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">~7 TPS  ·  ~10 min blocks  ·  settlement layer  ·  maximum security</text>
+          </g>
+          <!-- Layer 2: Lightning -->
+          <g transform="translate(50,20)">
+            <rect x="0" y="0" width="700" height="70" rx="8" fill="rgba(96,165,250,0.06)" stroke="#60a5fa" stroke-width="1.5"/>
+            <text x="350" y="20" text-anchor="middle" font-family="monospace" font-size="11" fill="#60a5fa" font-weight="bold">LAYER 2 — LIGHTNING NETWORK</text>
+            <text x="350" y="36" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">millions of TPS  ·  milliseconds  ·  payment layer  ·  near-zero fees</text>
+            <!-- Payment channel lines -->
+            <circle cx="120" cy="55" r="4" fill="#60a5fa" opacity="0.6"/>
+            <circle cx="250" cy="52" r="4" fill="#60a5fa" opacity="0.6"/>
+            <circle cx="350" cy="58" r="4" fill="#60a5fa" opacity="0.6"/>
+            <circle cx="480" cy="50" r="4" fill="#60a5fa" opacity="0.6"/>
+            <circle cx="580" cy="56" r="4" fill="#60a5fa" opacity="0.6"/>
+            <line x1="120" y1="55" x2="250" y2="52" stroke="#60a5fa" stroke-width="0.8" opacity="0.4"/>
+            <line x1="250" y1="52" x2="350" y2="58" stroke="#60a5fa" stroke-width="0.8" opacity="0.4"/>
+            <line x1="350" y1="58" x2="480" y2="50" stroke="#60a5fa" stroke-width="0.8" opacity="0.4"/>
+            <line x1="480" y1="50" x2="580" y2="56" stroke="#60a5fa" stroke-width="0.8" opacity="0.4"/>
+            <line x1="120" y1="55" x2="350" y2="58" stroke="#60a5fa" stroke-width="0.5" opacity="0.2"/>
+            <line x1="250" y1="52" x2="480" y2="50" stroke="#60a5fa" stroke-width="0.5" opacity="0.2"/>
+            <line x1="350" y1="58" x2="580" y2="56" stroke="#60a5fa" stroke-width="0.5" opacity="0.2"/>
+          </g>
+          <!-- Anchors connecting layers -->
+          <line x1="200" y1="90" x2="200" y2="110" stroke="#f59e0b" stroke-width="1" opacity="0.3" stroke-dasharray="3,3"/>
+          <line x1="400" y1="90" x2="400" y2="110" stroke="#f59e0b" stroke-width="1" opacity="0.3" stroke-dasharray="3,3"/>
+          <line x1="600" y1="90" x2="600" y2="110" stroke="#f59e0b" stroke-width="1" opacity="0.3" stroke-dasharray="3,3"/>
+          <text x="400" y="105" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">channels anchored to Layer 1</text>
+        </svg>
+      </div>
+
+      <p class="body-text">Bitcoin's base layer is intentionally slow. It processes about <strong style="color:var(--orange);">7 transactions per second</strong> — by design. That's the tradeoff for maximum decentralization and security. But you don't need to broadcast every coffee purchase to 50,000 nodes worldwide. That's where <strong style="color:#60a5fa;">the Lightning Network</strong> comes in.</p>
+
+      <p class="body-text">Lightning is Bitcoin's <strong style="color:#60a5fa;">Layer 2</strong> — a payment network built <em>on top of</em> Bitcoin. Think of it like this: Layer 1 (the blockchain) is the settlement layer — like a central bank clearing large transfers. Layer 2 (Lightning) is the payment layer — like swiping a debit card for everyday purchases. Both use real BTC. There is no separate "Lightning coin."</p>
+
+      <!-- ── How it works ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(96,165,250,0.3);">
+        <div class="text-sm font-bold mb-2" style="color:#60a5fa;">&#9889; How Lightning Works — In 4 Steps</div>
+
+        <div style="display:grid;gap:14px;margin-top:12px;">
+          <div style="padding:14px;border-radius:12px;background:rgba(96,165,250,0.04);border:1px solid rgba(96,165,250,0.15);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(96,165,250,0.15);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:#60a5fa;flex-shrink:0;">1</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#60a5fa;">Open a Channel</div>
+            </div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Alice and Bob each lock some BTC into a shared <span style="color:var(--orange);">2-of-2 multisig wallet</span> on the blockchain. This is the only on-chain transaction needed. Think of it like putting cash into a joint tab at a bar.</div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(96,165,250,0.04);border:1px solid rgba(96,165,250,0.15);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(96,165,250,0.15);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:#60a5fa;flex-shrink:0;">2</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#60a5fa;">Transact Instantly, Off-Chain</div>
+            </div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Now Alice and Bob can send BTC back and forth <strong>unlimited times</strong> — instantly, for nearly zero fees. Each payment updates their balance in the channel. None of these transactions touch the blockchain. It's like passing IOUs back and forth on the tab.</div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(96,165,250,0.04);border:1px solid rgba(96,165,250,0.15);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(96,165,250,0.15);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:#60a5fa;flex-shrink:0;">3</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#60a5fa;">Route Through the Network</div>
+            </div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Alice doesn't need a direct channel with everyone. If Alice has a channel with Bob, and Bob has one with Carol, Alice can pay Carol by routing through Bob — using <span style="color:var(--orange);">Hashed Timelock Contracts (HTLCs)</span> that make the payment trustless. No one can steal funds in transit. It works like internet routing — data finds a path.</div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(96,165,250,0.04);border:1px solid rgba(96,165,250,0.15);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(96,165,250,0.15);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:#60a5fa;flex-shrink:0;">4</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#60a5fa;">Close the Channel &amp; Settle</div>
+            </div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">When they're done, either party closes the channel. One final on-chain transaction records the net result of all their Lightning payments. Hundreds or thousands of payments get compressed into a single blockchain entry.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Layer comparison ── -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#9878;&#65039; Layer 1 vs Layer 2 — Why Both Matter</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);margin-bottom:8px;">Layer 1: Bitcoin Blockchain</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.7;">
+              &#128274; Maximum security<br/>
+              &#9203; ~10 minute confirmations<br/>
+              &#128176; Higher fees ($1-50+)<br/>
+              &#127760; ~7 transactions/second<br/>
+              &#128220; Final settlement layer<br/>
+              &#128171; Every node validates
+            </div>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(96,165,250,0.04);border:1px solid rgba(96,165,250,0.15);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#60a5fa;margin-bottom:8px;">Layer 2: Lightning Network</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.7;">
+              &#9889; Instant (&lt;1 second)<br/>
+              &#128178; Near-zero fees (&lt;$0.01)<br/>
+              &#128640; Millions of TPS possible<br/>
+              &#127758; Micropayments enabled<br/>
+              &#128275; Settled to L1 when closed<br/>
+              &#128373;&#65039; Onion-routed privacy
+            </div>
+          </div>
+        </div>
+        <div class="text-xs text-center mt-3" style="color:var(--muted);">Think of Layer 1 as the vault. Layer 2 as your wallet. You don't carry the vault to buy coffee.</div>
+      </div>
+
+      <p class="body-text">The analogy people use most: <strong style="color:var(--orange);">Layer 1 is like the Federal Reserve's settlement system</strong> — secure, slow, for large transfers. <strong style="color:#60a5fa;">Layer 2 is like Visa's payment network</strong> — fast, cheap, for everyday use. Except Lightning is open, permissionless, and doesn't take 3% of every transaction.</p>
+
+      <!-- ── Network stats ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.2);">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#128200; Lightning Network Growth</div>
+        <div class="text-xs mb-4" style="color:var(--muted);">The network is growing in capacity even as it consolidates into more efficient, larger channels.</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.15);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#60a5fa;">5,600+</div>
+            <div style="font-size:10px;color:var(--muted);">BTC capacity (ATH)</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.15);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#60a5fa;">~15,000</div>
+            <div style="font-size:10px;color:var(--muted);">Public nodes</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.15);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#60a5fa;">8M+</div>
+            <div style="font-size:10px;color:var(--muted);">Monthly transactions</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.15);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#60a5fa;">99%+</div>
+            <div style="font-size:10px;color:var(--muted);">Payment success rate</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--orange);">384%</div>
+            <div style="font-size:10px;color:var(--muted);">Capacity growth since 2020</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);text-align:center;">
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--orange);">266%</div>
+            <div style="font-size:10px;color:var(--muted);">YoY transaction growth</div>
+          </div>
+        </div>
+        <div class="text-xs text-center mt-3" style="color:var(--muted);">Coinbase: 15% of BTC withdrawals use Lightning  ·  Cash App: 7x Lightning usage growth  ·  Steak 'n Shake: 50% lower fees vs credit cards</div>
+      </div>
+
+      <!-- ── Real-world scenario ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(96,165,250,0.3);">
+        <div class="text-sm font-bold mb-2" style="color:#60a5fa;">&#127758; Lightning in Everyday Life — A Day in 2030</div>
+        <div class="text-xs mb-4" style="color:var(--muted);">Here's what a Lightning-powered economy could look like.</div>
+
+        <div style="display:grid;gap:12px;">
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.04);border-left:3px solid rgba(96,165,250,0.4);">
+            <div style="font-size:12px;color:#60a5fa;font-weight:700;margin-bottom:4px;">&#9749; 7:00 AM — Coffee</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">You scan a QR code at the cafe. 5,000 sats (~$2.50) leave your phone wallet instantly. The barista's register beeps. Total fee: 0.01 cents. No bank, no card network, no 3% merchant fee.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.04);border-left:3px solid rgba(96,165,250,0.4);">
+            <div style="font-size:12px;color:#60a5fa;font-weight:700;margin-bottom:4px;">&#127911; 9:00 AM — Streaming podcast</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">You listen to a podcast that charges 1 sat per minute. After an hour, you've paid 60 sats (~$0.03) — streamed in real time, per second. The creator gets paid directly. No ads, no subscription, no platform taking 30%.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.04);border-left:3px solid rgba(96,165,250,0.4);">
+            <div style="font-size:12px;color:#60a5fa;font-weight:700;margin-bottom:4px;">&#127758; 12:00 PM — Send money home</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">A worker in New York sends $200 to family in El Salvador. It arrives in 3 seconds. Fee: less than a penny. Western Union would have charged $15-25 and taken 3-5 days.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.04);border-left:3px solid rgba(96,165,250,0.4);">
+            <div style="font-size:12px;color:#60a5fa;font-weight:700;margin-bottom:4px;">&#127918; 6:00 PM — Online gaming</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">You earn 500 sats for winning a match in a mobile game. Real money, instantly in your wallet. No minimum withdrawal, no payout delay, no PayPal holding your funds for 21 days.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(96,165,250,0.04);border-left:3px solid rgba(96,165,250,0.4);">
+            <div style="font-size:12px;color:#60a5fa;font-weight:700;margin-bottom:4px;">&#128187; 9:00 PM — Pay-per-article</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">Instead of a $15/month subscription to a news site, you pay 200 sats (~$0.10) per article you actually read. Journalism funded by readers, not advertisers. Micropayments make it possible.</div>
+          </div>
+        </div>
+        <div class="text-xs text-center mt-3 p-2 rounded-lg" style="background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.15);color:#60a5fa;">
+          Lightning doesn't just make Bitcoin faster — it unlocks entirely new economic models that weren't possible when the minimum viable payment was $0.50+ in fees.
+        </div>
+      </div>
+
+      <p class="body-text">Lightning also uses <strong style="color:var(--orange);">onion routing</strong> — the same privacy concept as Tor. Each node in the payment path only knows the previous and next hop, never the full route. This gives Lightning payments better privacy than on-chain transactions in many cases.</p>
+
+      <p class="body-text">And it's not just theoretical. <strong style="color:#60a5fa;">El Salvador</strong> runs its national Bitcoin payment system on Lightning. <strong style="color:#60a5fa;">Steak 'n Shake</strong> accepts Lightning at every location — saving 50% on processing fees vs credit cards. <strong style="color:#60a5fa;">Coinbase, Cash App, Kraken, and Strike</strong> all support Lightning withdrawals. This is happening now.</p>
+
+      <p class="body-text">The key insight: Bitcoin doesn't need to compete with Visa at Layer 1. It needs to be <strong>more secure than any vault</strong> at Layer 1, and <strong style="color:#60a5fa;">faster than any card</strong> at Layer 2. Lightning delivers both — without compromising Bitcoin's core principles of decentralization and fixed supply.</p>
+
+      <div class="neon-divider"></div>
+    </div>
+
     <!-- ════ AM I TOO LATE? ════ -->
     <div class="section-content" id="sec-toolate">
       <h2 class="section-title">&#9203; <span class="glow-text">Am I Too Late?</span></h2>
@@ -4694,7 +4885,7 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','altcoins','myths','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','toolate','perspective','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','altcoins','myths','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','lightning','toolate','perspective','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
@@ -4702,7 +4893,7 @@ const sectionNames = {
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
-  signatures:'Digital Signatures', segwit:'SegWit', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective'
+  signatures:'Digital Signatures', segwit:'SegWit', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective'
 };
 
 let currentSection = 'welcome';
