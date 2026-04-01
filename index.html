@@ -7496,14 +7496,41 @@ async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label, titleEl){
       } catch(e){ console.warn('CoinCap chunked failed:', e); }
     }
 
-    // Strategy 4: CoinGecko 365 days as last resort
+    // Strategy 4: CoinCap 10-year with weekly interval (smaller payload)
+    if(!prices){
+      try {
+        var tenYrStart = Date.now() - (10 * 365.25 * 24 * 60 * 60 * 1000);
+        var tenYrEnd = Date.now();
+        var r4w = await fetch('https://api.coincap.io/v2/assets/bitcoin/history?interval=w1&start=' + Math.floor(tenYrStart) + '&end=' + Math.floor(tenYrEnd));
+        if(r4w.ok){
+          var p4w = await r4w.json();
+          if(p4w.data && p4w.data.length > 100){
+            prices = p4w.data.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
+          }
+        }
+      } catch(e){ console.warn('CoinCap weekly 10yr failed:', e); }
+    }
+
+    // Strategy 5: CoinGecko 3650 days (~10 years) as fallback
     if(!prices){
       try {
         await new Promise(function(resolve){ setTimeout(resolve, 500); });
-        var r4 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365');
+        var r4 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=3650&interval=daily');
         if(r4.ok){
           var p4 = await r4.json();
           if(p4.prices && p4.prices.length > 50) prices = p4.prices;
+        }
+      } catch(e){ console.warn('CoinGecko 3650 fallback failed:', e); }
+    }
+
+    // Strategy 5: CoinGecko 365 days as absolute last resort
+    if(!prices){
+      try {
+        await new Promise(function(resolve){ setTimeout(resolve, 500); });
+        var r5 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365');
+        if(r5.ok){
+          var p5 = await r5.json();
+          if(p5.prices && p5.prices.length > 50) prices = p5.prices;
         }
       } catch(e){ console.warn('CoinGecko 365 fallback failed:', e); }
     }
