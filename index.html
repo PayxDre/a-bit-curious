@@ -198,11 +198,11 @@
   }
   .chain-block .block-label{
     font-family:'Syne',sans-serif;
-    font-size:12px;font-weight:700;
+    font-size:11px;font-weight:700;
     color:var(--orange-bright);
     text-align:center;
-    padding:0 8px;
-    max-width:130px;
+    padding:0 6px;
+    max-width:180px;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
@@ -1486,7 +1486,10 @@
         <div class="text-sm font-bold mb-4" style="color:var(--orange);">&#128228; Demo: Send Bitcoin</div>
         <div class="space-y-3">
           <div>
-            <label for="sendAddr" class="text-xs mb-1 block" style="color:var(--muted);">Recipient Address</label>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
+              <label for="sendAddr" class="text-xs" style="color:var(--muted);">Recipient Address</label>
+              <button id="generateAddrBtn" style="font-family:'Space Mono',monospace;font-size:10px;padding:3px 10px;border-radius:6px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:var(--orange);cursor:pointer;transition:all .15s;" onmouseenter="this.style.background='rgba(245,158,11,0.2)'" onmouseleave="this.style.background='rgba(245,158,11,0.1)'">&#9889; Generate demo address</button>
+            </div>
             <input id="sendAddr" type="text" placeholder="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kjkjm9..."
                    class="w-full px-3 py-2 rounded-lg text-xs"
                    style="background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);color:var(--text);font-family:'Space Mono',monospace;outline:none;"
@@ -2219,9 +2222,9 @@
       <div class="glass p-5 my-6" style="border:2px solid rgba(248,113,113,0.3);">
         <div class="text-sm font-bold mb-2" style="color:#f87171;">&#9201; U.S. National Debt — Live Estimate</div>
         <div class="text-xs mb-3" style="color:var(--muted);">Based on $36.2 trillion (March 2025) growing at approximately $4.6 billion per day.</div>
-        <div style="text-align:center;padding:20px 0;">
-          <div style="font-family:'Space Mono',monospace;font-size:36px;font-weight:700;color:#f87171;letter-spacing:1px;" id="debtClock">$36,200,000,000,000</div>
-          <div style="display:flex;justify-content:center;gap:24px;margin-top:12px;">
+        <div style="text-align:center;padding:20px 0;overflow:hidden;">
+          <div style="font-family:'Space Mono',monospace;font-size:clamp(18px,5vw,36px);font-weight:700;color:#f87171;letter-spacing:0.5px;word-break:break-all;" id="debtClock">$36,200,000,000,000</div>
+          <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px 24px;margin-top:12px;">
             <div style="text-align:center;">
               <div style="font-size:10px;color:var(--muted);text-transform:uppercase;">Per Citizen</div>
               <div style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:#f87171;" id="debtPerCitizen">$108,000</div>
@@ -5195,6 +5198,16 @@ document.getElementById('main-content').addEventListener('click', function(e){
 
   // Wallet generator
   if(e.target.id === 'generateWalletBtn') generateWallet();
+
+  // Generate demo address
+  if(e.target.id === 'generateAddrBtn'){
+    var hex = '0123456789abcdef';
+    var qr = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+    var addr = 'bc1q';
+    for(var gi = 0; gi < 38; gi++) addr += qr[Math.floor(Math.random() * qr.length)];
+    var el = document.getElementById('sendAddr');
+    if(el){ el.value = addr; el.style.borderColor = 'var(--orange)'; setTimeout(function(){ el.style.borderColor = 'var(--glass-border)'; }, 1000); }
+  }
 
   // Demo send
   if(e.target.id === 'demoSendBtn') demoSend();
