@@ -25,7 +25,7 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/"/>
 <meta property="og:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 34 interactive lessons. Free. No account needed."/>
+<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 35 interactive lessons. Free. No account needed."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -35,7 +35,7 @@
 <!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 34 interactive lessons. Free."/>
+<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 35 interactive lessons. Free."/>
 <meta name="twitter:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <title>A ₿it Curious</title>
 <link rel="stylesheet" href="/styles.css"/>
@@ -1106,6 +1106,7 @@
     <button class="nav-item" data-section="blockchain" id="nav-blockchain" aria-describedby="nav-group-system">&#9939; The Blockchain</button>
     <button class="nav-item" data-section="blocks" id="nav-blocks" aria-describedby="nav-group-system">&#128230; Blocks</button>
     <button class="nav-item" data-section="difficulty" id="nav-difficulty" aria-describedby="nav-group-system">&#127919; Difficulty</button>
+    <button class="nav-item" data-section="attackvectors" id="nav-attackvectors" aria-describedby="nav-group-system">&#128737; Attack Vectors</button>
 
     <div class="neon-divider mx-3"></div>
     <div class="nav-group-label" id="nav-group-crypto">IV. Transactions &amp; Cryptography</div>
@@ -1167,7 +1168,7 @@
             Every section is designed to be visual, engaging, and jargon-free. Hover over highlighted words for instant definitions. Take interactive quizzes to test your understanding. And move at your own pace &mdash; there are no tests, no grades, and no judgment.
           </p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;">
-            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">5 chapters</strong> &bull; 34 interactive lessons</div>
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">5 chapters</strong> &bull; 35 interactive lessons</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">Zero</strong> prior knowledge needed</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">100%</strong> free &bull; No account required</div>
           </div>
@@ -1211,7 +1212,7 @@
 
         <!-- Course roadmap reflecting 5-chapter structure -->
         <div class="welcome-roadmap">
-          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 5 chapters, 34 interactive lessons</div>
+          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 5 chapters, 35 interactive lessons</div>
           <div class="roadmap-track" role="img" aria-label="Course roadmap: Why Bitcoin, Getting Started, How It Works, Transactions & Cryptography, The Future">
             <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">I. Why Bitcoin?</div></div>
             <div class="roadmap-line" style="background:linear-gradient(90deg,var(--orange),var(--muted2));"></div>
@@ -3637,12 +3638,205 @@
       <div class="neon-divider"></div>
       <button class="btn-orange" data-modal="difficulty">Start Interactive Lesson &rarr;</button>
 
+      <!-- Bridge to Attack Vectors -->
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Continuing Chapter III</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">OK, but can it be <span class="glow-text">attacked</span>?</div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You understand how Bitcoin works. Now let's stress-test it &mdash; every attack vector people have imagined, and why the system makes each one economically irrational.</p>
+        <button class="btn-orange" data-section="attackvectors" style="font-size:15px;padding:14px 32px;">Next: Attack Vectors &#128737; &rarr;</button>
+      </div>
+    </div>
+
+    <!-- ════ ATTACK VECTORS ════ -->
+    <div class="section-content" id="sec-attackvectors">
+      <h2 class="section-title">&#128737; <span class="glow-text">Attack Vectors</span></h2>
+      <div class="section-subtitle">// Every way someone could try to break Bitcoin — and why they can't</div>
+
+      <!-- Section illustration -->
+      <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
+        <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+          <rect width="800" height="180" fill="#0b0b18"/>
+          <!-- Shield in center -->
+          <g transform="translate(340,15)">
+            <path d="M60,0 L120,20 L120,80 C120,120 60,150 60,150 C60,150 0,120 0,80 L0,20 Z" fill="rgba(245,158,11,0.08)" stroke="#f59e0b" stroke-width="2"/>
+            <text x="60" y="70" text-anchor="middle" font-family="monospace" font-size="28" fill="#f59e0b">&#8383;</text>
+            <text x="60" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#f59e0b">SECURED</text>
+          </g>
+          <!-- Attack arrows bouncing off -->
+          <g opacity="0.5">
+            <line x1="80" y1="40" x2="320" y2="70" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <text x="60" y="35" font-family="monospace" font-size="8" fill="#f87171">51% Attack</text>
+            <line x1="100" y1="120" x2="325" y2="100" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <text x="40" y="125" font-family="monospace" font-size="8" fill="#f87171">Sybil Attack</text>
+            <line x1="720" y1="40" x2="480" y2="70" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <text x="680" y="35" font-family="monospace" font-size="8" fill="#f87171">Software Bug</text>
+            <line x1="700" y1="120" x2="475" y2="100" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <text x="670" y="125" font-family="monospace" font-size="8" fill="#f87171">Nation-State</text>
+            <line x1="400" y1="175" x2="400" y2="165" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <text x="400" y="178" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">All attacks deflected by math, physics, and incentives</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="highlight-box">
+        <span class="font-bold" style="color:var(--orange);">Bitcoin has been running for 17+ years with zero successful attacks on the protocol.</span> Not because no one has tried &mdash; billions of dollars in incentive sit behind that shield. It survives because the system makes attacking it <em>more expensive</em> than cooperating with it.
+      </div>
+
+      <!-- ══ 51% ATTACK ══ -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(248,113,113,0.3);">
+        <div class="text-sm font-bold mb-2" style="color:#f87171;">&#9888;&#65039; The 51% Attack</div>
+        <div class="text-xs mb-3" style="color:var(--muted);">The most discussed threat — and the most misunderstood.</div>
+
+        <p class="body-text" style="margin-bottom:14px;">Here's the idea: if someone controlled more than half of all the computing power (hash rate) on the Bitcoin network, they could theoretically <span class="tooltip-word" tabindex="0">rewrite recent blocks<span class="tooltip-box">An attacker with 51%+ hash rate could mine an alternative chain faster than the honest network, then broadcast it to replace the "real" chain. This would let them reverse their own recent transactions — a "double spend."</span></span> and reverse their own transactions. This is called a <strong style="color:#f87171;">double spend</strong> &mdash; spending the same Bitcoin twice.</p>
+
+        <p class="body-text" style="margin-bottom:14px;">Sounds terrifying. But let's look at what it would actually take:</p>
+
+        <!-- Cost breakdown -->
+        <div style="display:grid;gap:12px;margin-bottom:16px;">
+          <div style="padding:14px;border-radius:12px;background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.15);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#f87171;margin-bottom:6px;">&#128176; The Cost</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.7;">You would need to acquire more mining hardware than every other miner on Earth <em>combined</em>. The Bitcoin hash rate currently exceeds <strong style="color:var(--orange);">700 EH/s</strong> (700 quintillion calculations per second). The hardware alone would cost tens of billions of dollars. The electricity to run it would cost millions per day. And you'd need to do this <em>covertly</em> &mdash; buying that much hardware on the open market would spike prices, alert the community, and likely trigger defensive responses before you even switched it on.</div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.15);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#f87171;margin-bottom:6px;">&#128683; What You'd Actually Get</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.7;">Even with 51%, you <em>cannot</em>: steal other people's Bitcoin, change the 21M supply cap, create coins from nothing, or alter old transactions deep in the chain. All you can do is reverse <strong>your own recent transactions</strong>. You'd spend tens of billions to pull off... one double spend. Meanwhile, the moment it's detected, exchanges halt trading, the price crashes, and your stolen coins become worthless.</div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px;">&#9889; The Antonopoulos Argument</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.7;">As Andreas Antonopoulos put it: a 51% attack would require a <strong style="color:var(--orange);">massive covert effort</strong> by nation states or large industrial complexes, spending enormous amounts of energy, all to achieve <em>one</em> double spend &mdash; when they could have simply pointed that same hash power at mining honestly and earned the block rewards. The incentives are completely backward. <strong style="color:var(--orange);">It's cheaper to play by the rules.</strong></div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div style="padding:14px;border-radius:12px;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);text-align:center;">
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">Attack Cost</div>
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#f87171;">$20B+</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">hardware + electricity + secrecy</div>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);text-align:center;">
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">Mining Revenue Instead</div>
+            <div style="font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#4ade80;">$30M+/day</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:2px;">honest rewards with same hash power</div>
+          </div>
+        </div>
+        <div class="text-xs text-center" style="color:var(--muted);">The game theory is simple: attacking Bitcoin destroys the value of the very thing you're trying to steal.</div>
+      </div>
+
+      <!-- ══ SYBIL ATTACK ══ -->
+      <div class="glass p-5 my-5" style="border-left:3px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:var(--orange-dim);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">VECTOR #2</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Sybil Attack — Flood the Network with Fake Nodes</span>
+        </div>
+        <p class="body-text" style="margin-bottom:8px;">In many networks, an attacker can create thousands of fake identities to overwhelm the system. On social media, these are bot armies. Could someone do this to Bitcoin?</p>
+        <p class="body-text" style="margin-bottom:8px;"><strong style="color:var(--orange);">No &mdash; because Bitcoin doesn't care about identities.</strong> Proof of Work makes identity irrelevant. It doesn't matter if you run one node or ten thousand &mdash; you can only mine blocks by doing real computational work and spending real energy. You can't fake a valid hash. You can't vote your way to control. Every block must contain real proof that real electricity was burned. Running a million fake nodes gives you exactly zero advantage.</p>
+      </div>
+
+      <!-- ══ DOUBLE SPEND (without 51%) ══ -->
+      <div class="glass p-5 my-5" style="border-left:3px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:var(--orange-dim);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">VECTOR #3</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Double Spend — Spend the Same Coin Twice</span>
+        </div>
+        <p class="body-text" style="margin-bottom:8px;">What if someone sends Bitcoin to a merchant and then quickly sends the same coins elsewhere before the first transaction confirms?</p>
+        <p class="body-text" style="margin-bottom:8px;"><strong style="color:var(--orange);">Confirmations solve this.</strong> Once a transaction is included in a block (1 confirmation), reversing it requires outpacing the entire network. After 6 confirmations (~60 minutes), the probability of reversal is effectively zero &mdash; you'd need more computing power than exists on Earth. For small purchases, even 1 confirmation is sufficient. For large transfers, waiting for 6 is standard. The deeper a transaction is buried in the chain, the more energy it would cost to undo &mdash; exponentially.</p>
+      </div>
+
+      <!-- ══ NATION-STATE ATTACK ══ -->
+      <div class="glass p-5 my-5" style="border-left:3px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:var(--orange-dim);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">VECTOR #4</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Nation-State Attack — Government Tries to Kill Bitcoin</span>
+        </div>
+        <p class="body-text" style="margin-bottom:8px;">Could a government with unlimited resources shut Bitcoin down?</p>
+        <p class="body-text" style="margin-bottom:8px;"><strong style="color:var(--orange);">They'd have to shut down the internet &mdash; globally, simultaneously, forever.</strong> Bitcoin nodes run in 100+ countries. The protocol can transmit over satellite (Blockstream Satellite), mesh radio, and even SMS. China &mdash; the most powerful censorship apparatus in history &mdash; banned Bitcoin mining twice. The hash rate recovered in months as miners relocated. The network didn't skip a beat. A government can ban exchanges within its borders, but it cannot stop two people from sending math to each other over the internet.</p>
+      </div>
+
+      <!-- ══ SOFTWARE BUG ══ -->
+      <div class="glass p-5 my-5" style="border-left:3px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:var(--orange-dim);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">VECTOR #5</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Software Bug — A Flaw in the Code</span>
+        </div>
+        <p class="body-text" style="margin-bottom:8px;">Bitcoin is software. What if there's a critical bug?</p>
+        <p class="body-text" style="margin-bottom:8px;"><strong style="color:var(--orange);">Bitcoin's code is the most scrutinized open-source project in history.</strong> Hundreds of developers review every line. There have been bugs &mdash; in 2010, an overflow bug briefly allowed someone to create 184 billion Bitcoin, which was patched within hours. But here's the key: Bitcoin's consensus mechanism means every node independently validates every transaction. Even if one version of the software has a bug, the rest of the network rejects invalid blocks. There is no single point of failure. No "main server" to hack. No CEO to coerce. The code is public, the network is distributed, and anyone can audit it.</p>
+      </div>
+
+      <!-- ══ ECLIPSE ATTACK ══ -->
+      <div class="glass p-5 my-5" style="border-left:3px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:var(--orange-dim);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">VECTOR #6</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Eclipse Attack — Isolate a Single Node</span>
+        </div>
+        <p class="body-text" style="margin-bottom:8px;">Instead of attacking the whole network, what if you surround a single node with attacker-controlled nodes, feeding it false information?</p>
+        <p class="body-text" style="margin-bottom:8px;"><strong style="color:var(--orange);">This targets individuals, not the network itself.</strong> Even if successful, it only affects the isolated node &mdash; the rest of the network is unaffected. Bitcoin Core has built-in defenses: diversified peer connections, anchor connections, and limits on connections from the same IP range. Running your own node with multiple connection sources makes this attack extremely difficult. And it still can't create fake Bitcoin or alter the chain &mdash; it can only delay your view of new blocks.</p>
+      </div>
+
+      <!-- ══ SOCIAL/CONSENSUS ATTACK ══ -->
+      <div class="glass p-5 my-5" style="border-left:3px solid var(--orange);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <span style="background:var(--orange-dim);color:var(--orange);font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;">VECTOR #7</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Social Attack — Change the Rules from the Inside</span>
+        </div>
+        <p class="body-text" style="margin-bottom:8px;">What if powerful companies or influential developers try to change Bitcoin's rules &mdash; like raising the 21 million cap?</p>
+        <p class="body-text" style="margin-bottom:8px;"><strong style="color:var(--orange);">This was tried in 2017 &mdash; and it failed spectacularly.</strong> Major companies, exchanges, and miners backed the "SegWit2x" proposal to increase block size. They had overwhelming corporate support. But Bitcoin's rules are enforced by <em>node operators</em> &mdash; the thousands of individuals running the software. The nodes rejected the change. The corporate-backed fork died. This proved something remarkable: <strong style="color:var(--orange);">no one controls Bitcoin</strong>. Not the miners, not the developers, not the corporations. The users &mdash; through their nodes &mdash; have the final say.</p>
+      </div>
+
+      <!-- ══ WHY IT ALL WORKS ══ -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.3);">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#128737; Why Bitcoin Is Antifragile</div>
+        <div class="text-xs mb-4" style="color:var(--muted);">Every attack makes the network stronger. Here's why the security model works.</div>
+
+        <div style="display:grid;gap:10px;">
+          <div style="padding:12px;border-radius:10px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;font-weight:700;color:var(--orange);">&#128176; Economic Incentives</span>
+              <span style="font-size:11px;color:var(--text3);">Attacking costs more than cooperating</span>
+            </div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;font-weight:700;color:var(--orange);">&#9889; Thermodynamic Security</span>
+              <span style="font-size:11px;color:var(--text3);">Real energy = real cost to attack</span>
+            </div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;font-weight:700;color:var(--orange);">&#127760; Global Distribution</span>
+              <span style="font-size:11px;color:var(--text3);">No single point of failure, 100+ countries</span>
+            </div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;font-weight:700;color:var(--orange);">&#128064; Radical Transparency</span>
+              <span style="font-size:11px;color:var(--text3);">Open source code, public ledger, anyone can audit</span>
+            </div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:12px;font-weight:700;color:var(--orange);">&#128101; User Sovereignty</span>
+              <span style="font-size:11px;color:var(--text3);">Node operators enforce the rules, not corporations</span>
+            </div>
+          </div>
+        </div>
+        <div class="text-xs text-center mt-3 p-2 rounded-lg" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);color:var(--orange);">
+          Bitcoin turns the attacker's own resources against them. The bigger the attack, the more expensive it gets, the less it accomplishes, and the stronger the network becomes afterward.
+        </div>
+      </div>
+
+      <p class="body-text">This is why Bitcoin is often called <strong style="color:var(--orange);">antifragile</strong>. Unlike traditional systems that get weaker under stress, Bitcoin gets <em>stronger</em>. Every attack attempt, every ban, every crash &mdash; the network adapts, the community hardens, and the protocol keeps producing blocks. Every 10 minutes. Without fail. For 17 years and counting.</p>
+
+      <div class="neon-divider"></div>
+
       <!-- Bridge to Chapter IV -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
         <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next &mdash; Chapter IV</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">The <span class="glow-text">cryptography</span> that makes it all possible.</div>
-        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You understand the system. Now let's zoom in on the machinery &mdash; how transactions are built, how outputs work, how locks and keys protect your Bitcoin, and the elegant math behind digital signatures.</p>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You understand the system and its defenses. Now let's zoom in on the machinery &mdash; how transactions are built, how outputs work, how locks and keys protect your Bitcoin, and the elegant math behind digital signatures.</p>
         <button class="btn-orange" data-section="transactions" style="font-size:15px;padding:14px 32px;">Dive into Transactions &#128184; &rarr;</button>
       </div>
     </div>
@@ -4999,12 +5193,12 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','altcoins','myths','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','lightning','toolate','perspective','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','altcoins','myths','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','lightning','toolate','perspective','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
   money:'Nature of Money', pizza:'The Pizza Dilemma', myths:'6 Myths Debunked', quantum:'The Quantum Question', network:'Bitcoin Network', node:'Node', mining:'Mining',
-  blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty',
+  blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty', attackvectors:'Attack Vectors',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
   signatures:'Digital Signatures', segwit:'SegWit', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective'
