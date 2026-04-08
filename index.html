@@ -1117,7 +1117,7 @@
     <button class="nav-item" data-section="privatekeys" id="nav-privatekeys" aria-describedby="nav-group-crypto">&#128374; Private Keys</button>
     <button class="nav-item" data-section="publickeys" id="nav-publickeys" aria-describedby="nav-group-crypto">&#128226; Public Keys</button>
     <button class="nav-item" data-section="signatures" id="nav-signatures" aria-describedby="nav-group-crypto">&#9997;&#65039; Digital Signatures</button>
-    <button class="nav-item" data-section="segwit" id="nav-segwit" aria-describedby="nav-group-crypto">&#9889; SegWit</button>
+    <button class="nav-item" data-section="consensus" id="nav-consensus" aria-describedby="nav-group-crypto">&#9878;&#65039; Consensus &amp; Upgrades</button>
     <button class="nav-item" data-section="lightning" id="nav-lightning" aria-describedby="nav-group-crypto">&#9889; Lightning Network</button>
 
     <div class="neon-divider mx-3"></div>
@@ -4317,71 +4317,227 @@
       <button class="btn-orange" data-modal="signatures">Start Interactive Lesson &rarr;</button>
     </div>
 
-    <!-- ════ SEGWIT ════ -->
-    <div class="section-content" id="sec-segwit">
-      <h2 class="section-title">&#9889; <span class="glow-text">SegWit</span></h2>
-      <div class="section-subtitle">// Bitcoin's clever upgrade that made transactions cheaper</div>
-      <!-- Section illustration: SegWit before/after comparison -->
+
+    <!-- ════ CONSENSUS & UPGRADES ════ -->
+    <div class="section-content" id="sec-consensus">
+      <h2 class="section-title">&#9878;&#65039; <span class="glow-text">Consensus &amp; Upgrades</span></h2>
+      <div class="section-subtitle">// How Bitcoin evolves without a CEO</div>
+      <!-- Section illustration: Fork diagram -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
           <rect width="800" height="180" fill="#0b0b18"/>
-          <!-- Before SegWit -->
-          <g transform="translate(50,20)">
-            <text x="140" y="12" text-anchor="middle" font-family="monospace" font-size="10" fill="#6b7280" font-weight="bold">BEFORE SEGWIT</text>
-            <rect x="0" y="22" width="280" height="60" rx="6" fill="#f59e0b" fill-opacity="0.04" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
-            <!-- Transaction data -->
-            <rect x="8" y="30" width="100" height="44" rx="4" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="0.5"/>
-            <text x="58" y="50" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">TX DATA</text>
-            <text x="58" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#6b7280">inputs, outputs</text>
-            <!-- Witness/signature data (taking up space) -->
-            <rect x="116" y="30" width="156" height="44" rx="4" fill="#f59e0b" fill-opacity="0.06" stroke="#f59e0b" stroke-width="0.5" stroke-dasharray="3,2"/>
-            <text x="194" y="50" text-anchor="middle" font-family="monospace" font-size="7" fill="#f59e0b" opacity="0.6">SIGNATURES (65%)</text>
-            <text x="194" y="62" text-anchor="middle" font-family="monospace" font-size="6" fill="#6b7280">bloats the block</text>
-            <!-- 1MB limit bar -->
-            <rect x="0" y="92" width="280" height="8" rx="4" fill="#f59e0b" fill-opacity="0.1"/>
-            <rect x="0" y="92" width="280" height="8" rx="4" fill="#f59e0b" fill-opacity="0.3"/>
-            <text x="140" y="115" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">1 MB block limit — FULL</text>
-          </g>
-          <!-- Arrow -->
-          <text x="400" y="70" text-anchor="middle" font-family="monospace" font-size="20" fill="#f59e0b" opacity="0.5">→</text>
-          <!-- After SegWit -->
-          <g transform="translate(460,20)">
-            <text x="150" y="12" text-anchor="middle" font-family="monospace" font-size="10" fill="#f59e0b" font-weight="bold">AFTER SEGWIT</text>
-            <rect x="0" y="22" width="300" height="60" rx="6" fill="#f59e0b" fill-opacity="0.06" stroke="#f59e0b" stroke-width="1.5"/>
-            <!-- Transaction data (more room) -->
-            <rect x="8" y="30" width="180" height="44" rx="4" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="0.5"/>
-            <text x="98" y="48" text-anchor="middle" font-family="monospace" font-size="7" fill="#f59e0b">TX DATA</text>
-            <text x="98" y="60" text-anchor="middle" font-family="monospace" font-size="6" fill="#6b7280">more TXs fit!</text>
-            <!-- Witness separated -->
-            <rect x="196" y="30" width="96" height="44" rx="4" fill="#f59e0b" fill-opacity="0.04" stroke="#f59e0b" stroke-width="0.5" stroke-dasharray="3,2"/>
-            <text x="244" y="48" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">WITNESS</text>
-            <text x="244" y="60" text-anchor="middle" font-family="monospace" font-size="6" fill="#6b7280">separated</text>
-            <!-- 4MW limit bar -->
-            <rect x="0" y="92" width="300" height="8" rx="4" fill="#f59e0b" fill-opacity="0.1"/>
-            <rect x="0" y="92" width="200" height="8" rx="4" fill="#f59e0b" fill-opacity="0.3"/>
-            <text x="150" y="115" text-anchor="middle" font-family="monospace" font-size="8" fill="#f59e0b">4 MW virtual limit — room to grow</text>
-          </g>
-          <!-- Bottom benefits -->
-          <text x="400" y="160" text-anchor="middle" font-family="monospace" font-size="9" fill="#6b7280">~40% more capacity  ·  lower fees  ·  enabled Lightning Network  ·  soft fork (backwards compatible)</text>
+          <!-- Main chain -->
+          <line x1="50" y1="90" x2="350" y2="90" stroke="#f59e0b" stroke-width="3" opacity="0.8"/>
+          <!-- Fork point -->
+          <circle cx="350" cy="90" r="8" fill="#f59e0b" opacity="0.9"/>
+          <text x="350" y="75" text-anchor="middle" font-family="monospace" font-size="8" fill="#f59e0b" font-weight="bold">FORK POINT</text>
+          <!-- Soft fork path (continues main) -->
+          <line x1="350" y1="90" x2="750" y2="90" stroke="#4ade80" stroke-width="3" opacity="0.8"/>
+          <text x="550" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#4ade80" font-weight="bold">SOFT FORK</text>
+          <text x="550" y="105" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">backwards compatible &mdash; old nodes still work</text>
+          <!-- Hard fork path (splits off) -->
+          <line x1="350" y1="90" x2="750" y2="40" stroke="#f87171" stroke-width="2" opacity="0.5" stroke-dasharray="6,4"/>
+          <text x="580" y="35" text-anchor="middle" font-family="monospace" font-size="9" fill="#f87171" font-weight="bold">HARD FORK</text>
+          <text x="580" y="50" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">incompatible &mdash; creates a new chain</text>
+          <!-- Blocks on main chain -->
+          <rect x="80" y="80" width="40" height="20" rx="3" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="0.5"/>
+          <rect x="140" y="80" width="40" height="20" rx="3" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="0.5"/>
+          <rect x="200" y="80" width="40" height="20" rx="3" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="0.5"/>
+          <rect x="270" y="80" width="40" height="20" rx="3" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="0.5"/>
+          <!-- Blocks on soft fork -->
+          <rect x="400" y="80" width="40" height="20" rx="3" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="0.5"/>
+          <rect x="460" y="80" width="40" height="20" rx="3" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="0.5"/>
+          <rect x="520" y="80" width="40" height="20" rx="3" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="0.5"/>
+          <!-- Labels -->
+          <text x="50" y="130" font-family="monospace" font-size="8" fill="#6b7280">BIP proposed &#8594; community debate &#8594; code written &#8594; miners signal &#8594; activation</text>
+          <text x="400" y="160" text-anchor="middle" font-family="monospace" font-size="9" fill="#f59e0b">Bitcoin has NEVER had a successful contentious hard fork of its main chain</text>
         </svg>
       </div>
-      <p class="body-text"><span class="tooltip-word" tabindex="0">SegWit<span class="tooltip-box">Short for "Segregated Witness" &mdash; activated August 2017. Moved signature data to a separate, discounted data area.</span></span> stands for "Segregated Witness" &mdash; a fundamental upgrade activated in August 2017. It moved signature information out of the main transaction body into a separate, discounted area. The results: lower fees, more capacity, and new features.</p>
-      <p class="body-text">Before SegWit, signature data (often 60%+ of transaction size) took up precious block space at full price. SegWit introduced witness data counting as only 0.25&times; its actual size toward the block limit &mdash; effectively increasing transactions per block by up to 4&times; without changing the base block size.</p>
 
-      <!-- ── Inline Illustration ── -->
-      <div class="glass p-5 my-5">
-        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#9889; Before &amp; After SegWit</div>
-        <div class="space-y-3">
-          <div><div style="font-size:10px;color:#f87171;margin-bottom:4px;">&#10060; Legacy transaction (~250 bytes)</div><div style="height:14px;border-radius:7px;background:rgba(248,113,113,0.15);border:1px solid rgba(248,113,113,0.3);overflow:hidden;"><div style="width:100%;height:100%;background:linear-gradient(90deg,#60a5fa 16%,#a78bfa 16% 32%,#f87171 32% 75%,#fbbf24 75% 89%,#94a3b8 89%);border-radius:7px;"></div></div></div>
-          <div><div style="font-size:10px;color:#4ade80;margin-bottom:4px;">&#9989; SegWit transaction (~141 vBytes)</div><div style="height:14px;border-radius:7px;background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.3);overflow:hidden;"><div style="width:56%;height:100%;background:linear-gradient(90deg,#60a5fa 10%,#a78bfa 10% 30%,#fbbf24 30% 60%,#4ade80 60% 90%,#94a3b8 90%);border-radius:7px;"></div></div></div>
+      <p class="body-text">Bitcoin has no CEO, no board of directors, no foundation with veto power. Yet its code has been upgraded dozens of times since 2009. How? Through a process called <strong style="color:var(--orange);">rough consensus</strong> &mdash; a messy, slow, beautiful system where changes only happen when nearly everyone agrees.</p>
+
+      <p class="body-text">This is one of Bitcoin's most underappreciated features. In a world where tech companies push updates overnight, Bitcoin's upgrade process is <em>deliberately</em> slow and conservative. That's not a bug &mdash; it's what makes it trustworthy as a monetary protocol.</p>
+
+      <!-- ── BIP Process ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.3);">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#128220; The BIP Process &mdash; How Changes Are Proposed</div>
+        <p class="text-xs mb-4" style="color:var(--muted);">BIP = Bitcoin Improvement Proposal. Anyone in the world can submit one. Here's how it works:</p>
+
+        <div style="display:grid;gap:12px;margin-top:12px;">
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(245,158,11,0.15);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--orange);flex-shrink:0;">1</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);">Draft &amp; Discuss</div>
+            </div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">A developer writes a formal proposal (BIP) describing the change, its motivation, and technical specification. It gets posted to the bitcoin-dev mailing list and debated publicly. Anyone can participate.</div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(245,158,11,0.15);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--orange);flex-shrink:0;">2</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);">Code &amp; Review</div>
+            </div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">If the idea gains traction, developers write the actual code. Multiple independent reviewers audit it. This phase can take months or years. There's no deadline &mdash; the code ships when it's ready.</div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(245,158,11,0.15);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--orange);flex-shrink:0;">3</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);">Signal &amp; Activate</div>
+            </div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">For consensus changes, miners signal readiness by including a flag in the blocks they mine. When a supermajority (usually 90-95%) signals support over a defined period, the upgrade activates. Nodes that haven't upgraded still work &mdash; that's the beauty of soft forks.</div>
+          </div>
         </div>
-        <div class="text-xs text-center mt-2" style="color:var(--muted);">Witness data (signatures) moved to a discounted area. Same security, <span style="color:#4ade80;font-weight:700;">~44% cheaper</span>.</div>
       </div>
 
-      <p class="body-text">SegWit also fixed <span class="tooltip-word" tabindex="0">transaction malleability<span class="tooltip-box">A flaw where a transaction's ID could be changed before confirmation, without invalidating it. SegWit fixes this by removing signatures from the ID calculation.</span></span> &mdash; enabling the <span class="tooltip-word" tabindex="0">Lightning Network<span class="tooltip-box">A "layer 2" payment network allowing instant, nearly free Bitcoin payments via payment channels.</span></span> for instant, near-free payments.</p>
-      <p class="body-text">Modern SegWit addresses ("bc1q...") use less block space and cost less than legacy addresses ("1..."). If your wallet still uses old addresses, upgrade to save money on every transaction.</p>
+      <!-- ── Soft Fork vs Hard Fork ── -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#128256; Soft Fork vs Hard Fork</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="padding:14px;border-radius:12px;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.15);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#4ade80;margin-bottom:8px;">&#9989; Soft Fork</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.7;">
+              Backwards compatible<br/>
+              Old nodes still validate<br/>
+              Tightens existing rules<br/>
+              No chain split<br/>
+              <strong style="color:#4ade80;">Bitcoin's preferred method</strong>
+            </div>
+          </div>
+          <div style="padding:14px;border-radius:12px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.15);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#f87171;margin-bottom:8px;">&#10060; Hard Fork</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.7;">
+              NOT backwards compatible<br/>
+              Old nodes reject new blocks<br/>
+              Loosens or changes rules<br/>
+              Can split the chain<br/>
+              <strong style="color:#f87171;">Avoided whenever possible</strong>
+            </div>
+          </div>
+        </div>
+        <div class="text-xs text-center mt-3" style="color:var(--muted);">Think of a soft fork as adding a speed bump to a road &mdash; all cars still work. A hard fork is changing the road to train tracks &mdash; cars can't drive on them.</div>
+      </div>
+
+      <p class="body-text">Bitcoin strongly favors soft forks because they don't force anyone to upgrade. If you're running a node from 2017, it still validates the chain today. That's <strong style="color:var(--orange);">9 years of backwards compatibility</strong> &mdash; unheard of in software.</p>
+
+      <!-- ── Major Upgrades Timeline ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.2);">
+        <div class="text-sm font-bold mb-4" style="color:var(--orange);">&#128197; Major Bitcoin Upgrades</div>
+
+        <!-- P2SH -->
+        <div style="padding:14px;border-radius:12px;background:rgba(96,165,250,0.04);border:1px solid rgba(96,165,250,0.15);margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#60a5fa;background:rgba(96,165,250,0.15);padding:4px 10px;border-radius:6px;">2012</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#60a5fa;">P2SH (BIP 16) &mdash; Pay-to-Script-Hash</div>
+          </div>
+          <div style="font-size:12px;color:var(--text3);line-height:1.6;">Enabled multi-signature wallets and complex spending conditions. Before P2SH, the sender had to include the full script in the transaction. P2SH moved that burden to the recipient, making advanced transactions practical. Soft fork.</div>
+        </div>
+
+        <!-- CSV/CLTV -->
+        <div style="padding:14px;border-radius:12px;background:rgba(96,165,250,0.04);border:1px solid rgba(96,165,250,0.15);margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#60a5fa;background:rgba(96,165,250,0.15);padding:4px 10px;border-radius:6px;">2015-16</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#60a5fa;">Timelocks (BIPs 65 &amp; 112)</div>
+          </div>
+          <div style="font-size:12px;color:var(--text3);line-height:1.6;">Added CHECKLOCKTIMEVERIFY and CHECKSEQUENCEVERIFY &mdash; letting you lock bitcoin until a specific time or block height. These are essential building blocks for payment channels and the Lightning Network. Soft forks.</div>
+        </div>
+
+        <!-- SegWit -->
+        <div style="padding:16px;border-radius:12px;background:rgba(245,158,11,0.06);border:2px solid rgba(245,158,11,0.3);margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);background:rgba(245,158,11,0.15);padding:4px 10px;border-radius:6px;">2017</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--orange);">&#9889; SegWit (BIPs 141-145) &mdash; Segregated Witness</div>
+          </div>
+          <div style="font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:12px;">The most significant upgrade in Bitcoin's history. SegWit moved signature ("witness") data out of the main transaction body into a separate, discounted area. The results were transformative:</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px;">
+            <div style="padding:10px;border-radius:8px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);text-align:center;">
+              <div style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--orange);">~44%</div>
+              <div style="font-size:10px;color:var(--muted);">cheaper fees</div>
+            </div>
+            <div style="padding:10px;border-radius:8px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);text-align:center;">
+              <div style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--orange);">4 MW</div>
+              <div style="font-size:10px;color:var(--muted);">virtual block limit</div>
+            </div>
+            <div style="padding:10px;border-radius:8px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);text-align:center;">
+              <div style="font-family:'Space Mono',monospace;font-size:16px;font-weight:700;color:var(--orange);">&#9889;</div>
+              <div style="font-size:10px;color:var(--muted);">enabled Lightning</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:12px;">Before SegWit, signature data (often 60%+ of transaction size) took up precious block space at full price. SegWit introduced witness data counting as only <strong style="color:var(--orange);">0.25&times;</strong> its actual size &mdash; effectively increasing capacity without changing the base block size.</div>
+          <div style="font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:12px;">Crucially, SegWit fixed <span style="color:var(--orange);font-weight:700;">transaction malleability</span> &mdash; a bug where a transaction's ID could be changed before confirmation. This fix was the prerequisite for the Lightning Network. No SegWit, no Lightning.</div>
+
+          <!-- The Blocksize War -->
+          <div style="padding:12px;border-radius:10px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.15);margin-top:8px;">
+            <div style="font-size:11px;font-weight:700;color:#f87171;margin-bottom:6px;">&#9878;&#65039; The Blocksize War (2015-2017)</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">SegWit didn't happen easily. It emerged from a bitter 2-year civil war over how to scale Bitcoin. One side (mostly large companies and miners) wanted to increase the block size via hard fork. The other side (mostly developers and node operators) pushed SegWit as a soft fork. The conflict peaked with the <strong style="color:#f87171;">SegWit2x</strong> proposal &mdash; a backroom deal by major companies to force both SegWit and a 2MB hard fork. Users revolted. They ran nodes signaling "NO2X." SegWit2x collapsed weeks before activation. The lesson: <strong style="color:var(--orange);">in Bitcoin, users &mdash; not companies &mdash; have the final say.</strong></div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px;">Modern SegWit addresses ("bc1q...") use less block space and cost less than legacy addresses ("1..."). If your wallet still uses old addresses, upgrade to save on every transaction. Soft fork &mdash; activated August 2017.</div>
+        </div>
+
+        <!-- Taproot -->
+        <div style="padding:16px;border-radius:12px;background:rgba(167,139,250,0.06);border:2px solid rgba(167,139,250,0.3);margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:#a78bfa;background:rgba(167,139,250,0.15);padding:4px 10px;border-radius:6px;">2021</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:#a78bfa;">&#127793; Taproot (BIPs 340-342) &mdash; Schnorr &amp; MAST</div>
+          </div>
+          <div style="font-size:12px;color:var(--text3);line-height:1.6;margin-bottom:12px;">Bitcoin's most recent major upgrade, activated November 2021. Taproot introduced three powerful changes:</div>
+          <div style="display:grid;gap:8px;margin-bottom:12px;">
+            <div style="padding:10px 14px;border-radius:8px;background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);">
+              <div style="font-size:12px;font-weight:700;color:#a78bfa;">Schnorr Signatures (BIP 340)</div>
+              <div style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:4px;">Replaced ECDSA for Taproot outputs. Schnorr signatures are smaller, faster to verify, and enable <strong style="color:#a78bfa;">signature aggregation</strong> &mdash; combining multiple signatures into one. A 3-of-5 multisig transaction becomes indistinguishable from a simple payment.</div>
+            </div>
+            <div style="padding:10px 14px;border-radius:8px;background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);">
+              <div style="font-size:12px;font-weight:700;color:#a78bfa;">MAST (Merkelized Alternative Script Trees)</div>
+              <div style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:4px;">Allows complex spending conditions (like "Alice after 1 year OR Bob+Carol together") to be hidden in a Merkle tree. Only the condition actually used gets revealed on-chain. Better privacy, lower fees.</div>
+            </div>
+            <div style="padding:10px 14px;border-radius:8px;background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);">
+              <div style="font-size:12px;font-weight:700;color:#a78bfa;">Tapscript (BIP 342)</div>
+              <div style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:4px;">An upgraded scripting language that makes future soft forks easier to deploy. Think of it as future-proofing Bitcoin's programming language.</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);">Taproot was activated via "Speedy Trial" &mdash; miners signaled 90% support within a single difficulty period. Notably non-contentious compared to SegWit. Soft fork.</div>
+        </div>
+      </div>
+
+      <!-- ── Current Debates ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.2);">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#128293; Current &amp; Proposed Changes (2024-2026)</div>
+        <p class="text-xs mb-4" style="color:var(--muted);">These proposals are actively debated. None are activated. This is consensus in action &mdash; the slow, careful process working as designed.</p>
+
+        <div style="display:grid;gap:10px;">
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
+            <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">OP_CAT (BIP 347)</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">Would re-enable the ability to concatenate (join) two pieces of data in Bitcoin's scripting language. Satoshi originally included OP_CAT but disabled it in 2010 as a precaution. Proponents say it enables covenants, vaults, and bridges to other chains. Critics worry about unintended consequences and complexity creep. <span style="color:var(--orange);font-weight:600;">Status: actively debated.</span></div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
+            <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">OP_CTV &mdash; CheckTemplateVerify (BIP 119)</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">Would allow a transaction to commit to the exact shape of future transactions that spend it. Enables "covenants" &mdash; restrictions on how bitcoin can be spent in the future. Use cases include vaults (delayed withdrawals for security) and congestion control. <span style="color:var(--orange);font-weight:600;">Status: proposed since 2020, debated.</span></div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
+            <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">OP_VAULT (BIP 345)</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">A specialized covenant design for Bitcoin vaults &mdash; a security feature where you can "unvault" bitcoin with a time delay, giving you a window to claw it back if your keys are compromised. Like a safe with a time lock and a panic button. <span style="color:var(--orange);font-weight:600;">Status: draft proposal.</span></div>
+          </div>
+
+          <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
+            <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">Great Script Restoration</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">A proposal by Rusty Russell to re-enable many of the original opcodes Satoshi disabled in 2010, plus add new ones. The idea: give Bitcoin a more expressive scripting language for building advanced contracts, layer 2 protocols, and vaults. Controversial because it significantly expands Bitcoin's attack surface. <span style="color:var(--orange);font-weight:600;">Status: early discussion.</span></div>
+          </div>
+        </div>
+
+        <div class="text-xs text-center mt-4 p-3 rounded-lg" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);color:var(--orange);">
+          The fact that these proposals take years to debate is a feature, not a bug. Bitcoin's monetary policy is settled. Everything else moves carefully.
+        </div>
+      </div>
+
+      <!-- ── Why It Matters ── -->
+      <p class="body-text">Here's what makes Bitcoin's governance unique: <strong style="color:var(--orange);">no single entity can push through a change.</strong> Not the developers (they write code, but can't force anyone to run it). Not the miners (they process transactions, but users choose which chain to follow). Not the exchanges (they list coins, but can't change the protocol). Power is distributed across all participants &mdash; and that distribution is what makes Bitcoin's monetary properties trustworthy.</p>
+
+      <p class="body-text">Compare this to every other monetary system in history. The Federal Reserve can change interest rates in an afternoon. A government can freeze bank accounts overnight. Even Ethereum's leadership pushed through a chain rollback in 2016 (the DAO fork). Bitcoin's upgrade process is slow and frustrating by design &mdash; because the alternative is a monetary system that can be changed on a whim.</p>
+
       <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="segwit">Start Interactive Lesson &rarr;</button>
+      <button class="btn-orange" data-modal="consensus">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ LIGHTNING NETWORK ════ -->
@@ -5193,7 +5349,7 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','altcoins','myths','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','segwit','lightning','toolate','perspective','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','altcoins','myths','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','consensus','lightning','toolate','perspective','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
@@ -5201,7 +5357,7 @@ const sectionNames = {
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty', attackvectors:'Attack Vectors',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
-  signatures:'Digital Signatures', segwit:'SegWit', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective'
+  signatures:'Digital Signatures', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective'
 };
 
 let currentSection = 'welcome';
@@ -5434,7 +5590,7 @@ const teachingNotes = {
   privatekeys: `\ud83c\udf93 The "atoms in the universe" analogy is jaw-dropping.\n\n\ud83d\udca1 Emphasize entropy: bad randomness is the most common way keys have been compromised.`,
   publickeys: `\ud83c\udf93 The paint mixing analogy: easy to mix, impossible to un-mix.\n\n\ud83d\udca1 Address reuse is a privacy issue. Modern HD wallets handle this automatically.`,
   signatures: `\ud83c\udf93 The "seal that changes for every document" captures ECDSA perfectly.\n\n\ud83d\udca1 Taproot/Schnorr is a natural lead-in to Lightning Network.`,
-  segwit: `\ud83c\udf93 SegWit solved a multi-year debate without a contentious hard fork.\n\n\ud83d\udca1 The malleability fix enabling Lightning is the most consequential downstream effect.`,
+  consensus: `\ud83c\udf93 The Blocksize War is the perfect case study for how Bitcoin governance works.\n\n\ud83d\udca1 Emphasize that the BIP process being slow is a feature, not a bug. Compare to how the Fed can change monetary policy in an afternoon.\n\n\ud83c\udf93 SegWit and Taproot show that meaningful upgrades DO happen — just carefully. The current OP_CAT debate shows the process in real time.`,
   perspective: `\ud83c\udf1f This is the emotional and intellectual payoff of the entire course. Let it breathe.\n\n\ud83d\udca1 Jeff Booth's thesis is the bridge: technology creates deflation, fiat fights it with inflation, Bitcoin lets deflation win. This reframe is the "aha" moment for many students.\n\n\ud83c\udf93 The future-price simulator makes the abstract concrete. Watch students' eyes widen when they see grocery prices falling in sat terms year after year. That's the moment it clicks.\n\n\ud83c\udf89 Celebrate! They just completed the entire course. Make them feel proud.`
 };
 
@@ -6267,10 +6423,11 @@ function getModalContent(section){
         <div id="verifyResult" class="hidden text-center text-sm py-2 rounded-lg" aria-live="polite"></div>
       </div>`,
 
-    segwit: `
-      <div class="text-lg font-bold mb-1 glow-text" style="font-family:'Syne',sans-serif;">\u26A1 SegWit Size Comparison</div>
-      <p class="text-xs mb-4" style="color:var(--muted);">See how SegWit reduces transaction size \u2014 and your fees!</p>
+    consensus: `
+      <div class="text-lg font-bold mb-1 glow-text" style="font-family:'Syne',sans-serif;">\u2696\uFE0F Bitcoin Upgrade Explorer</div>
+      <p class="text-xs mb-4" style="color:var(--muted);">Compare how Bitcoin's major upgrades changed transaction structure and capabilities.</p>
       <div class="space-y-4">
+        <div class="text-xs font-bold mb-1" style="color:var(--orange);">\u26A1 SegWit: Before &amp; After</div>
         <div class="grid gap-3" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
           <div class="compare-box" style="background:rgba(248,113,113,0.08);border:2px solid rgba(248,113,113,0.3);">
             <div class="text-xs font-bold mb-2" style="color:#f87171;">\u274C Legacy Transaction (P2PKH)</div>
@@ -6287,8 +6444,19 @@ function getModalContent(section){
           <div class="text-2xl font-bold mb-1" style="color:var(--orange);">~44% cheaper fees</div>
           <div class="text-xs" style="color:var(--muted);">SegWit transactions cost significantly less. Always use bc1q... addresses!</div>
         </div>
+        <div class="text-xs font-bold mt-4 mb-2" style="color:#a78bfa;">\uD83C\uDF31 Taproot: Signature Aggregation</div>
+        <div class="grid gap-3" style="grid-template-columns:1fr 1fr">
+          <div class="compare-box" style="background:rgba(248,113,113,0.08);border:2px solid rgba(248,113,113,0.3);">
+            <div class="text-xs font-bold mb-2" style="color:#f87171;">\u274C 3-of-5 Multisig (Pre-Taproot)</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">3 separate signatures required on-chain. Everyone can see it's a multisig. <span style="color:#f87171;">~300+ vBytes.</span></div>
+          </div>
+          <div class="compare-box" style="background:rgba(167,139,250,0.08);border:2px solid rgba(167,139,250,0.3);">
+            <div class="text-xs font-bold mb-2" style="color:#a78bfa;">\u2705 3-of-5 Multisig (Taproot + Schnorr)</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">Signatures aggregated into ONE. Looks like a normal payment. <span style="color:#a78bfa;">~58 vBytes.</span> Private + cheap.</div>
+          </div>
+        </div>
         <div class="text-xs p-3 rounded-xl" style="background:rgba(245,158,11,0.08);border:1px solid var(--glass-border);color:var(--muted);">
-          <strong style="color:var(--orange);">The SegWit discount:</strong> Witness bytes count as only 0.25\u00D7 their actual size toward the 4MW block weight limit.
+          <strong style="color:var(--orange);">Key insight:</strong> Both SegWit (2017) and Taproot (2021) were soft forks \u2014 backwards compatible. Old nodes still validate the chain. That's 4 years between major upgrades. Bitcoin moves slowly because it has to.
         </div>
       </div>`,
 
@@ -7016,8 +7184,8 @@ modalInitFns.signatures = function(){
   });
 };
 
-// ── SegWit ──
-modalInitFns.segwit = function(){
+// ── Consensus & Upgrades ──
+modalInitFns.consensus = function(){
   const legacyParts=[{label:'Version',bytes:4,color:'#60a5fa'},{label:'Inputs',bytes:41,color:'#a78bfa'},{label:'Outputs',bytes:34,color:'#fbbf24'},{label:'Signature',bytes:107,color:'#f87171'},{label:'Locktime',bytes:4,color:'#94a3b8'}];
   const segwitParts=[{label:'Version',bytes:4,color:'#60a5fa'},{label:'Marker',bytes:2,color:'#f59e0b'},{label:'Inputs',bytes:41,color:'#a78bfa'},{label:'Outputs',bytes:31,color:'#fbbf24'},{label:'Witness',bytes:55,color:'rgba(74,222,128,0.6)'},{label:'Locktime',bytes:4,color:'#94a3b8'}];
   function renderParts(el,parts,total){
