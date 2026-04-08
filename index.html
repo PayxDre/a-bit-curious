@@ -4524,6 +4524,22 @@
             <div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">Great Script Restoration</div>
             <div style="font-size:11px;color:var(--text3);line-height:1.6;">A proposal by Rusty Russell to re-enable many of the original opcodes Satoshi disabled in 2010, plus add new ones. The idea: give Bitcoin a more expressive scripting language for building advanced contracts, layer 2 protocols, and vaults. Controversial because it significantly expands Bitcoin's attack surface. <span style="color:var(--orange);font-weight:600;">Status: early discussion.</span></div>
           </div>
+
+          <div style="padding:16px;border-radius:12px;background:rgba(248,113,113,0.04);border:2px solid rgba(248,113,113,0.25);">
+            <div style="font-size:13px;font-weight:700;color:#f87171;margin-bottom:4px;">&#128293; BIP 110 &mdash; Temporarily Limit Arbitrary Data</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;margin-bottom:10px;">The most contentious Bitcoin debate since the 2017 Blocksize War. Proposed in late 2025 by developer Dathon Ohm and backed by the Bitcoin Knots team, BIP 110 would impose a one-year soft fork limiting non-monetary data in transactions &mdash; targeting Ordinals inscriptions, BRC-20 tokens, and large OP_RETURN payloads. Outputs would be capped at 34 bytes, OP_RETURN at 83 bytes.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <div style="padding:10px;border-radius:8px;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.15);">
+                <div style="font-size:10px;font-weight:700;color:#4ade80;margin-bottom:4px;">FOR: "Clean up spam"</div>
+                <div style="font-size:10px;color:var(--text3);line-height:1.5;">Arbitrary data bloats the blockchain, drives up fees for real payments, and burdens node operators. Bitcoin should prioritize its monetary function.</div>
+              </div>
+              <div style="padding:10px;border-radius:8px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.15);">
+                <div style="font-size:10px;font-weight:700;color:#f87171;margin-bottom:4px;">AGAINST: "Dangerous precedent"</div>
+                <div style="font-size:10px;color:var(--text3);line-height:1.5;">Consensus-level content filtering violates Bitcoin's neutrality. It disables OP_SUCCESS (needed for future upgrades) and could set a precedent for transaction censorship. Adam Back and Michael Saylor have both warned against it.</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">The debate echoes the 2017 war: who decides what Bitcoin is "for"? Ocean pool mined the first BIP-110 signaling block in early 2026. As of now, ~2.4% of nodes support it &mdash; far from the activation threshold, but the ideological rift runs deep. <span style="color:#f87171;font-weight:600;">Status: actively contentious, signaling underway.</span></div>
+          </div>
         </div>
 
         <div class="text-xs text-center mt-4 p-3 rounded-lg" style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);color:var(--orange);">
