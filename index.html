@@ -25,17 +25,17 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/"/>
 <meta property="og:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 37 interactive lessons. Free. No account needed."/>
+<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 7 chapters, 37 interactive lessons. Free. No account needed."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="A ₿it Curious — The Interactive Guide to Bitcoin. 21M supply, 17+ years uptime, 5 chapters."/>
+<meta property="og:image:alt" content="A ₿it Curious — The Interactive Guide to Bitcoin. 21M supply, 17+ years uptime, 7 chapters."/>
 <meta property="og:site_name" content="A ₿it Curious"/>
 
 <!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 5 chapters, 37 interactive lessons. Free."/>
+<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 7 chapters, 37 interactive lessons. Free."/>
 <meta name="twitter:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <title>A ₿it Curious</title>
 <link rel="stylesheet" href="/styles.css"/>
@@ -1078,29 +1078,35 @@
     <button class="nav-item active" data-section="welcome" id="nav-welcome" style="margin-bottom:4px;border-left-color:var(--orange);font-weight:700;color:var(--orange-bright);">&#127793; Welcome</button>
 
     <div class="neon-divider mx-3" style="margin-top:8px;margin-bottom:8px;"></div>
-    <div class="nav-group-label" id="nav-group-why">I. Why Bitcoin?</div>
-    <button class="nav-item" data-section="money" id="nav-money" aria-describedby="nav-group-why">&#128128; The Nature of Money</button>
-    <button class="nav-item" data-section="inflation" id="nav-inflation" aria-describedby="nav-group-why">&#128200; Monetary Inflation</button>
-    <button class="nav-item" data-section="faithcredit" id="nav-faithcredit" aria-describedby="nav-group-why">&#127963;&#65039; Full Faith &amp; Credit</button>
-    <button class="nav-item" data-section="deflation" id="nav-deflation" aria-describedby="nav-group-why">&#9878;&#65039; Deflation vs Fiat</button>
-    <button class="nav-item" data-section="fiatgraveyard" id="nav-fiatgraveyard" aria-describedby="nav-group-why">&#128123; The Fiat Graveyard</button>
-    <button class="nav-item" data-section="pizza" id="nav-pizza" aria-describedby="nav-group-why">&#127829; The Pizza Dilemma</button>
-    <button class="nav-item" data-section="digimoney" id="nav-digimoney" aria-describedby="nav-group-why">&#128187; Digital Money Before Bitcoin</button>
-    <button class="nav-item" data-section="satoshi" id="nav-satoshi" aria-describedby="nav-group-why">&#128373;&#65039; Who Is Satoshi?</button>
-    <button class="nav-item" data-section="altcoins" id="nav-altcoins" aria-describedby="nav-group-why">&#128302; Bitcoin vs Other Cryptos</button>
-    <button class="nav-item" data-section="myths" id="nav-myths" aria-describedby="nav-group-why">&#128165; 6 Bitcoin Myths Debunked</button>
-    <button class="nav-item" data-section="quantum" id="nav-quantum" aria-describedby="nav-group-why">&#9883;&#65039; The Quantum Question</button>
-    <button class="nav-item" data-section="adoption" id="nav-adoption" aria-describedby="nav-group-why">&#128640; Bitcoin Adoption</button>
+    <div class="nav-group-label" id="nav-group-money">I. The Problem with Money</div>
+    <button class="nav-item" data-section="money" id="nav-money" aria-describedby="nav-group-money">&#128128; The Nature of Money</button>
+    <button class="nav-item" data-section="inflation" id="nav-inflation" aria-describedby="nav-group-money">&#128200; Monetary Inflation</button>
+    <button class="nav-item" data-section="faithcredit" id="nav-faithcredit" aria-describedby="nav-group-money">&#127963;&#65039; Full Faith &amp; Credit</button>
+    <button class="nav-item" data-section="deflation" id="nav-deflation" aria-describedby="nav-group-money">&#9878;&#65039; Deflation vs Fiat</button>
+    <button class="nav-item" data-section="fiatgraveyard" id="nav-fiatgraveyard" aria-describedby="nav-group-money">&#128123; The Fiat Graveyard</button>
 
     <div class="neon-divider mx-3"></div>
-    <div class="nav-group-label" id="nav-group-start">II. Getting Started</div>
+    <div class="nav-group-label" id="nav-group-origin">II. The Origin Story</div>
+    <button class="nav-item" data-section="pizza" id="nav-pizza" aria-describedby="nav-group-origin">&#127829; The Pizza Dilemma</button>
+    <button class="nav-item" data-section="digimoney" id="nav-digimoney" aria-describedby="nav-group-origin">&#128187; Digital Money Before Bitcoin</button>
+    <button class="nav-item" data-section="satoshi" id="nav-satoshi" aria-describedby="nav-group-origin">&#128373;&#65039; Who Is Satoshi?</button>
+
+    <div class="neon-divider mx-3"></div>
+    <div class="nav-group-label" id="nav-group-vs">III. Bitcoin vs The World</div>
+    <button class="nav-item" data-section="altcoins" id="nav-altcoins" aria-describedby="nav-group-vs">&#128302; Bitcoin vs Other Cryptos</button>
+    <button class="nav-item" data-section="myths" id="nav-myths" aria-describedby="nav-group-vs">&#128165; 6 Bitcoin Myths Debunked</button>
+    <button class="nav-item" data-section="quantum" id="nav-quantum" aria-describedby="nav-group-vs">&#9883;&#65039; The Quantum Question</button>
+    <button class="nav-item" data-section="adoption" id="nav-adoption" aria-describedby="nav-group-vs">&#128640; Bitcoin Adoption</button>
+
+    <div class="neon-divider mx-3"></div>
+    <div class="nav-group-label" id="nav-group-start">IV. Getting Started</div>
     <button class="nav-item" data-section="wallets" id="nav-wallets" aria-describedby="nav-group-start">&#128188; Wallets</button>
     <button class="nav-item" data-section="exchanges" id="nav-exchanges" aria-describedby="nav-group-start">&#127974; Exchanges</button>
     <button class="nav-item" data-section="sending" id="nav-sending" aria-describedby="nav-group-start">&#128228; Sending</button>
     <button class="nav-item" data-section="security" id="nav-security" aria-describedby="nav-group-start">&#128272; Security</button>
 
     <div class="neon-divider mx-3"></div>
-    <div class="nav-group-label" id="nav-group-system">III. How Bitcoin Works</div>
+    <div class="nav-group-label" id="nav-group-system">V. How Bitcoin Works</div>
     <button class="nav-item" data-section="network" id="nav-network" aria-describedby="nav-group-system">&#127760; The Bitcoin Network</button>
     <button class="nav-item" data-section="node" id="nav-node" aria-describedby="nav-group-system">&#128421; Node</button>
     <button class="nav-item" data-section="mining" id="nav-mining" aria-describedby="nav-group-system">&#9935; Mining</button>
@@ -1110,7 +1116,7 @@
     <button class="nav-item" data-section="attackvectors" id="nav-attackvectors" aria-describedby="nav-group-system">&#128737; Attack Vectors</button>
 
     <div class="neon-divider mx-3"></div>
-    <div class="nav-group-label" id="nav-group-crypto">IV. Transactions &amp; Cryptography</div>
+    <div class="nav-group-label" id="nav-group-crypto">VI. Transactions &amp; Cryptography</div>
     <button class="nav-item" data-section="transactions" id="nav-transactions" aria-describedby="nav-group-crypto">&#128184; Transactions</button>
     <button class="nav-item" data-section="outputs" id="nav-outputs" aria-describedby="nav-group-crypto">&#128228; Outputs</button>
     <button class="nav-item" data-section="locks" id="nav-locks" aria-describedby="nav-group-crypto">&#128274; Locks</button>
@@ -1122,7 +1128,7 @@
     <button class="nav-item" data-section="lightning" id="nav-lightning" aria-describedby="nav-group-crypto">&#9889; Lightning Network</button>
 
     <div class="neon-divider mx-3"></div>
-    <div class="nav-group-label" id="nav-group-future">V. The Future</div>
+    <div class="nav-group-label" id="nav-group-future">VII. The Future</div>
     <button class="nav-item" data-section="toolate" id="nav-toolate" aria-describedby="nav-group-future">&#9203; Am I Too Late?</button>
     <button class="nav-item" data-section="perspective" id="nav-perspective" aria-describedby="nav-group-future">&#127775; A &#8383;it New Perspective</button>
     <button class="nav-item" data-section="lore" id="nav-lore" aria-describedby="nav-group-future">&#127922; Bitcoin Lore</button>
@@ -1170,7 +1176,7 @@
             Every section is designed to be visual, engaging, and jargon-free. Hover over highlighted words for instant definitions. Take interactive quizzes to test your understanding. And move at your own pace &mdash; there are no tests, no grades, and no judgment.
           </p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;">
-            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">5 chapters</strong> &bull; 37 interactive lessons</div>
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">7 chapters</strong> &bull; 37 interactive lessons</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">Zero</strong> prior knowledge needed</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">100%</strong> free &bull; No account required</div>
           </div>
@@ -1214,17 +1220,21 @@
 
         <!-- Course roadmap reflecting 5-chapter structure -->
         <div class="welcome-roadmap">
-          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 5 chapters, 37 interactive lessons</div>
-          <div class="roadmap-track" role="img" aria-label="Course roadmap: Why Bitcoin, Getting Started, How It Works, Transactions & Cryptography, The Future">
-            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">I. Why Bitcoin?</div></div>
+          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 7 chapters, 37 interactive lessons</div>
+          <div class="roadmap-track" role="img" aria-label="Course roadmap: The Problem, Origin Story, Bitcoin vs The World, Getting Started, How It Works, Cryptography, The Future">
+            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">I. The Problem</div></div>
             <div class="roadmap-line" style="background:linear-gradient(90deg,var(--orange),var(--muted2));"></div>
-            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">II. Getting Started</div></div>
+            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">II. Origin Story</div></div>
             <div class="roadmap-line"></div>
-            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">III. How It Works</div></div>
+            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">III. BTC vs World</div></div>
             <div class="roadmap-line"></div>
-            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">IV. Cryptography</div></div>
+            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">IV. Getting Started</div></div>
             <div class="roadmap-line"></div>
-            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">V. The Future</div></div>
+            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">V. How It Works</div></div>
+            <div class="roadmap-line"></div>
+            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">VI. Cryptography</div></div>
+            <div class="roadmap-line"></div>
+            <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">VII. The Future</div></div>
           </div>
         </div>
 
@@ -1608,10 +1618,10 @@
         <div id="securityChecklist" class="space-y-2" role="group" aria-label="Security checklist"></div>
       </div>
 
-      <!-- Bridge to Chapter III -->
+      <!-- Bridge to Chapter V -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next &mdash; Chapter III</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next &mdash; Chapter V</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">Now let's see <span class="glow-text">how it works</span>.</div>
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You know the why and you've got the basics. Time to explore the engine under the hood &mdash; the network, miners, and blockchain.</p>
         <button class="btn-orange" data-section="network" style="font-size:15px;padding:14px 32px;">Explore How Bitcoin Works &#127760; &rarr;</button>
@@ -3362,7 +3372,7 @@
       <!-- Bridge to Getting Started -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next &mdash; Chapter II</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next &mdash; Chapter IV</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">You understand <em>why</em>. Now learn <span class="glow-text">how</span>.</div>
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Time for the practical side &mdash; set up your first wallet, buy Bitcoin, send it anywhere, and keep it safe.</p>
         <button class="btn-orange" data-section="wallets" style="font-size:15px;padding:14px 32px;">Continue to Wallets &#128188; &rarr;</button>
@@ -3761,7 +3771,7 @@
       <!-- Bridge to Attack Vectors -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Continuing Chapter III</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Continuing Chapter V</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">OK, but can it be <span class="glow-text">attacked</span>?</div>
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You understand how Bitcoin works. Now let's stress-test it &mdash; every attack vector people have imagined, and why the system makes each one economically irrational.</p>
         <button class="btn-orange" data-section="attackvectors" style="font-size:15px;padding:14px 32px;">Next: Attack Vectors &#128737; &rarr;</button>
@@ -3951,10 +3961,10 @@
 
       <div class="neon-divider"></div>
 
-      <!-- Bridge to Chapter IV -->
+      <!-- Bridge to Chapter VI -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next &mdash; Chapter IV</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next &mdash; Chapter VI</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">The <span class="glow-text">cryptography</span> that makes it all possible.</div>
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You understand the system and its defenses. Now let's zoom in on the machinery &mdash; how transactions are built, how outputs work, how locks and keys protect your Bitcoin, and the elegant math behind digital signatures.</p>
         <button class="btn-orange" data-section="transactions" style="font-size:15px;padding:14px 32px;">Dive into Transactions &#128184; &rarr;</button>
