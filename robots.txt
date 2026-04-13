@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+Allow: /for-bots/
+
+# Machine-readable resources
+# /for-bots/              - Bot-friendly landing & resource index
+# /for-bots/knowledge.json - Complete knowledge base (37 lessons, 7 chapters)
+# /for-bots/glossary.json  - Bitcoin glossary (80+ terms)
 
 User-agent: facebookexternalhit
 Allow: /
