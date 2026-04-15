@@ -1154,7 +1154,7 @@
     </div>
   </aside>
   <!-- ─── MAIN CONTENT ─── -->
-  <main id="main-content" class="flex-1 px-8 py-8" style="margin-left:230px;margin-right:280px;max-width:100%;background:var(--bg);min-height:calc(100vh - 58px);" tabindex="-1">
+  <main id="main-content" class="flex-1 px-8 py-8" style="margin-left:230px;margin-right:280px;max-width:100%;min-height:calc(100vh - 58px);" tabindex="-1">
 
     <!-- ════ WELCOME / LANDING ════ -->
     <div class="section-content active" id="sec-welcome">
@@ -5989,7 +5989,7 @@ function drawCanvas(){
       const dSq = dx*dx + dy*dy;
       if(dSq < maxDistSq){
         const d = Math.sqrt(dSq);
-        const alpha = (1 - d/maxDist) * 0.08;
+        const alpha = (1 - d/maxDist) * 0.12;
         const pjY = clampedVel * nj.depth * 0.6;
         const pjX = clampedVel * nj.depth * 0.08 * Math.sin(nj.pulse * 0.5);
         ctx.beginPath();
@@ -6014,13 +6014,13 @@ function drawCanvas(){
     const drawY = n.y + parallaxY;
 
     if(n.btc){
-      ctx.font = `${n.r * 7}px sans-serif`;
-      ctx.fillStyle = `rgba(245,158,11,${glow * 0.35})`;
+      ctx.font = `${n.r * 9}px sans-serif`;
+      ctx.fillStyle = `rgba(245,158,11,${glow * 0.55})`;
       ctx.fillText('\u20BF', drawX - n.r*3, drawY + n.r*2);
     } else {
       ctx.beginPath();
       ctx.arc(drawX, drawY, n.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(245,158,11,${glow * 0.35})`;
+      ctx.fillStyle = `rgba(245,158,11,${glow * 0.4})`;
       ctx.fill();
     }
     n.x += n.vx;
