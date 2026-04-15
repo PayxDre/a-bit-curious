@@ -5926,6 +5926,7 @@ const _timers = { ticker: null, stats: null, mining: null };
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
 let nodes = [], W, H, canvasAnimId = null;
+let scrollY = 0, scrollVel = 0, lastScrollY = 0;
 
 function resizeCanvas(){
   W = canvas.width = window.innerWidth;
@@ -5944,7 +5945,8 @@ function initNodes(){
       vy: (Math.random() - 0.5) * 0.4,
       r: Math.random() * 2.5 + 1,
       pulse: Math.random() * Math.PI * 2,
-      btc: Math.random() < 0.12
+      btc: Math.random() < 0.18,
+      depth: Math.random() * 0.7 + 0.3 // 0.3–1.0, smaller = farther = less parallax
     });
   }
 }
@@ -5957,41 +5959,67 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(() => { resizeCanvas(); initNodes(); }, 200);
 });
 
+// Scroll tracking for motion cue parallax
+lastScrollY = window.pageYOffset || 0;
+window.addEventListener('scroll', () => {
+  const sy = window.pageYOffset || 0;
+  scrollVel = sy - lastScrollY;
+  lastScrollY = sy;
+}, {passive:true});
+
 function drawCanvas(){
   if(document.hidden) { canvasAnimId = requestAnimationFrame(drawCanvas); return; }
   ctx.clearRect(0, 0, W, H);
   const maxDist = 140;
   const maxDistSq = maxDist * maxDist; // avoid sqrt in hot loop
 
-  // Draw connections using distance-squared comparison (O(n^2) but with capped n)
+  // Scroll parallax — dampen toward zero
+  scrollVel *= 0.92;
+  const clampedVel = Math.max(-30, Math.min(30, scrollVel));
+
+  // Draw connections using parallax-adjusted positions
   for(let i = 0; i < nodes.length; i++){
+    const ni = nodes[i];
+    const piY = clampedVel * ni.depth * 0.6;
+    const piX = clampedVel * ni.depth * 0.08 * Math.sin(ni.pulse * 0.5);
     for(let j = i+1; j < nodes.length; j++){
-      const dx = nodes[i].x - nodes[j].x;
-      const dy = nodes[i].y - nodes[j].y;
+      const nj = nodes[j];
+      const dx = ni.x - nj.x;
+      const dy = ni.y - nj.y;
       const dSq = dx*dx + dy*dy;
       if(dSq < maxDistSq){
         const d = Math.sqrt(dSq);
         const alpha = (1 - d/maxDist) * 0.08;
+        const pjY = clampedVel * nj.depth * 0.6;
+        const pjX = clampedVel * nj.depth * 0.08 * Math.sin(nj.pulse * 0.5);
         ctx.beginPath();
         ctx.strokeStyle = `rgba(245,158,11,${alpha})`;
         ctx.lineWidth = 0.5;
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.moveTo(ni.x + piX, ni.y + piY);
+        ctx.lineTo(nj.x + pjX, nj.y + pjY);
         ctx.stroke();
       }
     }
   }
-  // Draw nodes
+
+  // Draw nodes with scroll-reactive parallax
   for(const n of nodes){
     n.pulse += 0.025;
     const glow = Math.sin(n.pulse) * 0.25 + 0.55;
+
+    // Motion cue: displace based on scroll velocity and depth
+    const parallaxY = clampedVel * n.depth * 0.6;
+    const parallaxX = clampedVel * n.depth * 0.08 * Math.sin(n.pulse * 0.5);
+    const drawX = n.x + parallaxX;
+    const drawY = n.y + parallaxY;
+
     if(n.btc){
-      ctx.font = `${n.r * 6}px sans-serif`;
-      ctx.fillStyle = `rgba(245,158,11,${glow * 0.3})`;
-      ctx.fillText('\u20BF', n.x - n.r*3, n.y + n.r*2);
+      ctx.font = `${n.r * 7}px sans-serif`;
+      ctx.fillStyle = `rgba(245,158,11,${glow * 0.35})`;
+      ctx.fillText('\u20BF', drawX - n.r*3, drawY + n.r*2);
     } else {
       ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.arc(drawX, drawY, n.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(245,158,11,${glow * 0.35})`;
       ctx.fill();
     }
