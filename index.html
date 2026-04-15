@@ -25,7 +25,7 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/"/>
 <meta property="og:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 7 chapters, 37 interactive lessons. Free. No account needed."/>
+<meta property="og:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 7 chapters, 38 interactive lessons. Free. No account needed."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -35,7 +35,7 @@
 <!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="A ₿it Curious — The Interactive Guide to Bitcoin"/>
-<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 7 chapters, 37 interactive lessons. Free."/>
+<meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 7 chapters, 38 interactive lessons. Free."/>
 <meta name="twitter:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <title>A ₿it Curious</title>
 <link rel="stylesheet" href="/styles.css"/>
@@ -1017,6 +1017,14 @@
       transform:none !important;
     }
   }
+  /* Whitepaper accordion */
+  .wp-section{background:rgba(18,18,42,0.6);border:1px solid rgba(245,158,11,0.1);border-radius:12px;overflow:hidden;transition:border-color .2s}
+  .wp-section:hover{border-color:rgba(245,158,11,0.3)}
+  .wp-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;user-select:none}
+  .wp-header:focus-visible{outline:2px solid var(--orange);outline-offset:-2px;border-radius:12px}
+  .wp-body{padding:0 16px 16px}
+  .wp-section.open .wp-chevron{transform:rotate(90deg)}
+  .wp-section.open{border-color:rgba(245,158,11,0.3);background:rgba(18,18,42,0.8)}
 </style>
 </head>
 <body>
@@ -1090,6 +1098,7 @@
     <button class="nav-item" data-section="pizza" id="nav-pizza" aria-describedby="nav-group-origin">&#127829; The Pizza Dilemma</button>
     <button class="nav-item" data-section="digimoney" id="nav-digimoney" aria-describedby="nav-group-origin">&#128187; Digital Money Before Bitcoin</button>
     <button class="nav-item" data-section="satoshi" id="nav-satoshi" aria-describedby="nav-group-origin">&#128373;&#65039; Who Is Satoshi?</button>
+    <button class="nav-item" data-section="whitepaper" id="nav-whitepaper" aria-describedby="nav-group-origin">&#128220; The Whitepaper</button>
 
     <div class="neon-divider mx-3"></div>
     <div class="nav-group-label" id="nav-group-vs">III. Bitcoin vs The World</div>
@@ -1176,7 +1185,7 @@
             Every section is designed to be visual, engaging, and jargon-free. Hover over highlighted words for instant definitions. Take interactive quizzes to test your understanding. And move at your own pace &mdash; there are no tests, no grades, and no judgment.
           </p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;">
-            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">7 chapters</strong> &bull; 37 interactive lessons</div>
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">7 chapters</strong> &bull; 38 interactive lessons</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">Zero</strong> prior knowledge needed</div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">100%</strong> free &bull; No account required</div>
           </div>
@@ -1220,7 +1229,7 @@
 
         <!-- Course roadmap reflecting 5-chapter structure -->
         <div class="welcome-roadmap">
-          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 7 chapters, 37 interactive lessons</div>
+          <div class="welcome-roadmap-label">&#127891; Your learning journey &mdash; 7 chapters, 38 interactive lessons</div>
           <div class="roadmap-track" role="img" aria-label="Course roadmap: The Problem, Origin Story, Bitcoin vs The World, Getting Started, How It Works, Cryptography, The Future">
             <div class="roadmap-stop"><div class="roadmap-dot"></div><div class="roadmap-stop-label">I. The Problem</div></div>
             <div class="roadmap-line" style="background:linear-gradient(90deg,var(--orange),var(--muted2));"></div>
@@ -2749,6 +2758,241 @@
 
       <div class="neon-divider"></div>
       <button class="btn-orange" data-modal="satoshi">Start Interactive Lesson &rarr;</button>
+    </div>
+    <!-- ════ THE BITCOIN WHITEPAPER ════ -->
+    <div class="section-content" id="sec-whitepaper">
+      <h2 class="section-title">&#128220; <span class="glow-text">The Bitcoin Whitepaper</span></h2>
+      <div class="section-subtitle">// 9 pages that changed money forever</div>
+
+      <!-- Section illustration -->
+      <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
+        <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(18,18,42,0.9));padding:40px 24px;text-align:center;">
+          <div style="font-size:48px;margin-bottom:12px;">&#128220;</div>
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;">Bitcoin: A Peer-to-Peer Electronic Cash System</div>
+          <div style="font-size:13px;color:var(--muted);font-style:italic;">Satoshi Nakamoto &mdash; October 31, 2008</div>
+          <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px;font-size:12px;color:var(--orange);text-decoration:none;border:1px solid rgba(245,158,11,0.3);padding:8px 20px;border-radius:8px;">Read the Original Paper &rarr;</a>
+        </div>
+      </div>
+
+      <p class="body-text">On Halloween 2008, a pseudonymous figure named Satoshi Nakamoto published a <strong style="color:var(--orange);">9-page paper</strong> to a cryptography mailing list. No venture capital. No marketing. No hype. Just a technical proposal that would go on to create a trillion-dollar asset class and challenge the foundations of modern finance.</p>
+
+      <p class="body-text">The paper is brilliant but dense. Below, we break down <strong style="color:var(--orange);">every section</strong> of the whitepaper into plain English so anyone can understand what Satoshi actually proposed &mdash; and why each piece matters.</p>
+
+      <div class="neon-divider"></div>
+
+      <!-- Whitepaper Sections Accordion -->
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">&#9660; Click each section to explore</div>
+
+      <div id="whitepaperAccordion" style="display:flex;flex-direction:column;gap:8px;">
+
+        <!-- Abstract -->
+        <div class="wp-section" data-wp="abstract">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">0</span>
+              <span style="font-weight:700;font-size:14px;">Abstract</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> Satoshi opens with the entire vision in one sentence &mdash; send money directly to anyone, anywhere, without needing a bank, PayPal, or any middleman. The abstract lays out the core innovation: a system that uses <strong style="color:var(--orange);">cryptographic proof instead of trust</strong>. Instead of trusting a bank to process your payment honestly, math does the job. The key ingredients: digital signatures prove ownership, a peer-to-peer network timestamps transactions, and proof-of-work prevents double-spending.</p>
+          </div>
+        </div>
+
+        <!-- 1. Introduction -->
+        <div class="wp-section" data-wp="intro">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">1</span>
+              <span style="font-weight:700;font-size:14px;">Introduction</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;Commerce on the Internet has come to rely almost exclusively on financial institutions serving as trusted third parties to process electronic payments.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> Satoshi explains the problem. Every online payment today goes through a middleman &mdash; Visa, PayPal, your bank. This creates three issues: <strong style="color:#f87171;">transaction costs</strong> rise because middlemen take a cut, <strong style="color:#f87171;">small payments become impractical</strong> because fees eat them up, and <strong style="color:#f87171;">transactions can be reversed</strong>, meaning merchants need to collect extra personal information as protection. Satoshi argues we need a system based on <strong style="color:var(--orange);">cryptographic proof rather than trust</strong> &mdash; where payments are irreversible (like handing someone cash) and no third party can freeze, reverse, or censor them.</p>
+          </div>
+        </div>
+
+        <!-- 2. Transactions -->
+        <div class="wp-section" data-wp="transactions">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">2</span>
+              <span style="font-weight:700;font-size:14px;">Transactions</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;We define an electronic coin as a chain of digital signatures.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> A bitcoin isn&rsquo;t a file on your computer. It&rsquo;s a <strong style="color:var(--orange);">chain of signatures</strong> &mdash; a history of who sent it to whom. When Alice pays Bob, she digitally signs a message saying &ldquo;I&rsquo;m sending this coin to Bob&rdquo; using her private key. Bob can verify the signature using Alice&rsquo;s public key. Each new owner adds their signature to the chain, creating an unbroken record of ownership. The challenge: how does Bob know Alice didn&rsquo;t also send the same coin to Charlie? That&rsquo;s the <strong style="color:#f87171;">double-spending problem</strong>, and the rest of the paper solves it.</p>
+          </div>
+        </div>
+
+        <!-- 3. Timestamp Server -->
+        <div class="wp-section" data-wp="timestamp">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">3</span>
+              <span style="font-weight:700;font-size:14px;">Timestamp Server</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;The solution we propose begins with a timestamp server. A timestamp server works by taking a hash of a block of items to be timestamped and widely publishing the hash.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> To prove a transaction happened at a specific time, you need a public clock everyone agrees on. Satoshi&rsquo;s timestamp server groups transactions into <strong style="color:var(--orange);">blocks</strong> and creates a mathematical fingerprint (hash) of each block. Each block includes the hash of the previous block, creating an unbreakable chain. Think of it like a public notary that stamps documents &mdash; except instead of one person, the entire network does the stamping, and the stamps are linked in sequence. If anyone tampered with an old block, every stamp after it would break.</p>
+          </div>
+        </div>
+
+        <!-- 4. Proof-of-Work -->
+        <div class="wp-section" data-wp="pow">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">4</span>
+              <span style="font-weight:700;font-size:14px;">Proof-of-Work</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;The proof-of-work involves scanning for a value that when hashed, the hash begins with a number of zero bits.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> This is Bitcoin&rsquo;s security engine. To add a block of transactions, a computer must solve a math puzzle &mdash; find a number that, when hashed, produces a result starting with a specific number of zeros. It&rsquo;s like a <strong style="color:var(--orange);">global lottery</strong>: trillions of guesses per second, and the winner gets to add the next block. This is expensive on purpose. To rewrite history, an attacker would have to redo all that work faster than the entire honest network &mdash; which is practically impossible. Satoshi borrowed this idea from Adam Back&rsquo;s <strong style="color:var(--orange);">Hashcash</strong> (1997), originally designed to prevent email spam. The difficulty adjusts automatically so blocks arrive roughly every 10 minutes regardless of how much computing power joins the network.</p>
+          </div>
+        </div>
+
+        <!-- 5. Network -->
+        <div class="wp-section" data-wp="network">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">5</span>
+              <span style="font-weight:700;font-size:14px;">Network</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;Nodes always consider the longest chain to be the correct one and will keep working on extending it.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> Satoshi lays out the network in five elegant steps: <strong style="color:var(--orange);">1)</strong> New transactions are broadcast to all nodes. <strong style="color:var(--orange);">2)</strong> Each node collects transactions into a block. <strong style="color:var(--orange);">3)</strong> Each node works on finding proof-of-work for its block. <strong style="color:var(--orange);">4)</strong> When a node solves it, it broadcasts the block. <strong style="color:var(--orange);">5)</strong> Nodes accept the block only if all transactions in it are valid. The beauty is that nodes don&rsquo;t all have to be online at the same time. If a node goes offline and comes back, it simply downloads any blocks it missed and catches up. The longest chain (most accumulated work) always wins.</p>
+          </div>
+        </div>
+
+        <!-- 6. Incentive -->
+        <div class="wp-section" data-wp="incentive">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">6</span>
+              <span style="font-weight:700;font-size:14px;">Incentive</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;The first transaction in a block is a special transaction that starts a new coin owned by the creator of the block.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> Why would anyone spend electricity solving these puzzles? Because <strong style="color:var(--orange);">they get paid</strong>. The first transaction in every block is special &mdash; it creates brand-new bitcoin and awards it to the miner who solved the puzzle. This is how new bitcoin enters circulation (the &ldquo;block reward&rdquo;). Miners also collect transaction fees. Satoshi makes a profound argument: this incentive structure keeps miners <strong style="color:var(--orange);">honest</strong>. A miner with enough power to attack the network would find it more profitable to play by the rules and earn rewards than to undermine the system and destroy the value of their own earnings. Greed, channeled correctly, becomes security.</p>
+          </div>
+        </div>
+
+        <!-- 7. Reclaiming Disk Space -->
+        <div class="wp-section" data-wp="diskspace">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">7</span>
+              <span style="font-weight:700;font-size:14px;">Reclaiming Disk Space</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;Once the latest transaction in a coin is buried under enough blocks, the spent transactions before it can be discarded to save disk space.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> Satoshi anticipated that storing every transaction forever would take a lot of space. His solution: <strong style="color:var(--orange);">Merkle trees</strong>. Transactions in a block are organized into a tree structure where you can verify any individual transaction without storing all of them. Once a coin has been spent and buried under enough new blocks, the old transaction data can be pruned while keeping the mathematical proof intact. It&rsquo;s like keeping the summary of a receipt book &mdash; you can prove any entry existed without carrying the whole book around. Even at scale, Satoshi estimated block headers alone would only use about 4.2 MB per year.</p>
+          </div>
+        </div>
+
+        <!-- 8. Simplified Payment Verification -->
+        <div class="wp-section" data-wp="spv">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">8</span>
+              <span style="font-weight:700;font-size:14px;">Simplified Payment Verification</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;It is possible to verify payments without running a full network node.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> Not everyone needs to run a full node storing the entire blockchain. Satoshi describes <strong style="color:var(--orange);">SPV (Simplified Payment Verification)</strong> &mdash; a way for lightweight clients (like phone wallets) to verify transactions by only downloading block headers instead of full blocks. An SPV client asks the network &ldquo;is this transaction in a valid block?&rdquo; and gets a Merkle proof as evidence. It&rsquo;s like calling a library to confirm a book exists without reading the whole catalog yourself. The trade-off: SPV users trust that the longest chain is valid, so they&rsquo;re slightly less secure than full nodes, but it&rsquo;s enough for most everyday payments.</p>
+          </div>
+        </div>
+
+        <!-- 9. Combining and Splitting Value -->
+        <div class="wp-section" data-wp="value">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">9</span>
+              <span style="font-weight:700;font-size:14px;">Combining and Splitting Value</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;Although it would be possible to handle coins individually, it would be unwieldy to make a separate transaction for every cent in a transfer.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> In the real world, you might pay for a $15 item using a $10 bill and a $5 bill, or pay with a $20 and get $5 back. Bitcoin transactions work the same way. A single transaction can have <strong style="color:var(--orange);">multiple inputs</strong> (combining smaller amounts) and <strong style="color:var(--orange);">multiple outputs</strong> (splitting into a payment and change). You don&rsquo;t need to handle each &ldquo;satoshi&rdquo; individually. This section is short but critical &mdash; it&rsquo;s the mechanism that makes Bitcoin practical for real-world use rather than just a theoretical exercise.</p>
+          </div>
+        </div>
+
+        <!-- 10. Privacy -->
+        <div class="wp-section" data-wp="privacy">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">10</span>
+              <span style="font-weight:700;font-size:14px;">Privacy</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> Traditional banks keep transactions private but know everything about you. Bitcoin flips this: <strong style="color:var(--orange);">transactions are public, but identities are private</strong>. Everyone can see that &ldquo;address A sent 0.5 BTC to address B&rdquo; but nobody knows who owns those addresses (unless you tell them). Satoshi compares this to the stock market &mdash; trade prices and volumes are public, but you don&rsquo;t know who is trading. He recommends using a <strong style="color:var(--orange);">new address for each transaction</strong> to prevent linking. Bitcoin is pseudonymous, not anonymous &mdash; like writing under a pen name that could theoretically be uncovered with enough detective work.</p>
+          </div>
+        </div>
+
+        <!-- 11. Calculations -->
+        <div class="wp-section" data-wp="calculations">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">11</span>
+              <span style="font-weight:700;font-size:14px;">Calculations</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;We consider the scenario of an attacker trying to generate an alternate chain faster than the honest chain.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> This is the math section &mdash; Satoshi proves Bitcoin&rsquo;s security with probability theory. Imagine an attacker trying to rewrite the blockchain. They&rsquo;re in a <strong style="color:var(--orange);">race against the honest network</strong>, and the math shows their chances of catching up drop exponentially with every new block added on top. With less than 50% of computing power, an attacker&rsquo;s probability of success becomes vanishingly small after just a few confirmations. This is why merchants typically wait for <strong style="color:var(--orange);">6 confirmations</strong> (~1 hour) &mdash; at that point, the probability of a successful attack is less than 0.00002%. Satoshi uses a Poisson distribution model to prove this, similar to the math used in insurance and gambling.</p>
+          </div>
+        </div>
+
+        <!-- 12. Conclusion -->
+        <div class="wp-section" data-wp="conclusion">
+          <div class="wp-header" role="button" tabindex="0">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="color:var(--orange);font-family:'Space Mono',monospace;font-size:11px;min-width:28px;">12</span>
+              <span style="font-weight:700;font-size:14px;">Conclusion</span>
+            </div>
+            <span class="wp-chevron" style="color:var(--orange);font-size:14px;transition:transform .2s;">&#9654;</span>
+          </div>
+          <div class="wp-body" style="display:none;">
+            <div style="background:rgba(245,158,11,0.04);border-left:2px solid var(--orange);padding:12px 16px;margin-bottom:12px;font-style:italic;font-size:12px;color:var(--muted);">&ldquo;We have proposed a system for electronic transactions without relying on trust.&rdquo;</div>
+            <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;"><strong style="color:var(--text);">In plain English:</strong> Satoshi wraps up the entire proposal in one page. The system works because: digital signatures give owners control, proof-of-work prevents double-spending, and the peer-to-peer network keeps everything honest. <strong style="color:var(--orange);">Nodes vote with their CPU power</strong> &mdash; the longest chain represents the majority decision. No central authority needed. No trust required. The rules are enforced by math, and anyone can participate. What makes this conclusion remarkable is its restraint. No grand promises, no price predictions, no revolution manifesto &mdash; just a calm summary of a system that would go on to change the world.</p>
+          </div>
+        </div>
+
+      </div><!-- /whitepaperAccordion -->
+
+      <div class="neon-divider"></div>
+
+      <!-- Key Insight -->
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:24px 20px;text-align:center;margin:20px 0;">
+        <div style="font-size:24px;margin-bottom:8px;">&#128161;</div>
+        <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;">The genius of the whitepaper</div>
+        <p style="font-size:13px;color:var(--text3);max-width:560px;margin:0 auto;line-height:1.7;">None of the individual components were new. Digital signatures, hash chains, proof-of-work, peer-to-peer networks &mdash; all existed before. Satoshi&rsquo;s breakthrough was <strong style="color:var(--orange);">combining them into a system where the incentives align</strong> so that rational self-interest produces honest behavior. It&rsquo;s not just computer science &mdash; it&rsquo;s game theory, economics, and cryptography woven together into 9 pages.</p>
+      </div>
+
+      <div class="neon-divider"></div>
+      <button class="btn-orange" data-modal="whitepaper">Start Interactive Lesson &rarr;</button>
     </div>
     <!-- ════ BITCOIN VS OTHER CRYPTOS ════ -->
     <div class="section-content" id="sec-altcoins">
@@ -5640,7 +5884,7 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','satoshi','altcoins','myths','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','consensus','lightning','toolate','perspective','lore','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','myths','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','consensus','lightning','toolate','perspective','lore','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', satoshi:'Who Is Satoshi?', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
@@ -5648,7 +5892,8 @@ const sectionNames = {
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty', attackvectors:'Attack Vectors',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
-  signatures:'Digital Signatures', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore'
+  signatures:'Digital Signatures', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore',
+  whitepaper:'The Whitepaper'
 };
 
 let currentSection = 'welcome';
@@ -6935,6 +7180,15 @@ function getModalContent(section){
         </div>
       </div>`,
 
+    whitepaper: `
+      <div class="text-lg font-bold mb-1 glow-text" style="font-family:'Syne',sans-serif;">\uD83D\uDCDC Whitepaper Section Matcher</div>
+      <p class="text-xs mb-4" style="color:var(--muted);">Test how well you understand each section of Bitcoin's whitepaper.</p>
+      <div class="glass p-4 rounded-xl">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">\uD83C\uDF93 Match the Section</div>
+        <p class="text-xs mb-3" style="color:var(--text3);">For each question, pick the correct answer. See how well you know the 9 pages that changed money forever.</p>
+        <div id="wpQuiz" style="min-height:200px;"></div>
+      </div>`,
+
     altcoins: `
       <div class="text-lg font-bold mb-1 glow-text" style="font-family:'Syne',sans-serif;">\uD83D\uDD2E Bitcoin vs The Rest</div>
       <p class="text-xs mb-4" style="color:var(--muted);">Click each cryptocurrency to compare it against Bitcoin on what actually matters.</p>
@@ -7851,6 +8105,89 @@ modalInitFns.satoshi = function(){
     d.addEventListener('click',()=>{const w=d.querySelector('.skill-why');w.style.display=w.style.display==='none'?'block':'none';});
     el.appendChild(d);
   });
+};
+
+// ── Whitepaper Accordion (event delegation, works on page load) ──
+(function(){
+  const acc = document.getElementById('whitepaperAccordion');
+  if(!acc) return;
+  acc.addEventListener('click', function(e){
+    const header = e.target.closest('.wp-header');
+    if(!header) return;
+    const sec = header.closest('.wp-section');
+    if(!sec) return;
+    const body = sec.querySelector('.wp-body');
+    const isOpen = sec.classList.contains('open');
+    sec.classList.toggle('open');
+    body.style.display = isOpen ? 'none' : 'block';
+  });
+  acc.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    const header = e.target.closest('.wp-header');
+    if(!header) return;
+    e.preventDefault();
+    header.click();
+  });
+})();
+
+// ── Whitepaper Interactive Lesson ──
+modalInitFns.whitepaper = function(){
+  // Build a "Section Matcher" quiz inside the modal
+  const quizData = [
+    {section:'Abstract',q:'What is the core innovation Satoshi proposes?',options:['A faster database','Peer-to-peer cash without trusted third parties','A new programming language','A faster internet protocol'],answer:1},
+    {section:'Transactions',q:'How does the whitepaper define an electronic coin?',options:['A file stored on your computer','A number in a bank database','A chain of digital signatures','A physical token'],answer:2},
+    {section:'Proof-of-Work',q:'What existing system inspired Bitcoin\'s proof-of-work?',options:['CAPTCHA','Hashcash (Adam Back, 1997)','Visa\'s payment network','RSA encryption'],answer:1},
+    {section:'Incentive',q:'What keeps miners honest according to Satoshi?',options:['Government regulation','Reputation scores','It\'s more profitable to follow rules than to cheat','A central authority'],answer:2},
+    {section:'Timestamp Server',q:'What does the timestamp server prove?',options:['Who owns a coin','That data existed at a specific time','The price of bitcoin','How fast the network is'],answer:1},
+    {section:'Network',q:'How many steps does Satoshi describe for running the network?',options:['3','5','7','12'],answer:1},
+    {section:'Privacy',q:'How does the whitepaper describe Bitcoin\'s privacy model?',options:['Fully anonymous','Transactions public, identities private','Completely private','Same as banking'],answer:1},
+    {section:'Calculations',q:'What happens to an attacker\'s odds with each new block?',options:['They stay the same','They increase linearly','They drop exponentially','They fluctuate randomly'],answer:2},
+    {section:'SPV',q:'What does Simplified Payment Verification allow?',options:['Mining without hardware','Verifying payments without a full node','Reversing transactions','Creating new bitcoin'],answer:1},
+    {section:'Reclaiming Disk Space',q:'What data structure enables pruning old transactions?',options:['Linked list','Binary search tree','Merkle tree','Hash table'],answer:2}
+  ];
+  const container = document.getElementById('wpQuiz');
+  if(!container) return;
+  let current = 0;
+  let score = 0;
+  function renderQ(){
+    if(current >= quizData.length){
+      container.innerHTML = `<div style="text-align:center;padding:20px;"><div style="font-size:36px;margin-bottom:12px;">${score >= 8 ? '\uD83C\uDFC6' : score >= 5 ? '\uD83D\uDC4D' : '\uD83D\uDCDA'}</div><div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;">${score}/${quizData.length} Correct</div><p style="font-size:13px;color:var(--text3);margin-bottom:16px;">${score >= 8 ? 'Excellent! You understand the whitepaper well.' : score >= 5 ? 'Good foundation! Review the sections you missed.' : 'Keep studying — re-read the sections above and try again!'}</p><button onclick="this.closest('[id=wpQuiz]').dataset.reset='1';modalInitFns.whitepaper();" class="btn-orange" style="font-size:13px;padding:10px 24px;">Try Again</button></div>`;
+      return;
+    }
+    const d = quizData[current];
+    container.innerHTML = `<div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:6px;">Question ${current+1}/${quizData.length} — Section: ${d.section}</div><div style="font-size:14px;font-weight:600;margin-bottom:14px;">${d.q}</div><div id="wpOpts" style="display:flex;flex-direction:column;gap:6px;"></div>`;
+    const opts = document.getElementById('wpOpts');
+    d.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.style.cssText = 'text-align:left;padding:10px 14px;border-radius:8px;background:rgba(18,18,42,0.8);border:1px solid rgba(245,158,11,0.12);color:var(--text3);font-size:13px;cursor:pointer;transition:all .15s;';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => {
+        opts.querySelectorAll('button').forEach(b => { b.style.pointerEvents='none'; b.style.opacity='0.5'; });
+        btn.style.opacity = '1';
+        if(i === d.answer){
+          score++;
+          btn.style.borderColor = '#4ade80';
+          btn.style.background = 'rgba(74,222,128,0.1)';
+          btn.style.color = '#4ade80';
+        } else {
+          btn.style.borderColor = '#f87171';
+          btn.style.background = 'rgba(248,113,113,0.1)';
+          btn.style.color = '#f87171';
+          opts.children[d.answer].style.opacity = '1';
+          opts.children[d.answer].style.borderColor = '#4ade80';
+          opts.children[d.answer].style.color = '#4ade80';
+        }
+        setTimeout(() => { current++; renderQ(); }, 1200);
+      });
+      btn.addEventListener('mouseenter', () => { if(btn.style.pointerEvents!=='none') btn.style.borderColor='rgba(245,158,11,0.4)'; });
+      btn.addEventListener('mouseleave', () => { if(btn.style.pointerEvents!=='none') btn.style.borderColor='rgba(245,158,11,0.12)'; });
+      opts.appendChild(btn);
+    });
+  }
+  if(container.dataset.reset === '1'){
+    current = 0; score = 0; container.dataset.reset = '';
+  }
+  renderQ();
 };
 
 // ── Altcoins Comparison Modal ──
