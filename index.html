@@ -1103,6 +1103,7 @@
     <div class="neon-divider mx-3"></div>
     <div class="nav-group-label" id="nav-group-vs">III. Bitcoin vs The World</div>
     <button class="nav-item" data-section="altcoins" id="nav-altcoins" aria-describedby="nav-group-vs">&#128302; Bitcoin vs Other Cryptos</button>
+    <button class="nav-item" data-section="powvpos" id="nav-powvpos" aria-describedby="nav-group-vs">&#9874;&#65039; Proof of Work vs Proof of Stake</button>
     <button class="nav-item" data-section="myths" id="nav-myths" aria-describedby="nav-group-vs">&#128165; 6 Bitcoin Myths Debunked</button>
     <button class="nav-item" data-section="tulips" id="nav-tulips" aria-describedby="nav-group-vs">&#127799; Bitcoin vs Tulip Mania</button>
     <button class="nav-item" data-section="quantum" id="nav-quantum" aria-describedby="nav-group-vs">&#9883;&#65039; The Quantum Question</button>
@@ -3208,12 +3209,196 @@
       <div class="neon-divider"></div>
       <button class="btn-orange" data-modal="altcoins">Start Interactive Lesson &rarr;</button>
 
+      <!-- Bridge to PoW vs PoS -->
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Continuing Chapter III</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">Why does <span class="glow-text">consensus</span> matter?</div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">The difference between Proof of Work and Proof of Stake isn't just technical &mdash; it determines who controls the network and how power is distributed.</p>
+        <button class="btn-orange" data-section="powvpos" style="font-size:15px;padding:14px 32px;">Proof of Work vs Proof of Stake &#9874;&#65039; &rarr;</button>
+      </div>
+    </div>
+
+    <!-- ════ PROOF OF WORK vs PROOF OF STAKE ════ -->
+    <div class="section-content" id="sec-powvpos">
+      <h2 class="section-title">&#9874;&#65039; <span class="glow-text">Proof of Work vs Proof of Stake</span></h2>
+      <div class="section-subtitle">// How consensus mechanisms shape who has power</div>
+
+      <!-- Section illustration: PoW vs PoS -->
+      <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
+        <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+          <rect width="800" height="200" fill="#0b0b18"/>
+          <!-- PoW side -->
+          <rect x="30" y="20" width="350" height="160" rx="12" fill="rgba(74,222,128,0.04)" stroke="rgba(74,222,128,0.2)" stroke-width="1.5"/>
+          <text x="205" y="48" text-anchor="middle" font-family="'Arial',sans-serif" font-size="14" font-weight="bold" fill="#4ade80">Proof of Work</text>
+          <text x="205" y="68" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(74,222,128,0.6)">Energy in &rarr; Security out</text>
+          <text x="100" y="95" text-anchor="middle" font-family="monospace" font-size="20" fill="rgba(74,222,128,0.5)">&#9889;</text>
+          <text x="205" y="95" text-anchor="middle" font-family="monospace" font-size="20" fill="rgba(74,222,128,0.5)">&#9874;</text>
+          <text x="310" y="95" text-anchor="middle" font-family="monospace" font-size="20" fill="rgba(74,222,128,0.5)">&#9881;</text>
+          <text x="205" y="120" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(74,222,128,0.5)">Anyone can compete</text>
+          <text x="205" y="135" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(74,222,128,0.5)">External cost (electricity)</text>
+          <text x="205" y="150" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(74,222,128,0.5)">Wealth ≠ Power</text>
+          <text x="205" y="165" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(74,222,128,0.5)">17 years, zero downtime</text>
+          <!-- PoS side -->
+          <rect x="420" y="20" width="350" height="160" rx="12" fill="rgba(248,113,113,0.04)" stroke="rgba(248,113,113,0.2)" stroke-width="1.5"/>
+          <text x="595" y="48" text-anchor="middle" font-family="'Arial',sans-serif" font-size="14" font-weight="bold" fill="#f87171">Proof of Stake</text>
+          <text x="595" y="68" text-anchor="middle" font-family="monospace" font-size="9" fill="rgba(248,113,113,0.6)">Capital in &rarr; More capital out</text>
+          <text x="510" y="95" text-anchor="middle" font-family="monospace" font-size="20" fill="rgba(248,113,113,0.5)">&#128176;</text>
+          <text x="595" y="95" text-anchor="middle" font-family="monospace" font-size="20" fill="rgba(248,113,113,0.5)">&#128179;</text>
+          <text x="680" y="95" text-anchor="middle" font-family="monospace" font-size="20" fill="rgba(248,113,113,0.5)">&#127974;</text>
+          <text x="595" y="120" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(248,113,113,0.5)">Largest holders validate</text>
+          <text x="595" y="135" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(248,113,113,0.5)">No external cost</text>
+          <text x="595" y="150" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(248,113,113,0.5)">Wealth = Power</text>
+          <text x="595" y="165" text-anchor="middle" font-family="monospace" font-size="8" fill="rgba(248,113,113,0.5)">Multiple chains have gone offline</text>
+        </svg>
+      </div>
+
+      <p class="body-text">Every blockchain needs a way to decide which transactions are valid and who gets to add the next block. This mechanism &mdash; called <strong style="color:var(--orange);">consensus</strong> &mdash; is not just a technical detail. It determines who holds power over the network, how that power is distributed, and whether it concentrates over time. Bitcoin uses Proof of Work. Most other major cryptocurrencies have moved to Proof of Stake. The differences are fundamental.</p>
+
+      <!-- ── What is Proof of Work? ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(74,222,128,0.25);">
+        <div class="text-sm font-bold mb-3" style="color:#4ade80;">&#9874;&#65039; Proof of Work (PoW)</div>
+        <p class="body-text" style="margin:0 0 12px 0;">In Proof of Work, miners compete to solve a computationally difficult puzzle. The first to find a valid solution gets to propose the next block and earns the block reward. This process requires real-world resources &mdash; specialized hardware (ASICs) and electricity &mdash; creating an <strong style="color:#4ade80;">external cost</strong> that cannot be faked or shortcut.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px;">
+          <div style="padding:12px;border-radius:10px;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.12);">
+            <div style="font-size:12px;font-weight:700;color:#4ade80;margin-bottom:4px;">Open participation</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">Anyone with hardware and electricity can mine. No permission needed, no minimum balance required. A miner in Nigeria competes on equal terms with a miner in Texas.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.12);">
+            <div style="font-size:12px;font-weight:700;color:#4ade80;margin-bottom:4px;">Real-world anchor</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">Security is backed by physics, not financial promises. To attack Bitcoin, you'd need to outspend the entire network's energy output &mdash; currently billions of dollars per year in electricity alone.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.12);">
+            <div style="font-size:12px;font-weight:700;color:#4ade80;margin-bottom:4px;">Wealth does not equal control</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">Holding a large amount of bitcoin does not give you any influence over block production or network rules. Mining power comes from ongoing operational expenditure, not from accumulated wealth.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(74,222,128,0.04);border:1px solid rgba(74,222,128,0.12);">
+            <div style="font-size:12px;font-weight:700;color:#4ade80;margin-bottom:4px;">Proven track record</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">Bitcoin's Proof of Work has secured the network for 17 years with zero downtime, zero rollbacks, and zero successful attacks. No other consensus mechanism has this track record.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── What is Proof of Stake? ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(248,113,113,0.25);">
+        <div class="text-sm font-bold mb-3" style="color:#f87171;">&#128176; Proof of Stake (PoS)</div>
+        <p class="body-text" style="margin:0 0 12px 0;">In Proof of Stake, validators are selected to propose blocks based on <strong style="color:#f87171;">how many tokens they hold and "stake" as collateral</strong>. The more tokens you lock up, the more likely you are to be chosen to validate the next block &mdash; and the more rewards you earn. There is no external cost like electricity; validation requires only holding the token itself.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px;">
+          <div style="padding:12px;border-radius:10px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.12);">
+            <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:4px;">Wealth concentration</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">Validators with larger stakes earn proportionally more rewards, which they can re-stake to earn even more. Over time, the largest holders grow their share of the network, while smaller participants fall further behind. The rich get richer by design.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.12);">
+            <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:4px;">Governance power tied to wealth</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">In PoS systems, the entities with the most tokens have the most influence over which transactions are validated and which blocks are accepted. Holding a large balance directly translates into control over what the network considers valid.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.12);">
+            <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:4px;">No external cost</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">Since validation doesn't require energy expenditure, the cost of attacking a PoS network is purely financial &mdash; buy enough tokens and you control the chain. In PoW, you'd also need physical infrastructure and ongoing electricity, which can't be acquired instantly.</div>
+          </div>
+          <div style="padding:12px;border-radius:10px;background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.12);">
+            <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:4px;">Censorship risk</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.5;">Large PoS validators are identifiable entities with known holdings. Governments can pressure them to censor specific transactions or addresses. After Ethereum's move to PoS, research showed that a majority of blocks were being produced by validators running OFAC-compliant relay software, filtering certain transactions.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── The Compounding Problem ── -->
+      <div class="highlight-box" style="border-left-color:#f87171;background:rgba(248,113,113,0.08);">
+        <span class="font-bold" style="color:#f87171;">&#128200; The compounding problem:</span> In Proof of Stake, staking rewards function like interest &mdash; your tokens generate more tokens. A validator staking 1,000,000 ETH earns proportionally more than someone staking 1,000 ETH. Those rewards are then re-staked, earning even more. Over time, this creates a compounding effect where the largest holders capture an ever-growing share of the total supply. This dynamic mirrors the traditional financial system, where those with the most capital earn the highest returns and accumulate wealth at a faster rate than smaller participants.
+      </div>
+
+      <!-- ── Side by Side Comparison ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.3);">
+        <div class="text-sm font-bold mb-4" style="color:var(--orange);">&#9878;&#65039; Side-by-Side Comparison</div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:10px 12px;border-bottom:2px solid rgba(245,158,11,0.3);color:var(--muted);font-size:11px;font-weight:600;"></th>
+                <th style="text-align:left;padding:10px 12px;border-bottom:2px solid rgba(74,222,128,0.3);color:#4ade80;font-size:11px;font-weight:700;">Proof of Work (Bitcoin)</th>
+                <th style="text-align:left;padding:10px 12px;border-bottom:2px solid rgba(248,113,113,0.3);color:#f87171;font-size:11px;font-weight:700;">Proof of Stake (ETH, SOL, ADA...)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:10px 12px;color:var(--orange);font-weight:600;">Who validates?</td>
+                <td style="padding:10px 12px;color:var(--text3);">Anyone with hardware &amp; electricity</td>
+                <td style="padding:10px 12px;color:var(--text3);">Those who lock up the most tokens</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:10px 12px;color:var(--orange);font-weight:600;">Cost to participate</td>
+                <td style="padding:10px 12px;color:var(--text3);">Ongoing: hardware + electricity</td>
+                <td style="padding:10px 12px;color:var(--text3);">Capital: buy &amp; lock tokens</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:10px 12px;color:var(--orange);font-weight:600;">Does wealth = power?</td>
+                <td style="padding:10px 12px;color:#4ade80;">No. Holding BTC gives no mining advantage.</td>
+                <td style="padding:10px 12px;color:#f87171;">Yes. More tokens = more validation power + more yield.</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:10px 12px;color:var(--orange);font-weight:600;">Reward distribution</td>
+                <td style="padding:10px 12px;color:var(--text3);">Proportional to work done (hashrate)</td>
+                <td style="padding:10px 12px;color:var(--text3);">Proportional to tokens staked (wealth)</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:10px 12px;color:var(--orange);font-weight:600;">Wealth concentration</td>
+                <td style="padding:10px 12px;color:#4ade80;">Miners must sell BTC to cover electricity costs, distributing coins into the market.</td>
+                <td style="padding:10px 12px;color:#f87171;">Validators earn yield on holdings and re-stake, compounding their share over time.</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:10px 12px;color:var(--orange);font-weight:600;">Censorship resistance</td>
+                <td style="padding:10px 12px;color:var(--text3);">Miners are geographically distributed; can be relocated if banned.</td>
+                <td style="padding:10px 12px;color:var(--text3);">Large validators are known entities, subject to government pressure and compliance requirements.</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:10px 12px;color:var(--orange);font-weight:600;">Cost of attack</td>
+                <td style="padding:10px 12px;color:var(--text3);">Must acquire &amp; operate 51% of global hashrate (physical infrastructure + energy).</td>
+                <td style="padding:10px 12px;color:var(--text3);">Must acquire 33-51% of staked tokens (purely financial).</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 12px;color:var(--orange);font-weight:600;">Track record</td>
+                <td style="padding:10px 12px;color:#4ade80;">17 years, zero downtime.</td>
+                <td style="padding:10px 12px;color:#f87171;">Ethereum PoS since 2022. Solana: 7+ outages.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── PoW forces distribution ── -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#128260; Why Proof of Work distributes wealth and Proof of Stake concentrates it</div>
+        <p class="body-text" style="margin:0 0 12px 0;">Bitcoin miners have significant ongoing costs &mdash; electricity, cooling, hardware replacement, facility leases. To cover these expenses, miners must regularly <strong style="color:var(--orange);">sell a portion of their bitcoin earnings</strong> on the open market. This creates constant sell pressure that distributes newly mined coins into circulation. The coins flow outward, from miners to the broader economy.</p>
+        <p class="body-text" style="margin:0 0 12px 0;">Proof of Stake validators, by contrast, have minimal operating costs. Their primary "expense" is the opportunity cost of locking tokens. Since they don't need to sell to cover real-world bills, they can <strong style="color:#f87171;">re-stake 100% of their rewards</strong>, compounding their position. A validator staking 10% of the total supply today will hold an even larger percentage next year, and an even larger one the year after that &mdash; without doing any additional work.</p>
+        <p class="body-text" style="margin:0;">This is the same dynamic that exists in traditional finance: capital generates returns, returns are reinvested, and wealth concentrates at the top. Proof of Work breaks this cycle by requiring ongoing real-world expenditure. Proof of Stake replicates it.</p>
+      </div>
+
+      <!-- ── OFAC compliance / censorship ── -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#128274; Censorship in practice: the OFAC example</div>
+        <p class="body-text" style="margin:0 0 12px 0;">After Ethereum transitioned to Proof of Stake in September 2022, researchers began tracking how many blocks were produced by validators running MEV-Boost relays that comply with U.S. Treasury OFAC sanctions. At its peak, <strong style="color:#f87171;">over 70% of Ethereum blocks</strong> were being built by OFAC-compliant relays &mdash; meaning transactions involving sanctioned addresses were being excluded from the majority of blocks.</p>
+        <p class="body-text" style="margin:0 0 12px 0;">This happened because large PoS validators &mdash; companies like Coinbase, Lido, and Kraken &mdash; are identifiable, regulated entities. When the U.S. government sanctioned Tornado Cash (a privacy tool) in August 2022, these validators had strong incentives to comply. Their staked capital was at risk if they were deemed non-compliant.</p>
+        <p class="body-text" style="margin:0;">In Bitcoin's Proof of Work system, miners are more geographically distributed and mining operations can be relocated. When China banned Bitcoin mining in 2021, hashrate moved to the U.S., Kazakhstan, Russia, and elsewhere within months. The network never went down and no transactions were censored. The physical nature of mining equipment makes it harder &mdash; though not impossible &mdash; for any single government to enforce transaction-level censorship across the network.</p>
+      </div>
+
+      <!-- ── Nothing at Stake ── -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#9888;&#65039; The "nothing at stake" problem</div>
+        <p class="body-text" style="margin:0 0 12px 0;">In Proof of Work, mining on a competing fork costs real electricity. Miners must choose which chain to dedicate their hardware to, because they can't mine both simultaneously without splitting their hashrate. This economic cost enforces a natural commitment to one chain.</p>
+        <p class="body-text" style="margin:0;">In Proof of Stake, validators can theoretically sign blocks on multiple competing forks at zero additional cost &mdash; since there's no energy expenditure per signature. This is known as the "nothing at stake" problem. PoS systems attempt to address this through "slashing" penalties (destroying a validator's stake if they're caught signing competing blocks), but these mechanisms add complexity and rely on the correct functioning of the penalty system itself. Proof of Work solves this problem through physics: you can't use the same electricity twice.</p>
+      </div>
+
+      <p class="body-text"><strong style="color:var(--orange);">The core tradeoff is straightforward.</strong> Proof of Stake is more energy-efficient &mdash; that is its primary advantage. But in exchange, it creates a system where the wealthiest participants control validation, earn the most rewards, and grow their influence over time. Proof of Work requires real-world resources, which means mining power is earned through ongoing expenditure rather than accumulated through existing wealth. Bitcoin's design choice to use Proof of Work reflects its core purpose: a monetary system where no one gets special privileges based on how much they already hold.</p>
+
+      <div class="neon-divider"></div>
+
       <!-- Bridge to Myths -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Continuing Chapter I</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Continuing Chapter III</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">But what about the <span class="glow-text">critics</span>?</div>
-        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You've probably heard that Bitcoin "wastes energy," "is used by criminals," or "has no value." Let's debunk the five biggest myths.</p>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You've probably heard that Bitcoin "wastes energy," "is used by criminals," or "has no value." Let's debunk the biggest myths.</p>
         <button class="btn-orange" data-section="myths" style="font-size:15px;padding:14px 32px;">6 Bitcoin Myths Debunked &#128165; &rarr;</button>
       </div>
     </div>
@@ -6176,10 +6361,10 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','myths','tulips','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','consensus','lightning','toolate','perspective','lore','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','consensus','lightning','toolate','perspective','lore','bibliography'];
 
 const sectionNames = {
-  welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', satoshi:'Who Is Satoshi?', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', altcoins:'Bitcoin vs Other Cryptos', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
+  welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', satoshi:'Who Is Satoshi?', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', altcoins:'Bitcoin vs Other Cryptos', powvpos:'Proof of Work vs Proof of Stake', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
   money:'Nature of Money', pizza:'The Pizza Dilemma', myths:'6 Myths Debunked', quantum:'The Quantum Question', network:'Bitcoin Network', node:'Node', mining:'Mining',
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty', attackvectors:'Attack Vectors',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
