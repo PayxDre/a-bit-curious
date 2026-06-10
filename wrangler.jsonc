@@ -1,0 +1,8 @@
+{
+  // Cloudflare Workers Builds config: deploy this repo as static assets.
+  "name": "a-bit-curious",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./"
+  }
+}

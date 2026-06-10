@@ -860,6 +860,13 @@
     margin-bottom:0;
     transition:opacity .45s ease, transform .45s ease, filter .45s ease;
   }
+  .welcome-symbol svg{
+    width:1em;
+    height:1em;
+    display:block;
+    margin:0 auto;
+    filter:drop-shadow(0 0 18px rgba(136,136,184,0.4)) drop-shadow(0 0 40px rgba(136,136,184,0.2));
+  }
   .welcome-symbol.morph-out{
     opacity:0;
     transform:scale(0.7) rotateY(90deg);
@@ -1251,9 +1258,9 @@
             <input id="meltInput" type="number" value="50000" min="100" step="1000" style="background:var(--surface);border:1px solid var(--glass-border);border-radius:8px;padding:10px 14px;font-family:'Space Mono',monospace;font-size:18px;color:var(--orange);width:160px;text-align:center;outline:none;" oninput="updateMelt()"/>
           </div>
           <div id="meltResult" style="font-family:'Space Mono',monospace;font-size:14px;color:var(--text3);line-height:1.8;">
-            <div>After <strong style="color:var(--orange);">5 years</strong> at real inflation (~8%): you lost <strong style="color:#f87171;" id="melt5">$18,342</strong></div>
-            <div>After <strong style="color:var(--orange);">10 years</strong>: you lost <strong style="color:#f87171;" id="melt10">$32,305</strong></div>
-            <div>After <strong style="color:var(--orange);">20 years</strong>: you lost <strong style="color:#f87171;" id="melt20">$54,139</strong></div>
+            <div>After <strong style="color:var(--orange);">5 years</strong> at real inflation (~8%): you lost <strong style="color:#f87171;" id="melt5">$15,971</strong></div>
+            <div>After <strong style="color:var(--orange);">10 years</strong>: you lost <strong style="color:#f87171;" id="melt10">$26,840</strong></div>
+            <div>After <strong style="color:var(--orange);">20 years</strong>: you lost <strong style="color:#f87171;" id="melt20">$39,273</strong></div>
           </div>
           <p style="font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5;">Using ~8% real inflation (ShadowStats methodology, not the official CPI number). Your bank's 0.5% interest rate doesn't come close to covering this.</p>
         </div>
@@ -6883,9 +6890,11 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 function updateMelt(){
   const v = parseFloat(document.getElementById('meltInput').value) || 0;
   const r = 0.08;
-  const lost5 = v - v * Math.pow(1-r, 5);
-  const lost10 = v - v * Math.pow(1-r, 10);
-  const lost20 = v - v * Math.pow(1-r, 20);
+  // Purchasing power after n years of inflation r is v / (1+r)^n.
+  // The loss approaches but can never exceed the face value.
+  const lost5 = v - v / Math.pow(1+r, 5);
+  const lost10 = v - v / Math.pow(1+r, 10);
+  const lost20 = v - v / Math.pow(1+r, 20);
   const fmt = n => '$' + Math.round(n).toLocaleString();
   const el5 = document.getElementById('melt5');
   const el10 = document.getElementById('melt10');
@@ -6894,6 +6903,7 @@ function updateMelt(){
   if(el10) el10.textContent = fmt(lost10);
   if(el20) el20.textContent = fmt(lost20);
 }
+updateMelt();
 
 function formatPrice(p){
   return '$' + p.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
@@ -7306,13 +7316,27 @@ document.getElementById('main-content').addEventListener('click', function(e){
 //   HERO SYMBOL MORPH (evolution of money)
 // ═══════════════════════════════════════
 (function(){
+  // Custom line-art icons drawn to match the site's neon aesthetic (no emojis)
+  function icon(paths){
+    return '<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths + '</svg>';
+  }
   var symbols = [
-    {char:'\uD83D\uDC1A', label:'Cowrie Shells ~1200 BC'},
-    {char:'\uD83E\uDDC2', label:'Salt - Roman Era'},
-    {char:'\uD83E\uDD47', label:'Gold ~600 BC'},
-    {char:'\uD83E\uDE99', label:'Coins ~600 BC'},
-    {char:'\uD83D\uDCB5', label:'Paper Money ~1000 AD'},
-    {char:'\u20BF',        label:'Bitcoin 2009'}
+    // Cowrie shell: egg-shaped outline with the toothed aperture slit
+    {html: icon('<path d="M60 16 C88 16 100 42 100 64 C100 90 82 104 60 104 C38 104 20 90 20 64 C20 42 32 16 60 16 Z"/><path d="M60 32 C56 42 64 50 60 60 C56 70 64 78 60 90"/><path d="M51 40 L66 38 M53 54 L67 52 M51 68 L66 66 M53 81 L67 79"/>'),
+     label:'Cowrie Shells ~1200 BC'},
+    // Salt: faceted crystal
+    {html: icon('<path d="M60 16 L94 50 L78 104 L42 104 L26 50 Z"/><path d="M60 16 L50 50 L42 104 M60 16 L72 50 L78 104 M26 50 L50 50 M94 50 L72 50"/>'),
+     label:'Salt - Roman Era'},
+    // Gold: stacked ingots
+    {html: icon('<path d="M12 100 L24 74 L52 74 L62 100 Z"/><path d="M58 100 L70 74 L98 74 L108 100 Z"/><path d="M35 68 L47 42 L75 42 L85 68 Z"/>'),
+     label:'Gold ~600 BC'},
+    // Ancient coin: beaded border with incuse square punch mark
+    {html: icon('<circle cx="60" cy="60" r="46"/><circle cx="60" cy="60" r="34" stroke-dasharray="1 9"/><rect x="46" y="46" width="28" height="28" transform="rotate(45 60 60)"/>'),
+     label:'Coins ~600 BC'},
+    // Paper money: banknote with center seal and corner marks
+    {html: icon('<rect x="10" y="34" width="100" height="52" rx="7"/><circle cx="60" cy="60" r="15"/><path d="M21 45 h7 M92 45 h7 M21 75 h7 M92 75 h7"/>'),
+     label:'Paper Money ~1000 AD'},
+    {html:'\u20BF', label:'Bitcoin 2009', btc:true}
   ];
   var heroEl = document.getElementById('heroSymbol');
   var labelEl = document.getElementById('heroSymbolLabel');
@@ -7333,11 +7357,11 @@ document.getElementById('main-content').addEventListener('click', function(e){
       // advance to next symbol
       idx = (idx + 1) % symbols.length;
       var s = symbols[idx];
-      heroEl.textContent = s.char;
+      heroEl.innerHTML = s.html;
       labelEl.textContent = s.label;
 
       // if Bitcoin, restore orange text color; others get slightly different hue
-      if(s.char === '\u20BF'){
+      if(s.btc){
         heroEl.style.color = '';
         heroEl.style.textShadow = '';
       } else {
@@ -7351,7 +7375,7 @@ document.getElementById('main-content').addEventListener('click', function(e){
       labelEl.style.opacity = '1';
 
       // schedule next
-      var wait = s.char === '\u20BF' ? LINGER_BTC : LINGER_OTHER;
+      var wait = s.btc ? LINGER_BTC : LINGER_OTHER;
       setTimeout(cycle, wait);
     }, MORPH_DUR);
   }
