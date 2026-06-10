@@ -110,6 +110,8 @@
     background:var(--glass);
     border:1px solid var(--glass-border);
     border-radius:14px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
   }
   /* ── Neon glow text ── */
   .glow-text{
@@ -123,7 +125,7 @@
     border-radius:8px;
     font-size:13px;
     color:var(--text3);
-    transition:all .2s;
+    transition:all .2s cubic-bezier(.4,0,.2,1);
     border-left:2px solid transparent;
     font-family:'Inter',sans-serif;
     background:none;
@@ -140,12 +142,14 @@
     background:var(--orange-dim);
     border-left-color:var(--orange);
     outline:none;
+    padding-left:18px;
   }
   .nav-item.active{
     color:var(--orange-bright);
     background:var(--orange-dim2);
     border-left-color:var(--orange);
     font-weight:600;
+    padding-left:18px;
   }
   .nav-group-label{
     font-family:'Syne',sans-serif;
@@ -310,16 +314,21 @@
     transform:translateX(-50%);
     background:var(--bg3);
     border:1px solid var(--orange);
-    border-radius:8px;
-    padding:10px 14px;
+    border-radius:10px;
+    padding:12px 16px;
     font-size:12px;
     color:var(--text);
-    width:220px;
+    width:240px;
     max-width:85vw;
     z-index:9999;
-    line-height:1.55;
+    line-height:1.6;
     pointer-events:none;
-    box-shadow:0 8px 32px rgba(0,0,0,0.8), 0 0 16px var(--orange-glow);
+    box-shadow:0 8px 32px rgba(0,0,0,0.8), 0 0 20px var(--orange-glow);
+    animation:tooltipIn 0.2s ease-out;
+  }
+  @keyframes tooltipIn{
+    from{opacity:0;transform:translateX(-50%) translateY(4px);}
+    to{opacity:1;transform:translateX(-50%) translateY(0);}
   }
   /* Keep tooltips on-screen on mobile */
   @media(max-width:640px){
@@ -348,14 +357,27 @@
     border-radius:10px;
     border:none;
     cursor:pointer;
-    transition:all .25s;
-    box-shadow:0 0 24px var(--orange-glow);
+    transition:all .25s cubic-bezier(.4,0,.2,1);
+    box-shadow:0 4px 16px var(--orange-glow), 0 0 24px rgba(245,158,11,0.15);
     letter-spacing:.02em;
+    position:relative;
+    overflow:hidden;
+  }
+  .btn-orange::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent 60%);
+    opacity:0;
+    transition:opacity .25s;
   }
   .btn-orange:hover{
     transform:translateY(-2px);
-    box-shadow:0 0 40px rgba(245,158,11,0.5);
-    filter:brightness(1.1);
+    box-shadow:0 8px 32px rgba(245,158,11,0.4), 0 0 48px rgba(245,158,11,0.2);
+    filter:brightness(1.08);
+  }
+  .btn-orange:hover::after{
+    opacity:1;
   }
   .btn-orange:active{transform:translateY(0);}
   .btn-orange:focus-visible{
@@ -460,6 +482,7 @@
     font-weight:800;
     line-height:1.2;
     margin-bottom:8px;
+    letter-spacing:-0.02em;
   }
   .section-subtitle{
     font-size:13px;
@@ -468,11 +491,21 @@
     margin-bottom:24px;
     opacity:1;
   }
+  /* ── Section fade-in on display ── */
+  .section-content.active{
+    display:block;
+    animation:sectionFadeIn 0.4s ease-out;
+  }
+  @keyframes sectionFadeIn{
+    from{opacity:0;transform:translateY(12px);}
+    to{opacity:1;transform:translateY(0);}
+  }
   p.body-text{
     color:var(--text2);
     margin-bottom:18px;
     font-size:15.5px;
-    line-height:1.82;
+    line-height:1.85;
+    letter-spacing:0.005em;
   }
   /* ── Highlight box ── */
   .highlight-box{
@@ -484,6 +517,11 @@
     font-size:14.5px;
     color:var(--text);
     line-height:1.72;
+    transition:border-color 0.3s, background 0.3s;
+  }
+  .highlight-box:hover{
+    background:rgba(30,30,66,0.9);
+    border-left-color:var(--orange-bright);
   }
   /* ── Transaction builder ── */
   .tx-input,.tx-output{
@@ -629,12 +667,12 @@
     .section-subtitle{ font-size:12px !important; }
     .body-text{ font-size:14px !important; }
     .modal-box{
-      max-width:100vw !important;
-      width:100vw !important;
+      max-width:100% !important;
+      width:100% !important;
       max-height:92vh !important;
       border-radius:18px 18px 0 0 !important;
       margin:0 !important;
-      padding:24px 18px 32px !important;
+      padding:24px 16px 32px !important;
     }
     .modal-overlay.open{
       align-items:flex-end !important;
@@ -651,11 +689,39 @@
     #mobile-bottom-nav{ display:flex !important; }
     nav .gap-6{ gap:10px !important; }
   }
+  /* ── Inline comparison grids → single column on mobile ── */
+  @media(max-width:640px){
+    [style*="grid-template-columns:1fr 1fr"],
+    [style*="grid-template-columns: 1fr 1fr"]{
+      grid-template-columns:1fr !important;
+    }
+    [style*="grid-template-columns:repeat(2,1fr)"],
+    [style*="grid-template-columns:repeat(3,1fr)"]{
+      grid-template-columns:1fr !important;
+    }
+    [style*="display:grid"][style*="gap:12px"]{
+      gap:8px !important;
+    }
+    .welcome-sub{ font-size:15px !important; }
+  }
+  /* ── Tablet tweaks (768px) ── */
+  @media(max-width:768px) and (min-width:641px){
+    #main-content{
+      padding:24px 20px 40px !important;
+    }
+    .section-title{ font-size:24px !important; }
+    [style*="grid-template-columns:repeat(3,1fr)"]{
+      grid-template-columns:1fr 1fr !important;
+    }
+  }
   /* ── Very small phones ── */
   @media(max-width:380px){
     #main-content{ padding:16px 12px 100px !important; }
     .section-title{ font-size:19px !important; }
+    .section-subtitle{ font-size:11px !important; }
     .btn-orange{ font-size:13px !important; padding:10px 18px !important; }
+    [style*="font-size:42px"]{ font-size:32px !important; }
+    [style*="font-size:36px"]{ font-size:26px !important; }
   }
   /* ── Pulse badge ── */
   .pulse-badge{
@@ -674,8 +740,8 @@
   .neon-divider{
     height:1px;
     background:linear-gradient(90deg,transparent,var(--orange),transparent);
-    opacity:.4;
-    margin:24px 0;
+    opacity:.35;
+    margin:28px 0;
   }
   /* ── Compare boxes ── */
   .compare-box{
@@ -1046,7 +1112,7 @@
 </div>
 
 <!-- ═══════════════ TOP NAVIGATION BAR ═══════════════ -->
-<nav style="background:#0f0f26;border-bottom:1px solid var(--glass-border);" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3" aria-label="Top bar">
+<nav style="background:rgba(15,15,38,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--glass-border);" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3" aria-label="Top bar">
   <div class="flex items-center gap-3">
     <button id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="left-sidebar"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;transform:rotate(-15deg);"><circle cx="10" cy="1.5" r="1.5" fill="currentColor"/><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="3" y1="11" x2="17" y2="11" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="3" y1="16" x2="17" y2="16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="10" cy="20.5" r="1.5" fill="currentColor"/></svg></button>
     <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;">A <span class="logo-glow glow-text">&#8383;</span>it Curious</span>
@@ -1147,11 +1213,11 @@
     <button class="nav-item" data-section="bibliography" id="nav-bibliography" aria-describedby="nav-group-future">&#128218; Bibliography</button>
 
     <div class="px-4 mt-6 mb-4">
-      <div class="text-center py-3 px-2 rounded-xl" style="background:var(--orange-dim);border:1px solid var(--glass-border);">
-        <div class="text-xs" style="color:var(--muted);">Your Progress</div>
+      <div class="text-center py-3 px-2 rounded-xl" style="background:rgba(245,158,11,0.06);border:1px solid var(--glass-border);border-radius:12px;">
+        <div class="text-xs" style="color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-family:'Space Mono',monospace;font-size:9px;">Your Progress</div>
         <div class="text-sm mt-1 font-bold" style="color:var(--orange);font-family:'Space Mono',monospace;" id="progressLabel" aria-live="polite">1/19</div>
-        <div class="mt-2 rounded-full overflow-hidden" style="height:4px;background:rgba(255,255,255,0.1);" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">
-          <div id="progressBar" style="height:4px;background:var(--orange);width:5.5%;border-radius:4px;transition:width .3s;"></div>
+        <div class="mt-2 rounded-full overflow-hidden" style="height:5px;background:rgba(255,255,255,0.08);" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">
+          <div id="progressBar" style="height:5px;background:linear-gradient(90deg,#f59e0b,#fbbf24);width:5.5%;border-radius:4px;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(245,158,11,0.4);"></div>
         </div>
       </div>
     </div>
@@ -1182,15 +1248,15 @@
         <div style="text-align:center;margin-bottom:40px;">
           <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:12px;">What You're About to Experience</div>
           <p style="color:var(--text2);font-size:14px;max-width:580px;margin:0 auto 20px;line-height:1.8;">
-            This isn't a textbook. It's an interactive journey through the story of money &mdash; from ancient civilizations to the digital age. You'll explore 5,000 years of monetary history, see exactly how the system works today, and discover why millions of people around the world are turning to something radically different.
+            An interactive journey through the story of money &mdash; from ancient civilizations to the digital age. 5,000 years of monetary history, how the system works today, and why millions of people around the world are turning to something radically different.
           </p>
           <p style="color:var(--text3);font-size:13px;max-width:540px;margin:0 auto 20px;line-height:1.7;">
             Every section is designed to be visual, engaging, and jargon-free. Hover over highlighted words for instant definitions. Take interactive quizzes to test your understanding. And move at your own pace &mdash; there are no tests, no grades, and no judgment.
           </p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;">
-            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">7 chapters</strong> &bull; 40 interactive lessons</div>
-            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">Zero</strong> prior knowledge needed</div>
-            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:10px 16px;font-size:11px;color:var(--text2);"><strong style="color:var(--orange);">100%</strong> free &bull; No account required</div>
+            <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.18);border-radius:10px;padding:12px 18px;font-size:12px;color:var(--text2);transition:all .25s;"><strong style="color:var(--orange);">7 chapters</strong> &bull; 40 interactive lessons</div>
+            <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.18);border-radius:10px;padding:12px 18px;font-size:12px;color:var(--text2);transition:all .25s;"><strong style="color:var(--orange);">Zero</strong> prior knowledge needed</div>
+            <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.18);border-radius:10px;padding:12px 18px;font-size:12px;color:var(--text2);transition:all .25s;"><strong style="color:var(--orange);">100%</strong> free &bull; No account required</div>
           </div>
         </div>
 
@@ -1861,7 +1927,7 @@
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
         <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Continuing Chapter I</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">"But there are only 21 million Bitcoin &mdash; <span class="glow-text">is that enough</span>?"</div>
-        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Time for the most common beginner question &mdash; and the most beautiful answer. Think of it like a pizza...</p>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Every beginner asks this question. The answer involves pizza...</p>
         <button class="btn-orange" data-section="pizza" style="font-size:15px;padding:14px 32px;">Next: The Pizza Dilemma &#127829; &rarr;</button>
       </div>
     </div>
@@ -2475,7 +2541,7 @@
         </svg>
       </div>
       <div class="highlight-box">
-        <span class="font-bold" style="color:var(--orange);">Technology wants to make everything cheaper.</span> The fiat monetary system won't let it. This is the most important economic tension of our time &mdash; and Bitcoin resolves it.
+        <span class="font-bold" style="color:var(--orange);">Technology wants to make everything cheaper.</span> The fiat monetary system won't let it. This is the central economic tension of our time &mdash; and Bitcoin resolves it.
       </div>
 
       <p class="body-text">Think about how technology has transformed the world. A smartphone today has more computing power than the machines that sent astronauts to the moon. Storage costs dropped from $300,000 per gigabyte in 1980 to fractions of a penny. <span class="tooltip-word" tabindex="0">Software<span class="tooltip-box">Software has near-zero marginal cost &mdash; once built, copying it costs nothing. This deflationary force is accelerating with AI.</span></span> can be copied for free. AI is beginning to automate expensive human labor. The natural trajectory of technology is to drive costs relentlessly <em>downward</em>, toward the marginal cost of production &mdash; which often approaches zero.</p>
@@ -2578,7 +2644,7 @@
         </svg>
       </div>
       <div class="highlight-box">
-        <span class="font-bold" style="color:var(--orange);">"But if there are only 21 million Bitcoin, how can it work for 8 billion people?"</span> This is the most common question beginners ask &mdash; and the answer is the most beautiful thing about Bitcoin.
+        <span class="font-bold" style="color:var(--orange);">"But if there are only 21 million Bitcoin, how can it work for 8 billion people?"</span> This is the first question every beginner asks &mdash; and the answer is elegant.
       </div>
 
       <!-- ── Inline Visual: Pizza analogy ── -->
@@ -3723,6 +3789,186 @@
 
       <div class="neon-divider"></div>
       <button class="btn-orange" data-modal="tulips">Start Interactive Lesson &rarr;</button>
+
+      <!-- Bridge to Quantum -->
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">"But won't <span class="glow-text">quantum computers</span> break it?"</div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">The biggest FUD in crypto. Let's look at the actual math, the actual hardware, and what Satoshi said about it.</p>
+        <button class="btn-orange" data-section="quantum" style="font-size:15px;padding:14px 32px;">Next: The Quantum Question &#9883;&#65039; &rarr;</button>
+      </div>
+    </div>
+    <!-- ════ BITCOIN VS GOLD ════ -->
+    <div class="section-content" id="sec-gold">
+      <h2 class="section-title">&#129689; <span class="glow-text">Bitcoin vs Gold</span></h2>
+      <div class="section-subtitle">// 5,000 years of money meets 21 million coins</div>
+
+      <!-- Section illustration -->
+      <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
+        <div style="background:linear-gradient(135deg,rgba(251,191,36,0.06),rgba(18,18,42,0.9));padding:32px 24px;text-align:center;">
+          <div style="display:flex;justify-content:center;align-items:center;gap:24px;">
+            <div>
+              <div style="font-size:42px;">&#129689;</div>
+              <div style="font-size:11px;color:#fbbf24;font-family:'Space Mono',monospace;margin-top:4px;">~3000 BC&ndash;today</div>
+              <div style="font-size:10px;color:var(--muted);">~1.5% new supply / year</div>
+            </div>
+            <div style="font-size:24px;color:var(--muted);">vs</div>
+            <div>
+              <div style="font-size:42px;">&#8383;</div>
+              <div style="font-size:11px;color:var(--orange);font-family:'Space Mono',monospace;margin-top:4px;">2009&ndash;forever</div>
+              <div style="font-size:10px;color:var(--muted);">21M cap, 0% after ~2140</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="body-text">Tulips were the wrong comparison. Gold is the right one. For roughly 5,000 years &mdash; across Egypt, Rome, China, the Islamic world, and every modern economy &mdash; humans independently converged on gold as money. That wasn't a coincidence or a tradition. Gold won a long, brutal market competition against shells, salt, cattle, silver, and paper because of <strong style="color:var(--orange);">specific physical properties</strong>. Bitcoin was designed to replicate those exact properties in digital form &mdash; Satoshi explicitly described it as analogous to a scarce metal. To understand Bitcoin, you have to understand why gold worked.</p>
+
+      <div class="neon-divider"></div>
+
+      <!-- Why Gold Became Money -->
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Why Gold Became Money</div>
+
+      <p class="body-text">Good money needs a short list of properties. Gold scored higher on them than anything else available for most of human history:</p>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0;">
+        <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:10px;padding:14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:6px;">&#9878;&#65039; Scarce</div>
+          <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;">Mining gold is hard. Annual production adds only ~1.5% to existing supply &mdash; the lowest of any commodity. Nobody can print it.</p>
+        </div>
+        <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:10px;padding:14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:6px;">&#128330;&#65039; Durable</div>
+          <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;">Gold doesn't rust, corrode, or decay. Coins minted 2,000 years ago are still gold today. Value stored in it survives generations.</p>
+        </div>
+        <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:10px;padding:14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:6px;">&#9986;&#65039; Divisible</div>
+          <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;">Gold can be melted and split into smaller units without losing value. An ounce is worth exactly two half-ounces.</p>
+        </div>
+        <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:10px;padding:14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:6px;">&#129516; Fungible</div>
+          <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;">One ounce of pure gold is identical to any other ounce of pure gold. No unit is "better" than another.</p>
+        </div>
+        <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:10px;padding:14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:6px;">&#128270; Verifiable</div>
+          <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;">Density tests, acid tests, and bite marks let people confirm gold is real &mdash; imperfectly, but better than most alternatives.</p>
+        </div>
+        <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:10px;padding:14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fbbf24;margin-bottom:6px;">&#129309; No Counterparty</div>
+          <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;">Gold in your hand is nobody's liability. No bank, government, or company has to stay solvent for it to keep its value.</p>
+        </div>
+      </div>
+
+      <p class="body-text">This is why governments held gold even after abandoning the gold standard &mdash; central banks still hold over <strong style="color:#fbbf24;">35,000 tonnes</strong> of it today, and have been net buyers every year since 2010. When institutions want money that doesn't depend on anyone's promise, they still reach for gold.</p>
+
+      <div class="neon-divider"></div>
+
+      <!-- Property by Property -->
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Property by Property</div>
+
+      <p class="body-text">Bitcoin competes with gold on the same scorecard. On some properties it matches gold. On several, it does measurably better:</p>
+
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:#fbbf24;font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#129689; Gold — Scarcity</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:#fbbf24;">Scarce, but not capped.</strong> ~1.5% new supply per year. Higher prices fund more mining. Asteroid mining and ocean extraction are real, if distant, possibilities.</p>
+          </div>
+          <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:var(--orange);font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#8383; Bitcoin — Scarcity</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:var(--orange);">Absolutely capped at 21 million.</strong> Higher prices cannot produce more Bitcoin &mdash; the difficulty adjustment ensures it. The first asset in history with a fixed, verifiable supply.</p>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:#fbbf24;font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#129689; Gold — Portability</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:#fbbf24;">Heavy and slow.</strong> Moving large amounts requires armored trucks, vaults, insurance, and customs clearance. Crossing a border with significant gold is difficult and often illegal.</p>
+          </div>
+          <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:var(--orange);font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#8383; Bitcoin — Portability</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:var(--orange);">Any amount, anywhere, in minutes.</strong> A billion dollars moves for a few dollars in fees. Twelve memorized words can carry wealth across any border.</p>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:#fbbf24;font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#129689; Gold — Divisibility</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:#fbbf24;">Possible but impractical.</strong> You can't shave flakes off a coin at the grocery store. This is why gold historically needed paper certificates on top &mdash; which reintroduced trust in issuers.</p>
+          </div>
+          <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:var(--orange);font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#8383; Bitcoin — Divisibility</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:var(--orange);">100 million satoshis per coin.</strong> Divisible to 8 decimal places natively, further on Lightning. No paper layer needed &mdash; the base asset itself makes change.</p>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:#fbbf24;font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#129689; Gold — Verifiability</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:#fbbf24;">Requires equipment and expertise.</strong> Tungsten-filled bars have fooled refineries. Most people can't verify purity, so they trust dealers, assayers, and vault operators.</p>
+          </div>
+          <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:var(--orange);font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#8383; Bitcoin — Verifiability</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:var(--orange);">Verified by anyone, for free.</strong> A node on a $100 computer confirms every coin's authenticity and the total supply. Counterfeiting is mathematically impossible.</p>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:#fbbf24;font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#129689; Gold — Custody</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:#fbbf24;">Hard to self-custody at scale.</strong> Serious holdings end up in bank vaults &mdash; reintroducing the counterparty gold was supposed to remove. In 1933, US Executive Order 6102 made private gold ownership illegal and required citizens to sell it to the government.</p>
+          </div>
+          <div style="background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:10px;padding:14px;">
+            <div style="font-size:10px;color:var(--orange);font-family:'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">&#8383; Bitcoin — Custody</div>
+            <p style="font-size:12px;color:var(--text3);line-height:1.6;margin:0;"><strong style="color:var(--orange);">Self-custody at any scale.</strong> A hardware wallet secures $100 or $100 million identically. Seizure requires obtaining the keys &mdash; not just knowing where the vault is.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="neon-divider"></div>
+
+      <!-- Where Gold Still Wins -->
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Where Gold Still Wins</div>
+
+      <div class="glass p-4 my-4" style="border-left:3px solid #fbbf24;">
+        <p class="body-text" style="margin:0 0 8px 0;"><strong style="color:#fbbf24;">Track record.</strong> Gold has held value across every empire, war, and monetary collapse for five millennia. Bitcoin has 17 years. That difference matters, and it's the strongest honest argument for gold.</p>
+        <p class="body-text" style="margin:0 0 8px 0;"><strong style="color:#fbbf24;">No technology dependence.</strong> Gold works without electricity, internet, or software. It cannot have a bug.</p>
+        <p class="body-text" style="margin:0;"><strong style="color:#fbbf24;">Industrial and cultural demand.</strong> Electronics, jewelry, and religious tradition give gold demand outside of its monetary role.</p>
+      </div>
+
+      <p class="body-text">The honest framing isn't that Bitcoin makes gold worthless. It's that Bitcoin takes the properties that made gold money and removes its main weaknesses: weight, verification cost, and custodial centralization. Many investors hold both for exactly this reason.</p>
+
+      <div class="neon-divider"></div>
+
+      <!-- Measuring Bitcoin in Gold -->
+      <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">The Right Yardstick: Measuring Bitcoin in Gold</div>
+
+      <p class="body-text">Here's something most price charts get wrong. When you measure Bitcoin in dollars, you're using a <strong style="color:#f87171;">stretching ruler</strong>. The dollar's supply grows every year &mdash; M2 expanded roughly 40% between 2020 and 2022 alone &mdash; so part of every "Bitcoin is up" headline is really "the dollar is down." USD-denominated charts mix two signals together: Bitcoin's actual adoption, and the dollar's debasement. You can't tell how much of the move is which.</p>
+
+      <p class="body-text">Gold solves this measurement problem. It's the hardest money humans used before Bitcoin &mdash; nobody can print it, and its supply grows at a slow, predictable ~1.5% per year. When you price Bitcoin in <strong style="color:#fbbf24;">ounces of gold</strong>, inflation washes out of the picture, because both assets are beyond any central bank's control. What remains is the cleanest available signal of one thing: <strong style="color:var(--orange);">is the world choosing Bitcoin over the best money that came before it?</strong></p>
+
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(251,191,36,0.04));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:24px 20px;text-align:center;margin:20px 0;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">1 Bitcoin, priced in gold, right now</div>
+        <div id="goldSectionRatio" style="font-family:'Space Mono',monospace;font-size:36px;font-weight:700;color:var(--orange);">... oz</div>
+        <p style="font-size:12px;color:var(--text3);max-width:480px;margin:10px auto 0;line-height:1.7;">In 2010, one Bitcoin bought a fraction of a gram of gold. Today it buys dozens of ounces. That repricing happened against an asset nobody can inflate &mdash; which makes it a measure of adoption, not of money printing.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.15);border-radius:12px;padding:16px;">
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#f87171;margin-bottom:8px;">&#128181; Measured in USD</div>
+          <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;">The chart includes monetary inflation, interest rate cycles, and policy decisions. A flat BTC/USD price during 8% inflation actually means Bitcoin lost purchasing power. A rising price might just mean the denominator shrank. The signal is murky because the measuring stick itself moves.</p>
+        </div>
+        <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.15);border-radius:12px;padding:16px;">
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fbbf24;margin-bottom:8px;">&#129689; Measured in Gold</div>
+          <p style="font-size:13px;color:var(--text3);line-height:1.7;margin:0;">Both sides of the ratio are scarce assets outside government control. When BTC/gold rises, it means capital is choosing the newer hard money over the older one &mdash; on merit, not because either side was printed. The price chart on this site lets you flip the denomination to gold for exactly this reason.</p>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:24px 20px;text-align:center;margin:20px 0;">
+        <div style="font-size:24px;margin-bottom:8px;">&#128207;</div>
+        <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;">A simple habit</div>
+        <p style="font-size:13px;color:var(--text3);max-width:520px;margin:0 auto;line-height:1.7;">Whenever you see a Bitcoin price headline, ask: what does the chart look like denominated in gold? If Bitcoin is rising against the hardest money of the last 5,000 years, adoption is real. If it's only rising against the dollar, you might just be watching inflation.</p>
+      </div>
 
       <!-- Bridge to Quantum -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -5214,7 +5460,7 @@
     <!-- ════ PRIVATE KEYS ════ -->
     <div class="section-content" id="sec-privatekeys">
       <h2 class="section-title">&#128374; <span class="glow-text">Private Keys</span></h2>
-      <div class="section-subtitle">// The most powerful secret in the digital world</div>
+      <div class="section-subtitle">// The secret that controls everything</div>
       <!-- Section illustration: Private key security visualization -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -6102,11 +6348,11 @@
         <span class="font-bold" style="color:#4ade80;">&#127758; You've made it.</span> You now understand more about money, Bitcoin, and cryptography than 99% of people on Earth. This final chapter is your reward &mdash; a glimpse of where all of this is heading.
       </div>
 
-      <p class="body-text">Close your eyes for a moment and imagine a world where Bitcoin isn't priced in dollars anymore. Not because the dollar disappeared overnight, but because it slowly became irrelevant &mdash; the way nobody prices things in Roman denarii today. In this world, Bitcoin is measured against the only other hard money humanity ever had: <span class="tooltip-word" tabindex="0">gold<span class="tooltip-box">For 5,000 years, gold was the measuring stick of value. In a Bitcoin-standard world, the question isn't "how many dollars does a Bitcoin cost?" but "how many ounces of gold does one Bitcoin buy?" &mdash; and the answer keeps climbing.</span></span>. One Bitcoin buys 10 ounces of gold. Then 50. Then 200. Not because Bitcoin is in a "bubble," but because the world is slowly recognizing what you now understand: Bitcoin is harder money than gold, and harder money always wins over time.</p>
+      <p class="body-text">Consider a world where Bitcoin isn't priced in dollars anymore &mdash; not because the dollar disappeared overnight, but because it slowly became irrelevant, the way nobody prices things in Roman denarii today. In this world, Bitcoin is measured against the only other hard money humanity ever had: <span class="tooltip-word" tabindex="0">gold<span class="tooltip-box">For 5,000 years, gold was the measuring stick of value. In a Bitcoin-standard world, the question isn't "how many dollars does a Bitcoin cost?" but "how many ounces of gold does one Bitcoin buy?" &mdash; and the answer keeps climbing.</span></span>. One Bitcoin buys 10 ounces of gold. Then 50. Then 200. Not because Bitcoin is in a "bubble," but because the world is recognizing what you now understand: Bitcoin is harder money than gold, and harder money wins over time.</p>
 
       <p class="body-text">Now flip it around. In this world, everyday things are priced in <span class="tooltip-word" tabindex="0">satoshis<span class="tooltip-box">The smallest unit of Bitcoin: 1 sat = 0.00000001 BTC. There are 100 million sats in one Bitcoin. In a Bitcoin-standard future, you'd think in sats the way you think in cents today.</span></span> &mdash; the cents of Bitcoin. A loaf of bread: 40 sats. A gallon of gas: 65 sats. A month's rent: 120,000 sats. Your salary: paid in Bitcoin, deposited every two weeks, held in your own wallet that no bank or government controls. Company balance sheets &mdash; Apple, Toyota, the corner bakery &mdash; all denominated in Bitcoin. Not because anyone mandated it, but because people naturally gravitate toward the best money available, the same way the world once gravitated toward gold.</p>
 
-      <p class="body-text">Here's the most beautiful part: <strong style="color:var(--orange);">the prices keep falling</strong>. That loaf of bread that costs 40 sats this year? Next year it costs 35. Then 28. Then 20. Not because there's a recession or because something went wrong &mdash; but because something is going <em>right</em>. Technology relentlessly makes things cheaper to produce. Automation, AI, better logistics, more efficient farming &mdash; every year, humanity gets better at making more with less. In a sane monetary system, those <span class="tooltip-word" tabindex="0">productivity gains<span class="tooltip-box">When a factory that made 100 cars a day can now make 150 with the same workers and resources, that's a productivity gain. The natural result should be cheaper cars. In the fiat system, money printing absorbs those gains. In a Bitcoin system, the savings pass through to you.</span></span> should flow to you as lower prices. Under the fiat system, central banks print money to <em>prevent</em> prices from falling &mdash; they call this "fighting deflation," as if cheaper goods were a disease. Under a Bitcoin standard, the natural deflation <em>wins</em>. Your savings buy more every single year. You are rewarded for patience, not punished for it.</p>
+      <p class="body-text">Here's where it gets interesting: <strong style="color:var(--orange);">the prices keep falling</strong>. That loaf of bread that costs 40 sats this year? Next year it costs 35. Then 28. Then 20. Not because there's a recession or because something went wrong &mdash; but because something is going <em>right</em>. Technology relentlessly makes things cheaper to produce. Automation, AI, better logistics, more efficient farming &mdash; every year, humanity gets better at making more with less. In a sane monetary system, those <span class="tooltip-word" tabindex="0">productivity gains<span class="tooltip-box">When a factory that made 100 cars a day can now make 150 with the same workers and resources, that's a productivity gain. The natural result should be cheaper cars. In the fiat system, money printing absorbs those gains. In a Bitcoin system, the savings pass through to you.</span></span> should flow to you as lower prices. Under the fiat system, central banks print money to <em>prevent</em> prices from falling &mdash; they call this "fighting deflation," as if cheaper goods were a disease. Under a Bitcoin standard, the natural deflation <em>wins</em>. Your savings buy more every single year. You are rewarded for patience, not punished for it.</p>
 
       <p class="body-text">This is the thesis that author and entrepreneur <span class="tooltip-word" tabindex="0">Jeff Booth<span class="tooltip-box">Author of "The Price of Tomorrow: Why Deflation is the Key to an Abundant Future." Booth argues that technology's natural force is deflationary &mdash; it drives costs toward zero &mdash; but the fiat monetary system fights this with inflation, creating an unsustainable tug-of-war. Bitcoin resolves this by letting deflation win.</span></span> has spent years articulating: technology is a fundamentally <em>deflationary</em> force. It wants to make everything cheaper and more abundant. But the fiat monetary system is designed to be <em>inflationary</em> &mdash; to constantly create more money, propping up prices that should be falling. These two forces are in a tug-of-war, and fiat has been winning for decades, stealing the abundance that technology is trying to give you. Bitcoin ends this war. With a fixed supply of 21 million coins and no central bank to inflate it away, Bitcoin lets technology's natural gift &mdash; <strong style="color:var(--orange);">falling prices and rising abundance</strong> &mdash; finally reach ordinary people.</p>
 
@@ -6759,7 +7005,10 @@ function renderTicker(){
   // BTC priced in gold ounces
   const goldEl = document.getElementById('btcGold');
   if(btcPrice > 0 && goldPrice > 0){
-    goldEl.textContent = (btcPrice / goldPrice).toFixed(1) + ' oz';
+    const ratio = (btcPrice / goldPrice).toFixed(1);
+    goldEl.textContent = ratio + ' oz';
+    const sectionEl = document.getElementById('goldSectionRatio');
+    if(sectionEl) sectionEl.textContent = ratio + ' oz';
   }
 }
 async function fetchBtcPrice(){
@@ -6843,11 +7092,11 @@ _timers.stats = setInterval(fetchLiveStats, 60000);
 // ═══════════════════════════════════════
 const teachingNotes = {
   welcome: `\uD83C\uDF1F Welcome to A \u20BFit Curious! This landing page is designed to hook complete beginners by asking the questions they've never been taught to ask.\n\n\uD83D\uDCA1 The three question cards work as emotional entry points: what is money, what went wrong, and what comes next. Let students sit with each before moving on.\n\n\uD83C\uDFAF Goal: create genuine curiosity, not fear. By the time they click the button, they should be thinking "I never realized I didn't understand money."`,
-  money: `\ud83c\udf93 This is the most important section in the entire course. Do not rush it.\n\n\ud83d\udca1 The Cantillon Effect is the key insight most students have never encountered.\n\n\ud83d\udd25 Robert Breedlove: "Bitcoin is the separation of money and state." Let that land before moving on.`,
+  money: `\ud83c\udf93 This is the foundational section of the entire course. Do not rush it.\n\n\ud83d\udca1 The Cantillon Effect is the key insight most students have never encountered.\n\n\ud83d\udd25 Robert Breedlove: "Bitcoin is the separation of money and state."`,
   fiatgraveyard: `\uD83C\uDF93 This section is a gut-punch. Walk students through each collapsed currency slowly \u2014 let the pattern sink in. China tried it first in 1024. Same result every time for a thousand years.\n\n\uD83D\uDCA1 The USD timeline visual is the key moment. Students see where the dollar sits on the same trajectory as every dead currency. The "if, not when" framing is powerful.\n\n\uD83D\uDD25 The apocalypse simulator in the interactive lesson makes the abstract terrifyingly concrete. What would the government actually DO? The answer: exactly what every other government has done.`,
   digimoney: `\uD83C\uDF93 This section connects the "money is broken" realization to Bitcoin's specific origin story. Students need to see that Bitcoin didn't appear from nowhere \u2014 it was the culmination of 30 years of failed attempts.\n\n\uD83D\uDCA1 The timeline in the interactive lesson is the star here. Each failed project teaches a specific lesson. The moment students see the pattern (centralized = killable), Bitcoin's design choices click.\n\n\uD83D\uDD25 Hal Finney receiving the first Bitcoin transaction from Satoshi is a great human moment. He had already built RPOW \u2014 he recognized immediately what Bitcoin was.`,
   satoshi: `\uD83C\uDF93 The key insight is not "who is Satoshi" but "why doesn't it matter." Walk students through the profile first (cryptography + economics + privacy + game theory), then land on the punchline: even if Satoshi came back, they couldn't change anything.\n\n\uD83D\uDCA1 The Usual Suspects grid sparks curiosity but keep the tone neutral. Craig Wright's court ruling is the only definitive fact. Everyone else's denial should be respected.\n\n\uD83D\uDD25 The "disappearance was the final gift" framing is the emotional peak. Compare to Vitalik/Zuckerberg/etc \u2014 every other system has a leader who can be pressured.`,
-  altcoins: `\uD83C\uDF93 This is one of the most important sections for protecting beginners from losing money. The altcoin comparison should be factual and structural, not tribal or emotional.\n\n\uD83D\uDCA1 The key framework: decentralization is binary, not a spectrum. Either no one can change the rules or someone can. Bitcoin passes this test. Nothing else does.\n\n\uD83C\uDFAF The interactive comparison table is powerful \u2014 let students click through each crypto and see the founder stake, supply changes, and outage history. The data speaks for itself.`,
+  altcoins: `\uD83C\uDF93 This section protects beginners from losing money. The altcoin comparison should be factual and structural, not tribal or emotional.\n\n\uD83D\uDCA1 The key framework: decentralization is binary, not a spectrum. Either no one can change the rules or someone can. Bitcoin passes this test. Nothing else does.\n\n\uD83C\uDFAF The interactive comparison table is powerful \u2014 let students click through each crypto and see the founder stake, supply changes, and outage history. The data speaks for itself.`,
   inflation: `\uD83C\uDF93 This section bridges the gap between "money is broken" (Nature of Money) and "here's the alternative" (Bitcoin). Students need to understand that the inflation numbers they see on the news are actively manipulated.\n\n\uD83D\uDCA1 The ShadowStats comparison is powerful \u2014 show the divergence between official CPI and the 1980 methodology. The gap is not subtle.\n\n\uD83C\uDFAF Key insight: if real inflation is 8\u201312%, holding cash loses half its value in 6\u20139 years, not 24\u201336 years.`,
   deflation: `\uD83C\uDF93 Jeff Booth's thesis is the intellectual capstone of Chapter I. Technology = deflation. Fiat = inflation. The two are at war. Bitcoin lets deflation win.\n\n\uD83D\uDCA1 The key equation to drive home: 5% tech deflation + 7% money printing = "2% reported CPI." That single formula makes students see through the illusion.\n\n\uD83C\uDFAF After this section, students should feel genuine urgency to learn how Bitcoin works in practice.`,
   pizza: `\uD83C\uDF93 The pizza analogy is the single best response to "there aren't enough Bitcoin." It reframes the entire debate: the issue isn't quantity, it's dilution.\n\n\uD83D\uDCA1 The key line: "You can cut a pizza smaller, but you can't make more pizza." Let that land. Then show the numbers: 2.1 quadrillion sats. 262,000 per person.\n\n\uD83C\uDFAF Drive home that deflation under a gold standard powered the industrial revolution. "We need inflation" is propaganda, not economics.`,
