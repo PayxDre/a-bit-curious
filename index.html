@@ -1258,9 +1258,9 @@
             <input id="meltInput" type="number" value="50000" min="100" step="1000" style="background:var(--surface);border:1px solid var(--glass-border);border-radius:8px;padding:10px 14px;font-family:'Space Mono',monospace;font-size:18px;color:var(--orange);width:160px;text-align:center;outline:none;" oninput="updateMelt()"/>
           </div>
           <div id="meltResult" style="font-family:'Space Mono',monospace;font-size:14px;color:var(--text3);line-height:1.8;">
-            <div>After <strong style="color:var(--orange);">5 years</strong> at real inflation (~8%): you lost <strong style="color:#f87171;" id="melt5">$18,342</strong></div>
-            <div>After <strong style="color:var(--orange);">10 years</strong>: you lost <strong style="color:#f87171;" id="melt10">$32,305</strong></div>
-            <div>After <strong style="color:var(--orange);">20 years</strong>: you lost <strong style="color:#f87171;" id="melt20">$54,139</strong></div>
+            <div>After <strong style="color:var(--orange);">5 years</strong> at real inflation (~8%): you lost <strong style="color:#f87171;" id="melt5">$15,971</strong></div>
+            <div>After <strong style="color:var(--orange);">10 years</strong>: you lost <strong style="color:#f87171;" id="melt10">$26,840</strong></div>
+            <div>After <strong style="color:var(--orange);">20 years</strong>: you lost <strong style="color:#f87171;" id="melt20">$39,273</strong></div>
           </div>
           <p style="font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5;">Using ~8% real inflation (ShadowStats methodology, not the official CPI number). Your bank's 0.5% interest rate doesn't come close to covering this.</p>
         </div>
@@ -6890,9 +6890,11 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 function updateMelt(){
   const v = parseFloat(document.getElementById('meltInput').value) || 0;
   const r = 0.08;
-  const lost5 = v - v * Math.pow(1-r, 5);
-  const lost10 = v - v * Math.pow(1-r, 10);
-  const lost20 = v - v * Math.pow(1-r, 20);
+  // Purchasing power after n years of inflation r is v / (1+r)^n.
+  // The loss approaches but can never exceed the face value.
+  const lost5 = v - v / Math.pow(1+r, 5);
+  const lost10 = v - v / Math.pow(1+r, 10);
+  const lost20 = v - v / Math.pow(1+r, 20);
   const fmt = n => '$' + Math.round(n).toLocaleString();
   const el5 = document.getElementById('melt5');
   const el10 = document.getElementById('melt10');
@@ -6901,6 +6903,7 @@ function updateMelt(){
   if(el10) el10.textContent = fmt(lost10);
   if(el20) el20.textContent = fmt(lost20);
 }
+updateMelt();
 
 function formatPrice(p){
   return '$' + p.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
