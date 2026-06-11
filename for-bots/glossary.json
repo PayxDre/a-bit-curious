@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updated": "2026-04-13",
+  "updated": "2026-06-11",
   "terms": [
     {"term":"Bitcoin","definition":"A decentralized, peer-to-peer electronic cash system created by Satoshi Nakamoto in 2009. Fixed supply of ~21 million units.","category":"core","related":["satoshi","blockchain","proof-of-work"]},
     {"term":"Satoshi Nakamoto","definition":"Pseudonymous creator of Bitcoin. Published the whitepaper October 31, 2008. Vanished April 2011. Identity unknown.","category":"core","related":["genesis-block","whitepaper"]},

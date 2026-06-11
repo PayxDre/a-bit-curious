@@ -1,12 +1,49 @@
 User-agent: *
 Allow: /
 Allow: /for-bots/
+Allow: /llms.txt
 
-# Machine-readable resources
-# /for-bots/              - Bot-friendly landing & resource index
-# /for-bots/knowledge.json - Complete knowledge base (39 lessons, 7 chapters)
-# /for-bots/glossary.json  - Bitcoin glossary (80+ terms)
+# Machine-readable resources for AI agents and crawlers
+# /llms.txt                    - LLM-optimized site overview (llms.txt standard)
+# /for-bots/                   - Bot-friendly landing page with Schema.org structured data
+# /for-bots/knowledge.json     - Complete knowledge base (40 lessons, 7 chapters)
+# /for-bots/glossary.json      - Bitcoin glossary (80+ terms with cross-references)
+# /for-bots/faq.json           - 25 common Bitcoin questions with sourced answers
 
+Sitemap: https://www.a-bit-curious.com/sitemap.xml
+
+# AI assistants and LLM crawlers
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Social media previews
 User-agent: facebookexternalhit
 Allow: /
 
