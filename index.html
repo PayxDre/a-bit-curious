@@ -1090,6 +1090,28 @@
       transform:none !important;
     }
   }
+  /* ═══ Site search ═══ */
+  .search-overlay{position:fixed;inset:0;background:rgba(5,5,16,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:90;display:none;align-items:flex-start;justify-content:center;padding:90px 16px 16px;}
+  .search-overlay.open{display:flex;}
+  .search-panel{width:100%;max-width:560px;background:#10102a;border:1px solid rgba(245,158,11,0.25);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 40px rgba(245,158,11,0.06);overflow:hidden;animation:searchIn .18s ease;}
+  @keyframes searchIn{0%{opacity:0;transform:translateY(-8px) scale(0.98);}100%{opacity:1;transform:none;}}
+  .search-input-row{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(245,158,11,0.12);}
+  .search-input-row svg{flex:none;color:var(--orange);}
+  #searchInput{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:'Inter',sans-serif;font-size:16px;min-width:0;}
+  #searchInput::placeholder{color:var(--muted);}
+  .search-esc{font-size:10px;color:var(--muted);border:1px solid var(--glass-border);border-radius:5px;padding:2px 6px;font-family:'Space Mono',monospace;flex:none;cursor:pointer;background:none;}
+  .search-results{max-height:min(420px,60vh);overflow-y:auto;padding:8px;}
+  .search-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;padding:8px 10px 4px;}
+  .search-result{display:block;width:100%;text-align:left;background:none;border:none;border-radius:10px;padding:10px 12px;cursor:pointer;color:var(--text);}
+  .search-result:hover,.search-result.sel{background:rgba(245,158,11,0.1);}
+  .search-result .sr-title{font-size:14px;font-weight:600;font-family:'Inter',sans-serif;}
+  .search-result .sr-meta{font-size:11px;color:var(--muted);margin-top:1px;}
+  .search-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px;line-height:1.7;}
+  #navSearchBtn{display:flex;align-items:center;gap:6px;background:rgba(245,158,11,0.06);border:1px solid var(--glass-border);border-radius:8px;color:var(--muted);font-size:12px;padding:6px 10px;cursor:pointer;transition:all .2s;}
+  #navSearchBtn:hover{border-color:rgba(245,158,11,0.4);color:var(--text);}
+  .welcome-search{display:flex;align-items:center;gap:10px;width:100%;max-width:520px;margin:0 auto 36px;background:rgba(18,18,42,0.85);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:14px 18px;cursor:text;transition:all .2s;text-align:left;}
+  .welcome-search:hover{border-color:rgba(245,158,11,0.55);box-shadow:0 0 24px rgba(245,158,11,0.1);}
+  .welcome-search span{color:var(--muted);font-size:14px;}
   /* Whitepaper accordion */
   .wp-section{background:rgba(18,18,42,0.6);border:1px solid rgba(245,158,11,0.1);border-radius:12px;overflow:hidden;transition:border-color .2s}
   .wp-section:hover{border-color:rgba(245,158,11,0.3)}
@@ -1125,6 +1147,11 @@
     <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;">A <span class="logo-glow glow-text">&#8383;</span>it Curious</span>
   </div>
   <div class="flex items-center gap-4">
+    <button id="navSearchBtn" aria-label="Search the course" onclick="openSearch()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <span class="hidden sm:inline">Search</span>
+      <span class="hidden lg:inline" style="font-family:'Space Mono',monospace;font-size:10px;border:1px solid var(--glass-border);border-radius:4px;padding:1px 5px;">/</span>
+    </button>
     <div class="flex items-center gap-2" aria-label="Bitcoin price ticker" style="cursor:pointer;" onclick="openPriceChart('btcusd')" title="Click to view BTC/USD historical chart">
       <span class="pulse-badge" aria-hidden="true"></span>
       <span class="hidden sm:inline" style="font-size:12px;color:var(--muted);">BTC/USD</span>
@@ -1247,7 +1274,13 @@
         <p class="welcome-sub" style="font-size:17px;max-width:640px;margin:0 auto 32px;line-height:1.8;">
           You earn it. You spend it. You worry about it. But do you actually know what it <em>is</em>? Where it comes from? Why it buys less every single year? And whether there's something better?
         </p>
-        <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:40px;">The answers might surprise you.</p>
+        <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:28px;">The answers might surprise you.</p>
+
+        <!-- ═══════ COURSE SEARCH ═══════ -->
+        <button class="welcome-search" onclick="openSearch()" aria-label="Search the course">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" style="flex:none;"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+          <span>Got a question? Search the course...</span>
+        </button>
 
         <!-- ═══════ YOUR MONEY IS MELTING CALCULATOR ═══════ -->
         <div style="background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.2);border-radius:16px;padding:28px 24px;max-width:520px;margin:0 auto 40px;text-align:center;">
@@ -6731,6 +6764,18 @@
   </div>
 </div>
 
+<!-- ═══════════════ SITE SEARCH ═══════════════ -->
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search the course">
+  <div class="search-panel">
+    <div class="search-input-row">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <input id="searchInput" type="text" placeholder="Search lessons, topics, questions..." autocomplete="off" aria-label="Search input"/>
+      <button class="search-esc" onclick="closeSearch()" aria-label="Close search">ESC</button>
+    </div>
+    <div class="search-results" id="searchResults" role="listbox"></div>
+  </div>
+</div>
+
 <!-- ═══════════════ JAVASCRIPT ═══════════════ -->
 <script>
 // ═══════════════════════════════════════
@@ -7313,6 +7358,163 @@ document.getElementById('main-content').addEventListener('click', function(e){
 });
 
 // ═══════════════════════════════════════
+//   SITE SEARCH
+// ═══════════════════════════════════════
+const searchIndex = [
+  {s:'money',c:'I. The Problem with Money',k:'what is money history barter shells salt gold coins properties sound money scarcity durability divisibility portability'},
+  {s:'inflation',c:'I. The Problem with Money',k:'inflation cpi money printing m2 supply purchasing power prices rising fed federal reserve groceries expensive cost of living'},
+  {s:'faithcredit',c:'I. The Problem with Money',k:'national debt deficit treasury bonds dollar backed government 36 trillion interest spending'},
+  {s:'deflation',c:'I. The Problem with Money',k:'deflation falling prices technology savings cheaper saver'},
+  {s:'fiatgraveyard',c:'I. The Problem with Money',k:'fiat currency collapse hyperinflation weimar zimbabwe venezuela argentina failed currencies history paper money'},
+  {s:'pizza',c:'II. The Origin Story',k:'pizza day laszlo 10000 btc first purchase real transaction may 22'},
+  {s:'digimoney',c:'II. The Origin Story',k:'digicash hashcash bmoney bit gold rpow ecash before bitcoin predecessors attempts cypherpunk'},
+  {s:'satoshi',c:'II. The Origin Story',k:'satoshi nakamoto creator founder who made invented bitcoin identity anonymous disappeared vanished mystery'},
+  {s:'whitepaper',c:'II. The Origin Story',k:'whitepaper white paper 2008 nine pages peer to peer electronic cash read original'},
+  {s:'altcoins',c:'III. Bitcoin vs The World',k:'altcoins ethereum eth xrp ripple solana cardano dogecoin tether crypto other coins difference compare'},
+  {s:'powvpos',c:'III. Bitcoin vs The World',k:'proof of work stake pow pos mining staking consensus mechanism energy validators'},
+  {s:'myths',c:'III. Bitcoin vs The World',k:'myths criminal crime energy waste boil oceans volatile ban government illegal intrinsic value yield debunked lies fud'},
+  {s:'tulips',c:'III. Bitcoin vs The World',k:'tulip mania bubble 1637 dutch speculation crash ponzi scheme'},
+  {s:'quantum',c:'III. Bitcoin vs The World',k:'quantum computer break crack cryptography qubits threat future ibm google'},
+  {s:'goldvsbtc',c:'III. Bitcoin vs The World',k:'gold digital gold comparison precious metal 6102 confiscation ratio ounce store of value'},
+  {s:'adoption',c:'III. Bitcoin vs The World',k:'adoption el salvador etf blackrock institutions countries companies legal tender wall street'},
+  {s:'wallets',c:'IV. Getting Started',k:'wallet hardware software ledger trezor cold storage hot custody store keep safe keys'},
+  {s:'exchanges',c:'IV. Getting Started',k:'buy bitcoin exchange coinbase kraken cash app kyc how to purchase get dca dollar cost averaging invest'},
+  {s:'sending',c:'IV. Getting Started',k:'send transfer fees mempool transaction confirm receive payment address'},
+  {s:'security',c:'IV. Getting Started',k:'security multisig seed phrase backup protect safe scams phishing hacked stolen lost'},
+  {s:'network',c:'V. How Bitcoin Works',k:'network nodes peer to peer p2p decentralized uptime servers internet'},
+  {s:'node',c:'V. How Bitcoin Works',k:'run node raspberry pi validate full node verify trustless'},
+  {s:'mining',c:'V. How Bitcoin Works',k:'mining miners hash rate block reward halving asic energy electricity 21 million mined'},
+  {s:'blockchain',c:'V. How Bitcoin Works',k:'blockchain ledger blocks chain immutable history record technology'},
+  {s:'blocks',c:'V. How Bitcoin Works',k:'block header merkle root coinbase transaction size weight'},
+  {s:'difficulty',c:'V. How Bitcoin Works',k:'difficulty adjustment 2016 blocks ten minutes self regulating target'},
+  {s:'attackvectors',c:'V. How Bitcoin Works',k:'attack 51 percent hack hacked double spend sybil eclipse security breaking destroy kill'},
+  {s:'transactions',c:'VI. Transactions & Cryptography',k:'transaction inputs outputs signed irreversible anatomy'},
+  {s:'outputs',c:'VI. Transactions & Cryptography',k:'utxo unspent output balance change coins'},
+  {s:'locks',c:'VI. Transactions & Cryptography',k:'locking script p2pkh p2sh taproot spending conditions smart'},
+  {s:'keys',c:'VI. Transactions & Cryptography',k:'keys addresses derive hd wallet address formats bc1'},
+  {s:'privatekeys',c:'VI. Transactions & Cryptography',k:'private key secret 256 bit seed phrase 12 words 24 words backup'},
+  {s:'publickeys',c:'VI. Transactions & Cryptography',k:'public key elliptic curve secp256k1 derive'},
+  {s:'signatures',c:'VI. Transactions & Cryptography',k:'signature ecdsa schnorr sign verify ownership prove'},
+  {s:'consensus',c:'VI. Transactions & Cryptography',k:'consensus upgrades bip soft fork segwit taproot blocksize war governance rules change vote'},
+  {s:'lightning',c:'VI. Transactions & Cryptography',k:'lightning network layer 2 instant payments fast cheap channels coffee remittance'},
+  {s:'toolate',c:'VII. The Future',k:'too late buy now price prediction market cap early s curve adoption invest worth millionaire'},
+  {s:'perspective',c:'VII. The Future',k:'future savings perspective deflation standard jeff booth world'},
+  {s:'lore',c:'VII. The Future',k:'lore hodl fun facts trivia stories milestones lost coins landfill hal finney faucet casascius'},
+  {s:'bibliography',c:'VII. The Future',k:'sources books learn more bibliography references go deeper bitcoin standard saylor reading'}
+];
+const questionBank = [
+  {q:'What is Bitcoin, really?', s:'money'},
+  {q:'Is it too late to buy Bitcoin?', s:'toolate'},
+  {q:'Who created Bitcoin?', s:'satoshi'},
+  {q:'How do I buy Bitcoin safely?', s:'exchanges'},
+  {q:'Why does my money buy less every year?', s:'inflation'},
+  {q:"Doesn't Bitcoin waste energy?", s:'myths'},
+  {q:'How does mining actually work?', s:'mining'},
+  {q:'Is Bitcoin just digital gold?', s:'goldvsbtc'},
+  {q:'Where should I store my Bitcoin?', s:'wallets'},
+  {q:'Is Bitcoin a bubble like tulip mania?', s:'tulips'},
+  {q:'Can the government ban Bitcoin?', s:'myths'},
+  {q:'Can quantum computers break Bitcoin?', s:'quantum'},
+  {q:'What makes Bitcoin different from other crypto?', s:'altcoins'},
+  {q:'How can Bitcoin payments be instant?', s:'lightning'},
+  {q:'What is the blockchain?', s:'blockchain'},
+  {q:'What happens when all 21 million are mined?', s:'mining'},
+  {q:'How do I send Bitcoin to someone?', s:'sending'},
+  {q:'What is a private key?', s:'privatekeys'}
+];
+let searchSel = -1;
+
+function searchCourse(qRaw){
+  const tokens = qRaw.trim().toLowerCase().split(/\s+/).filter(w => w.length > 1);
+  if(!tokens.length) return [];
+  const results = [];
+  searchIndex.forEach(e => {
+    const title = (sectionNames[e.s] || e.s).toLowerCase();
+    let score = 0;
+    tokens.forEach(t => {
+      if(title.startsWith(t)) score += 30;
+      else if(title.includes(t)) score += 20;
+      if(e.k.includes(t)) score += 10;
+    });
+    if(score > 0) results.push({title: sectionNames[e.s], meta: e.c, s: e.s, score});
+  });
+  questionBank.forEach(e => {
+    const ql = e.q.toLowerCase();
+    let score = 0;
+    tokens.forEach(t => { if(ql.includes(t)) score += 15; });
+    if(score > 0) results.push({title: e.q, meta: 'Question → ' + (sectionNames[e.s] || e.s), s: e.s, score: score + 2});
+  });
+  results.sort((a,b) => b.score - a.score);
+  return results.slice(0, 8);
+}
+
+function renderSearchResults(q){
+  const box = document.getElementById('searchResults');
+  searchSel = -1;
+  let items, label;
+  if(!q.trim()){
+    items = questionBank.slice(0, 8).map(e => ({title: e.q, meta: 'Popular topic → ' + (sectionNames[e.s] || e.s), s: e.s}));
+    label = 'Popular topics';
+  } else {
+    items = searchCourse(q);
+    label = 'Results';
+  }
+  if(!items.length){
+    box.innerHTML = '<div class="search-empty">No matches. Try "mining", "wallets", or "inflation".<br/>Or start at the beginning: <button class="search-result" style="display:inline-block;width:auto;padding:4px 10px;margin-top:6px;color:var(--orange);" onclick="searchGo(\'money\')">The Nature of Money &rarr;</button></div>';
+    return;
+  }
+  box.innerHTML = '<div class="search-label">' + label + '</div>' + items.map(r =>
+    '<button class="search-result" role="option" data-s="' + r.s + '" onclick="searchGo(\'' + r.s + '\')"><div class="sr-title">' + r.title + '</div><div class="sr-meta">' + r.meta + '</div></button>'
+  ).join('');
+}
+
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  const inp = document.getElementById('searchInput');
+  inp.value = '';
+  renderSearchResults('');
+  setTimeout(() => inp.focus(), 50);
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.remove('open');
+}
+function searchGo(slug){
+  closeSearch();
+  showSection(slug);
+}
+
+(function(){
+  const inp = document.getElementById('searchInput');
+  const overlay = document.getElementById('searchOverlay');
+  inp.addEventListener('input', () => renderSearchResults(inp.value));
+  inp.addEventListener('keydown', (e) => {
+    const items = document.querySelectorAll('#searchResults .search-result[data-s]');
+    if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+      e.preventDefault();
+      if(!items.length) return;
+      searchSel = e.key === 'ArrowDown' ? (searchSel + 1) % items.length : (searchSel - 1 + items.length) % items.length;
+      items.forEach((el, i) => el.classList.toggle('sel', i === searchSel));
+      items[searchSel].scrollIntoView({block: 'nearest'});
+    } else if(e.key === 'Enter'){
+      e.preventDefault();
+      const target = items[searchSel >= 0 ? searchSel : 0];
+      if(target) searchGo(target.dataset.s);
+    } else if(e.key === 'Escape'){
+      closeSearch();
+    }
+    e.stopPropagation();
+  });
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeSearch(); });
+  document.addEventListener('keydown', (e) => {
+    const typing = document.activeElement && ['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName);
+    if((e.key === '/' && !typing) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')){
+      e.preventDefault();
+      openSearch();
+    }
+  });
+})();
+
+// ═══════════════════════════════════════
 //   HERO SYMBOL MORPH (evolution of money)
 // ═══════════════════════════════════════
 (function(){
@@ -7399,9 +7601,11 @@ document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){
     closeModalDirect();
     closeDrawer();
+    closeSearch();
     return;
   }
   if(document.getElementById('modalOverlay').classList.contains('open')) return;
+  if(document.getElementById('searchOverlay').classList.contains('open')) return;
   // Only navigate if no input/textarea is focused
   if(document.activeElement && ['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
   const idx = sectionOrder.indexOf(currentSection);
