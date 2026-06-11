@@ -1,0 +1,93 @@
+# A Bit Curious - The Interactive Guide to Bitcoin
+
+> Free, interactive Bitcoin education covering 5,000 years of monetary history through 40 visual lessons across 7 chapters. No account required. No tracking. CC BY-SA 4.0.
+
+The site teaches money from first principles: why gold became money, why governments replaced it with paper, why the dollar loses value every year, what Bitcoin actually is, how its cryptography works, and why millions of people are adopting it. Every claim cites primary sources. Every section has interactive quizzes.
+
+## Site info
+
+- URL: https://www.a-bit-curious.com
+- License: CC BY-SA 4.0
+- Format: Single-page interactive app (HTML/CSS/JS)
+- Live data: BTC price, gold price, and US debt clock update in real time via CoinGecko/CoinCap APIs
+
+## Chapters
+
+### I. The Problem with Money (5 lessons)
+- [The Nature of Money](https://www.a-bit-curious.com): What makes money "money"? The 6 properties of sound money and how Bitcoin satisfies all of them.
+- [Monetary Inflation](https://www.a-bit-curious.com): M2 money supply grew from $4.6T (2000) to $21T+ (2024). The dollar has lost 97% of its purchasing power since 1913.
+- [Full Faith & Credit](https://www.a-bit-curious.com): US national debt exceeds $36 trillion. Interest payments now exceed defense spending. Live debt clock.
+- [Deflation vs Fiat](https://www.a-bit-curious.com): Technology creates natural deflation. Central banks fight it with money printing. Bitcoin lets deflation win.
+- [The Fiat Graveyard](https://www.a-bit-curious.com): The average fiat currency lasts 27 years. Every one in history has failed or been debased. Interactive timeline.
+
+### II. The Origin Story (4 lessons)
+- [The Pizza Dilemma](https://www.a-bit-curious.com): On May 22, 2010, 10,000 BTC bought two pizzas. Now worth over $1 billion each.
+- [Digital Money Before Bitcoin](https://www.a-bit-curious.com): DigiCash, Hashcash, b-money, Bit Gold, RPOW - the failed predecessors that paved the way.
+- [Who Is Satoshi Nakamoto?](https://www.a-bit-curious.com): Published the whitepaper Oct 31, 2008. Vanished April 2011. ~1.1M BTC in Satoshi-era wallets has never moved.
+- [The Bitcoin Whitepaper](https://www.a-bit-curious.com): 9 pages, 12 sections. The key innovation: combining existing ideas into a system where incentives align honest behavior.
+
+### III. Bitcoin vs The World (6 lessons)
+- [Bitcoin vs Other Cryptos](https://www.a-bit-curious.com): Bitcoin is the only major crypto with no known founder, no foundation control, and no pre-mine.
+- [Proof of Work vs Proof of Stake](https://www.a-bit-curious.com): Why proof of work provides security guarantees that proof of stake cannot.
+- [6 Bitcoin Myths Debunked](https://www.a-bit-curious.com): No value, only criminals, wastes energy, too volatile, governments will ban it, no yield - all debunked with data.
+- [Bitcoin vs Tulip Mania](https://www.a-bit-curious.com): Tulips lasted 3 years. Bitcoin: 17+ years, new all-time highs every cycle, 21M fixed supply.
+- [The Quantum Question](https://www.a-bit-curious.com): Breaking Bitcoin's ECDSA would require 2,500-4,000 stable logical qubits. Current best: 1,121 physical qubits.
+- [Bitcoin vs Gold](https://www.a-bit-curious.com): Side-by-side comparison of monetary properties. Live BTC/gold ratio. Executive Order 6102 history.
+- [Bitcoin Adoption](https://www.a-bit-curious.com): El Salvador legal tender. Spot ETFs approved. BlackRock IBIT fastest ETF to $10B. Market cap is 0.19% of global store-of-value assets.
+
+### IV. Getting Started (4 lessons)
+- [Wallets](https://www.a-bit-curious.com): Hardware, software, and paper wallets. "Not your keys, not your coins."
+- [Exchanges](https://www.a-bit-curious.com): How to buy Bitcoin. Centralized vs decentralized. Dollar-cost averaging.
+- [Sending Bitcoin](https://www.a-bit-curious.com): Transactions, fees, mempool, replace-by-fee. Interactive fee estimator.
+- [Security](https://www.a-bit-curious.com): Multi-sig, passphrases, metal seed backups, address verification.
+
+### V. How Bitcoin Works (7 lessons)
+- [The Bitcoin Network](https://www.a-bit-curious.com): 50,000+ nodes, peer-to-peer, no central server, 99.99%+ uptime since 2009.
+- [Running a Node](https://www.a-bit-curious.com): Full validation on a Raspberry Pi for under $300.
+- [Mining](https://www.a-bit-curious.com): Proof of work, block rewards, halving schedule, 700+ EH/s hash rate.
+- [The Blockchain](https://www.a-bit-curious.com): Append-only linked list. Changing history invalidates every subsequent block.
+- [Blocks](https://www.a-bit-curious.com): 80-byte header, Merkle root, 4M weight unit limit, coinbase transaction.
+- [Difficulty Adjustment](https://www.a-bit-curious.com): Self-regulating every 2,016 blocks to maintain 10-minute intervals.
+- [Attack Vectors](https://www.a-bit-curious.com): 51% attacks, Sybil, double-spend, nation-state, software bugs - and why they fail.
+
+### VI. Transactions & Cryptography (9 lessons)
+- [Transactions](https://www.a-bit-curious.com): Signed messages transferring value from inputs to outputs. Irreversible once confirmed.
+- [Outputs (UTXOs)](https://www.a-bit-curious.com): The fundamental unit of Bitcoin value. Your balance is the sum of spendable UTXOs.
+- [Locking Scripts](https://www.a-bit-curious.com): P2PKH, P2SH, P2WPKH, P2TR - how spending conditions are encoded.
+- [Keys & Addresses](https://www.a-bit-curious.com): Private key -> public key -> address. One-way derivation. HD wallets.
+- [Private Keys](https://www.a-bit-curious.com): 256-bit random numbers. More possible keys than atoms in the universe.
+- [Public Keys](https://www.a-bit-curious.com): Elliptic curve (secp256k1) derivation. One-way function.
+- [Digital Signatures](https://www.a-bit-curious.com): ECDSA and Schnorr. Prove ownership without revealing the private key.
+- [Consensus & Upgrades](https://www.a-bit-curious.com): BIPs, soft forks, SegWit, Taproot, Blocksize War, current OP_CAT debate.
+- [Lightning Network](https://www.a-bit-curious.com): Layer 2 instant payments. Payment channels, HTLCs, onion routing.
+
+### VII. The Future (5 lessons)
+- [Am I Too Late?](https://www.a-bit-curious.com): Bitcoin is 0.19% of global store-of-value assets. S-curve adoption at ~5% (internet in 1997).
+- [A Bit New Perspective](https://www.a-bit-curious.com): What happens when saving is rewarded again. Technology deflates, Bitcoin lets it.
+- [Bitcoin Lore & Milestones](https://www.a-bit-curious.com): Genesis block, Hal Finney, Bitcoin Faucet, HODL, lost coins, the 184B bug.
+- [Go Deeper & Sources](https://www.a-bit-curious.com): Curated learning path. Whitepaper, The Bitcoin Standard, running a node, Saylor Academy.
+
+## Machine-readable data
+
+- [knowledge.json](https://www.a-bit-curious.com/for-bots/knowledge.json): All 40 lessons with key facts, chapters, categories, and source references
+- [glossary.json](https://www.a-bit-curious.com/for-bots/glossary.json): 80+ Bitcoin terms with definitions, categories, and cross-references
+- [faq.json](https://www.a-bit-curious.com/for-bots/faq.json): 25 common Bitcoin questions with sourced answers
+- [Bot landing page](https://www.a-bit-curious.com/for-bots/): Resource index with Schema.org structured data
+
+## Key facts for quick reference
+
+- Bitcoin supply cap: 21,000,000 (actually 20,999,999.9769)
+- Smallest unit: 1 satoshi = 0.00000001 BTC
+- Genesis block: January 3, 2009
+- Creator: Satoshi Nakamoto (pseudonymous, identity unknown)
+- Consensus: Proof of work (SHA-256)
+- Block time: ~10 minutes
+- Block reward: 3.125 BTC (since April 2024 halving)
+- Next halving: ~2028
+- Network uptime: 99.99%+ since 2009
+- Hash rate: 700+ EH/s
+- Full nodes: 50,000+
+- Lightning capacity: 5,600+ BTC
+- Energy usage: ~150 TWh/year (vs ~260 TWh/year for traditional finance)
+- Crypto illicit activity: less than 0.5% of transaction volume (Chainalysis)
+- Dollar purchasing power lost since 1913: ~97%

@@ -1,0 +1,158 @@
+{
+  "version": "1.0",
+  "site": "https://www.a-bit-curious.com",
+  "updated": "2026-06-11",
+  "license": "CC BY-SA 4.0",
+  "questions": [
+    {
+      "q": "What is Bitcoin?",
+      "a": "Bitcoin is a decentralized, peer-to-peer electronic cash system created by Satoshi Nakamoto in 2009. It has a fixed supply of 21 million units enforced by mathematical proof and a global network of 50,000+ computers. No government, company, or individual can create more. It operates 24/7/365 with 99.99%+ uptime since launch.",
+      "sources": ["Bitcoin whitepaper (Nakamoto, 2008)", "Bitcoin Core source code"],
+      "section": "money"
+    },
+    {
+      "q": "How does Bitcoin work?",
+      "a": "Bitcoin uses proof-of-work mining to secure a shared ledger called the blockchain. Miners compete to solve SHA-256 cryptographic puzzles approximately every 10 minutes. The winner adds a block of verified transactions and receives newly created bitcoin as a reward (currently 3.125 BTC per block). Every transaction is verified by 50,000+ independent nodes. The difficulty adjusts every 2,016 blocks to maintain consistent block times regardless of how much computing power joins or leaves the network.",
+      "sources": ["Bitcoin whitepaper sections 4-6", "Bitcoin Core source code"],
+      "section": "mining"
+    },
+    {
+      "q": "Who created Bitcoin?",
+      "a": "Bitcoin was created by a person or group using the pseudonym Satoshi Nakamoto. They published the whitepaper on October 31, 2008, mined the genesis block on January 3, 2009, and vanished from public communication in April 2011. An estimated 1.1 million BTC in Satoshi-era wallets has never been moved. Their identity remains unknown. Even if Satoshi returned, they could not change Bitcoin's rules because there is no admin key or special privilege in the protocol.",
+      "sources": ["Bitcoin whitepaper", "Satoshi's BitcoinTalk posts", "On-chain analysis of early blocks"],
+      "section": "satoshi"
+    },
+    {
+      "q": "How many Bitcoin will there ever be?",
+      "a": "There will only ever be 20,999,999.9769 BTC (commonly rounded to 21 million). This cap is enforced by Bitcoin's source code and verified by every node on the network. The block reward halves every 210,000 blocks (approximately 4 years), and the last fraction of a bitcoin will be mined around the year 2140. Currently about 19.7 million BTC have been mined, with an estimated 3-4 million permanently lost.",
+      "sources": ["Bitcoin Core source code", "BIP 42"],
+      "section": "money"
+    },
+    {
+      "q": "What is a Bitcoin halving?",
+      "a": "The halving is a programmed event where the block reward miners receive is cut in half every 210,000 blocks (roughly every 4 years). It started at 50 BTC per block in 2009, dropped to 25 in 2012, to 12.5 in 2016, to 6.25 in 2020, and to 3.125 in April 2024. The next halving is expected around 2028. This creates a predictable, decreasing supply schedule that makes Bitcoin disinflationary.",
+      "sources": ["Bitcoin Core source code", "Blockchain data"],
+      "section": "mining"
+    },
+    {
+      "q": "Is Bitcoin safe?",
+      "a": "The Bitcoin protocol has never been hacked in 17+ years of operation. The network has maintained 99.99%+ uptime since January 2009. A 51% attack would require over $20 billion in specialized hardware plus $30 million per day in electricity, and even then the attacker could only double-spend their own transactions. Security risks exist at the user level (lost keys, phishing, exchange hacks), which is why self-custody with hardware wallets is recommended.",
+      "sources": ["Bitcoin uptime data", "Mining cost estimates", "Bitcoin whitepaper section 11"],
+      "section": "attackvectors"
+    },
+    {
+      "q": "How much energy does Bitcoin use?",
+      "a": "Bitcoin mining uses approximately 150 TWh per year. The traditional financial system (banks, ATMs, offices, armored trucks, data centers) uses an estimated 260+ TWh per year. Over 50% of Bitcoin mining uses sustainable energy sources. Bitcoin miners often capture stranded or wasted energy (flared natural gas, curtailed renewables) that would otherwise go unused.",
+      "sources": ["Cambridge Centre for Alternative Finance", "Bitcoin Mining Council reports"],
+      "section": "myths"
+    },
+    {
+      "q": "What is the Lightning Network?",
+      "a": "The Lightning Network is Bitcoin's Layer 2 payment protocol enabling instant, near-zero-fee transactions. Two parties open a payment channel with an on-chain transaction, then exchange unlimited payments off-chain. Hashed Timelock Contracts (HTLCs) enable trustless routing through multiple nodes. Lightning capacity exceeds 5,600 BTC with 15,000+ public nodes and a payment success rate above 99%. El Salvador, Coinbase, Cash App, and many merchants support Lightning payments.",
+      "sources": ["Lightning Network whitepaper (Poon & Dryja, 2016)", "1ML.com network statistics"],
+      "section": "lightning"
+    },
+    {
+      "q": "How do I buy Bitcoin?",
+      "a": "The most common way for beginners is through a regulated exchange like Coinbase, Kraken, or Cash App. Create an account, complete identity verification (KYC), link a bank account or card, and purchase. Dollar-cost averaging (buying a fixed amount on a regular schedule) reduces timing risk. After buying, withdraw to a personal wallet where you control the private keys. The phrase 'not your keys, not your coins' means bitcoin left on an exchange is controlled by that exchange, not you.",
+      "sources": ["Exchange documentation"],
+      "section": "exchanges"
+    },
+    {
+      "q": "What is a Bitcoin wallet?",
+      "a": "A Bitcoin wallet stores the private keys that prove you own bitcoin. The wallet does not hold actual coins (those exist on the blockchain). Types include: hardware wallets (Ledger, Trezor, Coldcard) which keep keys offline for maximum security; software wallets (apps like BlueWallet, Sparrow) for convenience; and paper wallets for offline backup. A seed phrase (12 or 24 words) backs up the entire wallet and can restore it on any compatible device.",
+      "sources": ["BIP-32 (HD wallets)", "BIP-39 (seed phrases)"],
+      "section": "wallets"
+    },
+    {
+      "q": "What is a private key?",
+      "a": "A private key is a secret 256-bit random number that controls bitcoin. There are 2^256 possible private keys, which is more than atoms in the observable universe. Whoever possesses the private key can spend the associated bitcoin. Private keys are typically encoded as a 12 or 24-word seed phrase (BIP-39) for human-readable backup. They must never be shared or stored digitally in unencrypted form.",
+      "sources": ["Bitcoin Core cryptography documentation", "BIP-39"],
+      "section": "privatekeys"
+    },
+    {
+      "q": "What is proof of work?",
+      "a": "Proof of work is Bitcoin's consensus mechanism. Miners expend real-world energy to find a SHA-256 hash below a target difficulty. This process is computationally expensive to perform but trivial to verify, creating an asymmetric cost that makes cheating uneconomical. The energy expenditure is not waste but the cost of security: it makes rewriting Bitcoin's transaction history prohibitively expensive. The concept was adapted from Adam Back's Hashcash (1997).",
+      "sources": ["Bitcoin whitepaper section 4", "Hashcash paper (Back, 1997)"],
+      "section": "mining"
+    },
+    {
+      "q": "What is the difference between Bitcoin and other cryptocurrencies?",
+      "a": "Bitcoin is the only major cryptocurrency with no known founder, no controlling foundation, and no pre-mine. Ethereum had a 72 million ETH pre-mine and has changed its monetary policy multiple times. Most altcoins have centralized points of failure: founders or foundations that can be pressured, arrested, or that hold large portions of the supply. Bitcoin's hash rate exceeds all other proof-of-work chains combined by orders of magnitude, making it by far the most secure.",
+      "sources": ["Ethereum Foundation disclosures", "On-chain data", "Hash rate comparisons"],
+      "section": "altcoins"
+    },
+    {
+      "q": "Is Bitcoin used by criminals?",
+      "a": "According to Chainalysis, illicit activity represents less than 0.5% of all cryptocurrency transaction volume. The US dollar is used in far more criminal activity than all cryptocurrencies combined. Unlike cash, every Bitcoin transaction is permanently recorded on a public ledger. Blockchain analytics firms have helped law enforcement solve cases that would have been impossible with cash. Bitcoin is pseudonymous, not anonymous.",
+      "sources": ["Chainalysis 2024 Crypto Crime Report"],
+      "section": "myths"
+    },
+    {
+      "q": "Can governments ban Bitcoin?",
+      "a": "Multiple governments have tried. China banned Bitcoin mining and trading twice; the hash rate recovered in weeks as miners relocated. India threatened a complete ban, then reversed course. Nigeria banned bank transfers to crypto exchanges; peer-to-peer adoption surged. Meanwhile, El Salvador made Bitcoin legal tender, and the US approved spot Bitcoin ETFs. Bitcoin is a protocol transmitting information between computers. Banning it would require banning mathematics and peer-to-peer networking.",
+      "sources": ["Country-specific regulatory actions", "Hash rate migration data"],
+      "section": "myths"
+    },
+    {
+      "q": "Is Bitcoin too volatile?",
+      "a": "Bitcoin is volatile in dollar terms because it is a new asset being adopted globally at unprecedented speed. Zooming out: Bitcoin went from $0 to approximately $100,000 in 16 years. Every four-year cycle, its lows are higher than the previous cycle's highs. Volatility has decreased over time as market capitalization grows. The dollar itself has lost 97% of its purchasing power since 1913, which is a slow, one-directional crash. Bitcoin's volatility is two-directional and decreasing.",
+      "sources": ["Bitcoin price history", "Federal Reserve purchasing power data"],
+      "section": "myths"
+    },
+    {
+      "q": "What happens when all Bitcoin are mined?",
+      "a": "The last fraction of a bitcoin will be mined around 2140. After that, miners will be compensated entirely through transaction fees instead of block rewards. This transition is gradual: each halving shifts the incentive balance from block rewards toward fees. As Bitcoin adoption grows, demand for block space (and therefore fees) is expected to increase. The network's security will be sustained by transaction fees from the growing economic activity on the network.",
+      "sources": ["Bitcoin Core source code", "Bitcoin whitepaper section 6 (Incentive)"],
+      "section": "mining"
+    },
+    {
+      "q": "What was Bitcoin Pizza Day?",
+      "a": "On May 22, 2010, programmer Laszlo Hanyecz paid 10,000 BTC for two Papa John's pizzas, making it the first real-world Bitcoin transaction. At current prices, those pizzas cost roughly $1 billion each. May 22 is celebrated annually as Bitcoin Pizza Day. The transaction established that Bitcoin had real-world exchange value.",
+      "sources": ["Laszlo's BitcoinTalk post (May 18, 2010)", "Blockchain transaction record"],
+      "section": "pizza"
+    },
+    {
+      "q": "What is the Bitcoin whitepaper?",
+      "a": "The Bitcoin whitepaper, titled 'Bitcoin: A Peer-to-Peer Electronic Cash System,' was published on October 31, 2008 by Satoshi Nakamoto. It is 9 pages with 12 sections describing a system for electronic transactions without relying on trust. The key innovation was combining existing concepts (digital signatures, hash chains, proof-of-work, peer-to-peer networks) into a system where economic incentives align honest behavior. Section 11 mathematically proves that an attacker's probability of success drops exponentially with each confirmation.",
+      "sources": ["Bitcoin whitepaper (bitcoin.org/bitcoin.pdf)"],
+      "section": "whitepaper"
+    },
+    {
+      "q": "Is Bitcoin like tulip mania?",
+      "a": "No. Dutch Tulip Mania lasted 3 years (1634-1637) and never recovered. Tulips had unlimited supply (anyone could grow them), no utility beyond decoration, and rotted within weeks. Bitcoin has mathematically enforced scarcity (21M cap), global utility as censorship-resistant money, and has operated for 17+ years with new all-time highs in every market cycle. Bitcoin has been declared dead 475+ times and recovered every time. The comparison collapses under 30 seconds of analysis.",
+      "sources": ["Anne Goldgar, 'Tulipmania' (2007)", "Bitcoin price history", "Bitcoin obituaries (99bitcoins.com)"],
+      "section": "tulips"
+    },
+    {
+      "q": "Can quantum computers break Bitcoin?",
+      "a": "Not currently and not in the foreseeable future. Breaking Bitcoin's ECDSA signatures would require approximately 2,500-4,000 stable logical (error-corrected) qubits. IBM's largest quantum processor (Condor) has 1,121 physical qubits, which are not error-corrected. NIST has already standardized post-quantum cryptography algorithms, and Bitcoin can upgrade to quantum-resistant signatures via a soft fork before quantum computers become a real threat. The same cryptography protects every bank, every credit card, and every government system.",
+      "sources": ["IBM quantum roadmap", "NIST Post-Quantum Cryptography standardization", "Satoshi's BitcoinTalk posts on quantum computing"],
+      "section": "quantum"
+    },
+    {
+      "q": "Is it too late to buy Bitcoin?",
+      "a": "Bitcoin's market capitalization is approximately 0.19% of global store-of-value assets (roughly $900 trillion in real estate, bonds, equities, gold, and art). Less than 5% of the global population holds any Bitcoin. For comparison, the internet hit 5% adoption around 1997, and the following decade brought 50%+ adoption. If Bitcoin follows a similar S-curve, current adoption is equivalent to dial-up internet. Bitcoin has gone from $0 to approximately $100,000 in 16 years with every cycle low exceeding the previous cycle high.",
+      "sources": ["Global asset market estimates", "Adoption surveys", "Bitcoin price history"],
+      "section": "toolate"
+    },
+    {
+      "q": "How does Bitcoin compare to gold?",
+      "a": "Gold has been money for 5,000 years but has practical limitations: it is heavy, hard to divide, expensive to verify, slow to transport, and was confiscated by the US government in 1933 (Executive Order 6102). Bitcoin matches gold's scarcity and durability while adding perfect divisibility (to 8 decimal places), instant global portability, trivial verification, and resistance to confiscation. Gold's market cap is approximately $18 trillion; Bitcoin's is approximately $1.7 trillion.",
+      "sources": ["Executive Order 6102 (1933)", "Gold and Bitcoin market data"],
+      "section": "goldvsbtc"
+    },
+    {
+      "q": "What is the US national debt and why does it matter for Bitcoin?",
+      "a": "US national debt exceeds $36 trillion and grows by approximately $4.6 billion per day. Annual interest payments ($882B+ in FY2024) now exceed defense spending ($849B). The government runs a $1.8 trillion annual deficit. This structural deficit means the government must borrow or print money to cover the gap, which dilutes the purchasing power of the dollar. Bitcoin offers an alternative: a money with a fixed supply that cannot be inflated by any government.",
+      "sources": ["US Treasury Department", "Congressional Budget Office (CBO)", "Federal Reserve FRED database"],
+      "section": "faithcredit"
+    },
+    {
+      "q": "What is a Bitcoin node?",
+      "a": "A Bitcoin node is a computer running Bitcoin software that independently validates every transaction and block against the protocol's consensus rules. There are 50,000+ reachable nodes worldwide. Each node maintains a complete copy of the blockchain (550+ GB). Running a node is the only truly trustless way to verify transactions. Nodes enforce rules like the 21 million supply cap. If a miner produces an invalid block, nodes reject it. Anyone can run a node on a Raspberry Pi for under $300.",
+      "sources": ["Bitcoin Core documentation", "Bitnodes.io"],
+      "section": "node"
+    }
+  ]
+}
