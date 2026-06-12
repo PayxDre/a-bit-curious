@@ -3501,6 +3501,27 @@
 
       <div class="neon-divider"></div>
 
+      <!-- ── Case study: Zcash Orchard counterfeiting bug (June 2026) ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(248,113,113,0.3);">
+        <div class="text-sm font-bold mb-2" style="color:#f87171;">&#9888;&#65039; Case Study: Zcash and the Invisible Counterfeit (June 2026)</div>
+        <div class="text-xs mb-3" style="color:var(--muted);">Why "you can't see it" is not a feature when it comes to money supply.<sup><a href="#ref-43" style="color:var(--orange);text-decoration:none;font-size:10px;">[43]</a></sup></div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px;">On June 5, 2026, the Zcash project disclosed that a critical bug had been hiding in its Orchard shielded pool since the NU5 upgrade in May 2022 - <strong style="color:#f87171;">four years undetected</strong>. The flaw was an under-constrained element in the circuit's elliptic-curve multiplication gadget: an arithmetic check on transaction inputs contained a gap that allowed arbitrary false values to pass. Anyone who found it could have minted <strong style="color:#f87171;">unlimited counterfeit ZEC</strong> inside the shielded pool, completely invisibly.</p>
+        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px;">Security researcher Taylor Hornby discovered the vulnerability on May 29, 2026 using an AI-assisted auditing framework built on Anthropic's Opus 4.8 model. Working in a local test environment, Hornby wrote a complete exploit that generated unlimited, undetectable counterfeit ZEC - confirming the bug was not theoretical. Zcash developers executed an emergency hard fork (NU6.2) by June 3 and disabled the Orchard pool before publicly disclosing on June 5. ZEC crashed 38%.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;">
+          <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:#f87171;margin-bottom:6px;">ZCASH (SHIELDED POOL)</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Supply hidden by design. When a counterfeiting bug exists, <strong style="color:#f87171;">nobody can tell if it was exploited</strong>. Zcash founder Zooko Wilcox acknowledged users "cannot independently verify whether ZEC's circulating supply was affected."</div>
+          </div>
+          <div style="padding:14px;border-radius:10px;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:#4ade80;margin-bottom:6px;">BITCOIN (TRANSPARENT UTXO)</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Every satoshi is tracked in a public ledger. Anyone running a node can verify the total supply at any time. A counterfeiting bug in Bitcoin would be <strong style="color:#4ade80;">immediately visible</strong> to tens of thousands of auditors.</div>
+          </div>
+        </div>
+
+        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:0;">This is why Bitcoin's radical transparency is a strength, not a weakness. Privacy is important - but when privacy means <em>even the monetary supply itself becomes unknowable</em>, you have recreated the exact problem Bitcoin was built to solve: money you cannot verify, backed by trust you cannot audit.</p>
+      </div>
+
       <!-- ── Inline Chart: Decentralization Scorecard ── -->
       <div class="glass p-5 my-6">
         <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#128302; The Decentralization Test - Who Passes?</div>
@@ -6858,6 +6879,10 @@
             <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);">[42]</div>
             <div style="font-size:12px;color:var(--text2);line-height:1.6;">Chetty, R. et al., 'The Fading American Dream: Trends in Absolute Income Mobility Since 1940,' Science, 2017; Federal Reserve Distributional Financial Accounts (generational wealth shares); EPI CEO compensation report 2024; BEA personal saving rate; Jack Mallers, 'The Cost of Our Inheritance,' BTC Prague 2025 keynote</div>
           </div>
+          <div id="ref-43" style="display:flex;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--glass-border);background:rgba(0,0,0,0.2);">
+            <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);">[43]</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Zcash Orchard counterfeiting vulnerability (June 2026): Shielded Labs disclosure, June 5, 2026; Taylor Hornby AI-assisted audit using Anthropic Opus 4.8; NU6.2 emergency hard fork June 3, 2026; Zooko Wilcox on supply unverifiability; CoinDesk, The Block, CryptoBriefing coverage; Ironwood upgrade proposal by Wilcox, McGee & Hornby</div>
+          </div>
         </div>
       </div>
 
@@ -7601,7 +7626,7 @@ const searchIndex = [
   {s:'digimoney',c:'II. The Origin Story',k:'digicash hashcash bmoney bit gold rpow ecash before bitcoin predecessors attempts cypherpunk'},
   {s:'satoshi',c:'II. The Origin Story',k:'satoshi nakamoto creator founder who made invented bitcoin identity anonymous disappeared vanished mystery'},
   {s:'whitepaper',c:'II. The Origin Story',k:'whitepaper white paper 2008 nine pages peer to peer electronic cash read original'},
-  {s:'altcoins',c:'III. Bitcoin vs The World',k:'altcoins ethereum eth xrp ripple solana cardano dogecoin tether crypto other coins difference compare'},
+  {s:'altcoins',c:'III. Bitcoin vs The World',k:'altcoins ethereum eth xrp ripple solana cardano dogecoin tether crypto other coins difference compare zcash counterfeit infinite supply bug orchard shielded privacy coin'},
   {s:'powvpos',c:'III. Bitcoin vs The World',k:'proof of work stake pow pos mining staking consensus mechanism energy validators'},
   {s:'myths',c:'III. Bitcoin vs The World',k:'myths criminal crime energy waste boil oceans volatile ban government illegal intrinsic value yield debunked lies fud'},
   {s:'tulips',c:'III. Bitcoin vs The World',k:'tulip mania bubble 1637 dutch speculation crash ponzi scheme'},
