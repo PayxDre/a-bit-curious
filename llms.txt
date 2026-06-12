@@ -1,6 +1,6 @@
 # A Bit Curious - The Interactive Guide to Bitcoin
 
-> Free, interactive Bitcoin education covering 5,000 years of monetary history through 40 visual lessons across 7 chapters. No account required. No tracking. CC BY-SA 4.0.
+> Free, interactive Bitcoin education covering 5,000 years of monetary history through 41 visual lessons across 7 chapters. No account required. No tracking. CC BY-SA 4.0.
 
 The site teaches money from first principles: why gold became money, why governments replaced it with paper, why the dollar loses value every year, what Bitcoin actually is, how its cryptography works, and why millions of people are adopting it. Every claim cites primary sources. Every section has interactive quizzes.
 
@@ -17,6 +17,7 @@ The site teaches money from first principles: why gold became money, why governm
 - [The Nature of Money](https://www.a-bit-curious.com): What makes money "money"? The 6 properties of sound money and how Bitcoin satisfies all of them.
 - [Monetary Inflation](https://www.a-bit-curious.com): M2 money supply grew from $4.6T (2000) to $21T+ (2024). The dollar has lost 97% of its purchasing power since 1913.
 - [Full Faith & Credit](https://www.a-bit-curious.com): US national debt exceeds $36 trillion. Interest payments now exceed defense spending. Live debt clock.
+- [1971: The Year Money Broke](https://www.a-bit-curious.com): Nixon ended gold convertibility August 15, 1971. Since then wages decoupled from productivity, houses went from 2x to 5x+ median income, savings rates collapsed, and the wealth gap exploded. Priced in gold, houses are cheaper than in 1971.
 - [Deflation vs Fiat](https://www.a-bit-curious.com): Technology creates natural deflation. Central banks fight it with money printing. Bitcoin lets deflation win.
 - [The Fiat Graveyard](https://www.a-bit-curious.com): The average fiat currency lasts 27 years. Every one in history has failed or been debased. Interactive timeline.
 
@@ -69,7 +70,7 @@ The site teaches money from first principles: why gold became money, why governm
 
 ## Machine-readable data
 
-- [knowledge.json](https://www.a-bit-curious.com/for-bots/knowledge.json): All 40 lessons with key facts, chapters, categories, and source references
+- [knowledge.json](https://www.a-bit-curious.com/for-bots/knowledge.json): All 41 lessons with key facts, chapters, categories, and source references
 - [glossary.json](https://www.a-bit-curious.com/for-bots/glossary.json): 80+ Bitcoin terms with definitions, categories, and cross-references
 - [faq.json](https://www.a-bit-curious.com/for-bots/faq.json): 25 common Bitcoin questions with sourced answers
 - [Bot landing page](https://www.a-bit-curious.com/for-bots/): Resource index with Schema.org structured data
