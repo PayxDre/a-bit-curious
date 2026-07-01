@@ -37,6 +37,57 @@
 <meta name="twitter:title" content="A ₿it Curious - The Interactive Guide to Bitcoin"/>
 <meta name="twitter:description" content="Aren't you a bit curious about your money? 5,000 years of monetary history, 7 chapters, 41 interactive lessons. Free."/>
 <meta name="twitter:image" content="https://www.a-bit-curious.com/og-image.png"/>
+
+<!-- Structured data for search engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.a-bit-curious.com/#website",
+      "url": "https://www.a-bit-curious.com/",
+      "name": "A Bit Curious",
+      "description": "The free interactive guide to understanding money and Bitcoin",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Course",
+      "@id": "https://www.a-bit-curious.com/#course",
+      "name": "A Bit Curious - The Interactive Guide to Bitcoin",
+      "description": "5,000 years of monetary history, 7 chapters, 41 interactive lessons covering money, inflation, Bitcoin, wallets, transactions, mining, cryptography, and the Lightning Network. Includes hands-on demos with real SHA-256 hashing and real digital signatures running in your browser.",
+      "provider": {
+        "@type": "Organization",
+        "name": "A Bit Curious",
+        "url": "https://www.a-bit-curious.com/"
+      },
+      "isAccessibleForFree": true,
+      "educationalLevel": "Beginner",
+      "inLanguage": "en",
+      "teaches": [
+        "What money is and how it evolved over 5,000 years",
+        "How inflation and monetary debasement affect society",
+        "How Bitcoin works: blocks, mining, proof of work, difficulty",
+        "Public key cryptography, digital signatures, and seed phrases",
+        "How to use wallets, exchanges, and self-custody safely",
+        "The UTXO model and how Bitcoin transactions work",
+        "The Lightning Network and Bitcoin's upgrade history"
+      ],
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "courseWorkload": "PT6H"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "category": "Free"
+      }
+    }
+  ]
+}
+</script>
 <title>A ₿it Curious</title>
 <link rel="stylesheet" href="/styles.css"/>
 <style>
@@ -150,6 +201,17 @@
     border-left-color:var(--orange);
     font-weight:600;
     padding-left:18px;
+  }
+  .nav-item.visited{position:relative;}
+  .nav-item.visited::after{
+    content:'\2713';
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#4ade80;
+    font-size:11px;
+    opacity:0.7;
   }
   .nav-group-label{
     font-family:'Syne',sans-serif;
@@ -7016,8 +7078,12 @@
           <span id="hashRate" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">...</span>
         </div>
         <div class="flex justify-between text-xs">
+          <span style="color:var(--muted);">Fastest Fee</span>
+          <span id="feeRate" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">...</span>
+        </div>
+        <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Next Halving</span>
-          <span style="color:var(--orange-bright);font-family:'Space Mono',monospace;">~2028</span>
+          <span id="halvingCountdown" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">~2028</span>
         </div>
       </div>
     </div>
@@ -7076,6 +7142,79 @@ let btcPrice = 0;
 let btcChange = 0;
 let goldPrice = 0;
 let _scrollY = 0;
+
+// ═══════════════════════════════════════
+//   PERSISTENT PROGRESS (localStorage)
+// ═══════════════════════════════════════
+const PROGRESS_KEY = 'abc_progress_v1';
+let abcVisited = new Set();
+let abcCelebrated = false;
+let abcLastSection = null;
+try {
+  const saved = JSON.parse(localStorage.getItem(PROGRESS_KEY) || 'null');
+  if(saved){
+    abcVisited = new Set(saved.visited || []);
+    abcCelebrated = !!saved.celebrated;
+    abcLastSection = saved.last || null;
+  }
+} catch(e){ /* private browsing or storage disabled - progress just won't persist */ }
+let abcRoutingInitial = true;
+function saveProgress(){
+  try {
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify({visited: Array.from(abcVisited), celebrated: abcCelebrated, last: abcLastSection}));
+  } catch(e){}
+}
+function updateProgressUI(){
+  const total = sectionOrder.length;
+  const count = Math.min(abcVisited.size, total);
+  const pct = (count/total)*100;
+  const label = document.getElementById('progressLabel');
+  const bar = document.getElementById('progressBar');
+  if(label) label.textContent = count + '/' + total + ' explored';
+  if(bar){
+    bar.style.width = pct + '%';
+    bar.parentElement.setAttribute('aria-valuenow', Math.round(pct));
+  }
+  sectionOrder.forEach(function(sec){
+    const nav = document.getElementById('nav-' + sec);
+    if(nav) nav.classList.toggle('visited', abcVisited.has(sec));
+  });
+}
+function checkCompletion(){
+  if(abcCelebrated || abcVisited.size < sectionOrder.length) return;
+  abcCelebrated = true;
+  saveProgress();
+  showCompletionCard();
+}
+function showCompletionCard(){
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay open';
+  overlay.style.zIndex = '10001';
+  overlay.innerHTML = '<div class="modal-box" style="max-width:480px;text-align:center;">'
+    + '<div style="font-size:56px;margin-bottom:8px;">🎓</div>'
+    + '<div class="demo-title" style="font-size:26px;">Course Complete!</div>'
+    + '<div style="font-size:14px;color:var(--text2);line-height:1.7;margin:12px 0 20px;">You explored all ' + sectionOrder.length + ' lessons of A ₿it Curious. You now understand money and Bitcoin better than most people on the planet.</div>'
+    + '<div style="display:grid;gap:8px;">'
+    + '<button id="abcShareBtn" class="demo-btn demo-btn-orange">Share Your Achievement</button>'
+    + '<button id="abcCloseCardBtn" class="demo-btn demo-btn-ghost">Keep Exploring</button>'
+    + '</div></div>';
+  document.body.appendChild(overlay);
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) for(let k=0;k<25;k++) setTimeout(function(){spawnCoin();},k*70);
+  const shareText = 'I just completed A Bit Curious - the free interactive Bitcoin course. ' + sectionOrder.length + ' lessons, real cryptography demos, zero fluff.';
+  const shareUrl = 'https://www.a-bit-curious.com';
+  overlay.querySelector('#abcShareBtn').addEventListener('click', async function(){
+    if(navigator.share){
+      try { await navigator.share({title:'A Bit Curious', text:shareText, url:shareUrl}); } catch(e){}
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareText + ' ' + shareUrl);
+        this.textContent = 'Copied to clipboard!';
+      } catch(e){ this.textContent = shareText; }
+    }
+  });
+  overlay.querySelector('#abcCloseCardBtn').addEventListener('click', function(){ overlay.remove(); });
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) overlay.remove(); });
+}
 
 // Timers (stored so they can be cleaned up)
 const _timers = { ticker: null, stats: null, mining: null };
@@ -7322,15 +7461,28 @@ _timers.ticker = setInterval(() => { fetchBtcPrice(); fetchGoldPrice(); }, 30000
 // ═══════════════════════════════════════
 async function fetchLiveStats(){
   try {
-    // Block height
+    // Block height + halving countdown (halvings happen every 210,000 blocks)
     const tipRes = await fetch('https://mempool.space/api/blocks/tip/height');
-    const tipHeight = await tipRes.json();
-    document.getElementById('blockHeight').textContent = Number(tipHeight).toLocaleString();
+    const tipHeight = Number(await tipRes.json());
+    document.getElementById('blockHeight').textContent = tipHeight.toLocaleString();
+    const nextHalvingBlock = Math.ceil(tipHeight / 210000) * 210000;
+    const blocksLeft = nextHalvingBlock - tipHeight;
+    const daysLeft = Math.round(blocksLeft * 10 / 1440); // ~10 min per block
+    const hc = document.getElementById('halvingCountdown');
+    if(hc) hc.textContent = daysLeft > 365
+      ? '~' + (daysLeft/365).toFixed(1) + ' years'
+      : '~' + daysLeft.toLocaleString() + ' days';
 
     // Mempool size
     const mempoolRes = await fetch('https://mempool.space/api/mempool');
     const mempoolData = await mempoolRes.json();
     document.getElementById('mempoolTx').textContent = Number(mempoolData.count).toLocaleString();
+
+    // Recommended fees
+    const feeRes = await fetch('https://mempool.space/api/v1/fees/recommended');
+    const feeData = await feeRes.json();
+    const fr = document.getElementById('feeRate');
+    if(fr && feeData.fastestFee) fr.textContent = feeData.fastestFee + ' sat/vB';
 
     // Hash rate (from mining stats)
     const hashRes = await fetch('https://mempool.space/api/v1/mining/hashrate/3d');
@@ -7524,14 +7676,22 @@ function showSection(id){
   const dyk = document.getElementById('didYouKnow');
   if(dyk) dyk.textContent = didYouKnow[didYouKnowIndex];
 
-  // Update progress
-  const total = sectionOrder.length;
-  const pct = ((nextIdx+1)/total)*100;
-  document.getElementById('progressLabel').textContent = `${nextIdx+1}/${total}`;
-  document.getElementById('progressBar').style.width = `${pct}%`;
-  document.getElementById('progressBar').parentElement.setAttribute('aria-valuenow', Math.round(pct));
+  // Update persistent progress
+  abcVisited.add(id);
+  abcLastSection = id;
+  updateProgressUI();
+  saveProgress();
+  setTimeout(checkCompletion, 1500);
+
+  // Deep link: keep URL hash in sync (replace on initial/back-forward, push otherwise)
+  if(location.hash !== '#' + id){
+    if(abcRoutingInitial){ history.replaceState(null, '', '#' + id); }
+    else { history.pushState(null, '', '#' + id); }
+  }
+  abcRoutingInitial = false;
 
   // Update mobile bottom nav
+  const total = sectionOrder.length;
   const lbl = document.getElementById('mobile-section-label');
   if(lbl) lbl.textContent = sectionNames[id] || id;
   const prevBtn = document.getElementById('mob-prev-btn');
@@ -8436,7 +8596,7 @@ function getModalContent(section){
       <div id="entropyBox" style="height:200px;background:rgba(0,0,0,0.5);border:3px dashed var(--glass-border);border-radius:16px;cursor:crosshair;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:border-color .3s;">
         <div class="text-center" id="entropyPrompt">
           <div style="font-size:48px;margin-bottom:8px;">🖱️</div>
-          <div style="font-size:15px;color:var(--muted);font-family:'Syne',sans-serif;">Move your mouse here</div>
+          <div style="font-size:15px;color:var(--muted);font-family:'Syne',sans-serif;">Move your mouse or finger here</div>
         </div>
       </div>
       <div style="margin-top:14px;">
@@ -9642,7 +9802,14 @@ function collectEntropy(e){
 }
 modalInitFns.privatekeys = function(){
   entropyData=[];entropyCount=0;
-  document.getElementById('entropyBox')?.addEventListener('mousemove',collectEntropy);
+  const box = document.getElementById('entropyBox');
+  box?.addEventListener('mousemove',collectEntropy);
+  // Touch support: map finger movement to the same entropy collector
+  box?.addEventListener('touchmove',function(e){
+    e.preventDefault(); // keep the page from scrolling while collecting entropy
+    const t = e.touches[0];
+    if(t) collectEntropy({clientX:t.clientX, clientY:t.clientY});
+  },{passive:false});
 };
 
 // ── Public Keys ──
@@ -10930,9 +11097,24 @@ function renderChart(cvs, series, label, hoverIdx){
 }
 
 // ═══════════════════════════════════════
-//   INIT
+//   INIT (deep link routing)
 // ═══════════════════════════════════════
-showSection('welcome');
+// Back/forward navigation: re-render the section the hash points at
+window.addEventListener('popstate', function(){
+  const sec = location.hash.slice(1);
+  if(sectionOrder.includes(sec) && sec !== currentSection && !isTransitioning){
+    abcRoutingInitial = true; // hash already matches target - don't push a duplicate history entry
+    showSection(sec);
+  }
+});
+// First render: URL hash wins, then last visited lesson, then welcome
+(function(){
+  const fromHash = location.hash.slice(1);
+  const initial = sectionOrder.includes(fromHash) ? fromHash
+    : (abcLastSection && sectionOrder.includes(abcLastSection) ? abcLastSection : 'welcome');
+  currentSection = initial; // instant render, skip the transition animation on load
+  showSection(initial);
+})();
 
 // ── Bibliography reference link handler ──
 // Intercept clicks on [N] superscript links, switch to bibliography section, then scroll to ref
