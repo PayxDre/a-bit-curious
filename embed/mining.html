@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bitcoin Mining Simulator - A Bit Curious</title>
+<meta name="description" content="Mine a Bitcoin block with real SHA-256 hashing, right in your browser. Embeddable demo from A Bit Curious."/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{background:#0b0b18;color:#f5f5fa;font-family:'Inter',system-ui,sans-serif;padding:18px;min-height:100vh;}
+  .title{font-size:19px;font-weight:800;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+  .sub{font-size:12px;color:#7878a0;margin-bottom:16px;line-height:1.5;}
+  .card{padding:16px;border-radius:14px;background:rgba(0,0,0,0.3);border:1px solid rgba(245,158,11,0.2);margin-bottom:12px;}
+  .label{font-size:11px;font-weight:700;color:#f59e0b;letter-spacing:.06em;margin-bottom:8px;}
+  input[type=text]{width:100%;padding:11px 14px;border-radius:10px;font-size:16px;background:rgba(255,255,255,0.06);border:2px solid rgba(245,158,11,0.25);color:#f5f5fa;font-family:'Courier New',monospace;outline:none;}
+  input[type=text]:focus{border-color:#f59e0b;}
+  .hash{font-family:'Courier New',monospace;font-size:12px;word-break:break-all;padding:12px;border-radius:10px;background:rgba(0,0,0,0.5);border:1px solid rgba(245,158,11,0.2);color:#f59e0b;margin-top:10px;line-height:1.5;}
+  .row{display:flex;gap:8px;margin:10px 0;}
+  .diffbtn{flex:1;padding:9px;border-radius:9px;cursor:pointer;font-family:'Courier New',monospace;font-size:12px;font-weight:700;border:2px solid rgba(255,255,255,0.12);background:rgba(0,0,0,0.3);color:#b8b8d8;text-align:center;}
+  .diffbtn.active{border-color:#f59e0b;background:rgba(245,158,11,0.12);color:#f59e0b;}
+  .mine{width:100%;padding:13px;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;border:none;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;}
+  .stats{display:flex;justify-content:space-between;font-size:11px;color:#7878a0;font-family:'Courier New',monospace;margin-top:10px;}
+  .stats b{color:#f59e0b;font-weight:700;}
+  .bar{height:8px;border-radius:4px;background:rgba(255,255,255,0.06);overflow:hidden;margin-top:8px;}
+  .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#fbbf24);width:0%;transition:width .05s linear;}
+  .won{display:none;text-align:center;padding:14px;border-radius:12px;background:rgba(74,222,128,0.08);border:2px solid #4ade80;color:#4ade80;margin-top:10px;font-size:14px;font-weight:700;}
+  .credit{text-align:center;margin-top:14px;font-size:11px;}
+  .credit a{color:#f59e0b;text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+<div class="title">&#9935; Mine a Bitcoin Block - For Real</div>
+<div class="sub">This is not an animation. Your device is computing genuine SHA-256 hashes - the exact math Bitcoin miners run, just slower.</div>
+
+<div class="card">
+  <div class="label">BLOCK DATA</div>
+  <input type="text" id="data" value="Alice pays Bob 0.5 BTC"/>
+  <div class="label" style="margin-top:12px;">DIFFICULTY (leading zeros)</div>
+  <div class="row">
+    <div class="diffbtn" data-d="3">000</div>
+    <div class="diffbtn active" data-d="4">0000</div>
+    <div class="diffbtn" data-d="5">00000</div>
+  </div>
+  <button class="mine" id="mineBtn">&#9935; Mine</button>
+  <div class="stats"><span>Nonce: <b id="nonce">0</b></span><span><b id="rate">0</b> H/s</span><span><b id="time">0s</b></span></div>
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <div class="hash" id="hash">Press Mine to start hashing...</div>
+  <div class="won" id="won"></div>
+</div>
+
+<div class="credit">Interactive Bitcoin demos by <a href="https://www.a-bit-curious.com" target="_blank" rel="noopener">A &#8383;it Curious</a> - the free interactive Bitcoin course</div>
+
+<script>
+function sha256Hex(str){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const rotr=(x,n)=>(x>>>n)|(x<<(32-n));
+  const enc=new TextEncoder().encode(str);
+  const len=enc.length,bitLen=len*8;
+  const p=new Uint8Array(((len+8)>>6<<6)+64);
+  p.set(enc); p[len]=0x80;
+  const dv=new DataView(p.buffer);
+  dv.setUint32(p.length-8,Math.floor(bitLen/0x100000000));
+  dv.setUint32(p.length-4,bitLen>>>0);
+  let h0=0x6a09e667,h1=0xbb67ae85,h2=0x3c6ef372,h3=0xa54ff53a,h4=0x510e527f,h5=0x9b05688c,h6=0x1f83d9ab,h7=0x5be0cd19;
+  const w=new Array(64);
+  for(let off=0;off<p.length;off+=64){
+    for(let i=0;i<16;i++)w[i]=dv.getUint32(off+i*4);
+    for(let i=16;i<64;i++){
+      const s0=rotr(w[i-15],7)^rotr(w[i-15],18)^(w[i-15]>>>3);
+      const s1=rotr(w[i-2],17)^rotr(w[i-2],19)^(w[i-2]>>>10);
+      w[i]=(w[i-16]+s0+w[i-7]+s1)|0;
+    }
+    let a=h0,b=h1,c=h2,d=h3,e=h4,f=h5,g=h6,h=h7;
+    for(let i=0;i<64;i++){
+      const S1=rotr(e,6)^rotr(e,11)^rotr(e,25),ch=(e&f)^(~e&g),t1=(h+S1+ch+K[i]+w[i])|0;
+      const S0=rotr(a,2)^rotr(a,13)^rotr(a,22),maj=(a&b)^(a&c)^(b&c),t2=(S0+maj)|0;
+      h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;
+    }
+    h0=(h0+a)|0;h1=(h1+b)|0;h2=(h2+c)|0;h3=(h3+d)|0;h4=(h4+e)|0;h5=(h5+f)|0;h6=(h6+g)|0;h7=(h7+h)|0;
+  }
+  return [h0,h1,h2,h3,h4,h5,h6,h7].map(x=>(x>>>0).toString(16).padStart(8,'0')).join('');
+}
+const $=id=>document.getElementById(id);
+let mining=false,nonce=0,timer=null,diff=4;
+document.querySelectorAll('.diffbtn').forEach(b=>b.addEventListener('click',function(){
+  document.querySelectorAll('.diffbtn').forEach(x=>x.classList.remove('active'));
+  this.classList.add('active'); diff=parseInt(this.dataset.d); reset();
+}));
+$('data').addEventListener('input',reset);
+function reset(){
+  mining=false; if(timer){clearInterval(timer);timer=null;}
+  nonce=0; $('nonce').textContent='0'; $('fill').style.width='0%';
+  $('won').style.display='none'; $('mineBtn').textContent='⛏ Mine';
+  $('time').textContent='0s'; $('rate').textContent='0';
+}
+$('mineBtn').addEventListener('click',function(){
+  if(mining){reset();return;}
+  mining=true; this.textContent='⏹ Stop';
+  $('won').style.display='none';
+  const target='0'.repeat(diff), expected=Math.pow(16,diff), data=$('data').value;
+  const start=Date.now(); let lastN=nonce,lastT=start;
+  timer=setInterval(()=>{
+    let h='';
+    for(let i=0;i<600;i++){
+      nonce++;
+      h=sha256Hex(data+'|nonce:'+nonce);
+      if(h.startsWith(target)){
+        clearInterval(timer);timer=null;mining=false;
+        $('mineBtn').textContent='⛏ Mine again';
+        $('hash').innerHTML='<span style="color:#4ade80;font-weight:700;">'+h.slice(0,diff)+'</span>'+h.slice(diff);
+        $('nonce').textContent=nonce.toLocaleString();
+        $('fill').style.width='100%';
+        $('won').style.display='block';
+        $('won').textContent='🎉 Block found at nonce '+nonce.toLocaleString()+'! Anyone can verify this hash instantly - that is proof of work.';
+        return;
+      }
+    }
+    $('hash').innerHTML='<span style="color:#f87171;font-weight:700;">'+h.slice(0,diff)+'</span><span style="color:#7878a0;">'+h.slice(diff)+'</span>';
+    $('nonce').textContent=nonce.toLocaleString();
+    const now=Date.now();
+    $('time').textContent=((now-start)/1000).toFixed(1)+'s';
+    if(now-lastT>400){$('rate').textContent=Math.floor((nonce-lastN)/((now-lastT)/1000)).toLocaleString();lastN=nonce;lastT=now;}
+    $('fill').style.width=Math.min(99,(1-Math.pow(1-1/expected,nonce))*100)+'%';
+  },30);
+});
+</script>
+</body>
+</html>

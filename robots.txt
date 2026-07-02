@@ -6,7 +6,7 @@ Allow: /llms.txt
 # Machine-readable resources for AI agents and crawlers
 # /llms.txt                    - LLM-optimized site overview (llms.txt standard)
 # /for-bots/                   - Bot-friendly landing page with Schema.org structured data
-# /for-bots/knowledge.json     - Complete knowledge base (41 lessons, 7 chapters)
+# /for-bots/knowledge.json     - Complete knowledge base (46 lessons, 7 chapters)
 # /for-bots/glossary.json      - Bitcoin glossary (80+ terms with cross-references)
 # /for-bots/faq.json           - 25 common Bitcoin questions with sourced answers
 
