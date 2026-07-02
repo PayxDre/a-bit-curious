@@ -1364,8 +1364,10 @@
     <div class="nav-group-label" id="nav-group-start">IV. Getting Started</div>
     <button class="nav-item" data-section="wallets" id="nav-wallets" aria-describedby="nav-group-start">&#128188; Wallets</button>
     <button class="nav-item" data-section="exchanges" id="nav-exchanges" aria-describedby="nav-group-start">&#127974; Exchanges</button>
+    <button class="nav-item" data-section="firstbitcoin" id="nav-firstbitcoin" aria-describedby="nav-group-start">&#128640; Your First $10</button>
     <button class="nav-item" data-section="sending" id="nav-sending" aria-describedby="nav-group-start">&#128228; Sending</button>
     <button class="nav-item" data-section="security" id="nav-security" aria-describedby="nav-group-start">&#128272; Security</button>
+    <button class="nav-item" data-section="scamdrill" id="nav-scamdrill" aria-describedby="nav-group-start">&#127907; The Scam Drill</button>
 
     <div class="neon-divider mx-3"></div>
     <div class="nav-group-label" id="nav-group-system">V. How Bitcoin Works</div>
@@ -1742,6 +1744,54 @@
     </div>
 
     <!-- ════ SENDING ════ -->
+    <!-- ════ YOUR FIRST $10 ════ -->
+    <div class="section-content" id="sec-firstbitcoin">
+      <h2 class="section-title">&#128640; <span class="glow-text">Your First $10, Safely</span></h2>
+      <div class="section-subtitle">// From understanding Bitcoin to actually holding some - the training-wheels path  ·  ~6 min read</div>
+
+      <p class="body-text">Knowledge that never becomes action is trivia. This lesson is the bridge: a step-by-step path to owning your first ten dollars of bitcoin with essentially zero risk, and graduating to real self-custody only when you have practiced every move with amounts that do not matter.</p>
+
+      <div class="highlight-box" style="margin:24px 0;">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#128161; The ten-dollar philosophy</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.8;">Ten dollars buys you something no book can: real stakes, real buttons, real address anxiety, and real relief when it confirms. Every mistake you will ever make with Bitcoin, you want to make first with $10. Nobody has ever regretted practicing small.</div>
+      </div>
+
+      <!-- Wallet decision tree -->
+      <div class="demo-step active" style="margin-bottom:14px;">
+        <div class="demo-step-head"><div class="demo-num">1</div><div class="demo-step-label">Find your wallet type - three questions</div></div>
+        <div id="wdTree"></div>
+        <div id="wdResult" class="demo-result hidden" aria-live="polite"></div>
+      </div>
+
+      <!-- The path -->
+      <div class="demo-step" style="margin-bottom:14px;">
+        <div class="demo-step-head"><div class="demo-num">2</div><div class="demo-step-label">The path, in order</div></div>
+        <div style="display:grid;gap:10px;">
+          <div class="demo-card" style="padding:14px;"><div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">Buy $10 on a major regulated exchange</div><div style="font-size:12px;color:var(--text2);line-height:1.6;">Use a large, long-established, regulated exchange or payment app in your country. Boring and big beats new and exciting - you are optimizing for "still exists next year."</div></div>
+          <div class="demo-card" style="padding:14px;"><div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">Sit with it for a week</div><div style="font-size:12px;color:var(--text2);line-height:1.6;">Watch it move. Feel the volatility on ten dollars instead of ten thousand. This is emotional training, and it is free.</div></div>
+          <div class="demo-card" style="padding:14px;"><div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">Set up the wallet the quiz recommended</div><div style="font-size:12px;color:var(--text2);line-height:1.6;">Write the seed phrase on paper. Never photograph it, never type it into anything, never store it in a note app. You practiced key handling in the Lab - same rules, real stakes now.</div></div>
+          <div class="demo-card" style="padding:14px;"><div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">Withdraw your $10 to yourself</div><div style="font-size:12px;color:var(--text2);line-height:1.6;">This is the graduation exercise: your first real self-custody withdrawal. On-chain fees may eat a dollar or two of it - that lesson alone is worth the tuition. Many exchanges also support Lightning withdrawals, which cost pennies.</div></div>
+          <div class="demo-card" style="padding:14px;"><div style="font-size:13px;font-weight:700;color:var(--orange);margin-bottom:4px;">Only then, decide if you want more</div><div style="font-size:12px;color:var(--text2);line-height:1.6;">You now know the full loop: buy, hold, withdraw, custody. Whatever amount you choose from here, remember the rule from The Case Against Bitcoin: only what you can watch drop 70% without flinching.</div></div>
+        </div>
+      </div>
+
+      <!-- Withdrawal checklist -->
+      <div class="demo-step" style="margin-bottom:14px;">
+        <div class="demo-step-head"><div class="demo-num">3</div><div class="demo-step-label">The withdrawal checklist</div></div>
+        <div class="demo-desc" style="margin:0 0 10px;">Before any withdrawal, every time, forever:</div>
+        <div id="wdChecklist" style="display:grid;gap:8px;"></div>
+        <div id="wdChecklistDone" class="demo-desc" style="color:#4ade80;min-height:20px;" aria-live="polite"></div>
+      </div>
+
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">How does sending actually <span class="glow-text">work</span>?</div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Fees, confirmations, and why a Bitcoin payment is more like mailing gold than sending an email.</p>
+        <button class="btn-orange" data-section="sending" style="font-size:15px;padding:14px 32px;">Next: Sending Bitcoin &#128228; &rarr;</button>
+      </div>
+    </div>
+
     <div class="section-content" id="sec-sending">
       <h2 class="section-title">&#128228; <span class="glow-text">Sending Bitcoin</span></h2>
       <div class="section-subtitle">// Sending money anywhere in the world in minutes</div>
@@ -4917,6 +4967,36 @@
       </div>
     </div>
 
+    <!-- ════ THE SCAM DRILL ════ -->
+    <div class="section-content" id="sec-scamdrill">
+      <h2 class="section-title">&#127907; <span class="glow-text">The Scam Drill</span></h2>
+      <div class="section-subtitle">// The #1 way beginners lose bitcoin is not hacking. It is being asked nicely  ·  ~8 min drill</div>
+
+      <p class="body-text">Nobody breaks Bitcoin's cryptography. They break YOU - with urgency, authority, and greed. Billions of dollars are stolen every year through messages exactly like the ones below. Some of these are scams. Some are legitimate. Your job: tell them apart, before it costs you.</p>
+
+      <div id="scamGame"></div>
+      <div id="scamScore" class="demo-result hidden" aria-live="polite"></div>
+
+      <div class="highlight-box" style="margin:32px 0;">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#128274; The five red flags, forever</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.9;">
+          1. <strong>Anyone asking for your seed phrase is a thief.</strong> No exceptions, no support teams, no "validations."<br/>
+          2. <strong>Urgency is a weapon.</strong> "Act in 10 minutes or lose your funds" means it is a scam - real systems do not work that way.<br/>
+          3. <strong>Guaranteed returns are guaranteed theft.</strong> "Send 1, get 2 back" has stolen more bitcoin than every hack combined.<br/>
+          4. <strong>Support never contacts you first.</strong> Unsolicited DMs, calls, and texts from "support" are scripts read by thieves.<br/>
+          5. <strong>Verify addresses character by character.</strong> Clipboard malware swaps addresses as you paste. Check the first six and last six, every time.
+        </div>
+      </div>
+
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">Under the hood: <span class="glow-text">the network itself</span></div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You can use Bitcoin safely now. Time to understand the machine - starting with the network no one can switch off.</p>
+        <button class="btn-orange" data-section="network" style="font-size:15px;padding:14px 32px;">Next: The Bitcoin Network &#127760; &rarr;</button>
+      </div>
+    </div>
+
     <div class="section-content" id="sec-network">
       <h2 class="section-title">&#127760; <span class="glow-text">The Bitcoin Network</span></h2>
       <div class="section-subtitle">// A global web of computers with no boss</div>
@@ -7386,7 +7466,7 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','year1971','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','caseagainst','goldvsbtc','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','signetlab','consensus','lightning','toolate','perspective','finalexam','lore','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','year1971','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','caseagainst','goldvsbtc','adoption','wallets','exchanges','firstbitcoin','sending','security','scamdrill','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','signetlab','consensus','lightning','toolate','perspective','finalexam','lore','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', satoshi:'Who Is Satoshi?', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', year1971:'1971: The Year Money Broke', altcoins:'Bitcoin vs Other Cryptos', powvpos:'Proof of Work vs Proof of Stake', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
@@ -7394,7 +7474,7 @@ const sectionNames = {
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty', attackvectors:'Attack Vectors',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
-  signatures:'Digital Signatures', signetlab:'The Lab: Use Real Bitcoin', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', finalexam:'The Final Exam', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore',
+  signatures:'Digital Signatures', signetlab:'The Lab: Use Real Bitcoin', firstbitcoin:'Your First $10, Safely', scamdrill:'The Scam Drill', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', finalexam:'The Final Exam', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore',
   whitepaper:'The Whitepaper',
   tulips:'Bitcoin vs Tulip Mania',
   caseagainst:'The Case Against Bitcoin',
@@ -7778,6 +7858,8 @@ const teachingNotes = {
   deflation: `\uD83C\uDF93 Jeff Booth's thesis is the intellectual capstone of Chapter I. Technology = deflation. Fiat = inflation. The two are at war. Bitcoin lets deflation win.\n\n\uD83D\uDCA1 The key equation to drive home: 5% tech deflation + 7% money printing = "2% reported CPI." That single formula makes students see through the illusion.\n\n\uD83C\uDFAF After this section, students should feel genuine urgency to learn how Bitcoin works in practice.`,
   pizza: `\uD83C\uDF93 The pizza analogy is the single best response to "there aren't enough Bitcoin." It reframes the entire debate: the issue isn't quantity, it's dilution.\n\n\uD83D\uDCA1 The key line: "You can cut a pizza smaller, but you can't make more pizza." Let that land. Then show the numbers: 2.1 quadrillion sats. 262,000 per person.\n\n\uD83C\uDFAF Drive home that deflation under a gold standard powered the industrial revolution. "We need inflation" is propaganda, not economics.`,
   adoption: `\uD83C\uDF93 This section is the perfect response to "but nobody uses Bitcoin." Walk through each example slowly \u2014 the breadth of adoption shocks most beginners.\n\n\uD83D\uDCA1 Key insight: adoption is happening simultaneously at every level \u2014 individual (Cash App, Strike), merchant (Square), corporate treasury (Strategy), institutional (BlackRock IBIT), and sovereign (El Salvador). No technology in history has been adopted across all these layers this fast.\n\n\uD83C\uDFAF The "never sell" strategy via borrowing against BTC is a powerful reframe. It shifts the conversation from "when do I take profits?" to "why would I ever sell the hardest asset?"`,
+  firstbitcoin: `\uD83C\uDF93 The knowledge-to-action bridge. Assign the $10 exercise as literal homework - it converts more understanding than any lecture.\n\n\uD83D\uDCA1 The on-chain fee eating a dollar of their $10 is a feature: nobody forgets their first fee.\n\n\uD83C\uDFAF Rule to repeat: practice every move with amounts that do not matter before touching amounts that do.`,
+  scamdrill: `\uD83C\uDF93 Scams, not hacks, are how beginners actually lose coins. This drill outranks any technical lesson in practical value.\n\n\uD83D\uDCA1 The legitimate messages mixed in matter - students must learn that not everything is a scam, or they cannot function.\n\n\uD83C\uDFAF The five red flags should be recited from memory. Quiz them cold a week later.`,
   finalexam: `\uD83C\uDF93 Retrieval practice beats re-reading tenfold. Encourage students to attempt the exam BEFORE they feel ready.\n\n\uD83D\uDCA1 A failed attempt lists exactly which lessons to revisit - failure here is a study plan, not a verdict.\n\n\uD83C\uDFAF The OpenTimestamps step is a final hidden lesson: the certificate is proven by the same blockchain it certifies knowledge of.`,
   signetlab: `\uD83C\uDF93 The capstone of the technical chapters. Budget a full session: faucets and confirmations involve real waiting.\n\n\uD83D\uDCA1 The waiting IS a lesson - students feel block time viscerally instead of reading about it.\n\n\uD83C\uDFAF Drill the safety rule relentlessly: never type a real seed into any website. The lab builds the muscle memory with stakes of zero.`,
   caseagainst: `\uD83C\uDF93 The most important section for credibility. Do NOT rush to rebut - let the arguments stand at full strength first.\n\n\uD83D\uDCA1 Ask students which argument they find strongest BEFORE revealing the data. Volatility and irreversibility usually win.\n\n\uD83C\uDFAF The takeaway rule: never invest what you cannot watch drop 70%. Repeat it until it is boring.`,
@@ -8114,8 +8196,10 @@ const searchIndex = [
   {s:'adoption',c:'III. Bitcoin vs The World',k:'adoption el salvador etf blackrock institutions countries companies legal tender wall street'},
   {s:'wallets',c:'IV. Getting Started',k:'wallet hardware software ledger trezor cold storage hot custody store keep safe keys'},
   {s:'exchanges',c:'IV. Getting Started',k:'buy bitcoin exchange coinbase kraken cash app kyc how to purchase get dca dollar cost averaging invest'},
+  {s:'firstbitcoin',c:'IV. Getting Started',k:'first bitcoin ten dollars start small beginner buy first time which wallet choose decision practice withdrawal training'},
   {s:'sending',c:'IV. Getting Started',k:'send transfer fees mempool transaction confirm receive payment address'},
   {s:'security',c:'IV. Getting Started',k:'security multisig seed phrase backup protect safe scams phishing hacked stolen lost'},
+  {s:'scamdrill',c:'IV. Getting Started',k:'scam drill phishing fraud fake support seed phrase request giveaway doubler romance pig butchering clipboard malware red flags protect stolen'},
   {s:'network',c:'V. How Bitcoin Works',k:'network nodes peer to peer p2p decentralized uptime servers internet'},
   {s:'node',c:'V. How Bitcoin Works',k:'run node raspberry pi validate full node verify trustless'},
   {s:'mining',c:'V. How Bitcoin Works',k:'mining miners hash rate block reward halving asic energy electricity 21 million mined'},
@@ -8154,6 +8238,8 @@ const questionBank = [
   {q:'Can I try Bitcoin without risking money?', s:'signetlab'},
   {q:'Is Bitcoin just digital gold?', s:'goldvsbtc'},
   {q:'Where should I store my Bitcoin?', s:'wallets'},
+  {q:'How do I avoid Bitcoin scams?', s:'scamdrill'},
+  {q:'How do I actually get started?', s:'firstbitcoin'},
   {q:'Is Bitcoin a bubble like tulip mania?', s:'tulips'},
   {q:'Can the government ban Bitcoin?', s:'myths'},
   {q:'Can quantum computers break Bitcoin?', s:'quantum'},
@@ -12266,6 +12352,139 @@ document.getElementById('certDownloadBtn')?.addEventListener('click', function()
   a.href = document.getElementById('certCanvas').toDataURL('image/png');
   a.click();
 });
+
+// ── Wallet decision tree (Your First $10) ──
+(function(){
+  const tree = document.getElementById('wdTree');
+  if(!tree) return;
+  const QS = [
+    {q:'How much bitcoin will this wallet eventually hold?', opts:[{t:'Pocket money (under $100)', v:'small'},{t:'Real savings ($100 - $5,000)', v:'mid'},{t:'Serious wealth (over $5,000)', v:'large'}]},
+    {q:'How would you describe your comfort with technology?', opts:[{t:'Hold my hand, please', v:'easy'},{t:'I can follow instructions carefully', v:'ok'}]},
+    {q:'How often will you send or spend from it?', opts:[{t:'Regularly', v:'often'},{t:'Rarely - mostly holding', v:'rarely'}]}
+  ];
+  const answers = [];
+  function recommend(){
+    const [amt, tech, freq] = answers;
+    let title, body;
+    if(amt === 'small'){
+      title = 'A reputable custodial app (training wheels)';
+      body = 'For pocket money, a major regulated exchange app or a Lightning wallet is fine - the convenience outweighs the custody risk at this size. Graduate to self-custody as the amount grows.';
+    } else if(amt === 'large'){
+      title = 'A hardware wallet (cold storage)';
+      body = 'At this size, keys belong offline on a dedicated signing device from a well-known maker (Coldcard, Trezor, and similar - none of them sponsor this site). Above roughly $50k, research multisig or collaborative custody so no single mistake is fatal.';
+    } else if(freq === 'rarely' || tech === 'ok'){
+      title = 'A hardware wallet, or a well-known software wallet';
+      body = 'Real savings deserve real keys. A hardware wallet is the gold standard; a long-established open-source software wallet on a clean phone is an acceptable step while you learn. Never a browser extension full of tokens.';
+    } else {
+      title = 'A well-known open-source software wallet';
+      body = 'A mobile wallet with a strong reputation and years of history gives you true self-custody with an approachable interface. Write the seed on paper, and plan to add a hardware wallet as the balance grows.';
+    }
+    const r = document.getElementById('wdResult');
+    r.classList.remove('hidden');
+    r.className = 'demo-result demo-result-ok';
+    r.innerHTML = '<div class="demo-result-title" style="font-size:17px;">Recommended: ' + title + '</div><div class="demo-result-detail">' + body + '</div>'
+      + '<button class="demo-btn demo-btn-ghost" style="margin-top:12px;font-size:12px;" onclick="wdRestart()">Answer again</button>';
+  }
+  let step = 0;
+  function render(){
+    const q = QS[step];
+    tree.innerHTML = '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px;">' + q.q + '</div>'
+      + '<div style="display:grid;gap:8px;">' + q.opts.map(function(o, i){ return '<button class="demo-btn demo-btn-ghost wd-opt" data-i="' + i + '" style="font-size:13px;padding:12px 14px;text-align:left;justify-content:flex-start;">' + o.t + '</button>'; }).join('') + '</div>';
+    tree.querySelectorAll('.wd-opt').forEach(function(b){
+      b.addEventListener('click', function(){
+        answers[step] = q.opts[parseInt(b.dataset.i)].v;
+        step++;
+        if(step < QS.length) render(); else { tree.innerHTML = ''; recommend(); }
+      });
+    });
+  }
+  window.wdRestart = function(){
+    step = 0; answers.length = 0;
+    document.getElementById('wdResult').classList.add('hidden');
+    render();
+  };
+  render();
+})();
+// ── Withdrawal checklist ──
+(function(){
+  const box = document.getElementById('wdChecklist');
+  if(!box) return;
+  const items = [
+    'Send a SMALL test amount first, always',
+    'Verify the first 6 and last 6 characters of the address after pasting',
+    'Seed phrase is on paper or metal - never photographed, never typed online',
+    'One trusted person knows WHERE my backup lives (not what it says)',
+    'I am not rushing. Nobody is pressuring me to move fast'
+  ];
+  let done = 0;
+  items.forEach(function(t){
+    const d = document.createElement('div');
+    d.className = 'demo-coin';
+    d.innerHTML = '<div style="font-size:18px;" class="wdc-mark">⬜</div><div style="flex:1;font-size:13px;color:var(--text2);line-height:1.5;">' + t + '</div>';
+    d.addEventListener('click', function(){
+      const m = d.querySelector('.wdc-mark');
+      const checked = m.textContent === '✅';
+      m.textContent = checked ? '⬜' : '✅';
+      d.classList.toggle('selected', !checked);
+      done += checked ? -1 : 1;
+      document.getElementById('wdChecklistDone').textContent = done === items.length ? 'All five, every time, forever. That is the whole discipline.' : '';
+    });
+    box.appendChild(d);
+  });
+})();
+// ── Scam drill ──
+(function(){
+  const game = document.getElementById('scamGame');
+  if(!game) return;
+  const MSGS = [
+    {from:'SMS from +1 (838) 555-0147', msg:'Coinbase Alert: A withdrawal of 0.85 BTC has been initiated. If this was NOT you, call our fraud line immediately: +1-888-555-0122', scam:true, why:'Exchanges do not text phone numbers to call. The "fraud line" is the scammer, who will walk you into moving coins to a "safe" wallet they control. Urgency + phone number = scam.'},
+    {from:'Popup after a wallet app update', msg:'Security update complete. Please re-validate your wallet by entering your 12-word recovery phrase below.', scam:true, why:'Nothing legitimate EVER asks for the seed phrase. Not updates, not support, not validation. This is rule number one, and it has no exceptions.'},
+    {from:'Email from your exchange', msg:'New sign-in to your account from Chrome on Windows, Berlin, Germany. If this was you, no action is needed. If not, review your account security in the app.', scam:false, why:'Legitimate: purely informational, demands nothing, contains no link to click or number to call, and directs you to open the app YOURSELF. Still - go to the app directly, never through email links.'},
+    {from:'YouTube live stream: "Tesla Event 2026"', msg:'LIVE GIVEAWAY: Elon is doubling all Bitcoin sent to the address below for the next 20 minutes. Send 0.1 BTC, receive 0.2 BTC back. Verified by Tesla.', scam:true, why:'The giveaway doubler is the single most profitable Bitcoin scam in history. Nobody doubles money. The countdown exists to stop you from thinking.'},
+    {from:'X/Twitter DM', msg:'Hello, I am from Ledger Support. We detected an issue syncing your device. Please connect your wallet at ledger-sync-portal.com so we can resolve it for you.', scam:true, why:'Support never contacts you first, and wallet makers never need you to "connect" anywhere. The site harvests everything you enter.'},
+    {from:'Your wallet app changelog', msg:'Version 2.4: improved fee estimation for high-congestion periods, two bug fixes, updated translations.', scam:false, why:'Legitimate: a boring changelog inside the app you installed, asking for nothing. Boring is what real software sounds like.'},
+    {from:'Your own screen, mid-transaction', msg:'You copied bc1q7x2f...k9d4 from your exchange, but the address field shows bc1qm3rp...w2z8 after pasting.', scam:true, why:'Clipboard malware silently swaps addresses as you paste. This is why the checklist says verify first 6 and last 6 characters, every single time.'},
+    {from:'WhatsApp, after two weeks of friendly chat', msg:'You are so easy to talk to! By the way, my aunt runs a private crypto trading desk - I have made 40% monthly. I could get you access if you want, minimum is only $2,000.', scam:true, why:'This is pig butchering: weeks of manufactured friendship, then an "exclusive platform" that shows fake profits until you try to withdraw. It steals more per victim than any other scam.'}
+  ];
+  let idx = 0, right = 0;
+  MSGS.sort(function(){ return Math.random() - 0.5; });
+  MSGS.forEach(function(m, i){
+    const card = document.createElement('div');
+    card.className = 'demo-step' + (i === 0 ? ' active' : '');
+    card.innerHTML = '<div style="font-size:11px;color:var(--muted);font-family:Space Mono,monospace;margin-bottom:6px;">' + m.from + '</div>'
+      + '<div style="padding:14px;border-radius:10px;background:rgba(0,0,0,0.35);border:1px solid var(--glass-border);font-size:13px;color:var(--text);line-height:1.7;margin-bottom:12px;">' + m.msg + '</div>'
+      + '<div style="display:grid;gap:8px;grid-template-columns:1fr 1fr;">'
+      + '<button class="sd-opt demo-btn demo-btn-red" data-v="scam" style="font-size:13px;padding:12px;">🚨 Scam</button>'
+      + '<button class="sd-opt demo-btn demo-btn-green" data-v="legit" style="font-size:13px;padding:12px;">✅ Legitimate</button>'
+      + '</div>'
+      + '<div class="sd-why demo-desc hidden" style="padding:12px;border-radius:10px;margin-top:10px;line-height:1.65;"></div>';
+    card.querySelectorAll('.sd-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(btn.disabled) return;
+        const saidScam = btn.dataset.v === 'scam';
+        const correct = saidScam === m.scam;
+        if(correct) right++;
+        idx++;
+        card.querySelectorAll('.sd-opt').forEach(function(b){ b.disabled = true; b.style.cursor = 'default'; b.style.opacity = '0.55'; });
+        btn.style.opacity = '1';
+        const why = card.querySelector('.sd-why');
+        why.classList.remove('hidden');
+        why.style.background = correct ? 'rgba(74,222,128,0.06)' : 'rgba(248,113,113,0.06)';
+        why.style.border = '1px solid ' + (correct ? 'rgba(74,222,128,0.35)' : 'rgba(248,113,113,0.35)');
+        why.innerHTML = '<strong style="color:' + (correct ? '#4ade80' : '#f87171') + ';">' + (correct ? 'Correct - ' : 'Missed it - ') + (m.scam ? 'SCAM.' : 'LEGITIMATE.') + '</strong> ' + m.why;
+        if(idx === MSGS.length){
+          const sc = document.getElementById('scamScore');
+          sc.classList.remove('hidden');
+          sc.className = 'demo-result ' + (right >= 7 ? 'demo-result-ok' : 'demo-result-fail');
+          sc.innerHTML = '<div class="demo-result-title">' + right + ' / ' + MSGS.length + ' caught</div><div class="demo-result-detail">'
+            + (right === MSGS.length ? 'Perfect. You are harder to rob than 99% of the internet.' : right >= 7 ? 'Strong. Review the ones you missed - real scammers only need you to miss once.' : 'This drill just saved you real money. Read every explanation above, then run it again - in the wild there are no second chances.')
+            + '</div>';
+        }
+      });
+    });
+    game.appendChild(card);
+  });
+})();
 
 // ═══════════════════════════════════════
 //   INIT (deep link routing)
