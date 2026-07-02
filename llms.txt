@@ -1,6 +1,6 @@
 # A Bit Curious - The Interactive Guide to Bitcoin
 
-> Free, interactive Bitcoin education covering 5,000 years of monetary history through 41 visual lessons across 7 chapters. No account required. No tracking. CC BY-SA 4.0.
+> Free, interactive Bitcoin education covering 5,000 years of monetary history through 46 visual lessons across 7 chapters. No account required. No tracking. CC BY-SA 4.0.
 
 The site teaches money from first principles: why gold became money, why governments replaced it with paper, why the dollar loses value every year, what Bitcoin actually is, how its cryptography works, and why millions of people are adopting it. Every claim cites primary sources. Every section has interactive quizzes.
 
@@ -27,7 +27,7 @@ The site teaches money from first principles: why gold became money, why governm
 - [Who Is Satoshi Nakamoto?](https://www.a-bit-curious.com): Published the whitepaper Oct 31, 2008. Vanished April 2011. ~1.1M BTC in Satoshi-era wallets has never moved.
 - [The Bitcoin Whitepaper](https://www.a-bit-curious.com): 9 pages, 12 sections. The key innovation: combining existing ideas into a system where incentives align honest behavior.
 
-### III. Bitcoin vs The World (6 lessons)
+### III. Bitcoin vs The World (7 lessons)
 - [Bitcoin vs Other Cryptos](https://www.a-bit-curious.com): Bitcoin is the only major crypto with no known founder, no foundation control, and no pre-mine.
 - [Proof of Work vs Proof of Stake](https://www.a-bit-curious.com): Why proof of work provides security guarantees that proof of stake cannot.
 - [6 Bitcoin Myths Debunked](https://www.a-bit-curious.com): No value, only criminals, wastes energy, too volatile, governments will ban it, no yield - all debunked with data.
@@ -35,12 +35,15 @@ The site teaches money from first principles: why gold became money, why governm
 - [The Quantum Question](https://www.a-bit-curious.com): Breaking Bitcoin's ECDSA would require 2,500-4,000 stable logical qubits. Current best: 1,121 physical qubits.
 - [Bitcoin vs Gold](https://www.a-bit-curious.com): Side-by-side comparison of monetary properties. Live BTC/gold ratio. Executive Order 6102 history.
 - [Bitcoin Adoption](https://www.a-bit-curious.com): El Salvador legal tender. Spot ETFs approved. BlackRock IBIT fastest ETF to $10B. Market cap is 0.19% of global store-of-value assets.
+- [The Case Against Bitcoin](https://www.a-bit-curious.com/lessons/caseagainst/): The six strongest criticisms of Bitcoin presented at full strength - volatility, lost coins, energy, concentration, state risk, and pure-belief value - with honest data on each.
 
-### IV. Getting Started (4 lessons)
+### IV. Getting Started (6 lessons)
 - [Wallets](https://www.a-bit-curious.com): Hardware, software, and paper wallets. "Not your keys, not your coins."
 - [Exchanges](https://www.a-bit-curious.com): How to buy Bitcoin. Centralized vs decentralized. Dollar-cost averaging.
 - [Sending Bitcoin](https://www.a-bit-curious.com): Transactions, fees, mempool, replace-by-fee. Interactive fee estimator.
 - [Security](https://www.a-bit-curious.com): Multi-sig, passphrases, metal seed backups, address verification.
+- [Your First $10, Safely](https://www.a-bit-curious.com/lessons/firstbitcoin/): The knowledge-to-action bridge - wallet decision quiz, five-step training path, and withdrawal checklist.
+- [The Scam Drill](https://www.a-bit-curious.com/lessons/scamdrill/): Scored drill against the eight scams that actually steal bitcoin, from seed phishing to pig butchering.
 
 ### V. How Bitcoin Works (7 lessons)
 - [The Bitcoin Network](https://www.a-bit-curious.com): 50,000+ nodes, peer-to-peer, no central server, 99.99%+ uptime since 2009.
@@ -51,7 +54,7 @@ The site teaches money from first principles: why gold became money, why governm
 - [Difficulty Adjustment](https://www.a-bit-curious.com): Self-regulating every 2,016 blocks to maintain 10-minute intervals.
 - [Attack Vectors](https://www.a-bit-curious.com): 51% attacks, Sybil, double-spend, nation-state, software bugs - and why they fail.
 
-### VI. Transactions & Cryptography (9 lessons)
+### VI. Transactions & Cryptography (10 lessons)
 - [Transactions](https://www.a-bit-curious.com): Signed messages transferring value from inputs to outputs. Irreversible once confirmed.
 - [Outputs (UTXOs)](https://www.a-bit-curious.com): The fundamental unit of Bitcoin value. Your balance is the sum of spendable UTXOs.
 - [Locking Scripts](https://www.a-bit-curious.com): P2PKH, P2SH, P2WPKH, P2TR - how spending conditions are encoded.
@@ -61,8 +64,10 @@ The site teaches money from first principles: why gold became money, why governm
 - [Digital Signatures](https://www.a-bit-curious.com): ECDSA and Schnorr. Prove ownership without revealing the private key.
 - [Consensus & Upgrades](https://www.a-bit-curious.com): BIPs, soft forks, SegWit, Taproot, Blocksize War, current OP_CAT debate.
 - [Lightning Network](https://www.a-bit-curious.com): Layer 2 instant payments. Payment channels, HTLCs, onion routing.
+- [The Lab: Use Real Bitcoin](https://www.a-bit-curious.com/lessons/signetlab/): Generate real keys, receive coins from a Signet faucet, sign a genuine BIP 143 transaction in-browser, and watch it confirm on a live blockchain.
 
-### VII. The Future (5 lessons)
+### VII. The Future (6 lessons)
+- [The Final Exam](https://www.a-bit-curious.com/lessons/finalexam/): 25 questions across the course, 80% to pass, with a certificate whose SHA-256 ID can be anchored into Bitcoin via OpenTimestamps.
 - [Am I Too Late?](https://www.a-bit-curious.com): Bitcoin is 0.19% of global store-of-value assets. S-curve adoption at ~5% (internet in 1997).
 - [A Bit New Perspective](https://www.a-bit-curious.com): What happens when saving is rewarded again. Technology deflates, Bitcoin lets it.
 - [Bitcoin Lore & Milestones](https://www.a-bit-curious.com): Genesis block, Hal Finney, Bitcoin Faucet, HODL, lost coins, the 184B bug.
@@ -70,7 +75,7 @@ The site teaches money from first principles: why gold became money, why governm
 
 ## Machine-readable data
 
-- [knowledge.json](https://www.a-bit-curious.com/for-bots/knowledge.json): All 41 lessons with key facts, chapters, categories, and source references
+- [knowledge.json](https://www.a-bit-curious.com/for-bots/knowledge.json): All 46 lessons with key facts, chapters, categories, and source references
 - [glossary.json](https://www.a-bit-curious.com/for-bots/glossary.json): 80+ Bitcoin terms with definitions, categories, and cross-references
 - [faq.json](https://www.a-bit-curious.com/for-bots/faq.json): 25 common Bitcoin questions with sourced answers
 - [Bot landing page](https://www.a-bit-curious.com/for-bots/): Resource index with Schema.org structured data

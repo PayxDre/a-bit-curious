@@ -16,3 +16,7 @@ jobs:
           node-version: 20
       - name: Extract and check inline JavaScript
         run: python3 scripts/check-js.py
+      - name: Lesson SEO pages in sync with course
+        run: |
+          python3 scripts/gen-seo-pages.py
+          git diff --exit-code lessons/ sitemap.xml
