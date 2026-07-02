@@ -1386,6 +1386,7 @@
     <button class="nav-item" data-section="privatekeys" id="nav-privatekeys" aria-describedby="nav-group-crypto">&#128374; Private Keys</button>
     <button class="nav-item" data-section="publickeys" id="nav-publickeys" aria-describedby="nav-group-crypto">&#128226; Public Keys</button>
     <button class="nav-item" data-section="signatures" id="nav-signatures" aria-describedby="nav-group-crypto">&#9997;&#65039; Digital Signatures</button>
+    <button class="nav-item" data-section="signetlab" id="nav-signetlab" aria-describedby="nav-group-crypto">&#129514; The Lab: Real Bitcoin</button>
     <button class="nav-item" data-section="consensus" id="nav-consensus" aria-describedby="nav-group-crypto">&#9878;&#65039; Consensus &amp; Upgrades</button>
     <button class="nav-item" data-section="lightning" id="nav-lightning" aria-describedby="nav-group-crypto">&#9889; Lightning Network</button>
 
@@ -5984,6 +5985,86 @@
     </div>
 
 
+    <!-- ════ THE SIGNET LAB ════ -->
+    <div class="section-content" id="sec-signetlab">
+      <h2 class="section-title">&#129514; <span class="glow-text">The Lab: Use Real Bitcoin</span></h2>
+      <div class="section-subtitle">// Not a simulation. A real wallet, real coins, a real blockchain  ·  ~10 min hands-on</div>
+
+      <p class="body-text">Everything you have learned so far, you are now going to <em>do</em>. In the next ten minutes you will generate a real Bitcoin key pair, receive real coins, sign a real transaction with real ECDSA cryptography running in your browser, broadcast it to a live network, and watch a real miner seal it into a block that anyone on Earth can verify.</p>
+
+      <p class="body-text">The network is <strong style="color:var(--orange);">Signet</strong>, Bitcoin's official test network. It runs the same software, the same cryptography, and the same rules as Bitcoin - but its coins are free and worthless by design. That makes it the perfect gym: real weights, zero risk.</p>
+
+      <div class="highlight-box" style="border-color:rgba(248,113,113,0.4);margin:24px 0;">
+        <div class="text-sm font-bold mb-2" style="color:#f87171;">&#9888;&#65039; The two rules of the lab</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.8;">
+          1. Test coins only. The wallet you create here is for Signet. <strong>Never send real bitcoin to it.</strong><br/>
+          2. This page generates keys inside your browser and never transmits them - there is no server. But the habit matters more than the fact: <strong style="color:#f87171;">never type a real seed phrase or private key into any website. Ever. Including this one.</strong>
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="demo-step active" style="margin-bottom:14px;">
+        <div class="demo-step-head"><div class="demo-num">1</div><div class="demo-step-label">Create a real wallet</div></div>
+        <div class="demo-desc" style="margin:0 0 12px;">One click runs the full derivation you learned in Chapter VI: 256 random bits, secp256k1 point multiplication, SHA-256, RIPEMD-160, bech32. All of it in your browser, all of it real.</div>
+        <button id="slCreateBtn" class="demo-btn demo-btn-orange">&#128273; Generate my real key pair</button>
+        <div id="slWalletBox" class="hidden">
+          <div style="font-size:11px;color:#4ade80;font-weight:700;font-family:Syne,sans-serif;margin-bottom:4px;">YOUR SIGNET ADDRESS (safe to share)</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div class="demo-hash" id="slAddr" style="flex:1;font-size:12px;"></div>
+            <button id="slCopyBtn" class="demo-btn demo-btn-ghost" style="width:auto;padding:10px 16px;font-size:12px;">Copy</button>
+          </div>
+          <div style="font-size:11px;color:#f87171;font-weight:700;font-family:Syne,sans-serif;margin:10px 0 4px;">YOUR PRIVATE KEY</div>
+          <div class="demo-hash" id="slPrivReveal" style="font-size:11px;cursor:pointer;color:#f87171;">(tap to reveal - never do this with real bitcoin)</div>
+          <div style="margin-top:10px;"><button id="slResetBtn" style="background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;">Discard this wallet and start over</button></div>
+        </div>
+        <div id="slCreateStatus" class="demo-desc" aria-live="polite"></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="demo-step hidden" id="slStep2" style="margin-bottom:14px;">
+        <div class="demo-step-head"><div class="demo-num">2</div><div class="demo-step-label">Receive real coins</div></div>
+        <div class="demo-desc" style="margin:0 0 12px;">Copy your address above and paste it into a faucet - a site that gives away free Signet coins. This is a real payment from a stranger's wallet to yours.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+          <a href="https://signetfaucet.com" target="_blank" rel="noopener" class="demo-btn demo-btn-ghost" style="flex:1;text-decoration:none;font-size:13px;min-width:140px;">signetfaucet.com &#8599;</a>
+          <a href="https://alt.signetfaucet.com" target="_blank" rel="noopener" class="demo-btn demo-btn-ghost" style="flex:1;text-decoration:none;font-size:13px;min-width:140px;">alt.signetfaucet.com &#8599;</a>
+        </div>
+        <button id="slCheckBtn" class="demo-btn demo-btn-orange">&#128269; Check my balance on the real chain</button>
+        <div id="slBalStatus" class="demo-desc" style="line-height:1.7;" aria-live="polite"></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="demo-step hidden" id="slStep3" style="margin-bottom:14px;">
+        <div class="demo-step-head"><div class="demo-num">3</div><div class="demo-step-label">Sign and broadcast a real transaction</div></div>
+        <div class="demo-desc" style="margin:0 0 12px;">This spends your coins back to your own address (minus a real miner fee), exactly like the coin picker demo taught - except this time the signature is real ECDSA, the sighash is real BIP 143, and the network will actually verify it.</div>
+        <button id="slSendBtn" class="demo-btn demo-btn-orange">&#128228; Sign with my key and broadcast</button>
+        <div id="slSendStatus" class="demo-desc" style="line-height:1.7;" aria-live="polite"></div>
+        <div id="slTxLink" class="demo-desc" style="font-size:11px;"></div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="demo-step hidden" id="slStep4" style="margin-bottom:14px;">
+        <div class="demo-step-head"><div class="demo-num">4</div><div class="demo-step-label">Watch a miner confirm it</div></div>
+        <div class="demo-desc" style="margin:0 0 12px;">Signet blocks arrive roughly every 10 minutes, just like Bitcoin. When a miner includes your transaction, it becomes permanent history.</div>
+        <button id="slConfirmBtn" class="demo-btn demo-btn-green">&#9203; Has my transaction confirmed?</button>
+        <div id="slConfirmStatus" class="demo-desc" style="line-height:1.7;" aria-live="polite"></div>
+      </div>
+
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#127891; What you just did</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.8;">
+          You held a private key, received a UTXO, built a transaction that consumed it and created a new one, signed it with elliptic curve cryptography, paid a miner a fee, and got your payment sealed into a block by proof of work. That is the entire Bitcoin system, end to end, operated by you. Moving real bitcoin works exactly the same way - the only differences are the network name and the stakes.
+        </div>
+      </div>
+
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">Who decides the rules you just followed?</div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Your transaction obeyed rules no company wrote and no government passed. Time to see how a leaderless network agrees on anything - and how it upgrades without breaking.</p>
+        <button class="btn-orange" data-section="consensus" style="font-size:15px;padding:14px 32px;">Next: Consensus &amp; Upgrades &#9878;&#65039; &rarr;</button>
+      </div>
+    </div>
+
     <!-- ════ CONSENSUS & UPGRADES ════ -->
     <div class="section-content" id="sec-consensus">
       <h2 class="section-title">&#9878;&#65039; <span class="glow-text">Consensus &amp; Upgrades</span></h2>
@@ -7248,7 +7329,7 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','year1971','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','caseagainst','goldvsbtc','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','consensus','lightning','toolate','perspective','lore','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','year1971','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','caseagainst','goldvsbtc','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','signetlab','consensus','lightning','toolate','perspective','lore','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', satoshi:'Who Is Satoshi?', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', year1971:'1971: The Year Money Broke', altcoins:'Bitcoin vs Other Cryptos', powvpos:'Proof of Work vs Proof of Stake', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
@@ -7256,7 +7337,7 @@ const sectionNames = {
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty', attackvectors:'Attack Vectors',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
-  signatures:'Digital Signatures', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore',
+  signatures:'Digital Signatures', signetlab:'The Lab: Use Real Bitcoin', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore',
   whitepaper:'The Whitepaper',
   tulips:'Bitcoin vs Tulip Mania',
   caseagainst:'The Case Against Bitcoin',
@@ -7640,6 +7721,7 @@ const teachingNotes = {
   deflation: `\uD83C\uDF93 Jeff Booth's thesis is the intellectual capstone of Chapter I. Technology = deflation. Fiat = inflation. The two are at war. Bitcoin lets deflation win.\n\n\uD83D\uDCA1 The key equation to drive home: 5% tech deflation + 7% money printing = "2% reported CPI." That single formula makes students see through the illusion.\n\n\uD83C\uDFAF After this section, students should feel genuine urgency to learn how Bitcoin works in practice.`,
   pizza: `\uD83C\uDF93 The pizza analogy is the single best response to "there aren't enough Bitcoin." It reframes the entire debate: the issue isn't quantity, it's dilution.\n\n\uD83D\uDCA1 The key line: "You can cut a pizza smaller, but you can't make more pizza." Let that land. Then show the numbers: 2.1 quadrillion sats. 262,000 per person.\n\n\uD83C\uDFAF Drive home that deflation under a gold standard powered the industrial revolution. "We need inflation" is propaganda, not economics.`,
   adoption: `\uD83C\uDF93 This section is the perfect response to "but nobody uses Bitcoin." Walk through each example slowly \u2014 the breadth of adoption shocks most beginners.\n\n\uD83D\uDCA1 Key insight: adoption is happening simultaneously at every level \u2014 individual (Cash App, Strike), merchant (Square), corporate treasury (Strategy), institutional (BlackRock IBIT), and sovereign (El Salvador). No technology in history has been adopted across all these layers this fast.\n\n\uD83C\uDFAF The "never sell" strategy via borrowing against BTC is a powerful reframe. It shifts the conversation from "when do I take profits?" to "why would I ever sell the hardest asset?"`,
+  signetlab: `\uD83C\uDF93 The capstone of the technical chapters. Budget a full session: faucets and confirmations involve real waiting.\n\n\uD83D\uDCA1 The waiting IS a lesson - students feel block time viscerally instead of reading about it.\n\n\uD83C\uDFAF Drill the safety rule relentlessly: never type a real seed into any website. The lab builds the muscle memory with stakes of zero.`,
   caseagainst: `\uD83C\uDF93 The most important section for credibility. Do NOT rush to rebut - let the arguments stand at full strength first.\n\n\uD83D\uDCA1 Ask students which argument they find strongest BEFORE revealing the data. Volatility and irreversibility usually win.\n\n\uD83C\uDFAF The takeaway rule: never invest what you cannot watch drop 70%. Repeat it until it is boring.`,
   myths: `\uD83C\uDF93 Students arrive with these myths pre-loaded from media. Don't dismiss them \u2014 acknowledge them, then systematically dismantle them with facts.\n\n\uD83D\uDCA1 The pattern observation at the end is powerful: every myth follows the same lazy template. Once students see the pattern, they become immune to new myths.\n\n\uD83C\uDFAF The myth-buster interactive lesson lets students try to "attack" Bitcoin and see why each attack fails. Very engaging.`,
   wallets: `\ud83c\udf93 A great analogy: a wallet is like a keychain, not a piggy bank. It holds the KEYS to your money, not the money itself.\n\n\ud83d\udca1 Tip: Start with the wallet generator below to make it concrete.`,
@@ -7990,6 +8072,7 @@ const searchIndex = [
   {s:'privatekeys',c:'VI. Transactions & Cryptography',k:'private key secret 256 bit seed phrase 12 words 24 words backup'},
   {s:'publickeys',c:'VI. Transactions & Cryptography',k:'public key elliptic curve secp256k1 derive'},
   {s:'signatures',c:'VI. Transactions & Cryptography',k:'signature ecdsa schnorr sign verify ownership prove'},
+  {s:'signetlab',c:'VI. Transactions & Cryptography',k:'lab signet real bitcoin practice testnet test network faucet hands on try broadcast real transaction send receive wallet generate key practice safely'},
   {s:'consensus',c:'VI. Transactions & Cryptography',k:'consensus upgrades bip soft fork segwit taproot blocksize war governance rules change vote'},
   {s:'lightning',c:'VI. Transactions & Cryptography',k:'lightning network layer 2 instant payments fast cheap channels coffee remittance'},
   {s:'toolate',c:'VII. The Future',k:'too late buy now price prediction market cap early s curve adoption invest worth millionaire'},
@@ -8009,6 +8092,7 @@ const questionBank = [
   {q:'What happened in 1971?', s:'year1971'},
   {q:"Doesn't Bitcoin waste energy?", s:'myths'},
   {q:'How does mining actually work?', s:'mining'},
+  {q:'Can I try Bitcoin without risking money?', s:'signetlab'},
   {q:'Is Bitcoin just digital gold?', s:'goldvsbtc'},
   {q:'Where should I store my Bitcoin?', s:'wallets'},
   {q:'Is Bitcoin a bubble like tulip mania?', s:'tulips'},
@@ -11488,6 +11572,495 @@ function renderChart(cvs, series, label, hoverIdx){
     c.fillText(valStr, ttx + 10, tty + 34);
   }
 }
+
+// ── SigLab: real Bitcoin crypto for the Signet lab ──
+// Every function verified byte-for-byte against @noble/secp256k1 and bitcoinjs-lib.
+const SigLab = (function(){
+// Pure-JS Bitcoin crypto for the Signet lab. No dependencies.
+// SHA-256 (bytes), HMAC-SHA256, RIPEMD-160, secp256k1 ECDSA (RFC 6979, low-s),
+// bech32 (BIP 173), BIP 143 P2WPKH sighash, and transaction serialization.
+
+// ── SHA-256 over bytes ──
+function sha256Bytes(bytes){
+  const K = [0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const rotr = (x,n) => (x>>>n) | (x<<(32-n));
+  let h0=0x6a09e667,h1=0xbb67ae85,h2=0x3c6ef372,h3=0xa54ff53a,h4=0x510e527f,h5=0x9b05688c,h6=0x1f83d9ab,h7=0x5be0cd19;
+  const len = bytes.length;
+  const bitLen = len * 8;
+  const padded = new Uint8Array(((len + 8) >> 6 << 6) + 64);
+  padded.set(bytes);
+  padded[len] = 0x80;
+  const dv = new DataView(padded.buffer);
+  dv.setUint32(padded.length - 8, Math.floor(bitLen / 0x100000000));
+  dv.setUint32(padded.length - 4, bitLen >>> 0);
+  const w = new Array(64);
+  for(let off = 0; off < padded.length; off += 64){
+    for(let i = 0; i < 16; i++) w[i] = dv.getUint32(off + i*4);
+    for(let i = 16; i < 64; i++){
+      const s0 = rotr(w[i-15],7) ^ rotr(w[i-15],18) ^ (w[i-15]>>>3);
+      const s1 = rotr(w[i-2],17) ^ rotr(w[i-2],19) ^ (w[i-2]>>>10);
+      w[i] = (w[i-16] + s0 + w[i-7] + s1) | 0;
+    }
+    let a=h0,b=h1,c=h2,d=h3,e=h4,f=h5,g=h6,h=h7;
+    for(let i = 0; i < 64; i++){
+      const S1 = rotr(e,6) ^ rotr(e,11) ^ rotr(e,25);
+      const ch = (e & f) ^ (~e & g);
+      const t1 = (h + S1 + ch + K[i] + w[i]) | 0;
+      const S0 = rotr(a,2) ^ rotr(a,13) ^ rotr(a,22);
+      const maj = (a & b) ^ (a & c) ^ (b & c);
+      const t2 = (S0 + maj) | 0;
+      h=g; g=f; f=e; e=(d + t1)|0; d=c; c=b; b=a; a=(t1 + t2)|0;
+    }
+    h0=(h0+a)|0; h1=(h1+b)|0; h2=(h2+c)|0; h3=(h3+d)|0; h4=(h4+e)|0; h5=(h5+f)|0; h6=(h6+g)|0; h7=(h7+h)|0;
+  }
+  const out = new Uint8Array(32);
+  const odv = new DataView(out.buffer);
+  [h0,h1,h2,h3,h4,h5,h6,h7].forEach((x,i) => odv.setUint32(i*4, x >>> 0));
+  return out;
+}
+function dsha256(bytes){ return sha256Bytes(sha256Bytes(bytes)); }
+
+// ── HMAC-SHA256 ──
+function hmacSha256(key, msg){
+  if(key.length > 64) key = sha256Bytes(key);
+  const ipad = new Uint8Array(64 + msg.length);
+  const opad = new Uint8Array(64 + 32);
+  for(let i = 0; i < 64; i++){
+    ipad[i] = (key[i] || 0) ^ 0x36;
+    opad[i] = (key[i] || 0) ^ 0x5c;
+  }
+  ipad.set(msg, 64);
+  opad.set(sha256Bytes(ipad), 64);
+  return sha256Bytes(opad);
+}
+
+// ── RIPEMD-160 ──
+function ripemd160(bytes){
+  const rl = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,7,4,13,1,10,6,15,3,12,0,9,5,2,14,11,8,3,10,14,4,9,15,8,1,2,7,0,6,13,11,5,12,1,9,11,10,0,8,12,4,13,3,7,15,14,5,6,2,4,0,5,9,7,12,2,10,14,1,3,8,11,6,15,13];
+  const rr = [5,14,7,0,9,2,11,4,13,6,15,8,1,10,3,12,6,11,3,7,0,13,5,10,14,15,8,12,4,9,1,2,15,5,1,3,7,14,6,9,11,8,12,2,10,0,4,13,8,6,4,1,3,11,15,0,5,12,2,13,9,7,10,14,12,15,10,4,1,5,8,7,6,2,13,14,0,3,9,11];
+  const sl = [11,14,15,12,5,8,7,9,11,13,14,15,6,7,9,8,7,6,8,13,11,9,7,15,7,12,15,9,11,7,13,12,11,13,6,7,14,9,13,15,14,8,13,6,5,12,7,5,11,12,14,15,14,15,9,8,9,14,5,6,8,6,5,12,9,15,5,11,6,8,13,12,5,12,13,14,11,8,5,6];
+  const sr = [8,9,9,11,13,15,15,5,7,7,8,11,14,14,12,6,9,13,15,7,12,8,9,11,7,7,12,7,6,15,13,11,9,7,15,11,8,6,6,14,12,13,5,14,13,13,7,5,15,5,8,11,14,14,6,14,6,9,12,9,12,5,15,8,8,5,12,9,12,5,14,6,8,13,6,5,15,13,11,11];
+  const rotl = (x,n) => (x<<n) | (x>>>(32-n));
+  function f(j,x,y,z){
+    if(j < 16) return x ^ y ^ z;
+    if(j < 32) return (x & y) | (~x & z);
+    if(j < 48) return (x | ~y) ^ z;
+    if(j < 64) return (x & z) | (y & ~z);
+    return x ^ (y | ~z);
+  }
+  const KL = [0x00000000,0x5a827999,0x6ed9eba1,0x8f1bbcdc,0xa953fd4e];
+  const KR = [0x50a28be6,0x5c4dd124,0x6d703ef3,0x7a6d76e9,0x00000000];
+  let h0=0x67452301,h1=0xefcdab89,h2=0x98badcfe,h3=0x10325476,h4=0xc3d2e1f0;
+  const len = bytes.length;
+  const padded = new Uint8Array(((len + 8) >> 6 << 6) + 64);
+  padded.set(bytes);
+  padded[len] = 0x80;
+  const bitLen = len * 8;
+  const dv = new DataView(padded.buffer);
+  // RIPEMD-160 uses little-endian length
+  dv.setUint32(padded.length - 8, bitLen >>> 0, true);
+  dv.setUint32(padded.length - 4, Math.floor(bitLen / 0x100000000), true);
+  for(let off = 0; off < padded.length; off += 64){
+    const X = new Array(16);
+    for(let i = 0; i < 16; i++) X[i] = dv.getUint32(off + i*4, true);
+    let al=h0,bl=h1,cl=h2,dl=h3,el=h4;
+    let ar=h0,br=h1,cr=h2,dr=h3,er=h4;
+    for(let j = 0; j < 80; j++){
+      const round = Math.floor(j / 16);
+      let t = (al + f(j, bl, cl, dl) + X[rl[j]] + KL[round]) | 0;
+      t = (rotl(t, sl[j]) + el) | 0;
+      al = el; el = dl; dl = rotl(cl, 10); cl = bl; bl = t;
+      t = (ar + f(79 - j, br, cr, dr) + X[rr[j]] + KR[round]) | 0;
+      t = (rotl(t, sr[j]) + er) | 0;
+      ar = er; er = dr; dr = rotl(cr, 10); cr = br; br = t;
+    }
+    const t = (h1 + cl + dr) | 0;
+    h1 = (h2 + dl + er) | 0;
+    h2 = (h3 + el + ar) | 0;
+    h3 = (h4 + al + br) | 0;
+    h4 = (h0 + bl + cr) | 0;
+    h0 = t;
+  }
+  const out = new Uint8Array(20);
+  const odv = new DataView(out.buffer);
+  [h0,h1,h2,h3,h4].forEach((x,i) => odv.setUint32(i*4, x >>> 0, true));
+  return out;
+}
+function hash160(bytes){ return ripemd160(sha256Bytes(bytes)); }
+
+// ── byte helpers ──
+function bytesToHex(b){ return Array.from(b).map(x => x.toString(16).padStart(2,'0')).join(''); }
+function hexToBytes(h){ const out = new Uint8Array(h.length/2); for(let i = 0; i < out.length; i++) out[i] = parseInt(h.substr(i*2,2),16); return out; }
+function bytesToBig(b){ let n = 0n; for(const x of b) n = (n << 8n) | BigInt(x); return n; }
+function bigToBytes32(n){ const out = new Uint8Array(32); for(let i = 31; i >= 0; i--){ out[i] = Number(n & 0xffn); n >>= 8n; } return out; }
+function concatBytes(...arrs){
+  const total = arrs.reduce((s,a) => s + a.length, 0);
+  const out = new Uint8Array(total);
+  let off = 0;
+  for(const a of arrs){ out.set(a, off); off += a.length; }
+  return out;
+}
+
+// ── secp256k1 ──
+const SECP = {
+  p: 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2Fn,
+  n: 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141n,
+  gx: 0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798n,
+  gy: 0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8n
+};
+function mod(a, m){ const r = a % m; return r < 0n ? r + m : r; }
+function modInv(a, m){
+  let [old_r, r] = [mod(a, m), m];
+  let [old_s, s] = [1n, 0n];
+  while(r !== 0n){
+    const q = old_r / r;
+    [old_r, r] = [r, old_r - q * r];
+    [old_s, s] = [s, old_s - q * s];
+  }
+  return mod(old_s, m);
+}
+// Affine point ops; null = point at infinity
+function pointAdd(P, Q){
+  if(!P) return Q;
+  if(!Q) return P;
+  const p = SECP.p;
+  if(P[0] === Q[0]){
+    if(mod(P[1] + Q[1], p) === 0n) return null;
+    // double
+    const lam = mod(3n * P[0] * P[0] * modInv(2n * P[1], p), p);
+    const x = mod(lam * lam - 2n * P[0], p);
+    return [x, mod(lam * (P[0] - x) - P[1], p)];
+  }
+  const lam = mod((Q[1] - P[1]) * modInv(Q[0] - P[0], p), p);
+  const x = mod(lam * lam - P[0] - Q[0], p);
+  return [x, mod(lam * (P[0] - x) - P[1], p)];
+}
+function pointMul(k, P){
+  let R = null, A = P;
+  while(k > 0n){
+    if(k & 1n) R = pointAdd(R, A);
+    A = pointAdd(A, A);
+    k >>= 1n;
+  }
+  return R;
+}
+function pubkeyFromPriv(privBytes){
+  const d = bytesToBig(privBytes);
+  const P = pointMul(d, [SECP.gx, SECP.gy]);
+  const prefix = (P[1] & 1n) ? 0x03 : 0x02;
+  return concatBytes(new Uint8Array([prefix]), bigToBytes32(P[0]));
+}
+// RFC 6979 deterministic nonce
+function rfc6979k(privBytes, hashBytes){
+  const n = SECP.n;
+  const h1 = mod(bytesToBig(hashBytes), n);
+  const x = privBytes;
+  const hb = bigToBytes32(h1);
+  let V = new Uint8Array(32).fill(1);
+  let K = new Uint8Array(32).fill(0);
+  K = hmacSha256(K, concatBytes(V, new Uint8Array([0]), x, hb));
+  V = hmacSha256(K, V);
+  K = hmacSha256(K, concatBytes(V, new Uint8Array([1]), x, hb));
+  V = hmacSha256(K, V);
+  while(true){
+    V = hmacSha256(K, V);
+    const k = bytesToBig(V);
+    if(k >= 1n && k < n) return k;
+    K = hmacSha256(K, concatBytes(V, new Uint8Array([0])));
+    V = hmacSha256(K, V);
+  }
+}
+function ecdsaSign(privBytes, hashBytes){
+  const n = SECP.n;
+  const d = bytesToBig(privBytes);
+  const z = mod(bytesToBig(hashBytes), n);
+  let k = rfc6979k(privBytes, hashBytes);
+  const R = pointMul(k, [SECP.gx, SECP.gy]);
+  const r = mod(R[0], n);
+  let ss = mod(modInv(k, n) * mod(z + r * d, n), n);
+  if(ss > n / 2n) ss = n - ss; // low-s (BIP 62)
+  return {r, s: ss};
+}
+function derEncode(sig){
+  function trimInt(n){
+    let b = [];
+    let x = n;
+    while(x > 0n){ b.unshift(Number(x & 0xffn)); x >>= 8n; }
+    if(b.length === 0) b = [0];
+    if(b[0] & 0x80) b.unshift(0);
+    return new Uint8Array(b);
+  }
+  const rb = trimInt(sig.r), sb = trimInt(sig.s);
+  return concatBytes(
+    new Uint8Array([0x30, 4 + rb.length + sb.length, 0x02, rb.length]), rb,
+    new Uint8Array([0x02, sb.length]), sb
+  );
+}
+
+// ── bech32 (BIP 173, witness v0) ──
+const BECH32_CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+function bech32Polymod(values){
+  const GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
+  let chk = 1;
+  for(const v of values){
+    const b = chk >> 25;
+    chk = ((chk & 0x1ffffff) << 5) ^ v;
+    for(let i = 0; i < 5; i++) if((b >> i) & 1) chk ^= GEN[i];
+  }
+  return chk;
+}
+function bech32HrpExpand(hrp){
+  const out = [];
+  for(const c of hrp) out.push(c.charCodeAt(0) >> 5);
+  out.push(0);
+  for(const c of hrp) out.push(c.charCodeAt(0) & 31);
+  return out;
+}
+function bech32Encode(hrp, data){
+  const values = bech32HrpExpand(hrp).concat(data);
+  const polymod = bech32Polymod(values.concat([0,0,0,0,0,0])) ^ 1;
+  const checksum = [];
+  for(let i = 0; i < 6; i++) checksum.push((polymod >> (5 * (5 - i))) & 31);
+  return hrp + '1' + data.concat(checksum).map(d => BECH32_CHARSET[d]).join('');
+}
+function convertBits(data, from, to){
+  let acc = 0, bits = 0;
+  const out = [];
+  for(const v of data){
+    acc = (acc << from) | v;
+    bits += from;
+    while(bits >= to){
+      bits -= to;
+      out.push((acc >> bits) & ((1 << to) - 1));
+    }
+  }
+  if(bits > 0) out.push((acc << (to - bits)) & ((1 << to) - 1));
+  return out;
+}
+function p2wpkhAddress(pubkey, hrp){
+  const kh = hash160(pubkey);
+  return bech32Encode(hrp, [0].concat(convertBits(Array.from(kh), 8, 5)));
+}
+
+// ── Transaction building (P2WPKH inputs -> P2WPKH outputs, BIP 143) ──
+function u32le(n){ const b = new Uint8Array(4); new DataView(b.buffer).setUint32(0, n, true); return b; }
+function u64le(n){
+  const b = new Uint8Array(8);
+  const dv = new DataView(b.buffer);
+  dv.setUint32(0, n % 0x100000000, true);
+  dv.setUint32(4, Math.floor(n / 0x100000000), true);
+  return b;
+}
+function varint(n){
+  if(n < 0xfd) return new Uint8Array([n]);
+  const b = new Uint8Array(3); b[0] = 0xfd; new DataView(b.buffer).setUint16(1, n, true); return b;
+}
+function txidToBytesLE(txidHex){ return hexToBytes(txidHex).reverse(); }
+
+// utxos: [{txid, vout, value}], all locked to our own key
+// outputs: [{keyhash(20b Uint8Array), value}]
+function buildSignedTx(privBytes, pubkey, utxos, outputs){
+  const keyhash = hash160(pubkey);
+  const SEQ = 0xfffffffd; // opt-in RBF
+  const version = u32le(2);
+  const locktime = u32le(0);
+
+  const outpoints = concatBytes(...utxos.map(u => concatBytes(txidToBytesLE(u.txid), u32le(u.vout))));
+  const sequences = concatBytes(...utxos.map(() => u32le(SEQ)));
+  const outsSer = concatBytes(...outputs.map(o => concatBytes(u64le(o.value), new Uint8Array([0x16, 0x00, 0x14]), o.keyhash)));
+  const hashPrevouts = dsha256(outpoints);
+  const hashSequence = dsha256(sequences);
+  const hashOutputs = dsha256(outsSer);
+  const scriptCode = concatBytes(new Uint8Array([0x19, 0x76, 0xa9, 0x14]), keyhash, new Uint8Array([0x88, 0xac]));
+
+  const witnesses = utxos.map(u => {
+    const preimage = concatBytes(
+      version, hashPrevouts, hashSequence,
+      txidToBytesLE(u.txid), u32le(u.vout),
+      scriptCode, u64le(u.value), u32le(SEQ),
+      hashOutputs, locktime, u32le(1) // SIGHASH_ALL
+    );
+    const sighash = dsha256(preimage);
+    const der = derEncode(ecdsaSign(privBytes, sighash));
+    const sigWithType = concatBytes(der, new Uint8Array([1]));
+    return concatBytes(
+      new Uint8Array([2]),                       // 2 witness items
+      new Uint8Array([sigWithType.length]), sigWithType,
+      new Uint8Array([pubkey.length]), pubkey
+    );
+  });
+
+  const inputsSer = concatBytes(...utxos.map(u => concatBytes(
+    txidToBytesLE(u.txid), u32le(u.vout), new Uint8Array([0]), u32le(SEQ)
+  )));
+
+  const noWitness = concatBytes(version, varint(utxos.length), inputsSer, varint(outputs.length), outsSer, locktime);
+  const full = concatBytes(
+    version, new Uint8Array([0x00, 0x01]),
+    varint(utxos.length), inputsSer,
+    varint(outputs.length), outsSer,
+    concatBytes(...witnesses),
+    locktime
+  );
+  const txid = bytesToHex(dsha256(noWitness).reverse());
+  return {hex: bytesToHex(full), txid};
+}
+
+
+
+  return { pubkeyFromPriv, p2wpkhAddress, buildSignedTx, hash160, bytesToHex, hexToBytes, bytesToBig, SECP };
+})();
+
+// ── Signet Lab UI ──
+const SIGNET_API = 'https://mempool.space/signet/api';
+const SIGNET_EXPLORER = 'https://mempool.space/signet';
+let slWalletState = null, slUtxos = [];
+try { slWalletState = JSON.parse(localStorage.getItem('abc_signet_v1') || 'null'); } catch(e){}
+function slSaveWallet(){ try { localStorage.setItem('abc_signet_v1', JSON.stringify(slWalletState)); } catch(e){} }
+function slEl(id){ return document.getElementById(id); }
+function slStatus(id, msg, color){
+  const el = slEl(id); if(!el) return;
+  el.innerHTML = msg;
+  el.style.color = color || 'var(--muted)';
+}
+function slRenderWallet(){
+  if(!slEl('slAddr')) return;
+  if(slWalletState && slWalletState.priv){
+    slEl('slWalletBox').classList.remove('hidden');
+    slEl('slCreateBtn').classList.add('hidden');
+    slEl('slAddr').textContent = slWalletState.addr;
+    slEl('slStep2').classList.remove('hidden');
+    slEl('slStep3').classList.remove('hidden');
+    slEl('slStep4').classList.remove('hidden');
+    if(slWalletState.lastTxid){
+      slEl('slTxLink').innerHTML = 'Last broadcast: <a href="' + SIGNET_EXPLORER + '/tx/' + slWalletState.lastTxid + '" target="_blank" rel="noopener" style="color:var(--orange);">' + slWalletState.lastTxid.substring(0, 20) + '...</a>';
+    }
+  } else {
+    slEl('slWalletBox').classList.add('hidden');
+    slEl('slCreateBtn').classList.remove('hidden');
+    slEl('slStep2').classList.add('hidden');
+    slEl('slStep3').classList.add('hidden');
+    slEl('slStep4').classList.add('hidden');
+  }
+}
+function slCreateWallet(){
+  let priv, d;
+  do {
+    priv = new Uint8Array(32);
+    crypto.getRandomValues(priv);
+    d = SigLab.bytesToBig(priv);
+  } while(d === 0n || d >= SigLab.SECP.n);
+  const pub = SigLab.pubkeyFromPriv(priv);
+  slWalletState = {
+    priv: SigLab.bytesToHex(priv),
+    pub: SigLab.bytesToHex(pub),
+    addr: SigLab.p2wpkhAddress(pub, 'tb'),
+    lastTxid: null
+  };
+  slSaveWallet();
+  slRenderWallet();
+  slStatus('slCreateStatus', 'Wallet created. The private key lives only in YOUR browser - this site has no server to send it to.', '#4ade80');
+}
+async function slCheckBalance(){
+  if(!slWalletState) return;
+  slStatus('slBalStatus', 'Checking the real Signet blockchain...');
+  try {
+    const res = await fetch(SIGNET_API + '/address/' + slWalletState.addr + '/utxo');
+    if(!res.ok) throw new Error('API returned ' + res.status);
+    slUtxos = await res.json();
+    const total = slUtxos.reduce(function(sum, u){ return sum + u.value; }, 0);
+    if(!slUtxos.length){
+      slStatus('slBalStatus', 'No coins yet. Faucets can take a minute - and unconfirmed coins appear here too, so try again shortly.', '#fbbf24');
+      return;
+    }
+    const confirmed = slUtxos.filter(function(u){ return u.status && u.status.confirmed; }).length;
+    slStatus('slBalStatus',
+      '<strong style="color:#4ade80;">' + total.toLocaleString() + ' sats</strong> across ' + slUtxos.length + ' coin' + (slUtxos.length > 1 ? 's' : '') + ' (' + confirmed + ' confirmed). These are real UTXOs on a real blockchain - <a href="' + SIGNET_EXPLORER + '/address/' + slWalletState.addr + '" target="_blank" rel="noopener" style="color:var(--orange);">see them on the explorer</a>.',
+      '#4ade80');
+  } catch(e){
+    slStatus('slBalStatus', 'Could not reach mempool.space (' + e.message + '). Check your connection and try again.', '#f87171');
+  }
+}
+async function slSendTx(){
+  if(!slWalletState || !slUtxos.length){
+    slStatus('slSendStatus', 'Check your balance first - you need at least one coin to spend.', '#fbbf24');
+    return;
+  }
+  const total = slUtxos.reduce(function(sum, u){ return sum + u.value; }, 0);
+  const fee = 200 + 80 * slUtxos.length;
+  if(total <= fee + 294){
+    slStatus('slSendStatus', 'Balance too small to cover the fee. Get more from the faucet.', '#fbbf24');
+    return;
+  }
+  try {
+    slStatus('slSendStatus', 'Signing with your private key (RFC 6979 ECDSA, BIP 143 sighash)...');
+    const priv = SigLab.hexToBytes(slWalletState.priv);
+    const pub = SigLab.hexToBytes(slWalletState.pub);
+    const keyhash = SigLab.hash160(pub);
+    const inputs = slUtxos.map(function(u){ return {txid: u.txid, vout: u.vout, value: u.value}; });
+    const tx = SigLab.buildSignedTx(priv, pub, inputs, [{keyhash: keyhash, value: total - fee}]);
+    slStatus('slSendStatus', 'Broadcasting to the Signet network...');
+    const res = await fetch(SIGNET_API + '/tx', { method: 'POST', body: tx.hex });
+    const text = await res.text();
+    if(!res.ok) throw new Error(text.substring(0, 120));
+    slWalletState.lastTxid = text.trim();
+    slSaveWallet();
+    slStatus('slSendStatus',
+      '<strong style="color:#4ade80;">Broadcast accepted!</strong> You just spent ' + slUtxos.length + ' coin' + (slUtxos.length > 1 ? 's' : '') + ' back to yourself and paid a ' + fee + ' sat fee to a real miner.<br/>TXID: <a href="' + SIGNET_EXPLORER + '/tx/' + slWalletState.lastTxid + '" target="_blank" rel="noopener" style="color:var(--orange);font-family:Space Mono,monospace;word-break:break-all;">' + slWalletState.lastTxid + '</a>',
+      '#4ade80');
+    slEl('slTxLink').innerHTML = '';
+    slUtxos = [];
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) for(let k = 0; k < 12; k++) setTimeout(function(){ spawnCoin(); }, k * 90);
+  } catch(e){
+    slStatus('slSendStatus', 'Broadcast failed: ' + e.message, '#f87171');
+  }
+}
+async function slCheckConfirm(){
+  if(!slWalletState || !slWalletState.lastTxid){
+    slStatus('slConfirmStatus', 'Broadcast a transaction first.', '#fbbf24');
+    return;
+  }
+  slStatus('slConfirmStatus', 'Asking the network...');
+  try {
+    const res = await fetch(SIGNET_API + '/tx/' + slWalletState.lastTxid + '/status');
+    const st = await res.json();
+    if(st.confirmed){
+      slStatus('slConfirmStatus',
+        '<strong style="color:#4ade80;">CONFIRMED in block ' + st.block_height.toLocaleString() + '!</strong> Your transaction is now part of a real blockchain, mined with real proof of work, verifiable by anyone on Earth forever: <a href="' + SIGNET_EXPLORER + '/block/' + st.block_hash + '" target="_blank" rel="noopener" style="color:var(--orange);">see the block</a>. You have now done the thing this entire course is about.',
+        '#4ade80');
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) for(let k = 0; k < 20; k++) setTimeout(function(){ spawnCoin(); }, k * 80);
+    } else {
+      slStatus('slConfirmStatus', 'Still in the mempool, waiting for a miner. Signet blocks arrive about every 10 minutes - come back and check again.', '#fbbf24');
+    }
+  } catch(e){
+    slStatus('slConfirmStatus', 'Lookup failed: ' + e.message, '#f87171');
+  }
+}
+function slReset(){
+  if(!confirm('Discard this practice wallet? Any test coins on it will be unreachable.')) return;
+  slWalletState = null; slUtxos = [];
+  try { localStorage.removeItem('abc_signet_v1'); } catch(e){}
+  slRenderWallet();
+  slStatus('slCreateStatus', '');
+}
+function slToggleKey(){
+  const el = slEl('slPrivReveal');
+  if(el.textContent.indexOf('tap to reveal') >= 0){
+    el.textContent = slWalletState.priv;
+  } else {
+    el.textContent = '(tap to reveal - never do this with real bitcoin)';
+  }
+}
+slEl('slCreateBtn')?.addEventListener('click', slCreateWallet);
+slEl('slCheckBtn')?.addEventListener('click', slCheckBalance);
+slEl('slSendBtn')?.addEventListener('click', slSendTx);
+slEl('slConfirmBtn')?.addEventListener('click', slCheckConfirm);
+slEl('slResetBtn')?.addEventListener('click', slReset);
+slEl('slPrivReveal')?.addEventListener('click', slToggleKey);
+slEl('slCopyBtn')?.addEventListener('click', async function(){
+  try { await navigator.clipboard.writeText(slWalletState.addr); this.textContent = 'Copied!'; setTimeout(() => { this.textContent = 'Copy'; }, 1500); } catch(e){}
+});
+slRenderWallet();
 
 // ═══════════════════════════════════════
 //   INIT (deep link routing)
