@@ -1356,6 +1356,7 @@
     <button class="nav-item" data-section="myths" id="nav-myths" aria-describedby="nav-group-vs">&#128165; 6 Bitcoin Myths Debunked</button>
     <button class="nav-item" data-section="tulips" id="nav-tulips" aria-describedby="nav-group-vs">&#127799; Bitcoin vs Tulip Mania</button>
     <button class="nav-item" data-section="quantum" id="nav-quantum" aria-describedby="nav-group-vs">&#9883;&#65039; The Quantum Question</button>
+    <button class="nav-item" data-section="caseagainst" id="nav-caseagainst" aria-describedby="nav-group-vs">&#9876;&#65039; The Case Against Bitcoin</button>
     <button class="nav-item" data-section="goldvsbtc" id="nav-goldvsbtc" aria-describedby="nav-group-vs">&#129351; Bitcoin vs Gold</button>
     <button class="nav-item" data-section="adoption" id="nav-adoption" aria-describedby="nav-group-vs">&#128640; Bitcoin Adoption</button>
 
@@ -1524,7 +1525,8 @@
         <!-- CTA -->
         <div class="welcome-cta">
           <button class="btn-orange" id="welcomeBeginBtn">Start with The Nature of Money &#8594;</button>
-          <div style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-top:4px;">No account needed &bull; Completely free &bull; Takes ~2 hours</div>
+          <button id="welcomeSkepticBtn" style="display:block;margin:14px auto 0;background:none;border:1px solid rgba(248,113,113,0.4);color:#f87171;border-radius:12px;padding:11px 24px;font-size:13px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='rgba(248,113,113,0.08)'" onmouseout="this.style.background='none'">I think it is a scam. Show me the strongest case against it &#8594;</button>
+          <div style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-top:10px;">No account needed &bull; Completely free &bull; Takes ~2 hours</div>
         </div>
 
         <!-- Live stats bar -->
@@ -4425,6 +4427,89 @@
         <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next</div>
         <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">How does Bitcoin stack up against <span class="glow-text">5,000 years of gold</span>?</div>
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Before comparing Bitcoin to dollars, let's compare it to the money that outlasted every empire - and see why measuring Bitcoin in ounces tells a cleaner story than measuring it in inflating paper.</p>
+        <button class="btn-orange" data-section="caseagainst" style="font-size:15px;padding:14px 32px;">Next: The Case Against Bitcoin &#9876;&#65039; &rarr;</button>
+      </div>
+    </div>
+
+    <!-- ════ THE CASE AGAINST BITCOIN ════ -->
+    <div class="section-content" id="sec-caseagainst">
+      <h2 class="section-title">&#9876;&#65039; <span class="glow-text">The Case Against Bitcoin</span></h2>
+      <div class="section-subtitle">// The strongest arguments against Bitcoin, presented at full strength  ·  ~7 min read</div>
+
+      <p class="body-text">Every other page on this site makes the case <em>for</em> Bitcoin. This one does the opposite, and it does it honestly. No strawmen, no "myths to debunk." These are the six strongest arguments against Bitcoin, presented the way a smart critic would present them. Some of them are partly right. If your conviction cannot survive this page, it was never conviction.</p>
+
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:#f87171;">1. "It is far too volatile to be money"</div>
+        <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border-left:3px solid #f87171;margin-bottom:12px;">
+          <div style="font-size:13px;color:var(--text);line-height:1.7;font-style:italic;">"A currency that loses 75% of its value four separate times in fifteen years is not a store of value. It is a casino chip. Nobody prices a mortgage, a salary, or a pension in something that can halve in a quarter."</div>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px;"><strong style="color:var(--orange);">What the data says:</strong> This is simply true. Bitcoin fell roughly 93% in 2011, 85% in 2013-15, 84% in 2017-18, and 77% in 2021-22.<sup><a href="#ref-44" style="color:var(--orange);text-decoration:none;font-size:10px;">[44]</a></sup> Anyone who bought a cycle top waited two to four years just to break even. Volatility has declined as the asset has grown, and each drawdown has bottomed higher than the last, but Bitcoin today is still several times more volatile than gold or major currencies.</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.6;"><strong style="color:#fbbf24;">What remains unresolved:</strong> Whether volatility keeps declining until Bitcoin is stable enough to price bread in, or plateaus as a permanently violent asset. Seventeen years of data suggests the former. It does not prove it.</div>
+      </div>
+
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:#f87171;">2. "One mistake and your money is gone forever"</div>
+        <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border-left:3px solid #f87171;margin-bottom:12px;">
+          <div style="font-size:13px;color:var(--text);line-height:1.7;font-style:italic;">"Banks have fraud departments, chargebacks, deposit insurance, and password resets. Bitcoin has none of these by design. Fat-finger an address, lose a seed phrase, fall for one phishing message, and there is no undo button and nobody to call."</div>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px;"><strong style="color:var(--orange);">What the data says:</strong> Also true, and the numbers are sobering. An estimated 3 to 4 million bitcoin, roughly a fifth of the supply, is considered lost forever - keys destroyed, seeds forgotten, owners deceased without backups.<sup><a href="#ref-44" style="color:var(--orange);text-decoration:none;font-size:10px;">[44]</a></sup> On top of that, crypto scams steal billions of dollars every year from real people. Self-custody transfers all responsibility to you, and most people have never held that kind of responsibility for anything.</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.6;"><strong style="color:#fbbf24;">What remains unresolved:</strong> Wallet design keeps improving - multisig, social recovery, inheritance tools - but "safe enough for your grandmother without help" does not exist yet. The scam drill later in this course exists precisely because this criticism is valid.</div>
+      </div>
+
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:#f87171;">3. "It consumes a country's worth of electricity"</div>
+        <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border-left:3px solid #f87171;margin-bottom:12px;">
+          <div style="font-size:13px;color:var(--text);line-height:1.7;font-style:italic;">"Whatever mining apologists say about stranded energy and grid balancing, the absolute number keeps growing: Bitcoin consumes on the order of what the Netherlands consumes, to process a handful of transactions per second. A spreadsheet does not need a power plant."</div>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px;"><strong style="color:var(--orange);">What the data says:</strong> The Cambridge index estimates Bitcoin mining at roughly 100 to 180 TWh per year, genuinely comparable to a mid-size country.<sup><a href="#ref-44" style="color:var(--orange);text-decoration:none;font-size:10px;">[44]</a></sup> A meaningful and growing share is stranded, flared, or renewable energy, and miners do act as flexible grid load. But the honest framing is this: the energy is not an accident or an inefficiency. It IS the security. Bitcoin deliberately converts electricity into the cost of rewriting history.</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.6;"><strong style="color:#fbbf24;">What remains unresolved:</strong> Whether neutral, censorship-resistant money is worth a country's electricity bill is a values question, not a math question. This course thinks yes. Reasonable people conclude no. Both are looking at the same numbers.</div>
+      </div>
+
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:#f87171;">4. "The whales own everything - you are exit liquidity"</div>
+        <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border-left:3px solid #f87171;margin-bottom:12px;">
+          <div style="font-size:13px;color:var(--text);line-height:1.7;font-style:italic;">"A tiny fraction of addresses controls most of the supply. Early adopters bought for pennies what you are asked to buy for a hundred thousand dollars. Meanwhile two mining pools frequently coordinate the majority of hashrate. Decentralized in theory, oligarchy in practice."</div>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px;"><strong style="color:var(--orange);">What the data says:</strong> Partly true, partly a measurement artifact. Address-level statistics wildly overstate concentration because one exchange address custodies coins for millions of customers. Adjusted analyses still show meaningful concentration, though it has trended downward every cycle as coins spread from early holders to new ones. Mining pool concentration is real, but pools are coalitions that miners can and do leave in hours when a pool misbehaves - it has happened.</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.6;"><strong style="color:#fbbf24;">What remains unresolved:</strong> Early adopters did get in cheap. Every monetary transition in history rewarded whoever showed up first, but "that is how adoption curves work" is an explanation, not a comfort.</div>
+      </div>
+
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:#f87171;">5. "Governments will never allow a competitor to their money"</div>
+        <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border-left:3px solid #f87171;margin-bottom:12px;">
+          <div style="font-size:13px;color:var(--text);line-height:1.7;font-style:italic;">"The United States banned private gold ownership for forty-one years starting in 1933. When Bitcoin actually threatens monetary control, the response will not be an ETF approval. It will be exchange shutdowns, punitive exit taxes, and criminalized self-custody - coordinated across the G20."</div>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px;"><strong style="color:var(--orange);">What the data says:</strong> The precedent is real: Executive Order 6102 happened, and it targeted exactly the role Bitcoin wants to play.<sup><a href="#ref-44" style="color:var(--orange);text-decoration:none;font-size:10px;">[44]</a></sup> So far the observed pattern has run the other way - China banned Bitcoin repeatedly and the network shrugged; the US approved ETFs and holds seized bitcoin in reserve; nation-states now mine it. A ban cannot stop the network itself, but hostile coordination could strangle the on-ramps and crush the price for years.</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.6;"><strong style="color:#fbbf24;">What remains unresolved:</strong> "So far" is not "forever." The full-hostility scenario - a simultaneous G20 crackdown - has never been tested, and honest Bitcoiners admit it is the tail risk they cannot price.</div>
+      </div>
+
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-3" style="color:#f87171;">6. "It produces nothing - the price is pure belief"</div>
+        <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border-left:3px solid #f87171;margin-bottom:12px;">
+          <div style="font-size:13px;color:var(--text);line-height:1.7;font-style:italic;">"A business earns profits. A bond pays coupons. A house collects rent. Bitcoin pays nothing and produces nothing. Its price rests entirely on the belief that someone else will value it later. If a generation simply loses interest, it does not crash dramatically - it just fades into irrelevance."</div>
+        </div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px;"><strong style="color:var(--orange);">What the data says:</strong> Correct, and it applies equally to gold, which has carried monetary value on belief alone for five thousand years. Monetary goods are not businesses; their "yield" is salability across time and space. The honest version of this argument is not "no cash flows means worthless" - it is "monetary belief can die." It has died before, for seashells and for salt. Bitcoin's counter-evidence is seventeen years of survival through four 75%+ crashes, every obituary, and every ban.</div>
+        <div style="font-size:12px;color:var(--text3);line-height:1.6;"><strong style="color:#fbbf24;">What remains unresolved:</strong> Survival is evidence, not proof. Nobody can show you a theorem that Bitcoin must keep winning. Anyone who claims certainty, in either direction, is selling something.</div>
+      </div>
+
+      <div class="highlight-box" style="margin:32px 0;">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#129504; Why a Bitcoin course argues against Bitcoin</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.8;">
+          Because education that hides the strongest counterarguments is not education, it is marketing. You should know exactly what you are accepting: real volatility, real responsibility, real political risk, and a monetary experiment that seventeen years of success has still not settled. The rule that follows from this page is simple and non-negotiable: <strong style="color:var(--orange);">never put money into Bitcoin that you cannot afford to watch drop 70% without flinching.</strong> If the case for Bitcoin is as strong as this course believes, it survives its critics at full strength. You just watched it try.
+        </div>
+      </div>
+
+      <div class="glass p-5 my-6 text-center">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#127919; Interactive: The Honest Skeptic</div>
+        <p style="color:var(--text3);font-size:13px;margin:0 auto 16px;max-width:440px;line-height:1.6;">Five criticisms, one question each: is it overstated, fair, or understated? See how your judgment compares with the evidence.</p>
+        <button class="btn-orange" data-modal="caseagainst">Rate the arguments &rarr;</button>
+      </div>
+
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">How does Bitcoin stack up against <span class="glow-text">5,000 years of gold</span>?</div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You have now heard the strongest case against Bitcoin. Time to compare it against the only money that ever lasted - and see which properties it keeps, and which it fixes.</p>
         <button class="btn-orange" data-section="goldvsbtc" style="font-size:15px;padding:14px 32px;">Next: Bitcoin vs Gold &#129351; &rarr;</button>
       </div>
     </div>
@@ -7031,6 +7116,10 @@
             <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);">[43]</div>
             <div style="font-size:12px;color:var(--text2);line-height:1.6;">Zcash Orchard counterfeiting vulnerability (June 2026): Shielded Labs disclosure, June 5, 2026; Taylor Hornby AI-assisted audit using Anthropic Opus 4.8; NU6.2 emergency hard fork June 3, 2026; Zooko Wilcox on supply unverifiability; CoinDesk, The Block, CryptoBriefing coverage; Ironwood upgrade proposal by Wilcox, McGee & Hornby</div>
           </div>
+          <div id="ref-44" style="display:flex;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--glass-border);background:rgba(0,0,0,0.2);">
+            <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);">[44]</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Case against Bitcoin data: historical drawdowns from CoinMetrics and TradingView BTC/USD price history (2011: -93%, 2013-15: -85%, 2017-18: -84%, 2021-22: -77%); lost coin estimates from Chainalysis (2020) and Glassnode dormancy analyses (~3-4M BTC); energy consumption from Cambridge Bitcoin Electricity Consumption Index (CBECI); Executive Order 6102 (April 5, 1933), US National Archives; FTC and Chainalysis Crypto Crime Reports on annual scam losses</div>
+          </div>
         </div>
       </div>
 
@@ -7159,7 +7248,7 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','year1971','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','goldvsbtc','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','consensus','lightning','toolate','perspective','lore','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','year1971','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','caseagainst','goldvsbtc','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','consensus','lightning','toolate','perspective','lore','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', satoshi:'Who Is Satoshi?', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', year1971:'1971: The Year Money Broke', altcoins:'Bitcoin vs Other Cryptos', powvpos:'Proof of Work vs Proof of Stake', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
@@ -7170,6 +7259,7 @@ const sectionNames = {
   signatures:'Digital Signatures', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore',
   whitepaper:'The Whitepaper',
   tulips:'Bitcoin vs Tulip Mania',
+  caseagainst:'The Case Against Bitcoin',
   goldvsbtc:'Bitcoin vs Gold'
 };
 
@@ -7550,6 +7640,7 @@ const teachingNotes = {
   deflation: `\uD83C\uDF93 Jeff Booth's thesis is the intellectual capstone of Chapter I. Technology = deflation. Fiat = inflation. The two are at war. Bitcoin lets deflation win.\n\n\uD83D\uDCA1 The key equation to drive home: 5% tech deflation + 7% money printing = "2% reported CPI." That single formula makes students see through the illusion.\n\n\uD83C\uDFAF After this section, students should feel genuine urgency to learn how Bitcoin works in practice.`,
   pizza: `\uD83C\uDF93 The pizza analogy is the single best response to "there aren't enough Bitcoin." It reframes the entire debate: the issue isn't quantity, it's dilution.\n\n\uD83D\uDCA1 The key line: "You can cut a pizza smaller, but you can't make more pizza." Let that land. Then show the numbers: 2.1 quadrillion sats. 262,000 per person.\n\n\uD83C\uDFAF Drive home that deflation under a gold standard powered the industrial revolution. "We need inflation" is propaganda, not economics.`,
   adoption: `\uD83C\uDF93 This section is the perfect response to "but nobody uses Bitcoin." Walk through each example slowly \u2014 the breadth of adoption shocks most beginners.\n\n\uD83D\uDCA1 Key insight: adoption is happening simultaneously at every level \u2014 individual (Cash App, Strike), merchant (Square), corporate treasury (Strategy), institutional (BlackRock IBIT), and sovereign (El Salvador). No technology in history has been adopted across all these layers this fast.\n\n\uD83C\uDFAF The "never sell" strategy via borrowing against BTC is a powerful reframe. It shifts the conversation from "when do I take profits?" to "why would I ever sell the hardest asset?"`,
+  caseagainst: `\uD83C\uDF93 The most important section for credibility. Do NOT rush to rebut - let the arguments stand at full strength first.\n\n\uD83D\uDCA1 Ask students which argument they find strongest BEFORE revealing the data. Volatility and irreversibility usually win.\n\n\uD83C\uDFAF The takeaway rule: never invest what you cannot watch drop 70%. Repeat it until it is boring.`,
   myths: `\uD83C\uDF93 Students arrive with these myths pre-loaded from media. Don't dismiss them \u2014 acknowledge them, then systematically dismantle them with facts.\n\n\uD83D\uDCA1 The pattern observation at the end is powerful: every myth follows the same lazy template. Once students see the pattern, they become immune to new myths.\n\n\uD83C\uDFAF The myth-buster interactive lesson lets students try to "attack" Bitcoin and see why each attack fails. Very engaging.`,
   wallets: `\ud83c\udf93 A great analogy: a wallet is like a keychain, not a piggy bank. It holds the KEYS to your money, not the money itself.\n\n\ud83d\udca1 Tip: Start with the wallet generator below to make it concrete.`,
   exchanges: `\ud83c\udf93 Most beginners start on exchanges. Key teaching moment: exchange Bitcoin is like a "receipt" \u2014 it's a promise, not the real thing.\n\n\ud83d\udca1 The airport currency analogy works brilliantly here.`,
@@ -7856,6 +7947,7 @@ document.getElementById('main-content').addEventListener('click', function(e){
 
   // Welcome "Begin Your Journey" button
   if(e.target.id === 'welcomeBeginBtn') showSection('money');
+  if(e.target.id === 'welcomeSkepticBtn') showSection('caseagainst');
 });
 
 // ═══════════════════════════════════════
@@ -7877,6 +7969,7 @@ const searchIndex = [
   {s:'myths',c:'III. Bitcoin vs The World',k:'myths criminal crime energy waste boil oceans volatile ban government illegal intrinsic value yield debunked lies fud'},
   {s:'tulips',c:'III. Bitcoin vs The World',k:'tulip mania bubble 1637 dutch speculation crash ponzi scheme'},
   {s:'quantum',c:'III. Bitcoin vs The World',k:'quantum computer break crack cryptography qubits threat future ibm google'},
+  {s:'caseagainst',c:'III. Bitcoin vs The World',k:'case against bitcoin criticism skeptic steelman risks downsides volatility drawdown lost coins energy consumption concentration whales government ban 6102 no intrinsic value belief honest cons drawbacks why not buy'},
   {s:'goldvsbtc',c:'III. Bitcoin vs The World',k:'gold digital gold comparison precious metal 6102 confiscation ratio ounce store of value'},
   {s:'adoption',c:'III. Bitcoin vs The World',k:'adoption el salvador etf blackrock institutions countries companies legal tender wall street'},
   {s:'wallets',c:'IV. Getting Started',k:'wallet hardware software ledger trezor cold storage hot custody store keep safe keys'},
@@ -7906,6 +7999,8 @@ const searchIndex = [
 ];
 const questionBank = [
   {q:'What is Bitcoin, really?', s:'money'},
+  {q:'What are the real risks of Bitcoin?', s:'caseagainst'},
+  {q:'Why might Bitcoin fail?', s:'caseagainst'},
   {q:'Is it too late to buy Bitcoin?', s:'toolate'},
   {q:'Who created Bitcoin?', s:'satoshi'},
   {q:'How do I buy Bitcoin safely?', s:'exchanges'},
@@ -8431,6 +8526,7 @@ const quickChecks = {
   difficulty: {q:'Half of all miners go offline overnight. What happens to Bitcoin?', ok:'Blocks slow down temporarily, then difficulty adjusts and 10-minute blocks resume', wrong:['The network halts until miners return','The remaining miners vote to change the rules'], why:'Exactly this happened when China banned mining in 2021. Blocks slowed for a few weeks, the next adjustments cut difficulty, and the network healed with zero intervention.'},
   network: {q:'Why does a merchant wait for one confirmation before handing over the goods?', ok:'An unconfirmed transaction can still lose a double-spend race - a mined block settles which version wins', wrong:['Confirmations increase the amount received','Unconfirmed transactions expire after an hour'], why:'Until a transaction is in a block, a conflicting spend of the same coin can still beat it. A confirmation means the race is over.'},
   node: {q:'A block awards its miner double the allowed reward. Who stops it?', ok:'Every node independently rejects it - the miner burned electricity for nothing', wrong:['The Bitcoin Foundation reverses it','The other miners hold a vote'], why:'Rule enforcement is not a vote or an authority. Every node checks every block against the same rules and silently drops violations.'},
+  caseagainst: {q:'A friend asks how much of their savings to put into Bitcoin. Best answer?', ok:'Only what they can watch drop 70% without flinching - drawdowns like that have happened four times', wrong:['Everything - it only goes up over four-year cycles','Nothing - it is guaranteed to go to zero'], why:'Both extremes ignore the evidence. Bitcoin has recovered from four crashes above 75%, and it has also never promised it will again. Position sizing IS the risk management.'},
   locks: {q:'What actually enforces that only your key can spend your coins?', ok:'Mathematics, checked identically by every node - not any person or company', wrong:['The wallet company holds them for you','Miners decide who owns what'], why:'A coin is locked by a script. Spending requires a signature that satisfies it, and every node verifies the math independently. Ownership is enforced by computation, not custody.'}
 };
 function quickCheckHTML(section){
@@ -8799,6 +8895,12 @@ function getModalContent(section){
       </div>
 
       <div class="demo-desc" style="text-align:center;margin-top:12px;">Uses ECDSA on P-256 with SHA-256 via Web Crypto API. Bitcoin uses the same algorithm on sibling curve secp256k1.</div>`,
+
+    caseagainst: `
+      <div class="demo-title">🧐 The Honest Skeptic</div>
+      <div class="demo-subtitle">Five criticisms of Bitcoin. For each one, give your verdict: overstated, fair, or understated? Then see what the evidence says.</div>
+      <div id="skepticGame"></div>
+      <div id="skepticScore" class="demo-result hidden" aria-live="polite"></div>`,
 
     consensus: `
       <div class="demo-title">⚖️ Upgrade Explorer</div>
@@ -10135,6 +10237,56 @@ modalInitFns.signatures = async function(){
     document.getElementById('sigVal').textContent = buf2hex(corrupted);
     document.getElementById('verifyResult').classList.add('hidden');
     document.getElementById('sigStep3').classList.remove('complete');
+  });
+};
+
+// ── Case Against Bitcoin (Honest Skeptic verdict game) ──
+modalInitFns.caseagainst = function(){
+  const claims = [
+    {c:'Bitcoin is far too volatile to function as money today.', v:'fair', why:'Four drawdowns above 75% in fifteen years is real. Volatility is falling as the asset grows, but today it is a fair criticism.'},
+    {c:'If you make one mistake in self-custody, nobody can help you.', v:'fair', why:'Roughly a fifth of all bitcoin is estimated lost forever. Irreversibility is the design, and the responsibility is fully yours. Fair.'},
+    {c:'Bitcoin uses as much electricity as a mid-size country.', v:'fair', why:'Cambridge estimates 100-180 TWh per year. The number is real. The debate is whether the security it buys is worth it - a values question.'},
+    {c:'A few whales own almost all the bitcoin, so the little guy has no chance.', v:'overstated', why:'Address statistics count exchange wallets holding millions of customers as single whales. Concentration is real but shrinks every cycle - this claim overstates it.'},
+    {c:'Governments can shut Bitcoin down whenever they decide to.', v:'overstated', why:'China tried repeatedly and the network never missed a block. Governments can attack the on-ramps and the price, but killing the network itself has failed every time it was tried. Overstated - though hostile coordination remains the honest tail risk.'}
+  ];
+  const game = document.getElementById('skepticGame');
+  let answered = 0, agreed = 0;
+  game.innerHTML = '';
+  claims.forEach(function(cl, i){
+    const card = document.createElement('div');
+    card.className = 'demo-step' + (i === 0 ? ' active' : '');
+    card.innerHTML = '<div style="font-size:14px;font-weight:600;color:var(--text);line-height:1.6;margin-bottom:12px;">"' + cl.c + '"</div>'
+      + '<div style="display:grid;gap:8px;grid-template-columns:1fr 1fr 1fr;">'
+      + '<button class="sk-opt demo-btn demo-btn-ghost" data-v="overstated" style="font-size:12px;padding:10px;">Overstated</button>'
+      + '<button class="sk-opt demo-btn demo-btn-ghost" data-v="fair" style="font-size:12px;padding:10px;">Fair</button>'
+      + '<button class="sk-opt demo-btn demo-btn-ghost" data-v="understated" style="font-size:12px;padding:10px;">Understated</button>'
+      + '</div>'
+      + '<div class="sk-why demo-desc hidden" style="padding:12px;border-radius:10px;margin-top:10px;line-height:1.6;"></div>';
+    card.querySelectorAll('.sk-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(btn.disabled) return;
+        const match = btn.dataset.v === cl.v;
+        answered++; if(match) agreed++;
+        card.querySelectorAll('.sk-opt').forEach(function(b){
+          b.disabled = true; b.style.cursor = 'default';
+          if(b.dataset.v === cl.v){ b.style.borderColor = '#a78bfa'; b.style.color = '#a78bfa'; b.style.background = 'rgba(167,139,250,0.1)'; }
+        });
+        if(!match){ btn.style.borderColor = '#f87171'; btn.style.color = '#f87171'; }
+        const why = card.querySelector('.sk-why');
+        why.classList.remove('hidden');
+        why.style.background = 'rgba(167,139,250,0.06)';
+        why.style.border = '1px solid rgba(167,139,250,0.3)';
+        why.innerHTML = '<strong style="color:#a78bfa;">Evidence verdict: ' + cl.v.toUpperCase() + '.</strong> ' + cl.why;
+        if(answered === claims.length){
+          const sc = document.getElementById('skepticScore');
+          sc.classList.remove('hidden');
+          sc.className = 'demo-result ' + (agreed >= 3 ? 'demo-result-ok' : 'demo-result-fail');
+          sc.innerHTML = '<div class="demo-result-title">Your judgment matched the evidence on ' + agreed + ' of ' + claims.length + '</div>'
+            + '<div class="demo-result-detail">The point is not the score. The point is that some criticisms of Bitcoin are FAIR - and knowing which ones separates an investor from a gambler. Never put in money you cannot watch drop 70%.</div>';
+        }
+      });
+    });
+    game.appendChild(card);
   });
 };
 
