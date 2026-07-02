@@ -8329,6 +8329,25 @@ document.getElementById('modalOverlay').addEventListener('click', function(e){
 });
 document.getElementById('modalCloseBtn').addEventListener('click', closeModalDirect);
 
+// Quick Check answer handling (delegated - survives modal content swaps)
+document.getElementById('modalContent').addEventListener('click', function(e){
+  const btn = e.target.closest('.qc-opt');
+  if(!btn || btn.disabled) return;
+  const box = btn.closest('#quickCheck');
+  const ok = btn.dataset.ok === '1';
+  box.querySelectorAll('.qc-opt').forEach(function(b){
+    b.disabled = true;
+    b.style.cursor = 'default';
+    if(b.dataset.ok === '1'){ b.style.borderColor = '#4ade80'; b.style.color = '#4ade80'; b.style.background = 'rgba(74,222,128,0.08)'; }
+  });
+  if(!ok){ btn.style.borderColor = '#f87171'; btn.style.color = '#f87171'; btn.style.background = 'rgba(248,113,113,0.08)'; }
+  const ex = box.querySelector('.qc-explain');
+  ex.classList.remove('hidden');
+  ex.style.background = ok ? 'rgba(74,222,128,0.06)' : 'rgba(248,113,113,0.06)';
+  ex.style.border = '1px solid ' + (ok ? 'rgba(74,222,128,0.35)' : 'rgba(248,113,113,0.35)');
+  ex.innerHTML = (ok ? '<strong style="color:#4ade80;">Correct.</strong> ' : '<strong style="color:#f87171;">Not quite.</strong> ') + box.dataset.why;
+});
+
 function closeModalDirect(){
   const overlay = document.getElementById('modalOverlay');
   if(!overlay.classList.contains('open')) return;
@@ -8399,6 +8418,36 @@ function sha256Hex(str){
 // ═══════════════════════════════════════
 //   MODAL CONTENT GENERATOR
 // ═══════════════════════════════════════
+// ── Quick Check: one retrieval question at the end of each core demo ──
+const quickChecks = {
+  mining: {q:'Your laptop found a winning nonce after 80,000 tries. Why can everyone else trust it instantly?', ok:'Anyone can recompute one hash and see it matches - verifying is free, only finding was expensive', wrong:['The mining pool vouches for it','Bitcoin HQ signs off on each block'], why:'Proof of work is expensive to produce but nearly free to verify. That asymmetry is the entire trick: no trust needed, just one SHA-256 computation.'},
+  blockchain: {q:'You secretly edit block #1 in a 5-block chain. What do the other nodes see?', ok:'Blocks 1 through 5 all become invalid on your copy - and their copies are untouched', wrong:['Only block #1 shows as modified','Nothing, if you re-mine block #1 quickly'], why:'Each block locks in the hash of the one before it, so one edit cascades through every later block - and you only ever edited YOUR copy. Everyone else still holds the original.'},
+  transactions: {q:'A transaction takes in 0.5000 BTC and sends out 0.4980. Where did the 0.0020 go?', ok:'It becomes the fee the miner collects for including the transaction', wrong:['It is destroyed forever','It returns to the sender automatically'], why:'Fees are never set explicitly - they are simply inputs minus outputs. Forget your change output and the miner keeps the difference. No refunds.'},
+  outputs: {q:'Your wallet shows 0.80 BTC but a payment of exactly 0.80 fails. Why?', ok:'The fee must also come from your coins, so you can never spend the full total', wrong:['The wallet is showing a fake balance','Bitcoin requires a minimum account balance'], why:'A balance is just the sum of your coins. Spending all of it leaves nothing for the fee, so the transaction cannot be built.'},
+  signatures: {q:'A signed message gets one character altered in transit. What happens at verification?', ok:'Verification fails everywhere, instantly', wrong:['It still passes if the change is small','The signer must be contacted to confirm'], why:'The signature commits to the exact hash of the message. Any change, however small, produces a different hash and the math no longer checks out.'},
+  keys: {q:'Your house burns down with your hardware wallet inside. Your 12 words are memorized. Your bitcoin is...', ok:'Completely safe - the words deterministically regenerate every key and address', wrong:['Gone with the device','Recoverable only through customer support'], why:'Keys are derived from the seed the same way every time. The device was just a calculator. The words are the wallet.'},
+  publickeys: {q:'Why is it safe to post your bitcoin address publicly?', ok:'Deriving the private key from an address means reversing one-way functions - practically impossible', wrong:['It is not safe - addresses must stay secret','Because the network hides your balance'], why:'An address reveals nothing usable about the private key. Going backward requires breaking SHA-256 or the elliptic curve. No computer on Earth can.'},
+  privatekeys: {q:'Why does key generation demand real randomness?', ok:'Predictable randomness means guessable keys - and guessable keys have been drained in real thefts', wrong:['Randomness makes transactions confirm faster','It is only a convention - any number works'], why:'Wallets have been robbed because their randomness was weak. A key born from bad entropy can be re-created by an attacker running the same predictable process.'},
+  difficulty: {q:'Half of all miners go offline overnight. What happens to Bitcoin?', ok:'Blocks slow down temporarily, then difficulty adjusts and 10-minute blocks resume', wrong:['The network halts until miners return','The remaining miners vote to change the rules'], why:'Exactly this happened when China banned mining in 2021. Blocks slowed for a few weeks, the next adjustments cut difficulty, and the network healed with zero intervention.'},
+  network: {q:'Why does a merchant wait for one confirmation before handing over the goods?', ok:'An unconfirmed transaction can still lose a double-spend race - a mined block settles which version wins', wrong:['Confirmations increase the amount received','Unconfirmed transactions expire after an hour'], why:'Until a transaction is in a block, a conflicting spend of the same coin can still beat it. A confirmation means the race is over.'},
+  node: {q:'A block awards its miner double the allowed reward. Who stops it?', ok:'Every node independently rejects it - the miner burned electricity for nothing', wrong:['The Bitcoin Foundation reverses it','The other miners hold a vote'], why:'Rule enforcement is not a vote or an authority. Every node checks every block against the same rules and silently drops violations.'},
+  locks: {q:'What actually enforces that only your key can spend your coins?', ok:'Mathematics, checked identically by every node - not any person or company', wrong:['The wallet company holds them for you','Miners decide who owns what'], why:'A coin is locked by a script. Spending requires a signature that satisfies it, and every node verifies the math independently. Ownership is enforced by computation, not custody.'}
+};
+function quickCheckHTML(section){
+  const qc = quickChecks[section];
+  if(!qc) return '';
+  const opts = [{t: qc.ok, ok: true}].concat(qc.wrong.map(function(w){ return {t: w, ok: false}; }));
+  opts.sort(function(){ return Math.random() - 0.5; });
+  return '<div class="demo-step" id="quickCheck" data-why="' + qc.why.replace(/"/g, '&quot;') + '" style="margin-top:18px;border-color:rgba(167,139,250,0.45);">'
+    + '<div style="font-size:11px;font-weight:700;color:#a78bfa;font-family:Syne,sans-serif;letter-spacing:.1em;margin-bottom:8px;">🧠 QUICK CHECK</div>'
+    + '<div style="font-size:14px;color:var(--text);font-weight:600;line-height:1.5;margin-bottom:12px;">' + qc.q + '</div>'
+    + '<div style="display:grid;gap:8px;">'
+    + opts.map(function(o){ return '<button class="qc-opt demo-btn demo-btn-ghost" data-ok="' + (o.ok ? '1' : '0') + '" style="font-size:13px;padding:12px 14px;text-align:left;justify-content:flex-start;line-height:1.45;">' + o.t + '</button>'; }).join('')
+    + '</div>'
+    + '<div class="qc-explain demo-desc hidden" style="padding:12px 14px;border-radius:10px;margin-top:10px;line-height:1.6;"></div>'
+    + '</div>';
+}
+
 function getModalContent(section){
   const contents = {
     money: `
@@ -8465,11 +8514,12 @@ function getModalContent(section){
 
     network: `
       <div class="demo-title">🌐 Network Propagation</div>
-      <div class="demo-subtitle">Click any node to broadcast a transaction and watch it ripple across the peer-to-peer network in real time.</div>
+      <div class="demo-subtitle">Click any node to broadcast a transaction and watch it ripple across the peer-to-peer network. Then try the attack every payment system fears.</div>
       <div style="position:relative;height:300px;background:rgba(0,0,0,0.35);border-radius:16px;border:1px solid var(--glass-border);overflow:hidden;" id="netSim">
         <canvas id="netCanvas" style="width:100%;height:100%;"></canvas>
       </div>
-      <div id="netLog" class="demo-hash" style="margin-top:12px;height:80px;overflow-y:auto;font-size:12px;color:var(--muted);" aria-live="polite" role="log">
+      <button id="netDoubleSpendBtn" class="demo-btn demo-btn-red" style="margin-top:10px;">😈 Attempt a double-spend</button>
+      <div id="netLog" class="demo-hash" style="margin-top:10px;height:110px;overflow-y:auto;font-size:11px;color:var(--muted);line-height:1.6;" aria-live="polite" role="log">
         <div>[ Network ready. Click a node to broadcast. ]</div>
       </div>`,
 
@@ -8563,52 +8613,53 @@ function getModalContent(section){
       <div class="space-y-2" id="blockAnatomy"></div>`,
 
     difficulty: `
-      <div class="demo-title">🎯 Difficulty Adjuster</div>
-      <div class="demo-subtitle">Bitcoin automatically adjusts its puzzle difficulty every 2,016 blocks (~2 weeks) so that blocks always arrive roughly every 10 minutes, no matter how many miners join or leave.</div>
+      <div class="demo-title">🎯 The Difficulty Thermostat</div>
+      <div class="demo-subtitle">No committee controls Bitcoin's pace. Every 2,016 blocks the protocol measures how fast blocks actually arrived and re-tunes the puzzle. Break the network - then watch it heal itself.</div>
       <div class="demo-step active">
-        <label class="demo-desc" style="margin:0 0 10px;display:block;">Drag to simulate miners joining or leaving the network</label>
-        <input type="range" id="minerSlider" min="100" max="10000" value="5000" class="w-full" style="accent-color:var(--orange);height:8px;"/>
-        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;"><span>100 miners</span><span>5,000</span><span>10,000 miners</span></div>
+        <div class="demo-step-head"><div class="demo-num">1</div><div class="demo-step-label">Shock the network</div></div>
+        <div style="display:grid;gap:8px;grid-template-columns:1fr 1fr;margin-bottom:12px;">
+          <button id="diffBanBtn" class="demo-btn demo-btn-red" style="font-size:12px;padding:12px;">🚫 Mining ban<br/><span style="font-weight:400;font-size:10px;">hashrate -50%</span></button>
+          <button id="diffBoomBtn" class="demo-btn demo-btn-green" style="font-size:12px;padding:12px;">🚀 New ASICs ship<br/><span style="font-weight:400;font-size:10px;">hashrate +60%</span></button>
+        </div>
+        <label class="demo-desc" style="margin:0 0 6px;display:block;font-size:12px;">Or drag hashrate by hand</label>
+        <input type="range" id="minerSlider" min="10" max="300" value="100" class="w-full" style="accent-color:var(--orange);height:8px;" aria-label="Network hashrate percent"/>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:4px;">
-        <div class="demo-stat"><div class="demo-stat-val" id="diffMiners">5,000</div><div class="demo-stat-label">Active Miners</div></div>
-        <div class="demo-stat"><div class="demo-stat-val" id="diffVal">50.0T</div><div class="demo-stat-label">Difficulty</div></div>
-        <div class="demo-stat"><div class="demo-stat-val" id="diffTime" style="color:#4ade80;">~10 min</div><div class="demo-stat-label">Block Time</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <div class="demo-stat"><div class="demo-stat-val" id="diffHash">100%</div><div class="demo-stat-label">Hashrate</div></div>
+        <div class="demo-stat"><div class="demo-stat-val" id="diffVal">100%</div><div class="demo-stat-label">Difficulty</div></div>
+        <div class="demo-stat"><div class="demo-stat-val" id="diffTime" style="color:#4ade80;">10.0 min</div><div class="demo-stat-label">Block Time</div></div>
       </div>
       <div class="demo-step" style="margin-top:12px;">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
-          <div style="font-size:13px;font-weight:700;color:var(--orange);font-family:'Syne',sans-serif;">Target Hash Threshold</div>
-          <div class="demo-badge" id="diffBadge" style="background:rgba(74,222,128,0.12);color:#4ade80;border:1px solid rgba(74,222,128,0.3);font-size:11px;">BALANCED</div>
-        </div>
-        <div class="demo-hash" id="diffTarget" style="font-size:12px;text-align:center;">00000000000fffffffffffffffffffffffffffffffffffffffffffffffffffffff</div>
-        <div class="demo-desc" style="text-align:center;">A valid block hash must be below this value. More zeros = harder to find.</div>
-      </div>
-      <div class="demo-card" style="margin-top:12px;" id="diffExplanation">
-        <div style="font-size:14px;color:var(--text2);line-height:1.7;">With 5,000 miners, the network is balanced. Blocks arrive roughly every 10 minutes. No committee sets this number. The protocol adjusts automatically.</div>
+        <div class="demo-step-head"><div class="demo-num">2</div><div class="demo-step-label">Let the protocol respond</div></div>
+        <button id="diffEpochBtn" class="demo-btn demo-btn-orange">⏩ Advance 2,016 blocks (one adjustment)</button>
+        <div id="diffLog" class="demo-hash" style="margin-top:10px;font-size:11px;max-height:150px;overflow-y:auto;color:var(--text2);line-height:1.7;">Shock the network above, then advance epochs and watch block time converge back to 10 minutes. Nobody votes. Nobody meets. The math just adjusts.</div>
       </div>`,
 
     transactions: `
-      <div class="demo-title">💸 Transaction Builder</div>
-      <div class="demo-subtitle">Build a Bitcoin transaction by adding inputs (coins you own) and outputs (where they go). The difference is the miner's fee.</div>
-      <div style="display:grid;gap:14px;grid-template-columns:1fr 1fr;">
-        <div class="demo-step active" style="margin-bottom:0;">
-          <div style="font-size:14px;font-weight:700;color:var(--orange);font-family:'Syne',sans-serif;margin-bottom:10px;">📥 INPUTS (your coins)</div>
-          <div id="txInputsList" class="space-y-2"></div>
-          <button id="addTxInputBtn" class="demo-btn demo-btn-ghost" style="font-size:12px;padding:10px;margin-top:10px;">+ Add Input</button>
+      <div class="demo-title">💸 Build a Real Transaction</div>
+      <div class="demo-subtitle">Your mission: pay Carol exactly 0.3000 BTC. Select coins to fund it, then decide how much change to send back to yourself. Whatever you leave on the table becomes the miner's fee - get it right.</div>
+      <div class="demo-step active">
+        <div class="demo-step-head"><div class="demo-num">1</div><div class="demo-step-label">Select coins to spend</div></div>
+        <div id="txCoins" style="display:grid;gap:8px;grid-template-columns:1fr 1fr;"></div>
+      </div>
+      <div class="demo-step">
+        <div class="demo-step-head"><div class="demo-num">2</div><div class="demo-step-label">Set your outputs</div></div>
+        <div class="demo-card" style="border-color:rgba(74,222,128,0.3);padding:14px;margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div><div style="font-size:13px;font-weight:700;color:#4ade80;font-family:Syne,sans-serif;">To Carol</div><div style="font-size:10px;color:var(--muted);font-family:Space Mono,monospace;">bc1qcarol7x2f...</div></div>
+            <div style="font-size:18px;font-weight:700;color:#4ade80;font-family:Space Mono,monospace;">0.3000</div>
+          </div>
         </div>
-        <div class="demo-step" style="margin-bottom:0;border-color:rgba(74,222,128,0.3);">
-          <div style="font-size:14px;font-weight:700;color:#4ade80;font-family:'Syne',sans-serif;margin-bottom:10px;">📤 OUTPUTS (recipients)</div>
-          <div id="txOutputsList" class="space-y-2"></div>
-          <button id="addTxOutputBtn" class="demo-btn" style="font-size:12px;padding:10px;margin-top:10px;background:rgba(74,222,128,0.1);border:2px solid rgba(74,222,128,0.3);color:#4ade80;">+ Add Output</button>
+        <div class="demo-card" style="border-color:rgba(96,165,250,0.3);padding:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+            <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#60a5fa;font-family:Syne,sans-serif;">Change back to you</div><div style="font-size:10px;color:var(--muted);">You decide this. Anything left over is the fee.</div></div>
+            <input type="number" id="txChange" value="0" step="0.0001" min="0" class="demo-input" style="width:150px;text-align:right;" aria-label="Change amount"/>
+          </div>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;">
-        <div class="demo-stat"><div class="demo-stat-val" style="color:var(--orange);" id="txTotalIn">0.0000</div><div class="demo-stat-label">Total In</div></div>
-        <div class="demo-stat"><div class="demo-stat-val" style="color:#4ade80;" id="txTotalOut">0.0000</div><div class="demo-stat-label">Total Out</div></div>
-        <div class="demo-stat"><div class="demo-stat-val" style="color:#fbbf24;" id="txFee">0.0000</div><div class="demo-stat-label">Fee (miner tip)</div></div>
-      </div>
-      <button id="broadcastTxBtn" class="demo-btn demo-btn-orange" style="margin-top:14px;">📡 Broadcast Transaction</button>
-      <div id="txBroadcastResult" class="hidden demo-result" style="font-family:'Space Mono',monospace;font-size:14px;" aria-live="polite"></div>`,
+      <div class="demo-plan" id="txMath" aria-live="polite">Select coins above to begin.</div>
+      <button id="broadcastTxBtn" class="demo-btn demo-btn-orange" style="margin-top:12px;">📡 Broadcast Transaction</button>
+      <div id="txBroadcastResult" class="demo-result hidden" aria-live="polite"></div>`,
 
     outputs: `
       <div class="demo-title">🪙 The Coin Picker</div>
@@ -8649,10 +8700,22 @@ function getModalContent(section){
       <div id="lockResult" class="demo-result hidden" aria-live="polite"></div>`,
 
     keys: `
-      <div class="demo-title">🔑 Key Derivation Flow</div>
-      <div class="demo-subtitle">Watch how a random seed phrase creates your private key, public key, and address through a chain of one-way functions. Each step is computed with real SHA-256.</div>
-      <div id="keyFlow" class="space-y-0"></div>
-      <button id="keyFlowBtn" class="demo-btn demo-btn-orange" style="margin-top:18px;">🔄 Generate New Key Chain</button>`,
+      <div class="demo-title">🔑 The Seed Phrase Experiment</div>
+      <div class="demo-subtitle">These 12 words ARE a wallet. Everything below is derived from them live, with real SHA-256, as you type. Run the experiment: change one word, watch the wallet vanish - then change it back.</div>
+      <div class="demo-step active">
+        <div class="demo-step-head"><div class="demo-num">1</div><div class="demo-step-label">Your seed phrase - edit it</div></div>
+        <textarea id="seedInput" class="demo-input" rows="2" style="resize:none;line-height:1.9;" aria-label="Seed phrase"></textarea>
+        <button id="seedShuffleBtn" class="demo-btn demo-btn-ghost" style="margin-top:10px;font-size:12px;padding:10px;">🎲 Start over with a new random seed</button>
+      </div>
+      <div class="demo-step">
+        <div class="demo-step-head"><div class="demo-num">2</div><div class="demo-step-label">What those words become</div></div>
+        <div style="display:grid;gap:10px;">
+          <div><div style="font-size:11px;color:#f87171;font-weight:700;font-family:Syne,sans-serif;margin-bottom:4px;">PRIVATE KEY</div><div class="demo-hash" id="seedPriv" style="font-size:11px;"></div></div>
+          <div><div style="font-size:11px;color:#fbbf24;font-weight:700;font-family:Syne,sans-serif;margin-bottom:4px;">PUBLIC KEY</div><div class="demo-hash" id="seedPub" style="font-size:11px;"></div></div>
+          <div><div style="font-size:11px;color:#4ade80;font-weight:700;font-family:Syne,sans-serif;margin-bottom:4px;">ADDRESS</div><div class="demo-hash" id="seedAddr" style="font-size:13px;"></div></div>
+        </div>
+      </div>
+      <div id="seedVerdict" class="demo-result" style="padding:16px;" aria-live="polite"></div>`,
 
     privatekeys: `
       <div class="demo-title">🎲 Entropy Collector</div>
@@ -8671,29 +8734,21 @@ function getModalContent(section){
       <div style="margin-top:10px;text-align:center;font-size:13px;" id="keyStrength" style="color:var(--muted);"></div>`,
 
     publickeys: `
-      <div class="demo-title">📢 Public Key Derivation</div>
-      <div class="demo-subtitle">See how a private key becomes a public key and then an address. Every step is a one-way function. You can never go backwards.</div>
-      <div class="space-y-0" id="pubkeyFlow">
-        <div class="demo-card" style="border-color:rgba(248,113,113,0.3);">
-          <div style="font-size:14px;font-weight:700;color:#f87171;font-family:'Syne',sans-serif;margin-bottom:6px;">🔴 Private Key (SECRET - never share)</div>
-          <div class="demo-hash" id="pkPrivate" style="font-size:12px;">Click generate below</div>
-        </div>
-        <div class="demo-chain-link">↓ <span style="font-size:11px;color:var(--muted);">secp256k1 curve multiply (one-way)</span></div>
-        <div class="demo-card" style="border-color:rgba(251,191,36,0.3);">
-          <div style="font-size:14px;font-weight:700;color:#fbbf24;font-family:'Syne',sans-serif;margin-bottom:6px;">🟡 Public Key (safe to share)</div>
-          <div class="demo-hash" id="pkPublic" style="font-size:12px;">...</div>
-        </div>
-        <div class="demo-chain-link">↓ <span style="font-size:11px;color:var(--muted);">SHA-256 → RIPEMD-160 → Bech32</span></div>
-        <div class="demo-card" style="border-color:rgba(74,222,128,0.3);">
-          <div style="font-size:14px;font-weight:700;color:#4ade80;font-family:'Syne',sans-serif;margin-bottom:6px;">🟢 Bitcoin Address (share to receive BTC)</div>
-          <div class="demo-hash" id="pkAddress" style="font-size:12px;">...</div>
-        </div>
-        <div class="demo-result demo-result-fail" style="margin-top:12px;padding:14px;">
-          <div style="font-size:14px;">⛔ You can NEVER go backwards</div>
-          <div class="demo-result-detail">Address → Public Key → Private Key is mathematically impossible</div>
-        </div>
+      <div class="demo-title">📢 The One-Way Street</div>
+      <div class="demo-subtitle">Forward is instant: any secret becomes an address in microseconds. Backward is impossible. Don't take our word for it - try to break it yourself.</div>
+      <div class="demo-step active">
+        <div class="demo-step-head"><div class="demo-num">1</div><div class="demo-step-label">Forward: instant</div></div>
+        <input type="text" id="pkSecret" class="demo-input" value="correct horse battery staple" aria-label="Secret to derive"/>
+        <div class="demo-chain-link">↓ <span style="font-size:11px;color:var(--muted);">private key → public key → address, all one-way</span></div>
+        <div class="demo-hash" id="pkForwardAddr" style="font-size:13px;border-color:rgba(74,222,128,0.35);"></div>
       </div>
-      <button id="genKeyChainBtn" class="demo-btn demo-btn-orange" style="margin-top:16px;">🔄 Generate New Chain</button>`,
+      <div class="demo-step">
+        <div class="demo-step-head"><div class="demo-num">2</div><div class="demo-step-label">Backward: try to steal these coins</div></div>
+        <div class="demo-desc" style="margin:0 0 10px;">The address below was derived from a secret phrase. If you can type any secret that produces this exact address, the coins are yours. Go ahead.</div>
+        <div class="demo-hash" id="pkTargetAddr" style="font-size:13px;border-color:rgba(248,113,113,0.45);color:#f87171;"></div>
+        <input type="text" id="pkGuess" class="demo-input" placeholder="Type a guess..." style="margin-top:10px;" aria-label="Guess the secret"/>
+        <div id="pkGuessResult" class="demo-desc" style="min-height:48px;font-family:Space Mono,monospace;font-size:11px;" aria-live="polite"></div>
+      </div>`,
 
     signatures: `
       <div class="demo-title">✍️ Sign and Verify</div>
@@ -9074,7 +9129,7 @@ function getModalContent(section){
         </div>
       </div>`
   };
-  return contents[section] || '<p>Coming soon!</p>';
+  return contents[section] ? contents[section] + quickCheckHTML(section) : '<p>Coming soon!</p>';
 }
 
 // ═══════════════════════════════════════
@@ -9183,9 +9238,11 @@ modalInitFns.network = function(){
     netNodes.push({x: W/2 + r*Math.cos(angle) + (Math.random()-0.5)*30, y: H/2 + r*Math.sin(angle) + (Math.random()-0.5)*30, active: false, id: i, color: '#7878a0'});
   }
   let packets = [];
-  function addLog(msg){
+  let dsFirstSeen = null; // per-node first-seen color during a double-spend race
+  function addLog(msg, color){
     const d = document.createElement('div');
-    d.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+    d.innerHTML = msg;
+    if(color) d.style.color = color;
     log.appendChild(d);
     log.scrollTop = log.scrollHeight;
   }
@@ -9206,23 +9263,35 @@ modalInitFns.network = function(){
       p.progress += 0.025;
       const x = p.sx + (p.ex - p.sx) * p.progress;
       const y = p.sy + (p.ey - p.sy) * p.progress;
-      c.beginPath(); c.arc(x, y, 4, 0, Math.PI * 2); c.fillStyle = '#f59e0b'; c.fill();
+      c.beginPath(); c.arc(x, y, 4, 0, Math.PI * 2); c.fillStyle = p.color || '#f59e0b'; c.fill();
       if(p.progress >= 1){
-        netNodes[p.targetIdx].active = true; netNodes[p.targetIdx].color = '#f59e0b';
-        setTimeout(() => { netNodes[p.targetIdx].color = '#7878a0'; netNodes[p.targetIdx].active = false; }, 1000);
+        const n = netNodes[p.targetIdx];
+        if(dsFirstSeen && p.ds){
+          // Double-spend race: node accepts whichever conflicting tx arrives first
+          if(!dsFirstSeen[p.targetIdx]){
+            dsFirstSeen[p.targetIdx] = p.color;
+            n.active = true; n.color = p.color;
+          } else if(dsFirstSeen[p.targetIdx] !== p.color){
+            addLog('Node ' + p.targetIdx + ' already saw the ' + (p.color === '#f59e0b' ? 'RED' : 'ORANGE') + ' tx - rejects this one ✗', '#7878a0');
+          }
+        } else if(!dsFirstSeen){
+          n.active = true; n.color = p.color || '#f59e0b';
+          setTimeout(() => { n.color = '#7878a0'; n.active = false; }, 1000);
+        }
       }
     }
     netNodes.forEach(n => {
       c.beginPath(); c.arc(n.x, n.y, 14, 0, Math.PI * 2);
-      c.fillStyle = n.active ? 'rgba(245,158,11,0.3)' : 'rgba(18,18,32,0.8)'; c.fill();
+      c.fillStyle = n.active ? (n.color === '#f87171' ? 'rgba(248,113,113,0.3)' : 'rgba(245,158,11,0.3)') : 'rgba(18,18,32,0.8)'; c.fill();
       c.strokeStyle = n.color; c.lineWidth = 2; c.stroke();
       c.fillStyle = n.color; c.font = '10px Space Mono, monospace'; c.textAlign = 'center';
-      c.fillText('\u20BF', n.x, n.y + 4);
+      c.fillText('₿', n.x, n.y + 4);
     });
     requestAnimationFrame(drawNet);
   }
   drawNet();
   cvs.addEventListener('click', function(e){
+    if(dsFirstSeen) return; // ignore clicks during the race
     const rect = cvs.getBoundingClientRect();
     const mx = (e.clientX - rect.left) * (cvs.width / rect.width);
     const my = (e.clientY - rect.top) * (cvs.height / rect.height);
@@ -9231,16 +9300,50 @@ modalInitFns.network = function(){
       if(Math.sqrt((netNodes[i].x-mx)**2 + (netNodes[i].y-my)**2) < 20){ clicked = i; break; }
     }
     if(clicked >= 0){
-      addLog(`Node ${clicked} broadcasts TX: "Send 0.1 BTC to bc1q..."`);
+      addLog('Node ' + clicked + ' broadcasts TX: "Send 0.1 BTC to bc1q..."');
       netNodes[clicked].active = true; netNodes[clicked].color = '#f59e0b';
       netNodes.filter((_, i) => i !== clicked).forEach((target, j) => {
         setTimeout(() => {
-          packets.push({sx: netNodes[clicked].x, sy: netNodes[clicked].y, ex: target.x, ey: target.y, targetIdx: netNodes.indexOf(target), progress: 0});
-          addLog(`Node ${netNodes.indexOf(target)} verified \u2713`);
+          packets.push({sx: netNodes[clicked].x, sy: netNodes[clicked].y, ex: target.x, ey: target.y, targetIdx: netNodes.indexOf(target), progress: 0, color: '#f59e0b'});
+          addLog('Node ' + netNodes.indexOf(target) + ' verified ✓');
         }, j * 150);
       });
       setTimeout(() => { netNodes[clicked].color = '#7878a0'; netNodes[clicked].active = false; }, 500);
     }
+  });
+  document.getElementById('netDoubleSpendBtn')?.addEventListener('click', function(){
+    if(dsFirstSeen) return;
+    const btn = this;
+    btn.disabled = true; btn.style.opacity = '0.5';
+    dsFirstSeen = {};
+    // Two nodes on opposite sides of the network broadcast conflicting spends of the SAME coin
+    const A = 0, B = Math.floor(nodeCount / 2);
+    dsFirstSeen[A] = '#f59e0b'; dsFirstSeen[B] = '#f87171';
+    netNodes[A].active = true; netNodes[A].color = '#f59e0b';
+    netNodes[B].active = true; netNodes[B].color = '#f87171';
+    log.innerHTML = '';
+    addLog('😈 Attacker signs TWO transactions spending the SAME coin:', '#f87171');
+    addLog('<span style="color:#f59e0b;">ORANGE tx</span>: pays the coffee shop (broadcast from node ' + A + ')');
+    addLog('<span style="color:#f87171;">RED tx</span>: pays the attacker back (broadcast from node ' + B + ')');
+    netNodes.forEach(function(target, i){
+      if(i === A || i === B) return;
+      const dA = Math.hypot(target.x - netNodes[A].x, target.y - netNodes[A].y);
+      const dB = Math.hypot(target.x - netNodes[B].x, target.y - netNodes[B].y);
+      setTimeout(function(){ packets.push({sx: netNodes[A].x, sy: netNodes[A].y, ex: target.x, ey: target.y, targetIdx: i, progress: 0, color: '#f59e0b', ds: true}); }, dA * 2.2);
+      setTimeout(function(){ packets.push({sx: netNodes[B].x, sy: netNodes[B].y, ex: target.x, ey: target.y, targetIdx: i, progress: 0, color: '#f87171', ds: true}); }, dB * 2.2);
+    });
+    setTimeout(function(){
+      const orange = netNodes.filter(function(n){ return n.color === '#f59e0b'; }).length;
+      const red = netNodes.filter(function(n){ return n.color === '#f87171'; }).length;
+      addLog('─────────────────────────', '#7878a0');
+      addLog('The network is SPLIT: ' + orange + ' nodes hold the orange tx, ' + red + ' hold the red one. Both cannot be valid - they spend the same coin.', '#fbbf24');
+      addLog('Whichever tx a miner includes in the next block wins. The other is erased everywhere. This race is exactly why merchants wait for a CONFIRMATION instead of trusting an unconfirmed payment.', '#4ade80');
+      setTimeout(function(){
+        netNodes.forEach(function(n){ n.color = '#7878a0'; n.active = false; });
+        dsFirstSeen = null;
+        btn.disabled = false; btn.style.opacity = '1';
+      }, 4000);
+    }, 3500);
   });
 };
 
@@ -9584,79 +9687,135 @@ modalInitFns.blocks = function(){
   });
 };
 
-// ── Difficulty ──
-function updateDifficulty(){
-  const val = parseInt(document.getElementById('minerSlider').value);
-  document.getElementById('diffMiners').textContent = val.toLocaleString();
-  const ratio = val / 5000;
-  document.getElementById('diffVal').textContent = (50 * ratio).toFixed(1) + 'T';
-  let blockTime, timeColor, badge, badgeColor, explanation;
-  const zeros = Math.max(5, Math.min(16, Math.round(10 + Math.log2(ratio) * 2)));
-  const target = '0'.repeat(zeros) + 'f'.repeat(64 - zeros);
-  document.getElementById('diffTarget').textContent = target;
-  if(ratio < 0.3){
-    blockTime = '~' + Math.round(10/ratio) + ' min'; timeColor = '#f87171'; badge = 'TOO SLOW'; badgeColor = 'rgba(248,113,113,0.12)';
-    explanation = 'With only ' + val.toLocaleString() + ' miners, blocks take too long. The protocol will automatically DECREASE difficulty at the next adjustment so blocks come faster.';
-  } else if(ratio > 1.7){
-    blockTime = '~' + (10/ratio).toFixed(1) + ' min'; timeColor = '#fbbf24'; badge = 'TOO FAST'; badgeColor = 'rgba(251,191,36,0.12)';
-    explanation = 'With ' + val.toLocaleString() + ' miners, blocks arrive too quickly. The protocol will INCREASE difficulty. More leading zeros are required, making valid hashes exponentially harder to find.';
-  } else {
-    blockTime = '~10 min'; timeColor = '#4ade80'; badge = 'BALANCED'; badgeColor = 'rgba(74,222,128,0.12)';
-    explanation = 'With ' + val.toLocaleString() + ' miners, the network is balanced. Blocks arrive roughly every 10 minutes. No committee sets this. The math adjusts automatically every 2,016 blocks.';
-  }
-  document.getElementById('diffTime').textContent = blockTime;
-  document.getElementById('diffTime').style.color = timeColor;
-  const b = document.getElementById('diffBadge');
-  b.textContent = badge; b.style.background = badgeColor; b.style.color = timeColor; b.style.borderColor = timeColor;
-  document.getElementById('diffExplanation').innerHTML = '<div style="font-size:14px;color:var(--text2);line-height:1.7;">' + explanation + '</div>';
-}
+// ── Difficulty (epoch thermostat) ──
+let diffState = null;
 modalInitFns.difficulty = function(){
-  updateDifficulty();
-  document.getElementById('minerSlider')?.addEventListener('input', updateDifficulty);
+  diffState = {hash: 100, diff: 100, epoch: 0};
+  const $ = function(id){ return document.getElementById(id); };
+  function blockTime(){ return 10 * diffState.diff / diffState.hash; }
+  function render(){
+    $('diffHash').textContent = Math.round(diffState.hash) + '%';
+    $('diffVal').textContent = Math.round(diffState.diff) + '%';
+    const bt = blockTime();
+    $('diffTime').textContent = bt.toFixed(1) + ' min';
+    $('diffTime').style.color = Math.abs(bt - 10) < 0.8 ? '#4ade80' : (bt > 10 ? '#f87171' : '#fbbf24');
+  }
+  function log(msg, color){
+    const el = $('diffLog');
+    const d = document.createElement('div');
+    d.innerHTML = msg;
+    if(color) d.style.color = color;
+    el.insertBefore(d, el.firstChild);
+  }
+  function shock(mult, story){
+    diffState.hash = Math.min(300, Math.max(10, diffState.hash * mult));
+    $('minerSlider').value = diffState.hash;
+    render();
+    const bt = blockTime();
+    log('⚡ ' + story + ' Hashrate: ' + Math.round(diffState.hash) + '%. Blocks now take ~' + bt.toFixed(1) + ' min. ' + (bt > 11 ? 'Payments crawl...' : bt < 9 ? 'Coins issue too fast...' : ''), bt > 11 ? '#f87171' : bt < 9 ? '#fbbf24' : '#4ade80');
+  }
+  $('diffBanBtn')?.addEventListener('click', function(){ shock(0.5, 'A major country bans mining overnight.'); });
+  $('diffBoomBtn')?.addEventListener('click', function(){ shock(1.6, 'A new ASIC generation comes online.'); });
+  $('minerSlider')?.addEventListener('input', function(){
+    diffState.hash = parseFloat(this.value);
+    render();
+  });
+  $('diffEpochBtn')?.addEventListener('click', function(){
+    const bt = blockTime();
+    // Real retarget rule: adjust by measured/expected, clamped to 4x either way
+    const factor = Math.min(4, Math.max(0.25, 10 / bt));
+    diffState.diff = diffState.diff * factor;
+    diffState.epoch++;
+    render();
+    const newBt = blockTime();
+    const dir = factor > 1.005 ? 'increased ' + ((factor - 1) * 100).toFixed(0) + '%' : factor < 0.995 ? 'decreased ' + ((1 - factor) * 100).toFixed(0) + '%' : 'held steady';
+    log('📐 Epoch ' + diffState.epoch + ': 2,016 blocks averaged ' + bt.toFixed(1) + ' min → difficulty ' + dir + '. Block time now ' + newBt.toFixed(1) + ' min.', '#f59e0b');
+    if(Math.abs(newBt - 10) < 0.5 && Math.abs(bt - 10) >= 0.5){
+      log('✅ Equilibrium restored: ~10 minute blocks. No committee met. No vote was held. The protocol healed itself - exactly what happened after China banned mining in 2021.', '#4ade80');
+    }
+  });
+  render();
 };
 
-// ── Transactions ──
-let txInputs = [{amt:0.25},{amt:0.15}], txOutputs = [{amt:0.12},{amt:0.27}];
-function renderTxBuilder(){
-  const il = document.getElementById('txInputsList'), ol = document.getElementById('txOutputsList');
-  if(!il||!ol) return;
-  il.innerHTML = ''; ol.innerHTML = '';
-  let totalIn = 0, totalOut = 0;
-  txInputs.forEach(function(inp,i){
-    totalIn += inp.amt;
+// ── Transactions (balance-the-transaction puzzle) ──
+const TX_GOAL = 0.3;
+let txPuzzleCoins, txPuzzleSel;
+function resetTxPuzzle(){
+  txPuzzleCoins = [
+    {id:'t1',amt:0.18,label:'From Alice'},
+    {id:'t2',amt:0.22,label:'Mining pool payout'},
+    {id:'t3',amt:0.09,label:'Sold a laptop'},
+    {id:'t4',amt:0.35,label:'From Bob'}
+  ];
+  txPuzzleSel = new Set();
+}
+function renderTxCoins(){
+  const el = document.getElementById('txCoins'); if(!el) return;
+  el.innerHTML = '';
+  txPuzzleCoins.forEach(function(u){
+    const sel = txPuzzleSel.has(u.id);
     const d = document.createElement('div');
-    d.style.cssText = 'display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);';
-    d.innerHTML = '<span style="font-size:16px;">📥</span><span style="flex:1;font-size:13px;color:var(--orange);font-family:Space Mono,monospace;font-weight:700;">'+inp.amt.toFixed(4)+' BTC</span><button aria-label="Remove input" style="color:#f87171;background:none;border:none;cursor:pointer;font-size:18px;padding:4px;">×</button>';
-    d.querySelector('button').addEventListener('click',function(){txInputs.splice(i,1);renderTxBuilder();});
-    il.appendChild(d);
+    d.className = 'demo-coin' + (sel ? ' selected' : '');
+    d.innerHTML = '<div style="font-size:22px;">' + (sel ? '✅' : '🪙') + '</div>'
+      + '<div style="flex:1;"><div class="demo-coin-amt" style="color:' + (sel ? 'var(--orange)' : 'var(--text)') + ';">' + u.amt.toFixed(4) + '</div>'
+      + '<div class="demo-coin-label">' + u.label + '</div></div>';
+    d.addEventListener('click', function(){
+      if(txPuzzleSel.has(u.id)) txPuzzleSel.delete(u.id); else txPuzzleSel.add(u.id);
+      renderTxCoins(); updateTxMath();
+    });
+    el.appendChild(d);
   });
-  txOutputs.forEach(function(out,i){
-    totalOut += out.amt;
-    const d = document.createElement('div');
-    d.style.cssText = 'display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);';
-    d.innerHTML = '<span style="font-size:16px;">📤</span><span style="flex:1;font-size:13px;color:#4ade80;font-family:Space Mono,monospace;font-weight:700;">'+out.amt.toFixed(4)+' BTC</span><button aria-label="Remove output" style="color:#f87171;background:none;border:none;cursor:pointer;font-size:18px;padding:4px;">×</button>';
-    d.querySelector('button').addEventListener('click',function(){txOutputs.splice(i,1);renderTxBuilder();});
-    ol.appendChild(d);
-  });
-  const fee = Math.max(0, totalIn - totalOut);
-  document.getElementById('txTotalIn').textContent = totalIn.toFixed(4);
-  document.getElementById('txTotalOut').textContent = totalOut.toFixed(4);
-  document.getElementById('txFee').textContent = fee.toFixed(4);
-  document.getElementById('txFee').style.color = fee > 0.01 ? '#f87171' : fee > 0 ? '#fbbf24' : '#4ade80';
+}
+function txFeeVerdict(inTotal, change){
+  const fee = inTotal - TX_GOAL - change;
+  if(inTotal < TX_GOAL) return {fee, color:'#f87171', msg:'Selected coins do not cover 0.3000 yet.', valid:false};
+  if(fee < 0) return {fee, color:'#f87171', msg:'Outputs exceed inputs. Every node rejects this instantly.', valid:false};
+  if(fee === 0) return {fee, color:'#fbbf24', msg:'Zero fee. No miner will ever include this. It sits in the mempool forever.', valid:false};
+  if(fee > 0.01) return {fee, color:'#f87171', msg:'You are tipping the miner ' + fee.toFixed(4) + ' BTC. Real users have lost fortunes this way. Send more back to yourself as change.', valid:false};
+  if(fee < 0.00005) return {fee, color:'#fbbf24', msg:'Fee is dust. This might confirm eventually, but nodes may drop it. Leave a little more.', valid:false};
+  return {fee, color:'#4ade80', msg:'Reasonable fee. Miners will happily include this.', valid:true};
+}
+function updateTxMath(){
+  const el = document.getElementById('txMath'); if(!el) return;
+  const selected = txPuzzleCoins.filter(function(u){ return txPuzzleSel.has(u.id); });
+  if(!selected.length){ el.innerHTML = '<span style="color:var(--muted);">Select coins above to begin.</span>'; return; }
+  const inTotal = selected.reduce(function(x,u){ return x+u.amt; },0);
+  const change = parseFloat(document.getElementById('txChange').value) || 0;
+  const v = txFeeVerdict(inTotal, change);
+  el.innerHTML = '<div style="display:grid;gap:4px;">'
+    + '<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Inputs (' + selected.length + ' coin' + (selected.length>1?'s':'') + ')</span><span style="color:var(--orange);font-family:Space Mono,monospace;font-weight:700;">' + inTotal.toFixed(4) + '</span></div>'
+    + '<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">To Carol</span><span style="color:#4ade80;font-family:Space Mono,monospace;">-' + TX_GOAL.toFixed(4) + '</span></div>'
+    + '<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Change to you</span><span style="color:#60a5fa;font-family:Space Mono,monospace;">-' + change.toFixed(4) + '</span></div>'
+    + '<div style="display:flex;justify-content:space-between;border-top:1px solid var(--glass-border);padding-top:6px;margin-top:4px;"><span style="color:var(--muted);font-weight:700;">Miner fee (what is left)</span><span style="color:' + v.color + ';font-family:Space Mono,monospace;font-weight:700;">' + v.fee.toFixed(4) + '</span></div>'
+    + '<div style="color:' + v.color + ';font-size:12px;margin-top:4px;">' + v.msg + '</div>'
+    + '</div>';
 }
 modalInitFns.transactions = function(){
-  renderTxBuilder();
-  document.getElementById('addTxInputBtn')?.addEventListener('click',function(){txInputs.push({amt:parseFloat((Math.random()*0.3+0.05).toFixed(4))});renderTxBuilder();});
-  document.getElementById('addTxOutputBtn')?.addEventListener('click',function(){txOutputs.push({amt:parseFloat((Math.random()*0.2+0.03).toFixed(4))});renderTxBuilder();});
-  document.getElementById('broadcastTxBtn')?.addEventListener('click',function(){
-    const totalIn = txInputs.reduce(function(s,x){return s+x.amt;},0), totalOut = txOutputs.reduce(function(s,x){return s+x.amt;},0);
+  resetTxPuzzle();
+  renderTxCoins();
+  updateTxMath();
+  document.getElementById('txChange')?.addEventListener('input', updateTxMath);
+  document.getElementById('broadcastTxBtn')?.addEventListener('click', function(){
     const r = document.getElementById('txBroadcastResult');
+    const selected = txPuzzleCoins.filter(function(u){ return txPuzzleSel.has(u.id); });
     r.classList.remove('hidden');
-    if(!txInputs.length){r.className='demo-result demo-result-fail';r.innerHTML='<div class="demo-result-title">❌ No Inputs</div><div class="demo-result-detail">Add at least one input UTXO.</div>';return;}
-    if(!txOutputs.length){r.className='demo-result demo-result-fail';r.innerHTML='<div class="demo-result-title">❌ No Outputs</div><div class="demo-result-detail">Add at least one output recipient.</div>';return;}
-    if(totalOut>totalIn){r.className='demo-result demo-result-fail';r.innerHTML='<div class="demo-result-title">❌ Outputs Exceed Inputs</div><div class="demo-result-detail">You cannot spend more than you have.</div>';return;}
-    r.className='demo-result demo-result-ok';
-    r.innerHTML='<div class="demo-result-title">✅ Transaction Broadcast!</div><div class="demo-result-detail">Fee: '+(totalIn-totalOut).toFixed(4)+' BTC goes to the miner who includes this in a block.</div>';
+    if(!selected.length){
+      r.className = 'demo-result demo-result-fail';
+      r.innerHTML = '<div class="demo-result-title">❌ No inputs</div><div class="demo-result-detail">Select coins to fund the payment.</div>';
+      return;
+    }
+    const inTotal = selected.reduce(function(x,u){ return x+u.amt; },0);
+    const change = parseFloat(document.getElementById('txChange').value) || 0;
+    const v = txFeeVerdict(inTotal, change);
+    if(!v.valid){
+      r.className = 'demo-result demo-result-fail';
+      r.innerHTML = '<div class="demo-result-title">❌ Rejected</div><div class="demo-result-detail">' + v.msg + '</div>';
+      return;
+    }
+    r.className = 'demo-result demo-result-ok';
+    r.innerHTML = '<div class="demo-result-title">🎉 Transaction confirmed!</div>'
+      + '<div class="demo-result-detail">Carol receives 0.3000. You get ' + change.toFixed(4) + ' back as a brand new coin. The miner keeps ' + v.fee.toFixed(4) + ' as the tip that got you included in a block.<br/><br/>This is every Bitcoin transaction ever made: inputs in, outputs out, the difference is the fee. There is no account, no balance - just coins being melted down and re-minted.</div>';
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) for(let k=0;k<10;k++) setTimeout(function(){spawnCoin();},k*90);
   });
 };
 
@@ -9806,43 +9965,42 @@ modalInitFns.locks = function(){
   });
 };
 
-// ── Key Flow ──
-function runKeyFlow(){
-  const seed = Array.from({length:12},()=>bip39Words[Math.floor(Math.random()*bip39Words.length)]).join(' ');
-  const privKey = sha256Hex(seed);
-  const pubKey = '02' + sha256Hex(privKey).substring(0, 62);
-  const addrHash = sha256Hex(pubKey);
+// ── Key Flow (seed phrase experiment) ──
+let seedOriginal = '', seedOriginalAddr = '';
+function deriveWallet(seed){
+  const priv = sha256Hex(seed.trim().replace(/\s+/g,' ').toLowerCase());
+  const pub = '02' + sha256Hex(priv).substring(0, 62);
+  const addrHash = sha256Hex(pub);
   const b32 = '023456789acdefghjklmnpqrstuvwxyz';
   const addr = 'bc1q' + Array.from(addrHash.substring(0, 38)).map(function(c){ return b32[parseInt(c, 16) % 32] || b32[0]; }).join('');
-  const steps=[
-    {label:'Seed Phrase (12 words)',color:'#7878a0',val:seed,note:'Random words from a 2048-word list'},
-    {label:'Master Private Key',color:'#f87171',val:privKey,note:'SHA-256 of seed. Same seed = same key, always.'},
-    {label:'Public Key (compressed)',color:'#fbbf24',val:pubKey,note:'One-way derivation. Cannot be reversed.'},
-    {label:'Bitcoin Address',color:'#4ade80',val:addr,note:'Safe to share. This is what you give to receive BTC.'}
-  ];
-  const c=document.getElementById('keyFlow');c.innerHTML='';
-  steps.forEach(function(st,i){
-    if(i > 0){
-      const arrow = document.createElement('div');
-      arrow.className = 'demo-chain-link';
-      arrow.style.cssText = 'opacity:0;transition:opacity .3s;transition-delay:'+(i*0.2)+'s;';
-      arrow.innerHTML = '↓ <span style="font-size:11px;color:var(--muted);">one-way function</span>';
-      c.appendChild(arrow);
-      setTimeout(function(){arrow.style.opacity='1';}, i*200+50);
-    }
-    const d=document.createElement('div');
-    d.className='demo-card';
-    d.style.cssText='border-color:'+st.color+'33;opacity:0;transform:translateY(10px);transition:all .4s;transition-delay:'+(i*0.2)+'s;';
-    d.innerHTML='<div style="font-size:13px;font-weight:700;color:'+st.color+';font-family:Syne,sans-serif;margin-bottom:8px;">'+st.label+'</div>'
-      +'<div class="demo-hash" style="font-size:11px;">'+st.val.substring(0,60)+(st.val.length>60?'...':'')+'</div>'
-      +'<div style="font-size:11px;color:'+st.color+';opacity:0.7;margin-top:6px;">'+st.note+'</div>';
-    c.appendChild(d);
-    setTimeout(function(){d.style.opacity='1';d.style.transform='translateY(0)';},i*200+100);
-  });
+  return {priv: priv, pub: pub, addr: addr};
+}
+function renderSeedExperiment(){
+  const input = document.getElementById('seedInput'); if(!input) return;
+  const w = deriveWallet(input.value);
+  document.getElementById('seedPriv').textContent = w.priv;
+  document.getElementById('seedPub').textContent = w.pub;
+  document.getElementById('seedAddr').textContent = w.addr;
+  const verdict = document.getElementById('seedVerdict');
+  if(w.addr === seedOriginalAddr){
+    verdict.className = 'demo-result demo-result-ok';
+    verdict.innerHTML = '<div style="font-size:15px;font-weight:700;">✅ SAME WALLET</div><div class="demo-result-detail">These exact words always derive this exact address. Lose your phone, your laptop, your house - with these 12 words, your bitcoin comes back. That is wallet recovery.</div>';
+  } else {
+    verdict.className = 'demo-result demo-result-fail';
+    verdict.innerHTML = '<div style="font-size:15px;font-weight:700;">⚠️ DIFFERENT WALLET</div><div class="demo-result-detail">You changed the words, so this is now a completely different wallet with a different address - your coins are not here. Restore the original words exactly and watch your wallet come back.</div>';
+  }
+}
+function newSeedExperiment(){
+  const words = Array.from({length:12}, function(){ return bip39Words[Math.floor(Math.random()*bip39Words.length)]; }).join(' ');
+  document.getElementById('seedInput').value = words;
+  seedOriginal = words;
+  seedOriginalAddr = deriveWallet(words).addr;
+  renderSeedExperiment();
 }
 modalInitFns.keys = function(){
-  runKeyFlow();
-  document.getElementById('keyFlowBtn')?.addEventListener('click', runKeyFlow);
+  newSeedExperiment();
+  document.getElementById('seedInput')?.addEventListener('input', renderSeedExperiment);
+  document.getElementById('seedShuffleBtn')?.addEventListener('click', newSeedExperiment);
 };
 
 // ── Private Keys / Entropy ──
@@ -9876,21 +10034,40 @@ modalInitFns.privatekeys = function(){
   },{passive:false});
 };
 
-// ── Public Keys ──
-function generateKeyChain(){
-  const entropy = Math.random().toString(36) + Date.now().toString();
-  const priv = sha256Hex(entropy);
+// ── Public Keys (one-way street game) ──
+let pkTargetAddr = '', pkAttempts = 0;
+function pkDerive(secret){
+  const priv = sha256Hex(secret);
   const pub = '02' + sha256Hex(priv).substring(0, 62);
   const addrHash = sha256Hex(pub);
   const b32 = '023456789acdefghjklmnpqrstuvwxyz';
-  const addr = 'bc1q' + Array.from(addrHash.substring(0, 38)).map(function(c){ return b32[parseInt(c, 16) % 32] || b32[0]; }).join('');
-  document.getElementById('pkPrivate').textContent = priv;
-  document.getElementById('pkPublic').textContent = pub;
-  document.getElementById('pkAddress').textContent = addr;
+  return 'bc1q' + Array.from(addrHash.substring(0, 38)).map(function(c){ return b32[parseInt(c, 16) % 32] || b32[0]; }).join('');
 }
 modalInitFns.publickeys = function(){
-  generateKeyChain();
-  document.getElementById('genKeyChainBtn')?.addEventListener('click',generateKeyChain);
+  pkAttempts = 0;
+  const forward = document.getElementById('pkSecret');
+  function renderForward(){ document.getElementById('pkForwardAddr').textContent = pkDerive(forward.value); }
+  forward?.addEventListener('input', renderForward);
+  renderForward();
+  // Secret target the user will never hit
+  pkTargetAddr = pkDerive('satoshi-secret-' + Math.random().toString(36).slice(2) + Date.now());
+  document.getElementById('pkTargetAddr').textContent = pkTargetAddr;
+  const guess = document.getElementById('pkGuess');
+  const result = document.getElementById('pkGuessResult');
+  guess?.addEventListener('input', function(){
+    if(!this.value){ result.innerHTML = ''; return; }
+    pkAttempts++;
+    const derived = pkDerive(this.value);
+    if(derived === pkTargetAddr){
+      result.innerHTML = '<span style="color:#4ade80;">MATCH! You broke SHA-256. Contact every cryptographer on Earth immediately.</span>';
+      return;
+    }
+    let msg = 'Attempt ' + pkAttempts.toLocaleString() + ': ' + derived.substring(0, 24) + '... <span style="color:#f87171;">no match</span>';
+    if(pkAttempts >= 8){
+      msg += '<br/><span style="color:var(--text2);font-family:Inter,sans-serif;font-size:12px;">Keep going. At a billion guesses per second it takes about 10<sup>60</sup> years to search the space. The universe is 10<sup>10</sup> years old. This impossibility is what secures two trillion dollars.</span>';
+    }
+    result.innerHTML = msg;
+  });
 };
 
 // ── Signatures ──
