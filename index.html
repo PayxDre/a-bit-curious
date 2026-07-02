@@ -1394,6 +1394,7 @@
     <div class="nav-group-label" id="nav-group-future">VII. The Future</div>
     <button class="nav-item" data-section="toolate" id="nav-toolate" aria-describedby="nav-group-future">&#9203; Am I Too Late?</button>
     <button class="nav-item" data-section="perspective" id="nav-perspective" aria-describedby="nav-group-future">&#127775; A &#8383;it New Perspective</button>
+    <button class="nav-item" data-section="finalexam" id="nav-finalexam" aria-describedby="nav-group-future">&#127942; The Final Exam</button>
     <button class="nav-item" data-section="lore" id="nav-lore" aria-describedby="nav-group-future">&#127922; Bitcoin Lore</button>
     <button class="nav-item" data-section="bibliography" id="nav-bibliography" aria-describedby="nav-group-future">&#128218; Go Deeper &amp; Sources</button>
 
@@ -6797,6 +6798,62 @@
 
 
     <!-- ════ BITCOIN LORE ════ -->
+    <!-- ════ FINAL EXAM ════ -->
+    <div class="section-content" id="sec-finalexam">
+      <h2 class="section-title">&#127942; <span class="glow-text">The Final Exam</span></h2>
+      <div class="section-subtitle">// 25 questions across the whole course. Pass at 80% and mint your certificate  ·  ~15 min</div>
+
+      <p class="body-text">You have hashed blocks by hand, broken and repaired a blockchain, signed with real cryptography, and moved real coins on a real network. One question remains: did it stick? Twenty-five questions, drawn from every chapter. No timer, no tricks, no retakes limit - but the questions do not go easy on you.</p>
+
+      <div id="examIntro" class="glass p-5 my-6 text-center">
+        <div style="font-size:40px;margin-bottom:8px;">&#127942;</div>
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:8px;">Ready to prove it?</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">25 questions &bull; 80% to pass &bull; certificate on completion</div>
+        <button id="examStartBtn" class="btn-orange" style="font-size:15px;padding:14px 32px;">Begin the exam &rarr;</button>
+        <div id="examPrevResult" style="font-size:12px;color:var(--muted);margin-top:12px;"></div>
+      </div>
+
+      <div id="examArea" class="hidden">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div style="font-size:13px;color:var(--muted);font-family:'Space Mono',monospace;">Question <span id="examNum" style="color:var(--orange);">1</span> / 25</div>
+          <div class="demo-progress" style="flex:1;margin-left:14px;"><div class="demo-progress-bar" id="examProgress" style="width:0%;"></div></div>
+        </div>
+        <div class="demo-step active" id="examCard">
+          <div id="examQ" style="font-size:16px;font-weight:600;color:var(--text);line-height:1.6;margin-bottom:16px;"></div>
+          <div id="examOpts" style="display:grid;gap:10px;"></div>
+        </div>
+      </div>
+
+      <div id="examResult" class="hidden"></div>
+
+      <div id="certArea" class="hidden">
+        <div class="demo-step active" style="margin-top:16px;">
+          <div class="demo-step-head"><div class="demo-num">&#10003;</div><div class="demo-step-label">Mint your certificate</div></div>
+          <label for="certName" style="font-size:12px;color:var(--muted);margin-bottom:6px;display:block;">Name to appear on the certificate</label>
+          <input type="text" id="certName" class="demo-input" maxlength="40" placeholder="Satoshi Nakamoto" style="margin-bottom:12px;"/>
+          <button id="certMintBtn" class="demo-btn demo-btn-orange">&#127891; Generate my certificate</button>
+        </div>
+        <div id="certOutput" class="hidden" style="margin-top:14px;">
+          <canvas id="certCanvas" width="1200" height="850" style="width:100%;border-radius:14px;border:1px solid var(--glass-border);"></canvas>
+          <div style="display:grid;gap:8px;grid-template-columns:1fr 1fr;margin-top:10px;">
+            <button id="certDownloadBtn" class="demo-btn demo-btn-orange" style="font-size:13px;">&#11015;&#65039; Download PNG</button>
+            <a id="certStampLink" href="https://opentimestamps.org" target="_blank" rel="noopener" class="demo-btn demo-btn-ghost" style="font-size:13px;text-decoration:none;">&#9875; Timestamp it into Bitcoin &#8599;</a>
+          </div>
+          <div class="demo-plan" style="margin-top:10px;font-size:12px;line-height:1.7;">
+            <strong style="color:var(--orange);">Make it provable.</strong> Your certificate's SHA-256 fingerprint is <span id="certHash" style="font-family:'Space Mono',monospace;word-break:break-all;color:var(--orange);"></span><span id="certBlockNote"></span> Drop the downloaded PNG at opentimestamps.org and it gets anchored into the Bitcoin blockchain itself - after that, anyone can prove this exact certificate existed today, forever, using the very system it certifies you understand.
+          </div>
+        </div>
+      </div>
+
+      <div class="neon-divider" style="margin-top:40px;"></div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:8px;">Up next</div>
+        <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:10px;">Time for the <span class="glow-text">fun stuff</span></div>
+        <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Pizza days, lost fortunes in landfills, and the strange folklore of the hardest money ever made.</p>
+        <button class="btn-orange" data-section="lore" style="font-size:15px;padding:14px 32px;">Next: Bitcoin Lore &#127922; &rarr;</button>
+      </div>
+    </div>
+
     <div class="section-content" id="sec-lore">
       <h2 class="section-title">&#127922; <span class="glow-text">Bitcoin Lore &amp; Milestones</span></h2>
       <div class="section-subtitle">// The moments that made history</div>
@@ -7329,7 +7386,7 @@
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
 // ═══════════════════════════════════════
-const sectionOrder = ['welcome','money','inflation','faithcredit','year1971','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','caseagainst','goldvsbtc','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','signetlab','consensus','lightning','toolate','perspective','lore','bibliography'];
+const sectionOrder = ['welcome','money','inflation','faithcredit','year1971','deflation','fiatgraveyard','pizza','digimoney','satoshi','whitepaper','altcoins','powvpos','myths','tulips','quantum','caseagainst','goldvsbtc','adoption','wallets','exchanges','sending','security','network','node','mining','blockchain','blocks','difficulty','attackvectors','transactions','outputs','locks','keys','privatekeys','publickeys','signatures','signetlab','consensus','lightning','toolate','perspective','finalexam','lore','bibliography'];
 
 const sectionNames = {
   welcome:'Welcome', fiatgraveyard:'The Fiat Graveyard', digimoney:'Digital Money Before Bitcoin', satoshi:'Who Is Satoshi?', inflation:'Monetary Inflation', faithcredit:'Full Faith & Credit', year1971:'1971: The Year Money Broke', altcoins:'Bitcoin vs Other Cryptos', powvpos:'Proof of Work vs Proof of Stake', deflation:'Deflation vs Fiat', adoption:'Bitcoin Adoption', wallets:'Wallets', exchanges:'Exchanges', sending:'Sending', security:'Security',
@@ -7337,7 +7394,7 @@ const sectionNames = {
   blockchain:'Blockchain', blocks:'Blocks', difficulty:'Difficulty', attackvectors:'Attack Vectors',
   transactions:'Transactions', outputs:'Outputs', locks:'Locks',
   keys:'Keys & Addresses', privatekeys:'Private Keys', publickeys:'Public Keys',
-  signatures:'Digital Signatures', signetlab:'The Lab: Use Real Bitcoin', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore',
+  signatures:'Digital Signatures', signetlab:'The Lab: Use Real Bitcoin', consensus:'Consensus & Upgrades', lightning:'Lightning Network', toolate:'Am I Too Late?', finalexam:'The Final Exam', perspective:'A \u20BFit New Perspective', lore:'Bitcoin Lore',
   whitepaper:'The Whitepaper',
   tulips:'Bitcoin vs Tulip Mania',
   caseagainst:'The Case Against Bitcoin',
@@ -7721,6 +7778,7 @@ const teachingNotes = {
   deflation: `\uD83C\uDF93 Jeff Booth's thesis is the intellectual capstone of Chapter I. Technology = deflation. Fiat = inflation. The two are at war. Bitcoin lets deflation win.\n\n\uD83D\uDCA1 The key equation to drive home: 5% tech deflation + 7% money printing = "2% reported CPI." That single formula makes students see through the illusion.\n\n\uD83C\uDFAF After this section, students should feel genuine urgency to learn how Bitcoin works in practice.`,
   pizza: `\uD83C\uDF93 The pizza analogy is the single best response to "there aren't enough Bitcoin." It reframes the entire debate: the issue isn't quantity, it's dilution.\n\n\uD83D\uDCA1 The key line: "You can cut a pizza smaller, but you can't make more pizza." Let that land. Then show the numbers: 2.1 quadrillion sats. 262,000 per person.\n\n\uD83C\uDFAF Drive home that deflation under a gold standard powered the industrial revolution. "We need inflation" is propaganda, not economics.`,
   adoption: `\uD83C\uDF93 This section is the perfect response to "but nobody uses Bitcoin." Walk through each example slowly \u2014 the breadth of adoption shocks most beginners.\n\n\uD83D\uDCA1 Key insight: adoption is happening simultaneously at every level \u2014 individual (Cash App, Strike), merchant (Square), corporate treasury (Strategy), institutional (BlackRock IBIT), and sovereign (El Salvador). No technology in history has been adopted across all these layers this fast.\n\n\uD83C\uDFAF The "never sell" strategy via borrowing against BTC is a powerful reframe. It shifts the conversation from "when do I take profits?" to "why would I ever sell the hardest asset?"`,
+  finalexam: `\uD83C\uDF93 Retrieval practice beats re-reading tenfold. Encourage students to attempt the exam BEFORE they feel ready.\n\n\uD83D\uDCA1 A failed attempt lists exactly which lessons to revisit - failure here is a study plan, not a verdict.\n\n\uD83C\uDFAF The OpenTimestamps step is a final hidden lesson: the certificate is proven by the same blockchain it certifies knowledge of.`,
   signetlab: `\uD83C\uDF93 The capstone of the technical chapters. Budget a full session: faucets and confirmations involve real waiting.\n\n\uD83D\uDCA1 The waiting IS a lesson - students feel block time viscerally instead of reading about it.\n\n\uD83C\uDFAF Drill the safety rule relentlessly: never type a real seed into any website. The lab builds the muscle memory with stakes of zero.`,
   caseagainst: `\uD83C\uDF93 The most important section for credibility. Do NOT rush to rebut - let the arguments stand at full strength first.\n\n\uD83D\uDCA1 Ask students which argument they find strongest BEFORE revealing the data. Volatility and irreversibility usually win.\n\n\uD83C\uDFAF The takeaway rule: never invest what you cannot watch drop 70%. Repeat it until it is boring.`,
   myths: `\uD83C\uDF93 Students arrive with these myths pre-loaded from media. Don't dismiss them \u2014 acknowledge them, then systematically dismantle them with facts.\n\n\uD83D\uDCA1 The pattern observation at the end is powerful: every myth follows the same lazy template. Once students see the pattern, they become immune to new myths.\n\n\uD83C\uDFAF The myth-buster interactive lesson lets students try to "attack" Bitcoin and see why each attack fails. Very engaging.`,
@@ -8077,6 +8135,7 @@ const searchIndex = [
   {s:'lightning',c:'VI. Transactions & Cryptography',k:'lightning network layer 2 instant payments fast cheap channels coffee remittance'},
   {s:'toolate',c:'VII. The Future',k:'too late buy now price prediction market cap early s curve adoption invest worth millionaire'},
   {s:'perspective',c:'VII. The Future',k:'future savings perspective deflation standard jeff booth world'},
+  {s:'finalexam',c:'VII. The Future',k:'final exam test quiz certificate diploma prove knowledge pass score graduate completion'},
   {s:'lore',c:'VII. The Future',k:'lore hodl fun facts trivia stories milestones lost coins landfill hal finney faucet casascius'},
   {s:'bibliography',c:'VII. The Future',k:'sources books learn more bibliography references go deeper bitcoin standard saylor reading'}
 ];
@@ -12061,6 +12120,152 @@ slEl('slCopyBtn')?.addEventListener('click', async function(){
   try { await navigator.clipboard.writeText(slWalletState.addr); this.textContent = 'Copied!'; setTimeout(() => { this.textContent = 'Copy'; }, 1500); } catch(e){}
 });
 slRenderWallet();
+
+// ── Final Exam + Certificate ──
+const EXAM_EXTRA = [
+  {sec:'money', q:'What made gold win over shells, salt, and cattle as money for 5,000 years?', ok:'It best combined scarcity, durability, divisibility, and portability', wrong:['Governments declared it valuable','It was the prettiest metal']},
+  {sec:'year1971', q:'What changed about the US dollar in 1971?', ok:'It lost its last link to gold, becoming purely faith-based money', wrong:['It became backed by oil instead','Paper bills were introduced for the first time']},
+  {sec:'inflation', q:'Who benefits FIRST when new money is printed?', ok:'Whoever receives it earliest - banks and asset owners - before prices adjust', wrong:['Everyone equally at the same time','Savers, because their accounts grow']},
+  {sec:'fiatgraveyard', q:'What has happened to every purely faith-based currency in history so far?', ok:'Each one eventually lost most or all of its value', wrong:['Most stabilized after a rough first century','They were all replaced by gold again']},
+  {sec:'satoshi', q:'Why does Satoshi’s disappearance make Bitcoin STRONGER?', ok:'There is no leader to pressure, subpoena, or corrupt', wrong:['It created mystery that markets love','It let exchanges take over development']},
+  {sec:'altcoins', q:'What is the decentralization test this course applies to any cryptocurrency?', ok:'Can anyone change the rules or halt the network? If yes, it fails', wrong:['Is it listed on major exchanges?','Does it have more than 1,000 developers?']},
+  {sec:'mining', q:'Roughly how many bitcoin will ever exist?', ok:'21 million, enforced by every node', wrong:['100 million, set by miners','It grows 2% per year forever']},
+  {sec:'blocks', q:'What does the halving do every four years?', ok:'Cuts the new bitcoin issued per block in half', wrong:['Doubles the block size','Halves transaction fees']},
+  {sec:'wallets', q:'What does a Bitcoin wallet actually store?', ok:'Your keys - the coins themselves live on the blockchain', wrong:['Your actual bitcoin, like a digital purse','A copy of the whole blockchain']},
+  {sec:'exchanges', q:'"Not your keys, not your coins" warns about what?', ok:'Bitcoin left on an exchange is an IOU that can vanish if the exchange fails', wrong:['Losing your password to the exchange','Buying at the wrong price']},
+  {sec:'sending', q:'You sent bitcoin to the wrong address. What can be done?', ok:'Nothing - transactions are irreversible by design, so verify before sending', wrong:['Support can reverse it within 24 hours','Miners will refund it for a fee']},
+  {sec:'privatekeys', q:'Where is the SAFEST place for the seed phrase protecting your savings?', ok:'Written physically, stored securely offline, never photographed or typed online', wrong:['A screenshot in your camera roll','A note in your email drafts']},
+  {sec:'lightning', q:'What problem does the Lightning Network solve?', ok:'Instant, near-free payments by settling many transfers off-chain and anchoring to Bitcoin', wrong:['It increases the 21 million supply cap','It replaces miners with validators']},
+  {sec:'caseagainst', q:'What is the honest response to "Bitcoin has crashed 75%+ four times"?', ok:'True - which is exactly why you only invest what you can watch drop without selling', wrong:['False - Bitcoin has never crashed','Crashes cannot happen after the ETFs']}
+];
+let examQs = [], examIdx = 0, examCorrect = 0, examMissed = [];
+function examBuildPool(){
+  const pool = [];
+  Object.keys(quickChecks).forEach(function(k){
+    const qc = quickChecks[k];
+    pool.push({sec: k, q: qc.q, ok: qc.ok, wrong: qc.wrong});
+  });
+  EXAM_EXTRA.forEach(function(x){ pool.push(x); });
+  pool.sort(function(){ return Math.random() - 0.5; });
+  return pool.slice(0, 25);
+}
+function examRenderQ(){
+  const item = examQs[examIdx];
+  document.getElementById('examNum').textContent = examIdx + 1;
+  document.getElementById('examProgress').style.width = (examIdx / 25 * 100) + '%';
+  document.getElementById('examQ').textContent = item.q;
+  const opts = [{t: item.ok, ok: true}].concat(item.wrong.map(function(w){ return {t: w, ok: false}; }));
+  opts.sort(function(){ return Math.random() - 0.5; });
+  const box = document.getElementById('examOpts');
+  box.innerHTML = '';
+  opts.forEach(function(o){
+    const b = document.createElement('button');
+    b.className = 'demo-btn demo-btn-ghost';
+    b.style.cssText = 'font-size:14px;padding:14px 16px;text-align:left;justify-content:flex-start;line-height:1.5;';
+    b.textContent = o.t;
+    b.addEventListener('click', function(){
+      if(box.dataset.locked) return;
+      box.dataset.locked = '1';
+      if(o.ok){ examCorrect++; } else { examMissed.push(item.sec); }
+      b.style.borderColor = 'var(--orange)';
+      setTimeout(function(){
+        delete box.dataset.locked;
+        examIdx++;
+        if(examIdx < examQs.length) examRenderQ(); else examFinish();
+      }, 250);
+    });
+    box.appendChild(b);
+  });
+}
+function examFinish(){
+  document.getElementById('examArea').classList.add('hidden');
+  const r = document.getElementById('examResult');
+  r.classList.remove('hidden');
+  const passed = examCorrect >= 20;
+  try { localStorage.setItem('abc_exam_v1', JSON.stringify({passed: passed, score: examCorrect, date: new Date().toISOString().slice(0,10)})); } catch(e){}
+  if(passed){
+    r.innerHTML = '<div class="demo-result demo-result-ok"><div class="demo-result-title">🎓 PASSED - ' + examCorrect + ' / 25</div><div class="demo-result-detail">You did not just read about Bitcoin. You understand it - and you proved it. Mint your certificate below.</div></div>';
+    document.getElementById('certArea').classList.remove('hidden');
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) for(let k = 0; k < 20; k++) setTimeout(function(){ spawnCoin(); }, k * 80);
+  } else {
+    const secs = Array.from(new Set(examMissed));
+    r.innerHTML = '<div class="demo-result demo-result-fail"><div class="demo-result-title">' + examCorrect + ' / 25 - not yet</div><div class="demo-result-detail">You need 20. This is a study plan, not a verdict. Revisit the lessons below, then try again - unlimited attempts.</div>'
+      + '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:12px;">'
+      + secs.map(function(sc){ return '<button class="demo-btn demo-btn-ghost" style="width:auto;font-size:12px;padding:8px 14px;" onclick="showSection(\'' + sc + '\')">' + (sectionNames[sc] || sc) + '</button>'; }).join('')
+      + '</div><button class="demo-btn demo-btn-orange" style="margin-top:14px;" onclick="examStart()">Try again</button></div>';
+  }
+}
+function examStart(){
+  examQs = examBuildPool(); examIdx = 0; examCorrect = 0; examMissed = [];
+  document.getElementById('examIntro').classList.add('hidden');
+  document.getElementById('examResult').classList.add('hidden');
+  document.getElementById('certArea').classList.add('hidden');
+  document.getElementById('examArea').classList.remove('hidden');
+  examRenderQ();
+}
+document.getElementById('examStartBtn')?.addEventListener('click', examStart);
+(function(){
+  try {
+    const prev = JSON.parse(localStorage.getItem('abc_exam_v1') || 'null');
+    if(prev && prev.passed){
+      const el = document.getElementById('examPrevResult');
+      if(el) el.innerHTML = 'You passed on ' + prev.date + ' with ' + prev.score + '/25. Retake any time, or scroll down to re-mint your certificate.';
+      document.getElementById('certArea')?.classList.remove('hidden');
+    }
+  } catch(e){}
+})();
+// ── Certificate ──
+async function certMint(){
+  const name = (document.getElementById('certName').value || 'A Curious Student').trim().substring(0, 40);
+  let score = 25, dateStr = new Date().toISOString().slice(0,10);
+  try { const prev = JSON.parse(localStorage.getItem('abc_exam_v1') || 'null'); if(prev){ score = prev.score; dateStr = prev.date; } } catch(e){}
+  let blockH = null;
+  try {
+    const res = await fetch('https://mempool.space/api/blocks/tip/height');
+    blockH = Number(await res.json());
+  } catch(e){
+    const el = document.getElementById('blockHeight');
+    if(el && /\d/.test(el.textContent)) blockH = parseInt(el.textContent.replace(/,/g,''), 10);
+  }
+  const certId = sha256Hex('a-bit-curious|' + name + '|' + dateStr + '|' + score + '/25|block:' + (blockH || 'unknown'));
+  const cv = document.getElementById('certCanvas');
+  const c = cv.getContext('2d');
+  // Background
+  c.fillStyle = '#0b0b18'; c.fillRect(0, 0, 1200, 850);
+  const grad = c.createRadialGradient(600, 340, 60, 600, 400, 700);
+  grad.addColorStop(0, 'rgba(245,158,11,0.14)'); grad.addColorStop(1, 'rgba(245,158,11,0)');
+  c.fillStyle = grad; c.fillRect(0, 0, 1200, 850);
+  c.strokeStyle = '#f59e0b'; c.lineWidth = 3; c.strokeRect(30, 30, 1140, 790);
+  c.strokeStyle = 'rgba(245,158,11,0.3)'; c.lineWidth = 1; c.strokeRect(42, 42, 1116, 766);
+  c.textAlign = 'center';
+  c.fillStyle = '#f59e0b'; c.font = 'bold 90px Georgia, serif'; c.fillText('₿', 600, 155);
+  c.fillStyle = '#7878a0'; c.font = '600 20px Syne, sans-serif'; c.fillText('A  B I T  C U R I O U S', 600, 205);
+  c.fillStyle = '#f5f5fa'; c.font = 'bold 44px Syne, sans-serif'; c.fillText('Certificate of Completion', 600, 280);
+  c.fillStyle = '#7878a0'; c.font = '18px Inter, sans-serif'; c.fillText('This certifies that', 600, 350);
+  c.fillStyle = '#fcd34d'; c.font = 'bold 58px Syne, sans-serif'; c.fillText(name, 600, 425);
+  c.fillStyle = '#b8b8d8'; c.font = '19px Inter, sans-serif';
+  c.fillText('completed the full interactive course on money and Bitcoin:', 600, 485);
+  c.fillText('monetary history, cryptography, mining, self-custody, and the Lightning Network,', 600, 515);
+  c.fillText('including hands-on use of the Bitcoin Signet network with real cryptographic keys.', 600, 545);
+  c.fillStyle = '#f59e0b'; c.font = 'bold 26px Space Mono, monospace';
+  c.fillText('Final exam: ' + score + ' / 25', 600, 615);
+  c.fillStyle = '#7878a0'; c.font = '17px Space Mono, monospace';
+  c.fillText(dateStr + (blockH ? '  ·  issued at Bitcoin block ' + blockH.toLocaleString() : ''), 600, 655);
+  c.fillStyle = '#4a4a6a'; c.font = '13px Space Mono, monospace';
+  c.fillText('Certificate ID (SHA-256): ' + certId.substring(0, 40), 600, 740);
+  c.fillText(certId.substring(40) + '  ·  verify at www.a-bit-curious.com', 600, 762);
+  document.getElementById('certOutput').classList.remove('hidden');
+  document.getElementById('certHash').textContent = certId;
+  document.getElementById('certBlockNote').textContent = blockH ? ' (issued at Bitcoin block ' + blockH.toLocaleString() + ').' : '.';
+  cv.scrollIntoView({behavior: 'smooth', block: 'center'});
+}
+document.getElementById('certMintBtn')?.addEventListener('click', certMint);
+document.getElementById('certDownloadBtn')?.addEventListener('click', function(){
+  const a = document.createElement('a');
+  a.download = 'a-bit-curious-certificate.png';
+  a.href = document.getElementById('certCanvas').toDataURL('image/png');
+  a.click();
+});
 
 // ═══════════════════════════════════════
 //   INIT (deep link routing)
