@@ -6130,6 +6130,14 @@
         <div id="slConfirmStatus" class="demo-desc" style="line-height:1.7;" aria-live="polite"></div>
       </div>
 
+      <!-- Step 5 -->
+      <div class="demo-step hidden" id="slStep5" style="margin-bottom:14px;">
+        <div class="demo-step-head"><div class="demo-num">5</div><div class="demo-step-label">Dissect your transaction, byte by byte</div></div>
+        <div class="demo-desc" style="margin:0 0 12px;">Your transaction is now public data on a real blockchain. Pull it back down and take it apart: every byte you broadcast, what each one means, and - once it confirms - the block header that sealed it into history.</div>
+        <button id="slDissectBtn" class="demo-btn demo-btn-orange">&#128300; Pull my transaction apart</button>
+        <div id="slDissectOut" style="margin-top:12px;" aria-live="polite"></div>
+      </div>
+
       <div class="glass p-5 my-6">
         <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#127891; What you just did</div>
         <div style="font-size:13px;color:var(--text2);line-height:1.8;">
@@ -12077,6 +12085,7 @@ function slRenderWallet(){
     slEl('slStep2').classList.remove('hidden');
     slEl('slStep3').classList.remove('hidden');
     slEl('slStep4').classList.remove('hidden');
+    slEl('slStep5').classList.remove('hidden');
     if(slWalletState.lastTxid){
       slEl('slTxLink').innerHTML = 'Last broadcast: <a href="' + SIGNET_EXPLORER + '/tx/' + slWalletState.lastTxid + '" target="_blank" rel="noopener" style="color:var(--orange);">' + slWalletState.lastTxid.substring(0, 20) + '...</a>';
     }
@@ -12086,6 +12095,7 @@ function slRenderWallet(){
     slEl('slStep2').classList.add('hidden');
     slEl('slStep3').classList.add('hidden');
     slEl('slStep4').classList.add('hidden');
+    slEl('slStep5').classList.add('hidden');
   }
 }
 function slCreateWallet(){
@@ -12206,6 +12216,150 @@ slEl('slCopyBtn')?.addEventListener('click', async function(){
   try { await navigator.clipboard.writeText(slWalletState.addr); this.textContent = 'Copied!'; setTimeout(() => { this.textContent = 'Copy'; }, 1500); } catch(e){}
 });
 slRenderWallet();
+
+// ── Transaction dissector (Step 5) ──
+const SL_COLORS = {version:'#60a5fa', segwit:'#a78bfa', count:'#7878a0', outpoint:'#f59e0b', script:'#34d399', seq:'#fbbf24', value:'#4ade80', sig:'#f87171', pubkey:'#fb923c', locktime:'#94a3b8'};
+function slParseRawTx(hex){
+  // Bespoke parser for the lab's own shape: v2 segwit, all-P2WPKH, small counts
+  let p = 0;
+  const seg = [];
+  function take(nChars, label, colorKey, note){
+    const chunk = hex.substr(p, nChars);
+    p += nChars;
+    seg.push({label: label, hex: chunk, color: SL_COLORS[colorKey], note: note});
+    return chunk;
+  }
+  take(8, 'Version', 'version', 'Little-endian 2. Version 2 transactions can use relative timelocks (BIP 68).');
+  take(4, 'SegWit marker + flag', 'segwit', 'The bytes 00 01 announce: witnesses live in a separate section. Pre-2017 nodes still see a valid (unsigned-looking) transaction - that is how SegWit stayed backward compatible.');
+  const nIn = parseInt(take(2, 'Input count', 'count', 'How many coins this transaction melts down.'), 16);
+  for(let i = 0; i < nIn; i++){
+    take(64, 'Input ' + (i+1) + ': previous txid', 'outpoint', 'The transaction that created the coin you are spending - stored byte-reversed, as Bitcoin displays txids backwards from how they are hashed.');
+    take(8, 'Input ' + (i+1) + ': output index', 'count', 'Which output of that transaction is being spent (little-endian).');
+    take(2, 'Input ' + (i+1) + ': scriptSig length', 'script', '00 - empty! For SegWit inputs the unlocking proof moved to the witness section below.');
+    take(8, 'Input ' + (i+1) + ': sequence', 'seq', 'fdffffff signals opt-in Replace-By-Fee: you may rebroadcast with a higher fee while unconfirmed.');
+  }
+  const nOut = parseInt(take(2, 'Output count', 'count', 'How many brand-new coins this transaction mints.'), 16);
+  for(let i = 0; i < nOut; i++){
+    const valHex = take(16, 'Output ' + (i+1) + ': amount', 'value', '');
+    let sats = 0n;
+    for(let b = 7; b >= 0; b--) sats = (sats << 8n) | BigInt(parseInt(valHex.substr(b*2, 2), 16));
+    seg[seg.length-1].note = 'Little-endian 8 bytes: ' + sats.toLocaleString() + ' satoshis, locked to the script that follows.';
+    take(2, 'Output ' + (i+1) + ': script length', 'count', '16 hex = 22 bytes of locking script.');
+    take(4, 'Output ' + (i+1) + ': script opcodes', 'script', 'OP_0 then push-20-bytes: "this is a version-0 witness program" - the P2WPKH pattern.');
+    take(40, 'Output ' + (i+1) + ': pubkey hash', 'script', 'HASH160 of the recipient public key. The coin now belongs to whoever can present a key that hashes to exactly this, plus a valid signature.');
+  }
+  for(let i = 0; i < nIn; i++){
+    take(2, 'Witness ' + (i+1) + ': item count', 'count', 'Two items unlock a P2WPKH coin: a signature and a public key.');
+    const sigLen = parseInt(take(2, 'Witness ' + (i+1) + ': signature length', 'count', ''), 16);
+    take(sigLen * 2, 'Witness ' + (i+1) + ': ECDSA signature', 'sig', 'DER-encoded (r, s) pair your private key produced, ending in 01 (SIGHASH_ALL: this signature commits to ALL inputs and outputs - change anything and it dies). This is the only place your authority appears, and it reveals nothing about the key itself.');
+    take(2, 'Witness ' + (i+1) + ': pubkey length', 'count', '');
+    take(66, 'Witness ' + (i+1) + ': public key', 'pubkey', '33-byte compressed public key (02/03 prefix + x-coordinate). Nodes hash it with SHA-256 then RIPEMD-160 and check it matches the pubkey hash the coin was locked to.');
+  }
+  take(8, 'Locktime', 'locktime', '00000000 - valid immediately. A nonzero value would forbid mining before a given block height or time.');
+  if(p !== hex.length) throw new Error('parse mismatch');
+  return seg;
+}
+function slFmtSats(n){ return Number(n).toLocaleString() + ' sats'; }
+function slDissectRender(tx, hex, segs){
+  const feeRate = (tx.fee / (tx.weight / 4)).toFixed(1);
+  let h = '';
+  // Overview
+  h += '<div class="demo-plan" style="margin-bottom:12px;"><div style="color:var(--orange);font-weight:700;font-family:Syne,sans-serif;margin-bottom:8px;">Transaction overview</div><div style="display:grid;gap:5px;font-size:12px;">'
+    + '<div><span style="color:var(--muted);">TXID:</span> <span style="font-family:Space Mono,monospace;word-break:break-all;">' + tx.txid + '</span><br/><span style="color:var(--muted);font-size:11px;">This is the double SHA-256 of the transaction (without witnesses) - its fingerprint, not a serial number nobody assigned it.</span></div>'
+    + '<div><span style="color:var(--muted);">Size:</span> ' + tx.size + ' bytes raw, but only <strong style="color:#4ade80;">' + Math.ceil(tx.weight/4) + ' vbytes</strong> for fees - witnesses are 75% discounted. That discount is SegWit\'s fee cut in action.</div>'
+    + '<div><span style="color:var(--muted);">Fee:</span> <strong style="color:#fbbf24;">' + slFmtSats(tx.fee) + '</strong> (' + feeRate + ' sat/vB) - the difference between what went in and what came out. Nobody set it; it is simply the remainder, claimed by the miner.</div>'
+    + '</div></div>';
+  // Inputs
+  h += '<div class="demo-plan" style="margin-bottom:12px;border-color:rgba(245,158,11,0.35);"><div style="color:var(--orange);font-weight:700;font-family:Syne,sans-serif;margin-bottom:8px;">Inputs - the coins you melted down (' + tx.vin.length + ')</div>';
+  tx.vin.forEach(function(vin, i){
+    h += '<div style="font-size:12px;padding:10px 0;' + (i ? 'border-top:1px solid var(--glass-border);' : '') + '">'
+      + '<div><span style="color:var(--muted);">Coin ' + (i+1) + ':</span> <strong style="color:var(--orange);">' + slFmtSats(vin.prevout.value) + '</strong> created by tx <span style="font-family:Space Mono,monospace;">' + vin.txid.substring(0,16) + '...</span> output #' + vin.vout + '</div>'
+      + '<div style="color:var(--muted);font-size:11px;margin-top:4px;">This coin is now destroyed forever. Its full value flowed into this transaction, and the network marks it spent - the same coin can never fund two transactions. That single rule is what "solving double-spending" means.</div>'
+      + '</div>';
+  });
+  h += '</div>';
+  // Outputs
+  h += '<div class="demo-plan" style="margin-bottom:12px;border-color:rgba(74,222,128,0.35);"><div style="color:#4ade80;font-weight:700;font-family:Syne,sans-serif;margin-bottom:8px;">Outputs - the brand-new coins you minted (' + tx.vout.length + ')</div>';
+  tx.vout.forEach(function(vout, i){
+    h += '<div style="font-size:12px;padding:10px 0;' + (i ? 'border-top:1px solid var(--glass-border);' : '') + '">'
+      + '<div><strong style="color:#4ade80;">' + slFmtSats(vout.value) + '</strong> locked to <span style="font-family:Space Mono,monospace;word-break:break-all;">' + (vout.scriptpubkey_address || vout.scriptpubkey) + '</span></div>'
+      + '<div style="color:var(--muted);font-size:11px;margin-top:4px;">Script: <span style="font-family:Space Mono,monospace;">' + vout.scriptpubkey + '</span> - OP_0 plus a 20-byte hash. Not "an account balance" - a padlock. Only a public key hashing to those exact 20 bytes, plus a valid signature, ever opens it.</div>'
+      + '</div>';
+  });
+  h += '</div>';
+  // Raw bytes
+  if(segs){
+    h += '<div class="demo-plan" style="margin-bottom:12px;"><div style="color:var(--orange);font-weight:700;font-family:Syne,sans-serif;margin-bottom:8px;">The raw bytes - all ' + (hex.length/2) + ' of them</div>'
+      + '<div style="font-family:Space Mono,monospace;font-size:10px;word-break:break-all;line-height:1.8;background:rgba(0,0,0,0.45);padding:12px;border-radius:10px;">'
+      + segs.map(function(g){ return '<span style="color:' + g.color + ';">' + g.hex + '</span>'; }).join('')
+      + '</div>'
+      + '<div style="margin-top:12px;display:grid;gap:8px;">'
+      + segs.filter(function(g){ return g.note; }).map(function(g){
+          return '<div style="font-size:11px;line-height:1.6;"><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:' + g.color + ';margin-right:6px;"></span><strong style="color:' + g.color + ';">' + g.label + ':</strong> <span style="color:var(--text2);">' + g.note + '</span></div>';
+        }).join('')
+      + '</div></div>';
+  }
+  return h;
+}
+function slBlockRender(block, txIndex){
+  let h = '<div class="demo-plan" style="border-color:rgba(96,165,250,0.4);"><div style="color:#60a5fa;font-weight:700;font-family:Syne,sans-serif;margin-bottom:8px;">The block that sealed it: #' + block.height.toLocaleString() + '</div>';
+  h += '<div style="font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:10px;">Your transaction is ' + (txIndex >= 0 ? 'number <strong style="color:#60a5fa;">' + (txIndex + 1) + ' of ' + block.tx_count + '</strong>' : 'one of ' + block.tx_count) + ' in this block. The 80-byte header below is what the miner actually hashed ' + '- everything else hangs off it.</div>';
+  const rows = [
+    ['Block hash', block.id, 'The double SHA-256 of the 80-byte header. Count the leading zeros - that IS the proof of work, the same game you played in the mining demo, at incomprehensible difficulty.'],
+    ['1. Version', '0x' + (block.version >>> 0).toString(16), 'Header field one. Modern miners also use spare version bits to signal readiness for protocol upgrades (BIP 9).'],
+    ['2. Previous block hash', block.previousblockhash, 'The chain link. This header commits to the entire history before it - alter any past block and this field stops matching, all the way to the tip.'],
+    ['3. Merkle root', block.merkle_root, 'All ' + block.tx_count + ' transactions, pair-hashed repeatedly down to one 32-byte fingerprint. YOUR txid is one of the leaves - change one byte of your transaction and this root, and therefore the block hash, changes. That is how one hash protects thousands of transactions.'],
+    ['4. Timestamp', new Date(block.timestamp * 1000).toUTCString(), 'When the miner claims to have built it. Nodes tolerate small drift but reject blocks from the future.'],
+    ['5. Bits (target)', '0x' + block.bits.toString(16), 'The difficulty target in compact form - the block hash had to be below the number this encodes. Retuned every 2,016 blocks by the thermostat you played with.'],
+    ['6. Nonce', block.nonce.toLocaleString(), 'The winning lottery ticket. The miner churned through nonces until the header hashed under the target - your Auto-Mine button, industrialized.']
+  ];
+  h += '<div style="display:grid;gap:9px;">' + rows.map(function(r){
+    return '<div style="font-size:11px;line-height:1.6;"><strong style="color:#60a5fa;">' + r[0] + ':</strong> <span style="font-family:Space Mono,monospace;word-break:break-all;color:var(--text);">' + r[1] + '</span><br/><span style="color:var(--muted);">' + r[2] + '</span></div>';
+  }).join('') + '</div></div>';
+  return h;
+}
+async function slDissect(){
+  const out = slEl('slDissectOut');
+  if(!slWalletState || !slWalletState.lastTxid){
+    out.innerHTML = '<div class="demo-desc" style="color:#fbbf24;">Broadcast a transaction in step 3 first - then there will be something to dissect.</div>';
+    return;
+  }
+  out.innerHTML = '<div class="demo-desc">Pulling your transaction back off the blockchain...</div>';
+  try {
+    const txid = slWalletState.lastTxid;
+    const [txRes, hexRes] = await Promise.all([
+      fetch(SIGNET_API + '/tx/' + txid),
+      fetch(SIGNET_API + '/tx/' + txid + '/hex')
+    ]);
+    if(!txRes.ok) throw new Error('tx lookup returned ' + txRes.status);
+    const tx = await txRes.json();
+    const hex = (await hexRes.text()).trim();
+    let segs = null;
+    try { segs = slParseRawTx(hex); } catch(e){ segs = null; }
+    let html = slDissectRender(tx, hex, segs);
+    if(tx.status && tx.status.confirmed){
+      try {
+        const blockRes = await fetch(SIGNET_API + '/block/' + tx.status.block_hash);
+        const block = await blockRes.json();
+        let txIndex = -1;
+        try {
+          const idsRes = await fetch(SIGNET_API + '/block/' + tx.status.block_hash + '/txids');
+          const ids = await idsRes.json();
+          txIndex = ids.indexOf(txid);
+        } catch(e){}
+        html += slBlockRender(block, txIndex);
+      } catch(e){
+        html += '<div class="demo-desc" style="color:#fbbf24;">Could not load the block details (' + e.message + ') - try again in a moment.</div>';
+      }
+    } else {
+      html += '<div class="demo-plan" style="border-color:rgba(251,191,36,0.4);"><div style="font-size:12px;color:#fbbf24;line-height:1.7;">&#9203; Still unconfirmed - the block header dissection unlocks once a miner includes it. Check step 4, then pull it apart again.</div></div>';
+    }
+    out.innerHTML = html;
+  } catch(e){
+    out.innerHTML = '<div class="demo-desc" style="color:#f87171;">Could not fetch the transaction (' + e.message + '). Check your connection and try again.</div>';
+  }
+}
+slEl('slDissectBtn')?.addEventListener('click', slDissect);
 
 // ── Final Exam + Certificate ──
 const EXAM_EXTRA = [
