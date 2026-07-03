@@ -2754,6 +2754,22 @@
         <div class="text-xs text-center mt-3" style="color:var(--muted);">CBO baseline projections<sup><a href="#ref-32" style="color:var(--orange);text-decoration:none;font-size:10px;">[32]</a></sup>. Historically, actual debt has exceeded CBO estimates.</div>
       </div>
 
+      <!-- ── Red ink is bipartisan ── -->
+      <div class="glass p-5 my-6">
+        <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#128499;&#65039; Red Ink Is Bipartisan</div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px;">Before you blame your least favorite party: the debt grew under every single administration of the last five decades. Here is what each president added to the gross national debt, colored by party.<sup><a href="#ref-45" style="color:var(--orange);text-decoration:none;font-size:10px;">[45]</a></sup></p>
+        <div style="display:flex;gap:8px;margin-bottom:14px;">
+          <button id="debtAllBtn" class="demo-diff-btn active" style="font-family:'Syne',sans-serif;font-size:12px;">All spending</button>
+          <button id="debtAdjBtn" class="demo-diff-btn" style="font-family:'Syne',sans-serif;font-size:12px;">Excluding crisis bills<br/><span style="font-size:9px;font-weight:400;color:var(--muted);">COVID relief, 2008 rescue</span></button>
+        </div>
+        <div id="debtPartyChart" style="display:grid;gap:10px;"></div>
+        <div id="debtPartyTally" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;"></div>
+        <div style="margin-top:14px;padding:14px;border-radius:10px;background:rgba(245,158,11,0.06);border-left:3px solid var(--orange);">
+          <div style="font-size:13px;color:var(--text);line-height:1.7;">The punchline: over the 24 years each party has held the White House since 1981, the totals are <strong style="color:var(--orange);">almost identical</strong>. Strip out the crisis bills and it is still a tie. Even the celebrated Clinton surpluses of 1998-2001 ended with gross debt higher than when they began. Whoever you vote for, you vote for more debt - <strong style="color:var(--orange);">the printing press is the one policy with true bipartisan support.</strong> That is not a criticism of either party. It is the nature of money that can be borrowed into existence.</div>
+        </div>
+        <div class="text-xs mt-3" style="color:var(--muted);line-height:1.6;">Methodology: gross federal debt at fiscal-year ends spanning each term, US Treasury "Historical Debt Outstanding."<sup><a href="#ref-45" style="color:var(--orange);text-decoration:none;font-size:10px;">[45]</a></sup> Crisis adjustments are approximate legislative scores (TARP ~$0.7T under Bush Jr., GFC stimulus and response ~$1.5T under Obama, CARES and December 2020 relief ~$3.5T under Trump, ARPA ~$1.9T under Biden) - attributing debt to presidents is inherently fuzzy since budgets and shocks span administrations, but no reasonable attribution changes the conclusion.</div>
+      </div>
+
       <p class="body-text">This is why the phrase <em>"full faith and credit"</em> rings hollow. Faith in what? A government that hasn't balanced its budget since 2001? Credit from whom? A central bank that creates money from thin air? Every dollar you hold is an IOU from an entity drowning in IOUs.</p>
 
       <p class="body-text">Bitcoin doesn't require faith. It requires <strong style="color:var(--orange);">math</strong>. No deficit. No debt ceiling drama. No printing press. Just 21 million coins, verified by a decentralized network that no government controls.</p>
@@ -7346,6 +7362,10 @@
             <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);">[44]</div>
             <div style="font-size:12px;color:var(--text2);line-height:1.6;">Case against Bitcoin data: historical drawdowns from CoinMetrics and TradingView BTC/USD price history (2011: -93%, 2013-15: -85%, 2017-18: -84%, 2021-22: -77%); lost coin estimates from Chainalysis (2020) and Glassnode dormancy analyses (~3-4M BTC); energy consumption from Cambridge Bitcoin Electricity Consumption Index (CBECI); Executive Order 6102 (April 5, 1933), US National Archives; FTC and Chainalysis Crypto Crime Reports on annual scam losses</div>
           </div>
+          <div id="ref-45" style="display:flex;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--glass-border);background:rgba(0,0,0,0.2);">
+            <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);">[45]</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Debt by administration: US Treasury Fiscal Data, "Historical Debt Outstanding" (fiscaldata.treasury.gov); crisis legislation scores from CBO cost estimates (CARES Act 2020, Consolidated Appropriations Act Dec 2020, American Rescue Plan Act 2021) and CRS reports on TARP (2008) and ARRA (2009)</div>
+          </div>
         </div>
       </div>
 
@@ -8186,7 +8206,7 @@ document.getElementById('main-content').addEventListener('click', function(e){
 const searchIndex = [
   {s:'money',c:'I. The Problem with Money',k:'what is money history barter shells salt gold coins properties sound money scarcity durability divisibility portability'},
   {s:'inflation',c:'I. The Problem with Money',k:'inflation cpi money printing m2 supply purchasing power prices rising fed federal reserve groceries expensive cost of living'},
-  {s:'faithcredit',c:'I. The Problem with Money',k:'national debt deficit treasury bonds dollar backed government 36 trillion interest spending'},
+  {s:'faithcredit',c:'I. The Problem with Money',k:'national debt deficit treasury bonds dollar backed government 36 trillion interest spending both parties republican democrat bipartisan presidents red blue who added more debt by president reagan obama trump biden'},
   {s:'year1971',c:'I. The Problem with Money',k:'1971 nixon gold standard gold window wtf happened wages stagnant productivity gap obesity suicide wealth gap inequality two incomes housing unaffordable college tuition healthcare costs society real wages cantillon effect boomers millennials cant afford house'},
   {s:'deflation',c:'I. The Problem with Money',k:'deflation falling prices technology savings cheaper saver'},
   {s:'fiatgraveyard',c:'I. The Problem with Money',k:'fiat currency collapse hyperinflation weimar zimbabwe venezuela argentina failed currencies history paper money'},
@@ -12638,6 +12658,61 @@ document.getElementById('certDownloadBtn')?.addEventListener('click', function()
     });
     game.appendChild(card);
   });
+})();
+
+// ── Debt by administration chart (Full Faith & Credit) ──
+(function(){
+  const chart = document.getElementById('debtPartyChart');
+  if(!chart) return;
+  // Gross federal debt in $T at fiscal-year ends spanning each term (Treasury Historical Debt Outstanding)
+  const PRES = [
+    {name:'Reagan', party:'R', years:'1981-89', added: 1.86, pct: 186, crisis: 0},
+    {name:'Bush Sr.', party:'R', years:'1989-93', added: 1.55, pct: 54, crisis: 0},
+    {name:'Clinton', party:'D', years:'1993-01', added: 1.40, pct: 32, crisis: 0},
+    {name:'Bush Jr.', party:'R', years:'2001-09', added: 6.10, pct: 105, crisis: 0.7, note:'2008 bank rescue'},
+    {name:'Obama', party:'D', years:'2009-17', added: 8.33, pct: 70, crisis: 1.5, note:'GFC stimulus + response'},
+    {name:'Trump', party:'R', years:'2017-21', added: 8.19, pct: 40, crisis: 3.5, note:'COVID relief bills'},
+    {name:'Biden', party:'D', years:'2021-25', added: 7.79, pct: 27, crisis: 1.9, note:'COVID relief (ARPA)'}
+  ];
+  const COLORS = {R:'#f87171', D:'#60a5fa'};
+  function render(adjusted){
+    const vals = PRES.map(function(p){ return adjusted ? p.added - p.crisis : p.added; });
+    const max = Math.max.apply(null, vals);
+    chart.innerHTML = '';
+    PRES.forEach(function(p, i){
+      const v = vals[i];
+      const row = document.createElement('div');
+      row.innerHTML = '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;">'
+        + '<span><strong style="color:' + COLORS[p.party] + ';">' + p.name + '</strong> <span style="color:var(--muted);font-size:10px;">(' + (p.party === 'R' ? 'Republican' : 'Democrat') + ', ' + p.years + ')</span></span>'
+        + '<span style="font-family:Space Mono,monospace;color:' + COLORS[p.party] + ';font-weight:700;">+$' + v.toFixed(2) + 'T <span style="color:var(--muted);font-weight:400;font-size:10px;">(+' + p.pct + '%)</span></span></div>'
+        + '<div style="height:14px;border-radius:7px;background:rgba(255,255,255,0.05);overflow:hidden;">'
+        + '<div style="height:100%;border-radius:7px;width:' + (v / max * 100).toFixed(1) + '%;background:' + COLORS[p.party] + ';opacity:0.85;transition:width .5s cubic-bezier(.4,0,.2,1);"></div></div>'
+        + (adjusted && p.crisis ? '<div style="font-size:10px;color:var(--muted);margin-top:2px;">excludes ~$' + p.crisis.toFixed(1) + 'T ' + p.note + '</div>' : '');
+      chart.appendChild(row);
+    });
+    // In-progress term
+    const cur = document.createElement('div');
+    cur.innerHTML = '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;">'
+      + '<span><strong style="color:' + COLORS.R + ';">Trump (2nd term)</strong> <span style="color:var(--muted);font-size:10px;">(Republican, 2025- )</span></span>'
+      + '<span style="font-family:Space Mono,monospace;color:var(--muted);font-size:11px;">in progress - watch the clock above</span></div>'
+      + '<div style="height:14px;border-radius:7px;background:rgba(255,255,255,0.05);border:1px dashed rgba(248,113,113,0.5);"></div>';
+    chart.appendChild(cur);
+    // Party tallies over completed terms since 1981 (24 years each)
+    const rTotal = PRES.filter(function(p){ return p.party === 'R'; }).reduce(function(t, p){ return t + (adjusted ? p.added - p.crisis : p.added); }, 0);
+    const dTotal = PRES.filter(function(p){ return p.party === 'D'; }).reduce(function(t, p){ return t + (adjusted ? p.added - p.crisis : p.added); }, 0);
+    document.getElementById('debtPartyTally').innerHTML =
+      '<div style="padding:14px;border-radius:12px;background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.3);text-align:center;">'
+      + '<div style="font-size:11px;color:var(--muted);">Republican presidents, 24 years</div>'
+      + '<div style="font-family:Space Mono,monospace;font-size:22px;font-weight:700;color:#f87171;">+$' + rTotal.toFixed(1) + 'T</div></div>'
+      + '<div style="padding:14px;border-radius:12px;background:rgba(96,165,250,0.07);border:1px solid rgba(96,165,250,0.3);text-align:center;">'
+      + '<div style="font-size:11px;color:var(--muted);">Democratic presidents, 24 years</div>'
+      + '<div style="font-family:Space Mono,monospace;font-size:22px;font-weight:700;color:#60a5fa;">+$' + dTotal.toFixed(1) + 'T</div></div>';
+  }
+  const allBtn = document.getElementById('debtAllBtn');
+  const adjBtn = document.getElementById('debtAdjBtn');
+  allBtn.addEventListener('click', function(){ allBtn.classList.add('active'); adjBtn.classList.remove('active'); render(false); });
+  adjBtn.addEventListener('click', function(){ adjBtn.classList.add('active'); allBtn.classList.remove('active'); render(true); });
+  render(false);
 })();
 
 // ═══════════════════════════════════════
