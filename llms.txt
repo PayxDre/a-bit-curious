@@ -41,7 +41,7 @@ The site teaches money from first principles: why gold became money, why governm
 - [Wallets](https://www.a-bit-curious.com): Hardware, software, and paper wallets. "Not your keys, not your coins."
 - [Exchanges](https://www.a-bit-curious.com): How to buy Bitcoin. Centralized vs decentralized. Dollar-cost averaging.
 - [Sending Bitcoin](https://www.a-bit-curious.com): Transactions, fees, mempool, replace-by-fee. Interactive fee estimator.
-- [Security](https://www.a-bit-curious.com): Multi-sig, passphrases, metal seed backups, address verification.
+- [Security](https://www.a-bit-curious.com): Multi-sig, passphrases, metal seed backups, address verification. Includes a case study on the July 2026 Coldcard entropy bug, where a firmware fallback to a predictable PRNG cut seed entropy to ~40 bits and led to roughly 1,367 BTC being swept.
 - [Your First $10, Safely](https://www.a-bit-curious.com/lessons/firstbitcoin/): The knowledge-to-action bridge - wallet decision quiz, five-step training path, and withdrawal checklist.
 - [The Scam Drill](https://www.a-bit-curious.com/lessons/scamdrill/): Scored drill against the eight scams that actually steal bitcoin, from seed phishing to pig butchering.
 

@@ -1949,6 +1949,52 @@
       </div>
 
       <p class="body-text">Diversify where you store Bitcoin. Small spending amounts can stay on an exchange or phone wallet for convenience. Large savings should be on a hardware wallet kept offline. Consider creating a "decoy wallet" with a small amount if you ever feel physically threatened. And tell someone you trust where your seed phrase backup is hidden - not the phrase itself, but where to find it in an emergency.</p>
+
+      <!-- ── Case study: Coldcard entropy bug (July 2026) ── -->
+      <div class="glass p-5 my-6" style="border:2px solid rgba(248,113,113,0.3);">
+        <div class="text-sm font-bold mb-2" style="color:#f87171;">&#9888;&#65039; Case Study: The Coldcard Entropy Bug (July 2026)</div>
+        <div class="text-xs mb-3" style="color:var(--muted);">Bitcoin worked perfectly. The dice did not.<sup><a href="#ref-46" style="color:var(--orange);text-decoration:none;font-size:10px;">[46]</a></sup></div>
+
+        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px;">In late July 2026, Coinkite disclosed that a bug in Coldcard firmware had been quietly crippling seed generation since <strong style="color:#f87171;">March 2021</strong>. Inside libngu, the device's cryptography library, a preprocessor check tested whether a configuration macro was <em>defined</em> rather than whether it was actually <em>switched on</em>. Every build from firmware 4.0.1 onward silently fell back to Yasmarang - a fast, non-cryptographic pseudo-random generator borrowed from MicroPython - instead of the STM32 chip's hardware true random number generator. Worse, that fallback was seeded once from the chip's unique ID and timer registers, then never fed fresh randomness again.</p>
+
+        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px;">A 24-word seed is supposed to carry <strong style="color:var(--orange);">128 bits of entropy</strong> - more possible keys than there are atoms in our galaxy, which is the entire reason nobody can guess yours. On affected devices, real entropy collapsed to roughly 72 bits on Mk4, Q and Mk5, and roughly <strong style="color:#f87171;">40 bits on Mk2 and Mk3</strong>. Forty bits is about a trillion possibilities. That is not a universe. That is a weekend and a decent graphics card.</p>
+
+        <div class="glass p-5 my-5">
+          <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#127922; Entropy Actually Delivered</div>
+          <div class="space-y-2">
+            <div style="display:flex;align-items:center;gap:8px;"><div style="font-size:10px;min-width:110px;color:var(--muted);">As promised</div><div style="flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,0.05);overflow:hidden;"><div style="width:100%;height:100%;background:#4ade80;border-radius:5px;"></div></div><div style="font-size:10px;color:#4ade80;min-width:66px;">128 bits</div></div>
+            <div style="display:flex;align-items:center;gap:8px;"><div style="font-size:10px;min-width:110px;color:var(--muted);">Mk4 / Q / Mk5</div><div style="flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,0.05);overflow:hidden;"><div style="width:56%;height:100%;background:#fbbf24;border-radius:5px;"></div></div><div style="font-size:10px;color:#fbbf24;min-width:66px;">~72 bits</div></div>
+            <div style="display:flex;align-items:center;gap:8px;"><div style="font-size:10px;min-width:110px;color:var(--muted);">Mk2 / Mk3</div><div style="flex:1;height:10px;border-radius:5px;background:rgba(255,255,255,0.05);overflow:hidden;"><div style="width:31%;height:100%;background:#f87171;border-radius:5px;"></div></div><div style="font-size:10px;color:#f87171;min-width:66px;">~40 bits</div></div>
+          </div>
+          <div class="text-xs text-center mt-2" style="color:var(--muted);">Every bit you lose halves the attacker's work. Losing 88 of them ends the game.</div>
+        </div>
+
+        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px;">Someone found it. Beginning around 01:10 UTC on <strong style="color:#f87171;">July 30, 2026</strong>, coins started leaving wallets whose owners had done nothing wrong that morning - no phishing link, no leaked backup, no malware. Galaxy Research went on to map three waves of sweeps through August 1, totalling roughly <strong style="color:#f87171;">1,367 BTC (about $88.6 million) across 4,585 addresses</strong>. The victims were overwhelmingly single-signature wallets. Coinkite shipped patched firmware on July 31.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;">
+          <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:#f87171;margin-bottom:6px;">WHO GOT SWEPT</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Seeds generated on the device itself on firmware 4.0.1 or later, held in a <strong style="color:#f87171;">single-signature wallet</strong>, with no passphrase and no dice rolls added. They were guessable from the moment they were created - the owners just did not know it for five years.</div>
+          </div>
+          <div style="padding:14px;border-radius:10px;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:#4ade80;margin-bottom:6px;">WHO WAS FINE</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Anyone who mixed in <strong style="color:#4ade80;">50+ of their own dice rolls</strong> or used a strong, unique BIP-39 passphrase. Also safe: seeds made before v4.0.0, the Mk1, Tapsigner, Opendime and Satscard, and multisig quorums whose other keys came from a different vendor.</div>
+          </div>
+        </div>
+
+        <div style="padding:14px;border-radius:10px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.25);margin:16px 0;">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--orange);margin-bottom:8px;">&#128295; IF YOU OWN A COLDCARD</div>
+          <div style="font-size:12px;color:var(--text3);line-height:1.8;">
+            1. Update to patched firmware - Mk3 to 4.2.0, Mk4 and Mk5 to 5.6.0, Q to 1.5.0Q (Edge builds: 6.6.0X and 6.6.0QX).<br/>
+            2. Understand that <strong style="color:var(--orange);">updating does not repair a seed that was already made weakly</strong>. The damage is baked into the words.<br/>
+            3. Generate a brand new seed on the patched firmware and move your coins to it, treating the old wallet as compromised.<br/>
+            4. Add your own dice rolls while you do it, and write the new words down before you send a single satoshi.
+          </div>
+        </div>
+
+        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:0;">Here is the uncomfortable part: the protocol never wavered. No consensus rule broke, no node was fooled, and every one of those thefts was a <em>perfectly valid</em> Bitcoin transaction signed by a key the attacker had legitimately guessed. Bitcoin will faithfully execute a theft if someone can produce your key - and weak randomness hands that key over quietly, years in advance. "Don't trust, verify" is not only about the ledger. It applies to the box that generates your keys too, which is exactly why rolling your own dice and spreading a multisig across different vendors are worth the extra ten minutes.</p>
+      </div>
+
       <div class="neon-divider"></div>
       <div class="glass p-5">
         <div class="text-sm font-bold mb-3" style="color:var(--orange);">&#128737; Security Checklist</div>
@@ -5929,6 +5975,7 @@
       </div>
       <p class="body-text">A Bitcoin private key is just a number between 1 and 2&sup2;&sup5;&sup6;. There are roughly 2&sup2;&sup5;&sup8; atoms in the observable universe. Your private key is a random point in a space almost as vast. It's impossible to guess someone's private key - even if every computer ever built worked on it together for longer than the universe has existed.</p>
       <p class="body-text">Private keys are generated from <span class="tooltip-word" tabindex="0">entropy<span class="tooltip-box">Randomness from unpredictable sources - mouse movements, keyboard timings, hardware noise. Bad randomness is one of the rare ways Bitcoin security has been compromised.</span></span>. The key is encoded in <span class="tooltip-word" tabindex="0">WIF<span class="tooltip-box">Wallet Import Format - encoding a raw key as a shorter, error-checked string starting with "K", "L", or "5".</span></span> for human readability.</p>
+      <p class="body-text">This is the part nobody checks and everybody depends on. Your key is only unguessable if the randomness behind it was genuine - and in July 2026 a firmware bug in Coldcard hardware wallets quietly replaced the chip's true random number generator with a predictable one, leaving thousands of seeds guessable and around 1,367 BTC swept from wallets that were never otherwise touched. <button type="button" data-section="security" style="background:none;border:none;padding:0;font:inherit;color:var(--orange);text-decoration:underline;cursor:pointer;">Read the full case study in Security &rarr;</button></p>
 
       <!-- ── Inline Illustration ── -->
       <div class="glass p-5 my-5">
@@ -7366,6 +7413,10 @@
             <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);">[45]</div>
             <div style="font-size:12px;color:var(--text2);line-height:1.6;">Debt by administration: US Treasury Fiscal Data, "Historical Debt Outstanding" (fiscaldata.treasury.gov); crisis legislation scores from CBO cost estimates (CARES Act 2020, Consolidated Appropriations Act Dec 2020, American Rescue Plan Act 2021) and CRS reports on TARP (2008) and ARRA (2009)</div>
           </div>
+          <div id="ref-46" style="display:flex;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--glass-border);background:rgba(0,0,0,0.2);">
+            <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--orange);">[46]</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Coldcard entropy vulnerability (July 2026): Coinkite security advisory and technical backgrounder, blog.coinkite.com, July 30-31, 2026 (libngu preprocessor fallback to the MicroPython "Yasmarang" PRNG instead of the STM32 hardware TRNG, introduced in firmware 4.0.1, March 2021; effective entropy ~40 bits on Mk2/Mk3 and ~72 bits on Mk4/Q/Mk5 against 128 expected; patched in Mk3 4.2.0, Mk4/Mk5 5.6.0, Q 1.5.0Q, Edge 6.6.0X/6.6.0QX); independent analysis by Block Engineering, "Predictable RNG Fallback and 32-Bit Reseed in COLDCARD Firmware"; on-chain sweep forensics from Galaxy Research (three waves, July 30 - August 1, 2026, 1,367.05 BTC across 4,585 addresses); CoinDesk, Decrypt and The Hacker News coverage</div>
+          </div>
         </div>
       </div>
 
@@ -8569,7 +8620,9 @@ const checks = [
   "Never clicked links in crypto emails",
   "Using unique addresses for each transaction",
   "Told a trusted person where my backup is",
-  "Verified wallet app is from official source"
+  "Verified wallet app is from official source",
+  "Hardware wallet firmware is up to date",
+  "Added my own dice rolls when generating a hardware wallet seed"
 ];
 const checklist = document.getElementById('securityChecklist');
 if(checklist){
