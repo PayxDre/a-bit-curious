@@ -11,8 +11,8 @@
   ║  3. Deploy: drop file at netlify.com/drop            ║
   ║                                                      ║
   ║  KEYBOARD SHORTCUTS:                                 ║
-  ║  → or ↓  →  Next section                            ║
-  ║  ← or ↑  →  Previous section                        ║
+  ║  →       →  Next section                            ║
+  ║  ←       →  Previous section                        ║
   ║  ESC     →  Close modal                              ║
   ╚══════════════════════════════════════════════════════╝
 -->
@@ -1257,6 +1257,8 @@
   .search-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px;line-height:1.7;}
   #navSearchBtn{display:flex;align-items:center;gap:6px;background:rgba(245,158,11,0.06);border:1px solid var(--glass-border);border-radius:8px;color:var(--muted);font-size:12px;padding:6px 10px;cursor:pointer;transition:all .2s;}
   #navSearchBtn:hover{border-color:rgba(245,158,11,0.4);color:var(--text);}
+  .ticker-btn{background:none;border:none;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;}
+  .ticker-btn:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:4px;}
   .welcome-search{display:flex;align-items:center;gap:10px;width:100%;max-width:520px;margin:0 auto 36px;background:rgba(18,18,42,0.85);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:14px 18px;cursor:text;transition:all .2s;text-align:left;}
   .welcome-search:hover{border-color:rgba(245,158,11,0.55);box-shadow:0 0 24px rgba(245,158,11,0.1);}
   .welcome-search span{color:var(--muted);font-size:14px;}
@@ -1284,7 +1286,7 @@
 <!-- ═══════════════ MOBILE BOTTOM NAV ═══════════════ -->
 <div id="mobile-bottom-nav" role="navigation" aria-label="Section navigation">
   <button class="mob-nav-btn" id="mob-prev-btn" aria-label="Previous section">&#8592; Prev</button>
-  <div id="mobile-section-label" aria-live="polite">Wallets</div>
+  <div id="mobile-section-label" aria-live="polite">Welcome</div>
   <button class="mob-nav-btn" id="mob-next-btn" aria-label="Next section">Next &#8594;</button>
 </div>
 
@@ -1300,22 +1302,22 @@
       <span class="hidden sm:inline">Search</span>
       <span class="hidden lg:inline" style="font-family:'Space Mono',monospace;font-size:10px;border:1px solid var(--glass-border);border-radius:4px;padding:1px 5px;">/</span>
     </button>
-    <div class="flex items-center gap-2" aria-label="Bitcoin price ticker" style="cursor:pointer;" onclick="openPriceChart('btcusd')" title="Click to view BTC/USD historical chart">
+    <button type="button" class="ticker-btn flex items-center gap-2" onclick="openPriceChart('btcusd')" title="View BTC/USD historical chart">
       <span class="pulse-badge" aria-hidden="true"></span>
       <span class="hidden sm:inline" style="font-size:12px;color:var(--muted);">BTC/USD</span>
-      <span class="ticker-num" id="btcPrice" aria-live="polite">...</span>
-    </div>
-    <div class="flex items-center gap-2" aria-label="Bitcoin gold price" style="cursor:pointer;" onclick="openPriceChart('btcgold')" title="Click to view BTC/Gold historical chart">
+      <span class="ticker-num" id="btcPrice">...</span>
+    </button>
+    <button type="button" class="ticker-btn flex items-center gap-2" onclick="openPriceChart('btcgold')" title="View BTC/Gold historical chart">
       <span class="hidden sm:inline" style="font-size:12px;color:var(--muted);">BTC/Gold</span>
       <span id="btcGold" style="font-family:'Space Mono',monospace;font-size:12px;color:var(--orange-bright);">... oz</span>
-    </div>
+    </button>
     <div class="hidden md:flex items-center gap-2">
       <span style="font-size:11px;color:var(--muted);">24h</span>
       <span id="btcChange" style="font-family:'Space Mono',monospace;font-size:12px;color:#4ade80;">+0.00%</span>
     </div>
     <div id="kbd-hint" class="hidden lg:flex items-center gap-1" style="font-size:11px;color:var(--muted);">
       <span aria-hidden="true">&#9000;</span>
-      <span>Arrow keys to navigate</span>
+      <span>&#8592; &#8594; to change lessons</span>
     </div>
   </div>
 </nav>
@@ -1403,9 +1405,9 @@
     <div class="px-4 mt-6 mb-4">
       <div class="text-center py-3 px-2 rounded-xl" style="background:rgba(245,158,11,0.06);border:1px solid var(--glass-border);border-radius:12px;">
         <div class="text-xs" style="color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-family:'Space Mono',monospace;font-size:9px;">Your Progress</div>
-        <div class="text-sm mt-1 font-bold" style="color:var(--orange);font-family:'Space Mono',monospace;" id="progressLabel" aria-live="polite">1/19</div>
-        <div class="mt-2 rounded-full overflow-hidden" style="height:5px;background:rgba(255,255,255,0.08);" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100">
-          <div id="progressBar" style="height:5px;background:linear-gradient(90deg,#f59e0b,#fbbf24);width:5.5%;border-radius:4px;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(245,158,11,0.4);"></div>
+        <div class="text-sm mt-1 font-bold" style="color:var(--orange);font-family:'Space Mono',monospace;" id="progressLabel" aria-live="polite">0/47 explored</div>
+        <div class="mt-2 rounded-full overflow-hidden" style="height:5px;background:rgba(255,255,255,0.08);" role="progressbar" aria-label="Course progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div id="progressBar" style="height:5px;background:linear-gradient(90deg,#f59e0b,#fbbf24);width:0%;border-radius:4px;transition:width .4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 8px rgba(245,158,11,0.4);"></div>
         </div>
       </div>
     </div>
@@ -1442,14 +1444,14 @@
           <p style="font-size:12px;color:var(--text3);margin-bottom:16px;line-height:1.6;">Enter your savings. See what inflation has quietly taken from you.</p>
           <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:16px;">
             <span style="font-size:20px;color:var(--muted);">$</span>
-            <input id="meltInput" type="number" value="50000" min="100" step="1000" style="background:var(--surface);border:1px solid var(--glass-border);border-radius:8px;padding:10px 14px;font-family:'Space Mono',monospace;font-size:18px;color:var(--orange);width:160px;text-align:center;outline:none;" oninput="updateMelt()"/>
+            <input id="meltInput" type="number" value="50000" min="100" step="1000" aria-label="Your savings in US dollars" style="background:var(--surface);border:1px solid var(--glass-border);border-radius:8px;padding:10px 14px;font-family:'Space Mono',monospace;font-size:18px;color:var(--orange);width:160px;text-align:center;" oninput="updateMelt()"/>
           </div>
           <div id="meltResult" style="font-family:'Space Mono',monospace;font-size:14px;color:var(--text3);line-height:1.8;">
-            <div>After <strong style="color:var(--orange);">5 years</strong> at real inflation (~8%): you lost <strong style="color:#f87171;" id="melt5">$15,971</strong></div>
-            <div>After <strong style="color:var(--orange);">10 years</strong>: you lost <strong style="color:#f87171;" id="melt10">$26,840</strong></div>
-            <div>After <strong style="color:var(--orange);">20 years</strong>: you lost <strong style="color:#f87171;" id="melt20">$39,273</strong></div>
+            <div>After <strong style="color:var(--orange);">5 years</strong>: <strong style="color:#f87171;" id="melt5">$6,870 - $14,351</strong></div>
+            <div>After <strong style="color:var(--orange);">10 years</strong>: <strong style="color:#f87171;" id="melt10">$12,795 - $24,583</strong></div>
+            <div>After <strong style="color:var(--orange);">20 years</strong>: <strong style="color:#f87171;" id="melt20">$22,316 - $37,079</strong></div>
           </div>
-          <p style="font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5;">Using ~8% real inflation (ShadowStats methodology, not the official CPI number). Your bank's 0.5% interest rate doesn't come close to covering this.</p>
+          <p style="font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5;">Purchasing power lost if your cash sits idle. The low end uses ~3% a year (roughly the official CPI average over the past century); the high end uses ~7% a year (roughly how fast the US money supply has grown since 1960). Ordinary savings accounts have rarely kept pace with the high end.</p>
         </div>
 
         <div class="neon-divider" style="margin:0 auto 40px;max-width:120px;"></div>
@@ -1461,7 +1463,7 @@
             An interactive journey through the story of money - from ancient civilizations to the digital age. 5,000 years of monetary history, how the system works today, and why millions of people around the world are turning to something radically different.
           </p>
           <p style="color:var(--text3);font-size:13px;max-width:540px;margin:0 auto 20px;line-height:1.7;">
-            Every section is designed to be visual, engaging, and jargon-free. Hover over highlighted words for instant definitions. Take interactive quizzes to test your understanding. And move at your own pace - there are no tests, no grades, and no judgment.
+            Every section is designed to be visual, engaging, and jargon-free. Tap or hover over highlighted words for instant definitions. Take interactive quizzes to test your understanding. And move at your own pace - the quizzes are just for you, and the final exam is there only if you want a certificate.
           </p>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;">
             <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.18);border-radius:10px;padding:12px 18px;font-size:12px;color:var(--text2);transition:all .25s;"><strong style="color:var(--orange);">7 chapters</strong> &bull; 46 interactive lessons</div>
@@ -1484,7 +1486,7 @@
           <p style="color:var(--text2);font-size:13px;line-height:1.8;margin-bottom:12px;">
             You'll learn what makes "good money" good, why gold dominated for millennia, what happened when governments replaced it with paper promises in 1971, and why the dollar has lost <strong style="color:#f87171;">over 85% of its purchasing power</strong><sup><a href="#ref-1" style="color:var(--orange);text-decoration:none;font-size:10px;">[1]</a></sup> since then (97% since the Federal Reserve was created in 1913). You'll see the graveyard of every fiat currency that came before it - and where the USD stands in that same timeline.
           </p>
-          <div style="font-size:11px;color:var(--muted);font-style:italic;">Sections include: The Nature of Money, Monetary Inflation, Deflation vs Fiat, The Fiat Graveyard, The Pizza Dilemma, Digital Money Before Bitcoin, Bitcoin vs Other Cryptos, 6 Myths Debunked, Bitcoin vs Gold, and Bitcoin Adoption.</div>
+          <div style="font-size:11px;color:var(--muted);font-style:italic;">Sections include: The Nature of Money, Monetary Inflation, Full Faith &amp; Credit, 1971: The Year Money Broke, Deflation vs Fiat, and The Fiat Graveyard.</div>
         </div>
 
         <!-- ═══════ SECTION 4: WHY BITCOIN IS DIFFERENT (INTRO) ═══════ -->
@@ -1497,16 +1499,16 @@
             Every currency in history shares one fatal flaw: someone can always create more of it. A king clips coins. A government fires up the printing press. A central bank types zeros into a computer. The result is always the same - the money in your pocket slowly becomes worthless.
           </p>
           <p style="color:var(--text2);font-size:13px;line-height:1.8;margin-bottom:12px;">
-            Bitcoin is the first money in human history where <strong style="color:var(--orange);">no one can create more</strong>. Not a CEO. Not a president. Not an army. There will only ever be <strong style="color:var(--orange);">21 million Bitcoin</strong><sup><a href="#ref-2" style="color:var(--orange);text-decoration:none;font-size:10px;">[2]</a></sup> - enforced by mathematics and a global network of computers, not by trust in any institution. It runs 24/7, has never been hacked, never been shut down, and has operated with <strong style="color:var(--orange);">100% uptime for 17+ years</strong><sup><a href="#ref-4" style="color:var(--orange);text-decoration:none;font-size:10px;">[4]</a></sup>. No bank, no government, no company on Earth can make that claim.
+            Bitcoin is the first money in human history where <strong style="color:var(--orange);">no one can create more</strong>. Not a CEO. Not a president. Not an army. There will only ever be <strong style="color:var(--orange);">21 million Bitcoin</strong><sup><a href="#ref-2" style="color:var(--orange);text-decoration:none;font-size:10px;">[2]</a></sup> - enforced by mathematics and a global network of computers, not by trust in any institution. It runs 24/7, its core protocol has never been broken into, it has never been shut down, and it has kept running with <strong style="color:var(--orange);">99.98%+ uptime for 17+ years</strong><sup><a href="#ref-4" style="color:var(--orange);text-decoration:none;font-size:10px;">[4]</a></sup>. Very few banks, governments, or companies can make that claim.
           </p>
           <p style="color:var(--text2);font-size:13px;line-height:1.8;margin-bottom:0;">
-            Unlike fiat money - dollars, euros, yen - which can be printed in unlimited quantities, Bitcoin is digitally scarce. It can be sent anywhere on Earth in minutes for pennies. It can't be frozen, seized, or censored. And it doesn't require you to trust a bank, a broker, or a government. This course will show you exactly how it works, why it matters, and what it means for the future of money.
+            Unlike fiat money - dollars, euros, yen - which can be printed in unlimited quantities, Bitcoin is digitally scarce. It can be sent anywhere on Earth - usually within an hour on the main chain, or in seconds for a fraction of a cent over the Lightning Network. When you hold your own keys, no bank or payment company can freeze or block it. And it doesn't require you to trust a bank, a broker, or a government. This course will show you exactly how it works, why it matters, and what it means for the future of money.
           </p>
         </div>
 
         <div class="neon-divider" style="margin:32px auto;max-width:120px;"></div>
 
-        <!-- Course roadmap reflecting 5-chapter structure -->
+        <!-- Course roadmap reflecting 7-chapter structure -->
         <div class="welcome-roadmap">
           <div class="welcome-roadmap-label">&#127891; Your learning journey - 7 chapters, 46 interactive lessons</div>
           <div class="roadmap-track" role="img" aria-label="Course roadmap: The Problem, Origin Story, Bitcoin vs The World, Getting Started, How It Works, Cryptography, The Future">
@@ -7557,7 +7559,8 @@ const sectionNames = {
   whitepaper:'The Whitepaper',
   tulips:'Bitcoin vs Tulip Mania',
   caseagainst:'The Case Against Bitcoin',
-  goldvsbtc:'Bitcoin vs Gold'
+  goldvsbtc:'Bitcoin vs Gold',
+  bibliography:'Go Deeper & Sources'
 };
 
 let currentSection = 'welcome';
@@ -7566,6 +7569,7 @@ let isTransitioning = false; // block transition lock
 let btcPrice = 0;
 let btcChange = 0;
 let goldPrice = 0;
+let liveTipHeight = 0;
 let _scrollY = 0;
 
 // ═══════════════════════════════════════
@@ -7574,19 +7578,21 @@ let _scrollY = 0;
 const PROGRESS_KEY = 'abc_progress_v1';
 let abcVisited = new Set();
 let abcCelebrated = false;
+let abcNudged = false;
 let abcLastSection = null;
 try {
   const saved = JSON.parse(localStorage.getItem(PROGRESS_KEY) || 'null');
   if(saved){
     abcVisited = new Set(saved.visited || []);
     abcCelebrated = !!saved.celebrated;
+    abcNudged = !!saved.nudged;
     abcLastSection = saved.last || null;
   }
 } catch(e){ /* private browsing or storage disabled - progress just won't persist */ }
 let abcRoutingInitial = true;
 function saveProgress(){
   try {
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify({visited: Array.from(abcVisited), celebrated: abcCelebrated, last: abcLastSection}));
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify({visited: Array.from(abcVisited), celebrated: abcCelebrated, nudged: abcNudged, last: abcLastSection}));
   } catch(e){}
 }
 function updateProgressUI(){
@@ -7605,27 +7611,58 @@ function updateProgressUI(){
     if(nav) nav.classList.toggle('visited', abcVisited.has(sec));
   });
 }
+function examPassedEver(){
+  try {
+    const prev = JSON.parse(localStorage.getItem('abc_exam_v1') || 'null');
+    return !!(prev && prev.passed);
+  } catch(e){ return false; }
+}
+// Opening every lesson earns a nudge toward the exam; passing the exam is what completes the course
 function checkCompletion(){
-  if(abcCelebrated || abcVisited.size < sectionOrder.length) return;
+  if(abcNudged || abcCelebrated || abcVisited.size < sectionOrder.length) return;
+  if(currentSection === 'finalexam' || examPassedEver()) return;
+  abcNudged = true;
+  saveProgress();
+  showExamNudgeCard();
+}
+function celebrateCourseComplete(score){
+  if(abcCelebrated) return;
   abcCelebrated = true;
   saveProgress();
-  showCompletionCard();
+  setTimeout(function(){ showCompletionCard(score); }, 1800);
 }
-function showCompletionCard(){
+function showCardOverlay(html){
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay open';
   overlay.style.zIndex = '10001';
-  overlay.innerHTML = '<div class="modal-box" style="max-width:480px;text-align:center;">'
-    + '<div style="font-size:56px;margin-bottom:8px;">🎓</div>'
+  overlay.innerHTML = '<div class="modal-box" style="max-width:480px;text-align:center;">' + html + '</div>';
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) overlay.remove(); });
+  return overlay;
+}
+function showExamNudgeCard(){
+  const overlay = showCardOverlay(
+    '<div style="font-size:56px;margin-bottom:8px;">🧭</div>'
+    + '<div class="demo-title" style="font-size:26px;">You\'ve Opened Every Lesson</div>'
+    + '<div style="font-size:14px;color:var(--text2);line-height:1.7;margin:12px 0 20px;">That\'s a great start. The Final Exam - 25 questions, 20 to pass - is how you find out what stuck, and passing it earns you a certificate anchored in Bitcoin.</div>'
+    + '<div style="display:grid;gap:8px;">'
+    + '<button id="abcExamBtn" class="demo-btn demo-btn-orange">Take the Final Exam</button>'
+    + '<button id="abcCloseCardBtn" class="demo-btn demo-btn-ghost">Keep Exploring</button>'
+    + '</div>');
+  overlay.querySelector('#abcExamBtn').addEventListener('click', function(){ overlay.remove(); showSection('finalexam'); });
+  overlay.querySelector('#abcCloseCardBtn').addEventListener('click', function(){ overlay.remove(); });
+}
+function showCompletionCard(score){
+  const overlay = showCardOverlay(
+    '<div style="font-size:56px;margin-bottom:8px;">🎓</div>'
     + '<div class="demo-title" style="font-size:26px;">Course Complete!</div>'
-    + '<div style="font-size:14px;color:var(--text2);line-height:1.7;margin:12px 0 20px;">You explored all ' + sectionOrder.length + ' lessons of A ₿it Curious. You now understand money and Bitcoin better than most people on the planet.</div>'
+    + '<div style="font-size:14px;color:var(--text2);line-height:1.7;margin:12px 0 20px;">You passed the A ₿it Curious final exam with ' + score + '/25. You now understand money and Bitcoin better than most people on the planet.</div>'
     + '<div style="display:grid;gap:8px;">'
     + '<button id="abcShareBtn" class="demo-btn demo-btn-orange">Share Your Achievement</button>'
     + '<button id="abcCloseCardBtn" class="demo-btn demo-btn-ghost">Keep Exploring</button>'
-    + '</div></div>';
-  document.body.appendChild(overlay);
+    + '</div>');
   if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) for(let k=0;k<25;k++) setTimeout(function(){spawnCoin();},k*70);
-  const shareText = 'I just completed A Bit Curious - the free interactive Bitcoin course. ' + sectionOrder.length + ' lessons, real cryptography demos, zero fluff.';
+  const shareText = 'I just passed the final exam of A Bit Curious - the free interactive Bitcoin course. ' + (sectionOrder.length - 1) + ' lessons, real cryptography demos, zero fluff.';
   const shareUrl = 'https://www.a-bit-curious.com';
   overlay.querySelector('#abcShareBtn').addEventListener('click', async function(){
     if(navigator.share){
@@ -7638,7 +7675,6 @@ function showCompletionCard(){
     }
   });
   overlay.querySelector('#abcCloseCardBtn').addEventListener('click', function(){ overlay.remove(); });
-  overlay.addEventListener('click', function(e){ if(e.target === overlay) overlay.remove(); });
 }
 
 // Timers (stored so they can be cleaned up)
@@ -7772,19 +7808,15 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 // ═══════════════════════════════════════
 function updateMelt(){
   const v = parseFloat(document.getElementById('meltInput').value) || 0;
-  const r = 0.08;
+  const LOW = 0.03, HIGH = 0.07;
   // Purchasing power after n years of inflation r is v / (1+r)^n.
   // The loss approaches but can never exceed the face value.
-  const lost5 = v - v / Math.pow(1+r, 5);
-  const lost10 = v - v / Math.pow(1+r, 10);
-  const lost20 = v - v / Math.pow(1+r, 20);
+  const lost = (r, n) => v - v / Math.pow(1+r, n);
   const fmt = n => '$' + Math.round(n).toLocaleString();
-  const el5 = document.getElementById('melt5');
-  const el10 = document.getElementById('melt10');
-  const el20 = document.getElementById('melt20');
-  if(el5) el5.textContent = fmt(lost5);
-  if(el10) el10.textContent = fmt(lost10);
-  if(el20) el20.textContent = fmt(lost20);
+  [5, 10, 20].forEach(function(n){
+    const el = document.getElementById('melt' + n);
+    if(el) el.textContent = fmt(lost(LOW, n)) + ' - ' + fmt(lost(HIGH, n));
+  });
 }
 updateMelt();
 
@@ -7833,53 +7865,72 @@ function renderTicker(){
     const sectionEl = document.getElementById('goldSectionRatio');
     if(sectionEl) sectionEl.textContent = ratio + ' oz';
   }
+  if(btcPrice > 0 && window.refreshTooLateCalc) window.refreshTooLateCalc();
 }
 async function fetchBtcPrice(){
-  // Primary: CoinCap (free, no key). Fallback: mempool.space, then CoinGecko.
+  // Primary: Coinbase 24h stats (free, no key, CORS). Fallbacks: CoinGecko, then mempool.space (price only).
   try {
-    const res = await fetch('https://api.coincap.io/v2/assets/bitcoin');
-    const data = await res.json();
-    if(data.data && data.data.priceUsd){
-      btcPrice = parseFloat(data.data.priceUsd);
-      btcChange = parseFloat(data.data.changePercent24Hr) || 0;
-      renderTicker();
-      return;
+    const res = await fetch('https://api.exchange.coinbase.com/products/BTC-USD/stats');
+    if(res.ok){
+      const data = await res.json();
+      const last = parseFloat(data.last), open = parseFloat(data.open);
+      if(last > 0){
+        btcPrice = last;
+        btcChange = open > 0 ? (last - open) / open * 100 : 0;
+        renderTicker();
+        return;
+      }
     }
-  } catch(e){ console.warn('CoinCap price failed:', e); }
+  } catch(e){ console.warn('Coinbase price failed:', e); }
   try {
-    const res2 = await fetch('https://mempool.space/api/v1/prices');
-    const data2 = await res2.json();
-    if(data2.USD){
-      btcPrice = data2.USD;
-      renderTicker();
-      return;
+    const res2 = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+    if(res2.ok){
+      const data2 = await res2.json();
+      if(data2.bitcoin && data2.bitcoin.usd){
+        btcPrice = data2.bitcoin.usd;
+        btcChange = data2.bitcoin.usd_24h_change || 0;
+        renderTicker();
+        return;
+      }
     }
-  } catch(e2){ console.warn('Mempool price failed:', e2); }
+  } catch(e2){ console.warn('CoinGecko price failed:', e2); }
   try {
-    const res3 = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true');
+    const res3 = await fetch('https://mempool.space/api/v1/prices');
     const data3 = await res3.json();
-    btcPrice = data3.bitcoin.usd;
-    btcChange = data3.bitcoin.usd_24h_change;
-    renderTicker();
+    if(data3.USD){
+      btcPrice = data3.USD;
+      renderTicker();
+    }
   } catch(e3){ console.warn('All BTC price sources failed:', e3); }
 }
 async function fetchGoldPrice(){
-  // Use a static gold price estimate; CoinGecko gold data is unreliable on free tier
-  // Gold price is only used for BTC/Gold chart ratio - a reasonable approximation suffices
+  // Tether Gold (XAUT) tracks one troy ounce of gold. If it fails, keep the last
+  // known price rather than inventing one - the ratio just stays at "... oz".
   try {
     const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=tether-gold&vs_currencies=usd');
+    if(!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    goldPrice = data['tether-gold'].usd;
-    renderTicker();
+    if(data['tether-gold'] && data['tether-gold'].usd > 0){
+      goldPrice = data['tether-gold'].usd;
+      renderTicker();
+    }
   } catch(e) {
-    goldPrice = goldPrice || 3100; // fallback estimate
-    console.warn('Gold price fetch failed, using estimate:', e);
+    console.warn('Gold price fetch failed:', e);
   }
 }
 renderTicker(); // Show "..." immediately instead of "$0"
 fetchBtcPrice();
 fetchGoldPrice();
-_timers.ticker = setInterval(() => { fetchBtcPrice(); fetchGoldPrice(); }, 30000);
+// Gold moves slowly and CoinGecko's free tier rate-limits aggressively, so poll it less often
+let _goldTick = 0;
+function startTickerPolling(){
+  if(_timers.ticker) return;
+  _timers.ticker = setInterval(() => {
+    fetchBtcPrice();
+    if(++_goldTick % 10 === 0) fetchGoldPrice();
+  }, 30000);
+}
+startTickerPolling();
 
 // ═══════════════════════════════════════
 //   LIVE BITCOIN STATS (mempool.space API)
@@ -7889,6 +7940,7 @@ async function fetchLiveStats(){
     // Block height + halving countdown (halvings happen every 210,000 blocks)
     const tipRes = await fetch('https://mempool.space/api/blocks/tip/height');
     const tipHeight = Number(await tipRes.json());
+    if(tipHeight > 0) liveTipHeight = tipHeight;
     document.getElementById('blockHeight').textContent = tipHeight.toLocaleString();
     const nextHalvingBlock = Math.ceil(tipHeight / 210000) * 210000;
     const blocksLeft = nextHalvingBlock - tipHeight;
@@ -7922,6 +7974,19 @@ async function fetchLiveStats(){
 }
 fetchLiveStats();
 _timers.stats = setInterval(fetchLiveStats, 60000);
+
+// Stop polling the price and network APIs while the tab is in the background
+document.addEventListener('visibilitychange', () => {
+  if(document.hidden){
+    clearInterval(_timers.ticker); _timers.ticker = null;
+    clearInterval(_timers.stats); _timers.stats = null;
+  } else {
+    fetchBtcPrice();
+    fetchLiveStats();
+    startTickerPolling();
+    if(!_timers.stats) _timers.stats = setInterval(fetchLiveStats, 60000);
+  }
+});
 
 // ═══════════════════════════════════════
 //   TEACHING NOTES & DID YOU KNOW
@@ -8375,11 +8440,11 @@ function renderSearchResults(q){
   ).join('');
 }
 
-function openSearch(){
+function openSearch(query){
   document.getElementById('searchOverlay').classList.add('open');
   const inp = document.getElementById('searchInput');
-  inp.value = '';
-  renderSearchResults('');
+  inp.value = typeof query === 'string' ? query : '';
+  renderSearchResults(inp.value);
   setTimeout(() => inp.focus(), 50);
 }
 function closeSearch(){
@@ -8541,12 +8606,14 @@ document.addEventListener('keydown', function(e){
   if(document.getElementById('searchOverlay').classList.contains('open')) return;
   // Only navigate if no input/textarea is focused
   if(document.activeElement && ['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
+  if(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  // Up/Down are left alone so the keyboard can still scroll long lessons
   const idx = sectionOrder.indexOf(currentSection);
-  if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){
+  if(e.key === 'ArrowRight'){
     e.preventDefault();
     showSection(sectionOrder[Math.min(idx+1, sectionOrder.length-1)]);
   }
-  if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){
+  if(e.key === 'ArrowLeft'){
     e.preventDefault();
     showSection(sectionOrder[Math.max(idx-1, 0)]);
   }
@@ -11514,109 +11581,63 @@ function closePriceChart(){
   if(cvs){ cvs.onmousemove = null; cvs.onmouseleave = null; cvs.ontouchmove = null; }
 }
 
+// LBMA annual average gold price (USD/oz), plotted at mid-year. Extend this table each January.
+var GOLD_ANNUAL_AVG = [
+  [2010,1225],[2011,1572],[2012,1669],[2013,1411],[2014,1266],[2015,1160],[2016,1251],
+  [2017,1257],[2018,1268],[2019,1393],[2020,1770],[2021,1799],[2022,1800],[2023,1941],[2024,2386]
+];
+// Historical gold price for a timestamp: interpolate between annual averages,
+// then from the last annual average to today's live price.
+function goldUsdAt(ms){
+  var pts = GOLD_ANNUAL_AVG.map(function(a){ return [Date.UTC(a[0], 6, 1), a[1]]; });
+  if(goldPrice > 0) pts.push([Date.now(), goldPrice]);
+  if(ms <= pts[0][0]) return pts[0][1];
+  for(var i = 1; i < pts.length; i++){
+    if(ms <= pts[i][0]){
+      var t = (ms - pts[i-1][0]) / (pts[i][0] - pts[i-1][0]);
+      return pts[i-1][1] + t * (pts[i][1] - pts[i-1][1]);
+    }
+  }
+  return pts[pts.length - 1][1];
+}
+
 async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label, titleEl){
   try {
+    if(vsCurrency === 'gold' && !(goldPrice > 0)) await fetchGoldPrice();
     var prices = null;
 
-    // Strategy 1: CoinGecko days=max (weekly data points for full history)
+    // Primary: blockchain.com daily market price since 2010 (free, no key, CORS via cors=true)
     try {
-      var r1 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=max&interval=daily');
+      var r1 = await fetch('https://api.blockchain.info/charts/market-price?timespan=all&format=json&cors=true');
       if(r1.ok){
         var p1 = await r1.json();
-        if(p1.prices && p1.prices.length > 500) prices = p1.prices;
+        if(p1.values && p1.values.length > 500){
+          prices = p1.values
+            .filter(function(v){ return v.y > 0; })
+            .map(function(v){ return [v.x * 1000, v.y]; });
+        }
       }
-    } catch(e){ console.warn('CoinGecko max failed:', e); }
+    } catch(e){ console.warn('blockchain.com history failed:', e); }
 
-    // Strategy 2: CoinCap weekly interval (single request, full history)
+    // Fallback: CoinGecko's free tier only serves the last 365 days
     if(!prices){
       try {
-        await new Promise(function(resolve){ setTimeout(resolve, 400); });
-        var startMs = new Date('2010-07-01').getTime();
-        var endMs = Date.now();
-        var r2 = await fetch('https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=' + startMs + '&end=' + endMs);
+        var r2 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365');
         if(r2.ok){
           var p2 = await r2.json();
-          if(p2.data && p2.data.length > 500){
-            prices = p2.data.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
-          }
-        }
-      } catch(e){ console.warn('CoinCap full failed:', e); }
-    }
-
-    // Strategy 3: CoinCap in 4-year chunks with weekly interval
-    if(!prices){
-      try {
-        var allData = [];
-        var chunks = [
-          ['2010-07-01','2014-01-01'],['2014-01-01','2018-01-01'],
-          ['2018-01-01','2022-01-01'],['2022-01-01','2030-01-01']
-        ];
-        for(var ci = 0; ci < chunks.length; ci++){
-          var cs = new Date(chunks[ci][0]).getTime();
-          var ce = Math.min(new Date(chunks[ci][1]).getTime(), Date.now());
-          var cr = await fetch('https://api.coincap.io/v2/assets/bitcoin/history?interval=d1&start=' + cs + '&end=' + ce);
-          if(cr.ok){
-            var cp = await cr.json();
-            if(cp.data) allData = allData.concat(cp.data);
-          }
-          if(ci < chunks.length - 1) await new Promise(function(resolve){ setTimeout(resolve, 500); });
-        }
-        if(allData.length > 200){
-          prices = allData.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
-        }
-      } catch(e){ console.warn('CoinCap chunked failed:', e); }
-    }
-
-    // Strategy 4: CoinCap 10-year with weekly interval (smaller payload)
-    if(!prices){
-      try {
-        var tenYrStart = Date.now() - (10 * 365.25 * 24 * 60 * 60 * 1000);
-        var tenYrEnd = Date.now();
-        var r4w = await fetch('https://api.coincap.io/v2/assets/bitcoin/history?interval=w1&start=' + Math.floor(tenYrStart) + '&end=' + Math.floor(tenYrEnd));
-        if(r4w.ok){
-          var p4w = await r4w.json();
-          if(p4w.data && p4w.data.length > 100){
-            prices = p4w.data.map(function(d){ return [d.time, parseFloat(d.priceUsd)]; });
-          }
-        }
-      } catch(e){ console.warn('CoinCap weekly 10yr failed:', e); }
-    }
-
-    // Strategy 5: CoinGecko 3650 days (~10 years) as fallback
-    if(!prices){
-      try {
-        await new Promise(function(resolve){ setTimeout(resolve, 500); });
-        var r4 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=3650&interval=daily');
-        if(r4.ok){
-          var p4 = await r4.json();
-          if(p4.prices && p4.prices.length > 50) prices = p4.prices;
-        }
-      } catch(e){ console.warn('CoinGecko 3650 fallback failed:', e); }
-    }
-
-    // Strategy 5: CoinGecko 365 days as absolute last resort
-    if(!prices){
-      try {
-        await new Promise(function(resolve){ setTimeout(resolve, 500); });
-        var r5 = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=365');
-        if(r5.ok){
-          var p5 = await r5.json();
-          if(p5.prices && p5.prices.length > 50) prices = p5.prices;
+          if(p2.prices && p2.prices.length > 50) prices = p2.prices;
         }
       } catch(e){ console.warn('CoinGecko 365 fallback failed:', e); }
     }
 
     if(!prices || prices.length < 2){
-      loadEl.textContent = 'Chart data unavailable. API rate limit - try again in 60s.';
+      loadEl.textContent = 'Chart data unavailable right now. Please try again in a minute.';
       return;
     }
 
     var series;
     if(vsCurrency === 'gold'){
-      // Divide BTC/USD by gold price to get BTC/Gold(oz)
-      // Note: uses current gold price for the ratio - approximate for historical data
-      var gp = goldPrice || 3100;
-      series = prices.map(function(p){ return [p[0], p[1] / gp]; });
+      series = prices.map(function(p){ return [p[0], p[1] / goldUsdAt(p[0])]; });
     } else {
       series = prices;
     }
@@ -11637,7 +11658,10 @@ async function fetchChartData(cvs, infoEl, loadEl, vsCurrency, label, titleEl){
     }
     var change = ((last[1] - first[1]) / first[1] * 100);
     var fmtV = function(v){ return label === 'oz Gold' ? v.toFixed(1) + ' oz' : '$' + v.toLocaleString('en-US',{maximumFractionDigits:0}); };
-    infoEl.innerHTML = '<span style="color:#8888b8;">' + startDate + ' \u2192 ' + endDate + '</span> &nbsp; <span style="color:#f59e0b;">' + fmtV(first[1]) + ' \u2192 ' + fmtV(last[1]) + '</span> &nbsp; <span style="color:' + (change >= 0 ? '#4ade80' : '#f87171') + ';">(' + (change >= 0 ? '+' : '') + change.toFixed(0) + '%)</span>';
+    var changeText = change >= 10000
+      ? '\u00D7' + Math.round(last[1] / first[1]).toLocaleString('en-US')
+      : (change >= 0 ? '+' : '') + change.toFixed(0) + '%';
+    infoEl.innerHTML = '<span style="color:#8888b8;">' + startDate + ' \u2192 ' + endDate + '</span> &nbsp; <span style="color:#f59e0b;">' + fmtV(first[1]) + ' \u2192 ' + fmtV(last[1]) + '</span> &nbsp; <span style="color:' + (change >= 0 ? '#4ade80' : '#f87171') + ';">(' + changeText + ')</span>';
 
     cvs.onmousemove = function(e){
       var rect = cvs.getBoundingClientRect();
@@ -12495,7 +12519,13 @@ function examFinish(){
   const r = document.getElementById('examResult');
   r.classList.remove('hidden');
   const passed = examCorrect >= 20;
-  try { localStorage.setItem('abc_exam_v1', JSON.stringify({passed: passed, score: examCorrect, date: new Date().toISOString().slice(0,10)})); } catch(e){}
+  try {
+    // Keep the best result so a weaker retake never takes away an earned certificate
+    const prev = JSON.parse(localStorage.getItem('abc_exam_v1') || 'null');
+    const isBest = !prev || (passed && (!prev.passed || examCorrect >= prev.score)) || (!passed && !prev.passed);
+    if(isBest) localStorage.setItem('abc_exam_v1', JSON.stringify({passed: passed, score: examCorrect, date: new Date().toISOString().slice(0,10)}));
+  } catch(e){}
+  if(passed) celebrateCourseComplete(examCorrect);
   if(passed){
     r.innerHTML = '<div class="demo-result demo-result-ok"><div class="demo-result-title">🎓 PASSED - ' + examCorrect + ' / 25</div><div class="demo-result-detail">You did not just read about Bitcoin. You understand it - and you proved it. Mint your certificate below.</div></div>';
     document.getElementById('certArea').classList.remove('hidden');
@@ -12786,6 +12816,9 @@ window.addEventListener('popstate', function(){
     : (abcLastSection && sectionOrder.includes(abcLastSection) ? abcLastSection : 'welcome');
   currentSection = initial; // instant render, skip the transition animation on load
   showSection(initial);
+  // /?s=term opens search pre-filled (advertised to search engines as a SearchAction)
+  const searchQuery = new URLSearchParams(location.search).get('s');
+  if(searchQuery) openSearch(searchQuery);
 })();
 
 // ── Bibliography reference link handler ──
@@ -12817,10 +12850,14 @@ document.addEventListener('click', function(e){
 
 /* ═══ Am I Too Late? - Interactive Market Cap Calculator ═══ */
 (function(){
-  const BTC_CIRCULATING = 19_800_000;
-  const CURRENT_MCAP = 1_700_000_000_000;
-  const CURRENT_PRICE = 87_000;
+  const FALLBACK_PRICE = 87_000;
   const ASSETS = {gold:18_000_000_000_000, realEstate:100_000_000_000_000, bonds:130_000_000_000_000, art:6_000_000_000_000};
+
+  // 19,687,500 BTC existed at the 2024 halving (block 840,000); 3.125 BTC per block until block 1,050,000
+  function btcSupply(){
+    const h = liveTipHeight || Math.round(840000 + (Date.now() - Date.UTC(2024, 3, 20)) / 600000);
+    return 19_687_500 + Math.max(0, Math.min(h, 1_050_000) - 840_000) * 3.125;
+  }
 
   function fmt$(n){
     if(n>=1e12) return '$'+(n/1e12).toFixed(1)+'T';
@@ -12837,10 +12874,15 @@ document.addEventListener('click', function(e){
     document.getElementById('realEstatePctLabel').textContent=rp+'%';
     document.getElementById('bondsPctLabel').textContent=bp+'%';
     document.getElementById('artPctLabel').textContent=ap+'%';
+    var price=btcPrice>0?btcPrice:FALLBACK_PRICE;
+    var supply=btcSupply();
+    var currentMcap=price*supply;
+    var mcapLabel=document.getElementById('btcMarketCapLabel');
+    if(mcapLabel) mcapLabel.textContent='~'+fmt$(currentMcap);
     var captured=ASSETS.gold*(gp/100)+ASSETS.realEstate*(rp/100)+ASSETS.bonds*(bp/100)+ASSETS.art*(ap/100);
-    var impliedMcap=CURRENT_MCAP+captured;
-    var impliedPrice=Math.round(impliedMcap/BTC_CIRCULATING);
-    var multiple=(impliedPrice/CURRENT_PRICE).toFixed(1);
+    var impliedMcap=currentMcap+captured;
+    var impliedPrice=Math.round(impliedMcap/supply);
+    var multiple=(impliedPrice/price).toFixed(1);
     document.getElementById('impliedMarketCap').textContent=fmt$(impliedMcap);
     document.getElementById('impliedPrice').textContent='$'+impliedPrice.toLocaleString('en-US');
     document.getElementById('impliedMultiple').textContent=multiple+'x';
@@ -12862,6 +12904,8 @@ document.addEventListener('click', function(e){
     var el=document.getElementById(id);
     if(el) el.addEventListener('input',updateCalc);
   });
+  window.refreshTooLateCalc=updateCalc;
+  updateCalc();
 })();
 </script>
 
@@ -12873,7 +12917,7 @@ document.addEventListener('click', function(e){
     <div id="priceChartInfo" style="font-family:'Space Mono',monospace;font-size:12px;margin-bottom:16px;"></div>
     <div id="priceChartLoading" style="text-align:center;padding:40px 0;color:var(--muted);font-family:'Space Mono',monospace;font-size:13px;">Loading chart data...</div>
     <canvas id="priceChartCanvas" style="display:none;width:100%;"></canvas>
-    <div style="margin-top:12px;font-size:11px;color:var(--muted);text-align:center;">Data from CoinGecko. Hover for details. Click outside to close.</div>
+    <div style="margin-top:12px;font-size:11px;color:var(--muted);text-align:center;">BTC prices from blockchain.com. BTC/Gold uses LBMA annual-average gold prices plus today's live price, so it is approximate. Hover for details. Click outside to close.</div>
   </div>
 </div>
 <!-- Machine-readable resources for AI agents and crawlers -->

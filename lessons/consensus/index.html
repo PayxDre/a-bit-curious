@@ -3,37 +3,132 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Consensus & Upgrades - A Bit Curious</title>
+<title>Consensus &amp; Upgrades - A Bit Curious</title>
 <meta name="description" content="How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/consensus/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/consensus/"/>
-<meta property="og:title" content="Consensus & Upgrades - A Bit Curious"/>
+<meta property="og:title" content="Consensus &amp; Upgrades - A Bit Curious"/>
 <meta property="og:description" content="How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Consensus &amp; Upgrades - A Bit Curious"/>
+<meta name="twitter:description" content="How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Consensus & Upgrades","description":"How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war.","url":"https://www.a-bit-curious.com/lessons/consensus/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Consensus & Upgrades", "description": "How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war.", "url": "https://www.a-bit-curious.com/lessons/consensus/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#consensus">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
-  <h1>Consensus & Upgrades</h1>
-  <p>How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war.</p>
-  <a class="cta" href="/#consensus">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; VI. Transactions &amp; Cryptography</nav>
+  <h1>Consensus &amp; Upgrades</h1>
+  <p class="sub">How Bitcoin evolves without a CEO</p>
+  <div class="cta-box">
+    <p>How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#consensus">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p>Bitcoin has no CEO, no board of directors, no foundation with veto power. Yet its code has been upgraded dozens of times since 2009. How? Through a process called <strong>rough consensus</strong> - a messy, slow, beautiful system where changes only happen when nearly everyone agrees.</p>
+<p>Most tech companies push updates overnight. Bitcoin's upgrade process is <em>deliberately</em> slow and conservative. That's not a bug - it's what makes it trustworthy as a monetary protocol.</p>
+<h3>📜 The BIP Process - How Changes Are Proposed</h3>
+<p>BIP = Bitcoin Improvement Proposal. Anyone in the world can submit one. Here's how it works:</p>
+<p>A developer writes a formal proposal (BIP) describing the change, its motivation, and technical specification. It gets posted to the bitcoin-dev mailing list and debated publicly. Anyone can participate.</p>
+<p>If the idea gains traction, developers write the actual code. Multiple independent reviewers audit it. This phase can take months or years. There's no deadline - the code ships when it's ready.</p>
+<p>For consensus changes, miners signal readiness by including a flag in the blocks they mine. When a supermajority (usually 90-95%) signals support over a defined period, the upgrade activates. Nodes that haven't upgraded still work - that's the beauty of soft forks.</p>
+<h3>✅ Soft Fork</h3>
+<p>Backwards compatible<br> Old nodes still validate<br> Tightens existing rules<br> No chain split<br> <strong>Bitcoin's preferred method</strong></p>
+<h3>❌ Hard Fork</h3>
+<p>NOT backwards compatible<br> Old nodes reject new blocks<br> Loosens or changes rules<br> Can split the chain<br> <strong>Avoided whenever possible</strong></p>
+<p>Think of a soft fork as adding a speed bump to a road - all cars still work. A hard fork is changing the road to train tracks - cars can't drive on them.</p>
+<p>Bitcoin strongly favors soft forks because they don't force anyone to upgrade. If you're running a node from 2017, it still validates the chain today. That's <strong>9 years of backwards compatibility</strong> - unheard of in software.</p>
+<h3>📅 Major Bitcoin Upgrades</h3>
+<p>Enabled multi-signature wallets and complex spending conditions. Before P2SH, the sender had to include the full script in the transaction. P2SH moved that burden to the recipient, making advanced transactions practical. Soft fork.</p>
+<p>Added CHECKLOCKTIMEVERIFY and CHECKSEQUENCEVERIFY - letting you lock bitcoin until a specific time or block height. These are essential building blocks for payment channels and the Lightning Network. Soft forks.</p>
+<p>The most significant upgrade in Bitcoin's history. SegWit moved signature ("witness") data out of the main transaction body into a separate, discounted area. The results were transformative:</p>
+<p>Before SegWit, signature data (often 60%+ of transaction size) took up precious block space at full price. SegWit introduced witness data counting as only <strong>0.25×</strong> its actual size - effectively increasing capacity without changing the base block size.</p>
+<p>Crucially, SegWit fixed transaction malleability - a bug where a transaction's ID could be changed before confirmation. This fix was the prerequisite for the Lightning Network. No SegWit, no Lightning.</p>
+<h3>⚖️ The Blocksize War (2015-2017)</h3>
+<p>SegWit didn't happen easily. It emerged from a bitter 2-year civil war over how to scale Bitcoin. One side (mostly large companies and miners) wanted to increase the block size via hard fork. The other side (mostly developers and node operators) pushed SegWit as a soft fork. The conflict peaked with the <strong>SegWit2x</strong> proposal - a backroom deal by major companies to force both SegWit and a 2MB hard fork. Users revolted. They ran nodes signaling "NO2X." SegWit2x collapsed weeks before activation. The lesson: <strong>in Bitcoin, users - not companies - have the final say.</strong></p>
+<p>Modern SegWit addresses ("bc1q...") use less block space and cost less than legacy addresses ("1..."). If your wallet still uses old addresses, upgrade to save on every transaction. Soft fork - activated August 2017.</p>
+<p>Bitcoin's most recent major upgrade, activated November 2021. Taproot introduced three powerful changes:</p>
+<h3>Schnorr Signatures (BIP 340)</h3>
+<p>Replaced ECDSA for Taproot outputs. Schnorr signatures are smaller, faster to verify, and enable <strong>signature aggregation</strong> - combining multiple signatures into one. A 3-of-5 multisig transaction becomes indistinguishable from a simple payment.</p>
+<h3>MAST (Merkelized Alternative Script Trees)</h3>
+<p>Allows complex spending conditions (like "Alice after 1 year OR Bob+Carol together") to be hidden in a Merkle tree. Only the condition actually used gets revealed on-chain. Better privacy, lower fees.</p>
+<h3>Tapscript (BIP 342)</h3>
+<p>An upgraded scripting language that makes future soft forks easier to deploy. Think of it as future-proofing Bitcoin's programming language.</p>
+<p>Taproot was activated via "Speedy Trial" - miners signaled 90% support within a single difficulty period. Notably non-contentious compared to SegWit. Soft fork.</p>
+<h3>🔥 Current &amp; Proposed Changes (2024-2026)</h3>
+<p>These proposals are actively debated. None are activated. This is consensus in action - the slow, careful process working as designed.</p>
+<h3>OP_CAT (BIP 347)</h3>
+<p>Would re-enable the ability to concatenate (join) two pieces of data in Bitcoin's scripting language. Satoshi originally included OP_CAT but disabled it in 2010 as a precaution. Proponents say it enables covenants, vaults, and bridges to other chains. Critics worry about unintended consequences and complexity creep. Status: actively debated.</p>
+<h3>OP_CTV - CheckTemplateVerify (BIP 119)</h3>
+<p>Would allow a transaction to commit to the exact shape of future transactions that spend it. Enables "covenants" - restrictions on how bitcoin can be spent in the future. Use cases include vaults (delayed withdrawals for security) and congestion control. Status: proposed since 2020, debated.</p>
+<h3>OP_VAULT (BIP 345)</h3>
+<p>A specialized covenant design for Bitcoin vaults - a security feature where you can "unvault" bitcoin with a time delay, giving you a window to claw it back if your keys are compromised. Like a safe with a time lock and a panic button. Status: draft proposal.</p>
+<h3>Great Script Restoration</h3>
+<p>A proposal by Rusty Russell to re-enable many of the original opcodes Satoshi disabled in 2010, plus add new ones. The idea: give Bitcoin a more expressive scripting language for building advanced contracts, layer 2 protocols, and vaults. Controversial because it significantly expands Bitcoin's attack surface. Status: early discussion.</p>
+<h3>🔥 BIP 110 - Temporarily Limit Arbitrary Data</h3>
+<p>The most contentious Bitcoin debate since the 2017 Blocksize War. Proposed in late 2025 by developer Dathon Ohm and backed by the Bitcoin Knots team, BIP 110 would impose a one-year soft fork limiting non-monetary data in transactions - targeting Ordinals inscriptions, BRC-20 tokens, and large OP_RETURN payloads. Outputs would be capped at 34 bytes, OP_RETURN at 83 bytes.</p>
+<h3>FOR: "Clean up spam"</h3>
+<p>Arbitrary data bloats the blockchain, drives up fees for real payments, and burdens node operators. Bitcoin should prioritize its monetary function.</p>
+<h3>AGAINST: "Dangerous precedent"</h3>
+<p>Consensus-level content filtering violates Bitcoin's neutrality. It disables OP_SUCCESS (needed for future upgrades) and could set a precedent for transaction censorship. Adam Back and Michael Saylor have both warned against it.</p>
+<p>The debate echoes the 2017 war: who decides what Bitcoin is "for"? Ocean pool mined the first BIP-110 signaling block in early 2026. As of now, ~2.4% of nodes support it - far from the activation threshold, but the ideological rift runs deep. Status: actively contentious, signaling underway.</p>
+<p>The fact that these proposals take years to debate is a feature, not a bug. Bitcoin's monetary policy is settled. Everything else moves carefully.</p>
+<p>Here's what makes Bitcoin's governance unique: <strong>no single entity can push through a change.</strong> Not the developers (they write code, but can't force anyone to run it). Not the miners (they process transactions, but users choose which chain to follow). Not the exchanges (they list coins, but can't change the protocol). Power is distributed across all participants - and that distribution is what makes Bitcoin's monetary properties trustworthy.</p>
+<p>Compare this to every other monetary system in history. The Federal Reserve can change interest rates in an afternoon. A government can freeze bank accounts overnight. Even Ethereum's leadership pushed through a chain rollback in 2016 (the DAO fork). Bitcoin's upgrade process is slow and frustrating by design - because the alternative is a monetary system that can be changed on a whim.</p>
+  </article>
+  
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/signetlab/">&#8592; The Lab: Use Real Bitcoin</a><a rel="next" href="/lessons/lightning/">Lightning Network &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

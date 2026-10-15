@@ -5,35 +5,88 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>The Lab: Use Real Bitcoin - A Bit Curious</title>
 <meta name="description" content="Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/signetlab/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/signetlab/"/>
 <meta property="og:title" content="The Lab: Use Real Bitcoin - A Bit Curious"/>
 <meta property="og:description" content="Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="The Lab: Use Real Bitcoin - A Bit Curious"/>
+<meta name="twitter:description" content="Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"The Lab: Use Real Bitcoin","description":"Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction.","url":"https://www.a-bit-curious.com/lessons/signetlab/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "The Lab: Use Real Bitcoin", "description": "Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction.", "url": "https://www.a-bit-curious.com/lessons/signetlab/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#signetlab">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; VI. Transactions &amp; Cryptography</nav>
   <h1>The Lab: Use Real Bitcoin</h1>
-  <p>Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction.</p>
-  <a class="cta" href="/#signetlab">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">Not a simulation. A real wallet, real coins, a real blockchain · ~10 min hands-on</p>
+  <div class="cta-box">
+    <p>Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#signetlab">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p>Everything you have learned so far, you are now going to <em>do</em>. In the next ten minutes you will generate a real Bitcoin key pair, receive real coins, sign a real transaction with real ECDSA cryptography running in your browser, broadcast it to a live network, and watch a real miner seal it into a block that anyone on Earth can verify.</p>
+<p>The network is <strong>Signet</strong>, Bitcoin's official test network. It runs the same software, the same cryptography, and the same rules as Bitcoin - but its coins are free and worthless by design. That makes it the perfect gym: real weights, zero risk.</p>
+<p class="note">⚠️ The two rules of the lab 1. Test coins only. The wallet you create here is for Signet. <strong>Never send real bitcoin to it.</strong><br> 2. This page generates keys inside your browser and never transmits them - there is no server. But the habit matters more than the fact: <strong>never type a real seed phrase or private key into any website. Ever. Including this one.</strong></p>
+<p>One click runs the full derivation you learned in Chapter VI: 256 random bits, secp256k1 point multiplication, SHA-256, RIPEMD-160, bech32. All of it in your browser, all of it real.</p>
+<h3>🎓 What you just did</h3>
+<p>You held a private key, received a UTXO, built a transaction that consumed it and created a new one, signed it with elliptic curve cryptography, paid a miner a fee, and got your payment sealed into a block by proof of work. That is the entire Bitcoin system, end to end, operated by you. Moving real bitcoin works exactly the same way - the only differences are the network name and the stakes.</p>
+<h3>Who decides the rules you just followed?</h3>
+<p>Your transaction obeyed rules no company wrote and no government passed. Time to see how a leaderless network agrees on anything - and how it upgrades without breaking.</p>
+  </article>
+  
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/signatures/">&#8592; Digital Signatures</a><a rel="next" href="/lessons/consensus/">Consensus &amp; Upgrades &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

@@ -5,35 +5,135 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Bitcoin vs Gold - A Bit Curious</title>
 <meta name="description" content="Bitcoin vs gold across every property of money, plus what the BTC/gold ratio reveals when you stop pricing in dollars."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/goldvsbtc/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/goldvsbtc/"/>
 <meta property="og:title" content="Bitcoin vs Gold - A Bit Curious"/>
 <meta property="og:description" content="Bitcoin vs gold across every property of money, plus what the BTC/gold ratio reveals when you stop pricing in dollars."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Bitcoin vs Gold - A Bit Curious"/>
+<meta name="twitter:description" content="Bitcoin vs gold across every property of money, plus what the BTC/gold ratio reveals when you stop pricing in dollars."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Bitcoin vs Gold","description":"Bitcoin vs gold across every property of money, plus what the BTC/gold ratio reveals when you stop pricing in dollars.","url":"https://www.a-bit-curious.com/lessons/goldvsbtc/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Bitcoin vs Gold", "description": "Bitcoin vs gold across every property of money, plus what the BTC/gold ratio reveals when you stop pricing in dollars.", "url": "https://www.a-bit-curious.com/lessons/goldvsbtc/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#goldvsbtc">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; III. Bitcoin vs The World</nav>
   <h1>Bitcoin vs Gold</h1>
-  <p>Bitcoin vs gold across every property of money, plus what the BTC/gold ratio reveals when you stop pricing in dollars.</p>
-  <a class="cta" href="/#goldvsbtc">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">Measuring digital scarcity against 5,000 years of physical scarcity · ~6 min read</p>
+  <div class="cta-box">
+    <p>Bitcoin vs gold across every property of money, plus what the BTC/gold ratio reveals when you stop pricing in dollars. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#goldvsbtc">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p class="note">Gold didn't win for 5,000 years by accident. It won because it checked every box for what good money needs to be. Bitcoin was engineered to do the same job - and to fix the few places where gold falls short in a digital, global economy.</p>
+<p>Every culture that has ever kept records - Sumer, Egypt, Lydia, Rome, the Islamic caliphates, imperial China, the British Empire - eventually converged on <strong>gold</strong> as its benchmark money. Not because kings decreed it. Because gold, uniquely among the hundred-plus elements on the periodic table, happens to be rare, durable, divisible, fungible, and hard to counterfeit. It is the only asset that has held its purchasing power across every collapse, every empire, every currency experiment. An ounce of gold bought a decent toga in Caesar's Rome, a tailored suit in 1920s London, and a tailored suit today. That isn't a coincidence - it's the consequence of physics.</p>
+<h3>⚖️ Scarce by nature</h3>
+<p>You cannot print gold. New supply requires finding a deposit, permitting it, digging, refining, and shipping - years of work for tiny gains. Total above-ground supply grows only <strong>~1.5% per year</strong>, and has for centuries.</p>
+<h3>⌚ Durable</h3>
+<p>Gold does not rust, tarnish, rot, or decay. A coin pulled from a Roman shipwreck is indistinguishable from a fresh mint. It outlasts governments, banks, and civilizations.</p>
+<h3>⚖️ Divisible &amp; fungible</h3>
+<p>Gold can be melted and re-cast into any size without losing value. One ounce of .999 gold is interchangeable with any other ounce - no "good" or "bad" gold.</p>
+<h3>🔍 Verifiable</h3>
+<p>Gold has a distinctive density, color, and sound. For millennia, assayers could tell real gold from a fake with a scale, a touchstone, and a trained eye.</p>
+<h3>👤 No counterparty</h3>
+<p>Physical gold you hold is not someone else's liability. No bank has to stay solvent. No government has to honor a promise. You own it. Period.</p>
+<h3>🌐 Universally recognized</h3>
+<p>Every culture on Earth, across every era, has independently recognized gold as valuable. It is the closest thing humanity has ever had to a neutral, global reserve asset.</p>
+<p>These six properties are not arbitrary - they are the requirements for something to function as long-term money. Every asset that has ever been tried as money has been scored, implicitly, against this list. Shells fell on scarcity. Tobacco fell on durability. Rai stones fell on portability. Fiat currency fails on counterparty risk and scarcity. Only gold satisfied all six - which is why, for 5,000 years, every serious civilization came back to it.</p>
+<h3>🥇 Gold</h3>
+<p>Growing ~1.5%/year. Asteroid mining and seabed extraction could change that someday.</p>
+<h3>₿ Bitcoin</h3>
+<p><strong>Mathematically capped at 21,000,000.</strong> Issuance halves every four years. Already harder than gold.</p>
+<h3>🥇 Gold</h3>
+<p>$1M of gold weighs ~50 lbs. Moving it across borders requires trucks, guards, and customs declarations.</p>
+<h3>₿ Bitcoin</h3>
+<p><strong>Weightless.</strong> Any amount moves to any country in minutes. Can be memorized as 12 words.</p>
+<h3>🥇 Gold</h3>
+<p>You cannot pay for a coffee with gold shavings. Small denominations require trusted coinage.</p>
+<h3>₿ Bitcoin</h3>
+<p><strong>Divisible to 100 million satoshis.</strong> Lightning lets you spend fractions of a cent.</p>
+<h3>🥇 Gold</h3>
+<p>Tungsten-filled "gold" bars have fooled banks and mints. Real assay requires specialized equipment.</p>
+<h3>₿ Bitcoin</h3>
+<p><strong>Verifiable in seconds</strong> by any node on Earth. Counterfeit is mathematically impossible.</p>
+<h3>🥇 Gold</h3>
+<p>Effectively eternal. A Roman coin is as good today as the day it was struck.</p>
+<h3>₿ Bitcoin</h3>
+<p>Lives on tens of thousands of independent nodes. No single copy can be lost or destroyed.</p>
+<h3>🥇 Gold</h3>
+<p>FDR confiscated private gold in 1933 (Executive Order 6102). Vaults and safes can be raided.</p>
+<h3>₿ Bitcoin</h3>
+<p><strong>Self-custody with a seed phrase.</strong> Twelve words in your head cross any border.</p>
+<p class="note">The story gold investors don't like to remember. On April 5, 1933, President Roosevelt signed Executive Order 6102, making it <em>illegal for American citizens to own gold</em>. Every person had to surrender their gold to the Federal Reserve at $20.67 per ounce. After the government collected it, they revalued gold to $35 per ounce, a 69% overnight devaluation of every citizen who complied. This was legal. It happened in the United States. And it could not happen to twelve words memorized in your head.</p>
+<p>Bitcoin is not trying to replace gold's appeal. It inherits it, then fixes the parts that don't translate to a digital, global, 24/7 economy. Saifedean Ammous calls this "digital gold"; the whitepaper called it "peer-to-peer electronic cash." Both labels point at the same thing: money with gold's hard-money properties and none of gold's physical friction.</p>
+<h3>📊 The problem with pricing Bitcoin in USD</h3>
+<p>When you look at a Bitcoin chart in dollars, you are measuring two things that are <em>both moving</em>. Bitcoin's purchasing power is changing - and the dollar's purchasing power is silently being debased underneath it. Since 2020 alone, roughly <strong>40% of all dollars that have ever existed</strong> were created.<sup><a href="/lessons/bibliography/#ref-10">[10]</a></sup> A rising BTC/USD chart exaggerates Bitcoin's real gains, because part of the rise is just the ruler shrinking.</p>
+<p>It's like trying to measure a child's height with a rubber yardstick that stretches every year. You can't tell how tall they really are.</p>
+<h3>🥇 Gold is the closest thing we have to a stable ruler</h3>
+<p>Gold isn't perfect, but it is the strongest money humans have ever used, and <strong>no one can make meaningfully more of it</strong>. Its supply grows ~1.5% a year whether the Fed is printing or not. Pricing Bitcoin in ounces of gold strips out almost all of the inflation, interest-rate games, and currency debasement that muddy a BTC/USD chart. What's left is something much closer to <em>pure monetary adoption</em>: how many ounces of the hardest physical money in history is the market willing to pay for one unit of the hardest digital money ever created?</p>
+<p>That ratio - <strong>BTC priced in ounces of gold</strong> - is the cleanest single chart for tracking Bitcoin's progress as money. It tells you whether Bitcoin is genuinely gaining monetary ground against the reigning champion, not just floating up on a rising tide of freshly printed dollars.</p>
+<h3>📈 Ounces of Gold Per 1 BTC</h3>
+<p>How many ounces of gold one Bitcoin buys (approximate milestones)</p>
+<p>In 2011, one Bitcoin could not buy a single ounce of gold. Today it buys <strong>dozens</strong>. This is adoption measured against hard money - not against inflating paper.</p>
+<h3>💡 The mental model to carry with you</h3>
+<p>Bitcoin is competing to be the world's apex monetary asset. The incumbent is gold - an <strong>~$18 trillion</strong><sup><a href="/lessons/bibliography/#ref-38">[38]</a></sup> market that has held that title for five millennia. If Bitcoin is succeeding, you should see it gaining ground on gold, not just on depreciating fiat.</p>
+<p>Every time you see the BTC/USD price jump, ask the cleaner question: <strong>"How many ounces of gold does one Bitcoin buy now, versus a year ago?"</strong> That number tells you whether the world is genuinely reallocating its hardest money from the old standard to the new one - or whether you're just watching dollars melt in real time.</p>
+<h3>"But nobody actually uses Bitcoin..."</h3>
+<p>Now that you have a clean ruler for adoption, let's look at who is actually doing the adopting - from BlackRock to El Salvador to your local coffee shop.</p>
+  </article>
+  
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/caseagainst/">&#8592; The Case Against Bitcoin</a><a rel="next" href="/lessons/adoption/">Bitcoin Adoption &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

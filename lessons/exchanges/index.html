@@ -5,35 +5,87 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Exchanges - A Bit Curious</title>
 <meta name="description" content="How to buy bitcoin safely: choosing an exchange, understanding IOUs, and why coins on exchanges are promises."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/exchanges/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/exchanges/"/>
 <meta property="og:title" content="Exchanges - A Bit Curious"/>
 <meta property="og:description" content="How to buy bitcoin safely: choosing an exchange, understanding IOUs, and why coins on exchanges are promises."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Exchanges - A Bit Curious"/>
+<meta name="twitter:description" content="How to buy bitcoin safely: choosing an exchange, understanding IOUs, and why coins on exchanges are promises."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Exchanges","description":"How to buy bitcoin safely: choosing an exchange, understanding IOUs, and why coins on exchanges are promises.","url":"https://www.a-bit-curious.com/lessons/exchanges/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Exchanges", "description": "How to buy bitcoin safely: choosing an exchange, understanding IOUs, and why coins on exchanges are promises.", "url": "https://www.a-bit-curious.com/lessons/exchanges/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#exchanges">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; IV. Getting Started</nav>
   <h1>Exchanges</h1>
-  <p>How to buy bitcoin safely: choosing an exchange, understanding IOUs, and why coins on exchanges are promises.</p>
-  <a class="cta" href="/#exchanges">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">Where you trade regular money for Bitcoin</p>
+  <div class="cta-box">
+    <p>How to buy bitcoin safely: choosing an exchange, understanding IOUs, and why coins on exchanges are promises. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#exchanges">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p class="note">Think of a Bitcoin exchange like an airport currency booth - except instead of swapping dollars for euros, you're swapping dollars for Bitcoin.</p>
+<p>Exchanging is the oldest economic activity in human civilization. Long before money existed, humans gathered at crossroads, river forks, and market squares to trade what they had for what they needed - fish for firewood, grain for tools, labor for shelter. When gold and silver coins emerged, dedicated money changers set up tables at ports and bazaars, weighing coins from different kingdoms and converting them for a fee. A Bitcoin exchange is simply the digital evolution of this ancient practice - a platform where you trade one form of money (dollars, euros, pounds) for another form of money (Bitcoin). The difference? This time, the money you're buying can't be debased, counterfeited, or seized.</p>
+<p>A cryptocurrency exchange is a website or app where you can buy Bitcoin using regular money (US dollars, euros, etc.). Popular ones include Coinbase, Kraken, and Binance. They work like stock exchanges - people post offers to buy or sell, and the platform matches buyers with sellers automatically.</p>
+<p>To get started on an exchange, you typically need to create an account, verify your identity (called KYC - "Know Your Customer"), link your bank account or credit card, and then you can buy Bitcoin instantly. The exchange holds your Bitcoin for you - which is convenient but means you're trusting them. Many experts recommend withdrawing your Bitcoin to your own wallet after buying.</p>
+<p>Exchanges charge fees for their services - usually a small percentage of each trade (like 0.5% to 1.5%). When comparing exchanges, look at fees, security history, and whether they're licensed in your country. A good rule: only use exchanges that are regulated and have a strong reputation. And remember - once you buy Bitcoin, consider moving it to YOUR own wallet. Your keys = your coins!</p>
+<table><tr><th>Exchange</th><th>Best For</th><th>Est. Fee</th><th>Beginner Friendly</th></tr><tr><td>Coinbase</td><td>Beginners</td><td>~1.5%</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td>Kraken</td><td>Security fans</td><td>~0.4%</td><td>⭐⭐⭐⭐</td></tr><tr><td>Binance</td><td>Low fees</td><td>~0.1%</td><td>⭐⭐⭐</td></tr><tr><td>River</td><td>Long-term holders</td><td>~1.0%</td><td>⭐⭐⭐⭐⭐</td></tr></table>
+<p class="note">⚠️ Remember: When your Bitcoin sits on an exchange, <em>they</em> hold the private keys - not you. History is littered with exchanges that were hacked, went bankrupt, or froze withdrawals (Mt. Gox, FTX, Celsius). An exchange is a marketplace, not a vault. Buy on the exchange, then transfer to <strong>your own wallet</strong>. Not your keys, not your coins.</p>
+  </article>
+  <section class="terms"><h2>Key terms</h2><dl><dt>money changers</dt><dd>Ancient money changers sat at benches (called "bancos" in Italian - the origin of the word "bank") in markets and ports, weighing and exchanging one form of money for another. They were the original exchanges.</dd><dt>Coinbase</dt><dd>One of the largest and most beginner-friendly exchanges, based in the USA. Great for first-time buyers.</dd><dt>Kraken</dt><dd>A well-respected exchange known for security and lower fees. Good for more experienced users.</dd><dt>Binance</dt><dd>The world's largest exchange by trading volume. Has almost every cryptocurrency you can think of.</dd><dt>KYC</dt><dd>Know Your Customer - a legal requirement where exchanges must verify who you are, just like a bank does. You'll usually upload a photo ID.</dd></dl></section>
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/wallets/">&#8592; Wallets</a><a rel="next" href="/lessons/firstbitcoin/">Your First $10, Safely &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

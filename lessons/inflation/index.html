@@ -5,35 +5,116 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Monetary Inflation - A Bit Curious</title>
 <meta name="description" content="Why your money buys less every year: money supply growth, the hidden tax of inflation, and what official CPI leaves out."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/inflation/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/inflation/"/>
 <meta property="og:title" content="Monetary Inflation - A Bit Curious"/>
 <meta property="og:description" content="Why your money buys less every year: money supply growth, the hidden tax of inflation, and what official CPI leaves out."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Monetary Inflation - A Bit Curious"/>
+<meta name="twitter:description" content="Why your money buys less every year: money supply growth, the hidden tax of inflation, and what official CPI leaves out."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Monetary Inflation","description":"Why your money buys less every year: money supply growth, the hidden tax of inflation, and what official CPI leaves out.","url":"https://www.a-bit-curious.com/lessons/inflation/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Monetary Inflation", "description": "Why your money buys less every year: money supply growth, the hidden tax of inflation, and what official CPI leaves out.", "url": "https://www.a-bit-curious.com/lessons/inflation/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#inflation">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; I. The Problem with Money</nav>
   <h1>Monetary Inflation</h1>
-  <p>Why your money buys less every year: money supply growth, the hidden tax of inflation, and what official CPI leaves out.</p>
-  <a class="cta" href="/#inflation">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">The number they don't want you to understand</p>
+  <div class="cta-box">
+    <p>Why your money buys less every year: money supply growth, the hidden tax of inflation, and what official CPI leaves out. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#inflation">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p class="note">🚨 The headline inflation number you see on the news is a lie. Not a small rounding error - a systematic, decades-long distortion designed to hide the true erosion of your purchasing power.</p>
+<p>Every month, the Bureau of Labor Statistics publishes the Consumer Price Index (CPI), the official measure of inflation. Politicians point to it, central bankers target it, and your employer uses it to justify your annual raise (or lack thereof). In 2025, official CPI hovered around 2-3%. Sounds manageable, right? But the way CPI is calculated has been quietly, fundamentally changed - multiple times - always in the direction of making inflation look <em>lower</em> than it actually is.</p>
+<p>The tricks are subtle but devastating. Substitution: when steak gets expensive, the government assumes you'll buy hamburger instead, and measures the cheaper item. Hedonic adjustments: your new phone costs $1,200 (same as last year), but the BLS says it's "really" cheaper because it has a better camera. Geometric weighting: a formula change in 1999 that automatically reduces the weight of things rising in price. If you measured inflation today the same way it was measured in 1980, the real rate would be closer to <strong>8-12%</strong>.</p>
+<p>Economist John Williams of ShadowStats has tracked this divergence for decades. Using the government's <em>own</em> 1980 methodology, he consistently finds real inflation running 5-8 points above the official CPI.<sup><a href="/lessons/bibliography/#ref-11">[11]</a></sup> Lower official inflation means lower Social Security adjustments, lower TIPS payouts, lower pressure on politicians. Meanwhile, asset prices have been inflating at 10-15% per year, invisible to the official number.</p>
+<h3>📊 Official CPI vs Real Inflation (1980 Methodology)</h3>
+<p>The gap between what the government reports and what you actually experience</p>
+<p>The 7-point gap is hidden by substitution, hedonic adjustments, and geometric weighting - all documented methodology changes.</p>
+<h3>🏦 How the Federal Reserve Actually Creates Money</h3>
+<p>People say "the Fed prints money." But what does that <em>actually</em> mean? Here's the step-by-step process - dumbed down to its essence - of how brand-new dollars get created and flow into the economy. No jargon. No complexity. Just the truth.</p>
+<h3>The Government Needs Money It Doesn't Have</h3>
+<p>Congress passes a budget that spends more than it collects in taxes. The difference is the <em>deficit</em>. To cover it, the U.S. Treasury issues bonds (IOUs) - essentially saying "lend us money now and we'll pay you back later with interest."</p>
+<h3>The Federal Reserve "Buys" Those Bonds</h3>
+<p>Here's where the magic trick happens. The Federal Reserve purchases Treasury bonds - but it doesn't use money it already has. It literally <strong>types new numbers into a computer</strong>. No vault is opened. No gold is moved. No taxpayer funds are used. The Fed creates dollars out of thin air and credits them to the Treasury's account. This is called Open Market Operations.</p>
+<h3>The Treasury Spends Those New Dollars</h3>
+<p>Now the Treasury has fresh money in its account. It sends it out: Social Security checks, military contracts, federal salaries, infrastructure projects, stimulus payments. These dollars flow to government employees, contractors, and citizens. <em>This is the first wave - the money hits the economy.</em></p>
+<h3>Banks Multiply It (Fractional Reserve Banking)</h3>
+<p>When those dollars land in people's bank accounts, the banks don't just sit on them. Under fractional reserve banking, banks lend out the vast majority of every deposit. Your $1,000 paycheck gets deposited → the bank lends $900 of it to someone else → that $900 gets deposited at another bank → which lends $810 → and so on. <strong>One new dollar from the Fed can become $10 or more</strong> circulating in the economy. This is the <em>money multiplier effect</em>.</p>
+<h3>The Cantillon Effect: Money Ripples Outward</h3>
+<p>Think of it like a stone dropped in a pond. The first ripple (banks and government contractors) is the strongest - they get the new money first, <em>before prices rise</em>. They buy assets, invest, and spend at today's prices. The second ripple (large corporations, Wall Street) gets the money next, still at relatively low prices. The third ripple (small businesses, wages) arrives months or years later. By the time the <strong>outer ripple reaches you</strong> - the ordinary worker, saver, or retiree - prices have already risen. You get the same dollars but they buy less. <em>The people furthest from the money printer always pay the price.</em> Economists call this the Cantillon Effect.</p>
+<p>Every new dollar created dilutes every dollar you already hold.<br>The closer you are to the top, the more you benefit. The further away, the more you lose.</p>
+<h3>🖨 The Money Printer - How Easy Is It?</h3>
+<p>Click the button to "print" money. Watch how fast the counter climbs. This is how easy it is for the Federal Reserve to create trillions from nothing.</p>
+<p>The US government created more money in 18 months than in the first 200 years of the nation’s existence. It took <strong>zero physical effort</strong>.</p>
+<h3>⏱ Robert Breedlove: The Human Cost of Money Printing</h3>
+<p>Breedlove quantified what money printing actually <em>steals</em> in human terms. If money represents stored time and labor, then devaluing money is literally stealing people's time - hours, years, lifetimes they worked and saved. His calculation:</p>
+<p>When the Fed printed $4.6 trillion, it didn’t create wealth - it diluted the value of every existing dollar. Every worker who had saved money saw their purchasing power silently reduced. Breedlove calculated that the aggregate loss in real purchasing power is equivalent to roughly <strong>1.9 million human lifetimes</strong> of labor. Not metaphorically. Mathematically. Your years of saving, erased by a keystroke. This is what “printing money” really means: <em>time theft at civilizational scale</em>.</p>
+<h3>Create $1 Trillion (Fiat)</h3>
+<p>One meeting. One vote. One keystroke. Zero energy. Zero effort. Backed by nothing. Created from nothing.</p>
+<h3>Create 1 Bitcoin</h3>
+<p>~1.4 million TH/s of computational power. ~$30,000-$50,000 in electricity. Specialized hardware. Real thermodynamic work.</p>
+<p>Fiat money is created by <strong>decree</strong>. Bitcoin is created by <strong>proof of work</strong>. One costs nothing to produce. The other requires real energy, real hardware, and real time. <em>That’s the difference between fake money and sound money.</em></p>
+<h3>🎯 Your Personal Inflation Rate</h3>
+<p>The CPI is an average - it doesn't reflect <em>your</em> life. Select the items you spend the most on and see what inflation actually looks like for you.</p>
+<p>Why does this matter for Bitcoin? Because the entire argument for fiat money rests on the claim that inflation is "low and stable." If it were honestly reported at 8-12%, the public would immediately see the system is broken. Bitcoin fixes this by making the statistics irrelevant: <strong>a money with a fixed supply cannot be inflated, period</strong>. No hedonic adjustments. No substitution tricks. Just 21 million, forever.</p>
+<h3>What exactly backs the US Dollar?</h3>
+<p>You've seen how inflation is hidden. Now let's look at what's behind the curtain - the "full faith and credit" of a government $36 trillion in debt and counting.</p>
+  </article>
+  <section class="terms"><h2>Key terms</h2><dl><dt>Consumer Price Index (CPI)</dt><dd>A government statistic that measures the average change in prices paid by consumers for a "basket" of goods and services. It's the most widely cited measure of inflation - and the most manipulated.</dd><dt>Substitution</dt><dd>If steak gets too expensive, the BLS assumes you'll switch to hamburger - and counts the cheaper item instead. Your standard of living drops, but CPI doesn't notice.</dd><dt>Hedonic adjustments</dt><dd>"Hedonic" means relating to pleasure. If your new laptop is 20% faster, the BLS treats it as if the price dropped 20% - even if you paid the exact same amount.</dd><dt>Geometric weighting</dt><dd>A formula introduced in 1999 that automatically reduces the weight of items that rise in price and increases the weight of items that fall. CPI always trends lower than a straightforward measurement.</dd><dt>ShadowStats</dt><dd>ShadowStats.com recalculates government statistics using older, pre-manipulation methodologies. Their alternative CPI consistently shows inflation 5-8 points higher than the official number.</dd><dt>asset prices</dt><dd>Stocks, real estate, bonds - everything you need for long-term financial security - have been inflating at 10-15% per year, invisible to CPI because it doesn't measure them.</dd><dt>U.S. Treasury</dt><dd>The Treasury Department is the government's bank account. It collects taxes, pays bills, and borrows money on behalf of the federal government. It is NOT the same as the Federal Reserve - they are two separate institutions that work together.</dd><dt>Open Market Operations</dt><dd>The Fed's primary tool for controlling the money supply. When they buy bonds, new money enters the system. When they sell bonds, money leaves the system. In practice, they almost always buy - the money supply has done nothing but grow since 1913.</dd><dt>fractional reserve banking</dt><dd>Banks are only required to keep a fraction (historically 10%, now effectively 0% since March 2020) of deposits on hand. The rest gets lent out. When that loan is deposited at another bank, THAT bank lends out 90% of it again. One dollar of Fed-created money can become $10+ in the real economy through this multiplication.</dd><dt>Cantillon Effect</dt><dd>Richard Cantillon observed in the 1700s that the injection point of new money matters enormously. Those closest to the money printer benefit at the expense of those furthest from it.</dd></dl></section>
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/money/">&#8592; Nature of Money</a><a rel="next" href="/lessons/faithcredit/">Full Faith &amp; Credit &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

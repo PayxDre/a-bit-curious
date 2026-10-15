@@ -36,7 +36,7 @@
     },
     {
       "q": "Is Bitcoin safe?",
-      "a": "The Bitcoin protocol has never been hacked in 17+ years of operation. The network has maintained 99.99%+ uptime since January 2009. A 51% attack would require over $20 billion in specialized hardware plus $30 million per day in electricity, and even then the attacker could only double-spend their own transactions. Security risks exist at the user level (lost keys, phishing, exchange hacks), which is why self-custody with hardware wallets is recommended.",
+      "a": "The Bitcoin protocol has never been hacked in 17+ years of operation. The network has maintained 99.98%+ uptime since January 2009. A 51% attack would require over $20 billion in specialized hardware plus $30 million per day in electricity, and even then the attacker could only double-spend their own transactions. Security risks exist at the user level (lost keys, phishing, exchange hacks), which is why self-custody with hardware wallets is recommended.",
       "sources": ["Bitcoin uptime data", "Mining cost estimates", "Bitcoin whitepaper section 11"],
       "section": "attackvectors"
     },

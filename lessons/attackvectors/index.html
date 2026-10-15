@@ -5,35 +5,118 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Attack Vectors - A Bit Curious</title>
 <meta name="description" content="51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/attackvectors/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/attackvectors/"/>
 <meta property="og:title" content="Attack Vectors - A Bit Curious"/>
 <meta property="og:description" content="51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Attack Vectors - A Bit Curious"/>
+<meta name="twitter:description" content="51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Attack Vectors","description":"51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice.","url":"https://www.a-bit-curious.com/lessons/attackvectors/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Attack Vectors", "description": "51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice.", "url": "https://www.a-bit-curious.com/lessons/attackvectors/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#attackvectors">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; V. How Bitcoin Works</nav>
   <h1>Attack Vectors</h1>
-  <p>51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice.</p>
-  <a class="cta" href="/#attackvectors">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">Every way someone could try to break Bitcoin - and why they can't</p>
+  <div class="cta-box">
+    <p>51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#attackvectors">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p class="note">Bitcoin has been running for 17+ years with zero successful attacks on the protocol. Not because no one has tried - billions of dollars in incentive sit behind that shield. It survives because the system makes attacking it <em>more expensive</em> than cooperating with it.</p>
+<h3>The most discussed threat - and the most misunderstood.</h3>
+<p>Here's the idea: if someone controlled more than half of all the computing power (hash rate) on the Bitcoin network, they could theoretically rewrite recent blocks and reverse their own transactions. This is called a <strong>double spend</strong> - spending the same Bitcoin twice.</p>
+<p>Sounds terrifying. But let's look at what it would actually take:</p>
+<h3>💰 The Cost</h3>
+<p>You would need to acquire more mining hardware than every other miner on Earth <em>combined</em>. The Bitcoin hash rate currently exceeds <strong>700 EH/s</strong> (700 quintillion calculations per second). The hardware alone would cost tens of billions of dollars. The electricity to run it would cost millions per day. And you'd need to do this <em>covertly</em> - buying that much hardware on the open market would spike prices, alert the community, and likely trigger defensive responses before you even switched it on.</p>
+<h3>🚫 What You'd Actually Get</h3>
+<p>Even with 51%, you <em>cannot</em>: steal other people's Bitcoin, change the 21M supply cap, create coins from nothing, or alter old transactions deep in the chain. All you can do is reverse <strong>your own recent transactions</strong>. You'd spend tens of billions to pull off... one double spend. Meanwhile, the moment it's detected, exchanges halt trading, the price crashes, and your stolen coins become worthless.</p>
+<h3>⚡ The Antonopoulos Argument</h3>
+<p>As Andreas Antonopoulos put it: a 51% attack would require a <strong>massive covert effort</strong> by nation states or large industrial complexes, spending enormous amounts of energy, all to achieve <em>one</em> double spend - when they could have simply pointed that same hash power at mining honestly and earned the block rewards. The incentives are completely backward. <strong>It's cheaper to play by the rules.</strong></p>
+<p>The game theory is simple: attacking Bitcoin destroys the value of the very thing you're trying to steal.</p>
+<h3>VECTOR #2 Sybil Attack - Flood the Network with Fake Nodes</h3>
+<p>In many networks, an attacker can create thousands of fake identities to overwhelm the system. On social media, these are bot armies. Could someone do this to Bitcoin?</p>
+<p><strong>No - because Bitcoin doesn't care about identities.</strong> Proof of Work makes identity irrelevant. It doesn't matter if you run one node or ten thousand - you can only mine blocks by doing real computational work and spending real energy. You can't fake a valid hash. You can't vote your way to control. Every block must contain real proof that real electricity was burned. Running a million fake nodes gives you exactly zero advantage.</p>
+<h3>VECTOR #3 Double Spend - Spend the Same Coin Twice</h3>
+<p>What if someone sends Bitcoin to a merchant and then quickly sends the same coins elsewhere before the first transaction confirms?</p>
+<p><strong>Confirmations solve this.</strong> Once a transaction is included in a block (1 confirmation), reversing it requires outpacing the entire network. After 6 confirmations (~60 minutes), the probability of reversal is effectively zero - you'd need more computing power than exists on Earth. For small purchases, even 1 confirmation is sufficient. For large transfers, waiting for 6 is standard. The deeper a transaction is buried in the chain, the more energy it would cost to undo - exponentially.</p>
+<p>VECTOR #4 Nation-State Attack - Government Tries to Kill Bitcoin</p>
+<p>Could a government with unlimited resources shut Bitcoin down?</p>
+<p><strong>They'd have to shut down the internet - globally, simultaneously, forever.</strong> Bitcoin nodes run in 100+ countries. The protocol can transmit over satellite (Blockstream Satellite), mesh radio, and even SMS. China - the most powerful censorship apparatus in history - banned Bitcoin mining twice. The hash rate recovered in months as miners relocated. The network didn't skip a beat. A government can ban exchanges within its borders, but it cannot stop two people from sending math to each other over the internet.</p>
+<h3>VECTOR #5 Software Bug - A Flaw in the Code</h3>
+<p>Bitcoin is software. What if there's a critical bug?</p>
+<p><strong>Bitcoin's code is the most scrutinized open-source project in history.</strong> Hundreds of developers review every line. There have been bugs - in 2010, an overflow bug briefly allowed someone to create 184 billion Bitcoin, which was patched within hours. But here's the key: Bitcoin's consensus mechanism means every node independently validates every transaction. Even if one version of the software has a bug, the rest of the network rejects invalid blocks. There is no single point of failure. No "main server" to hack. No CEO to coerce. The code is public, the network is distributed, and anyone can audit it.</p>
+<h3>VECTOR #6 Eclipse Attack - Isolate a Single Node</h3>
+<p>Instead of attacking the whole network, what if you surround a single node with attacker-controlled nodes, feeding it false information?</p>
+<p><strong>This targets individuals, not the network itself.</strong> Even if successful, it only affects the isolated node - the rest of the network is unaffected. Bitcoin Core has built-in defenses: diversified peer connections, anchor connections, and limits on connections from the same IP range. Running your own node with multiple connection sources makes this attack extremely difficult. And it still can't create fake Bitcoin or alter the chain - it can only delay your view of new blocks.</p>
+<h3>VECTOR #7 Social Attack - Change the Rules from the Inside</h3>
+<p>What if powerful companies or influential developers try to change Bitcoin's rules - like raising the 21 million cap?</p>
+<p><strong>This was tried in 2017 - and it failed spectacularly.</strong> Major companies, exchanges, and miners backed the "SegWit2x" proposal to increase block size. They had overwhelming corporate support. But Bitcoin's rules are enforced by <em>node operators</em> - the thousands of individuals running the software. The nodes rejected the change. The corporate-backed fork died. This proved something remarkable: <strong>no one controls Bitcoin</strong>. Not the miners, not the developers, not the corporations. The users - through their nodes - have the final say.</p>
+<h3>🛡 Why Bitcoin Is Antifragile</h3>
+<p>Every attack makes the network stronger. Here's why the security model works.</p>
+<p>🌐 Global Distribution No single point of failure, 100+ countries</p>
+<p>👀 Radical Transparency Open source code, public ledger, anyone can audit</p>
+<p>👥 User Sovereignty Node operators enforce the rules, not corporations</p>
+<p>Bitcoin turns the attacker's own resources against them. The bigger the attack, the more expensive it gets, the less it accomplishes, and the stronger the network becomes afterward.</p>
+<p>This is why Bitcoin is often called <strong>antifragile</strong>. Unlike traditional systems that get weaker under stress, Bitcoin gets <em>stronger</em>. Every attack attempt, every ban, every crash - the network adapts, the community hardens, and the protocol keeps producing blocks. Every 10 minutes. Without fail. For 17 years and counting.</p>
+<h3>The cryptography that makes it all possible.</h3>
+<p>You understand the system and its defenses. Now let's zoom in on the machinery - how transactions are built, how outputs work, how locks and keys protect your Bitcoin, and the elegant math behind digital signatures.</p>
+  </article>
+  <section class="terms"><h2>Key terms</h2><dl><dt>rewrite recent blocks</dt><dd>An attacker with 51%+ hash rate could mine an alternative chain faster than the honest network, then broadcast it to replace the "real" chain. This would let them reverse their own recent transactions - a "double spend."</dd></dl></section>
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/difficulty/">&#8592; Difficulty</a><a rel="next" href="/lessons/transactions/">Transactions &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

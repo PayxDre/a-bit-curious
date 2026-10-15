@@ -5,35 +5,111 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Bitcoin Adoption - A Bit Curious</title>
 <meta name="description" content="Who actually uses Bitcoin: individuals, companies, ETFs, and nation states - the adoption picture in data."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/adoption/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/adoption/"/>
 <meta property="og:title" content="Bitcoin Adoption - A Bit Curious"/>
 <meta property="og:description" content="Who actually uses Bitcoin: individuals, companies, ETFs, and nation states - the adoption picture in data."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Bitcoin Adoption - A Bit Curious"/>
+<meta name="twitter:description" content="Who actually uses Bitcoin: individuals, companies, ETFs, and nation states - the adoption picture in data."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Bitcoin Adoption","description":"Who actually uses Bitcoin: individuals, companies, ETFs, and nation states - the adoption picture in data.","url":"https://www.a-bit-curious.com/lessons/adoption/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Bitcoin Adoption", "description": "Who actually uses Bitcoin: individuals, companies, ETFs, and nation states - the adoption picture in data.", "url": "https://www.a-bit-curious.com/lessons/adoption/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#adoption">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; III. Bitcoin vs The World</nav>
   <h1>Bitcoin Adoption</h1>
-  <p>Who actually uses Bitcoin: individuals, companies, ETFs, and nation states - the adoption picture in data.</p>
-  <a class="cta" href="/#adoption">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">The adoption wave hiding in plain sight</p>
+  <div class="cta-box">
+    <p>Who actually uses Bitcoin: individuals, companies, ETFs, and nation states - the adoption picture in data. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#adoption">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p class="note">One of the most persistent myths is that Bitcoin is just a speculative toy. In reality, the world's largest companies, financial institutions, and payment processors are racing to integrate it. Here's what's actually happening.</p>
+<h3>PAYMENTS Block (Square) Opens Bitcoin to Every Merchant</h3>
+<p>Jack Dorsey's Block has given <strong>every Square merchant</strong> the ability to accept Bitcoin payments. Millions of small businesses - coffee shops, restaurants, retail stores - can now receive Bitcoin directly. Cash App, also owned by Block, has enabled tens of millions of users to buy, sell, and send Bitcoin instantly. Block is also investing heavily in Bitcoin mining hardware and open-source Bitcoin development, making their commitment structural, not speculative.</p>
+<h3>LIGHTNING Lightning Network: Instant, Nearly Free Payments</h3>
+<p>The Lightning Network has turned Bitcoin into a real-time payment rail. Transactions settle in <strong>milliseconds</strong> for fractions of a penny. El Salvador's Chivo wallet runs on Lightning. Strike uses it for cross-border remittances that are faster and cheaper than Western Union. Businesses like Fold, Bitrefill, and thousands of merchants worldwide accept Lightning payments daily. What Visa does for the dollar, Lightning does for Bitcoin - but without the middlemen taking 2-3% of every transaction.</p>
+<p>TREASURY Strategy (MicroStrategy): Bitcoin as a Treasury Reserve</p>
+<p>Michael Saylor's Strategy (formerly MicroStrategy) has accumulated over <strong>762,000 BTC</strong><sup><a href="/lessons/bibliography/#ref-22">[22]</a></sup>, making it by far the largest corporate holder of Bitcoin in the world. At current prices, that's tens of billions of dollars in Bitcoin on a single corporate balance sheet. Why? Because holding cash means losing 7-10% of purchasing power per year to real inflation. Bitcoin offers a treasury asset with a <em>fixed supply</em>, <em>no counterparty risk</em>, <em>24/7 global liquidity</em>, and a 17-year track record of outperforming every other asset class. The playbook is simple: instead of watching your cash reserves melt, convert them to the hardest money ever created. Strategy has continued to aggressively accumulate - issuing convertible notes, at-the-market equity offerings, and preferred stock specifically to acquire more Bitcoin. Since adopting this strategy, dozens of other public companies - including Tesla, Marathon Digital, Metaplanet, and Semler Scientific - have followed suit.</p>
+<h3>Fixed Supply</h3>
+<p>Only 21M will ever exist. No board, no government, no CEO can dilute it.</p>
+<h3>24/7 Liquidity</h3>
+<p>Trades around the clock, every day. No market hours. No settlement delays.</p>
+<h3>No Counterparty Risk</h3>
+<p>Self-custodied Bitcoin depends on no bank, no broker, no institution to hold your value.</p>
+<h3>Asymmetric Upside</h3>
+<p>Still early in its adoption curve. Cash guarantees loss. Bitcoin offers the possibility of generational gains.</p>
+<h3>WALL STREET IBIT: The Most Successful ETP Launch in History</h3>
+<p>When the SEC approved spot Bitcoin ETFs in January 2024<sup><a href="/lessons/bibliography/#ref-21">[21]</a></sup>, BlackRock's <strong>iShares Bitcoin Trust (IBIT)</strong> shattered every record in ETP history. It reached $10 billion in assets faster than any ETF ever launched<sup><a href="/lessons/bibliography/#ref-21">[21]</a></sup> - faster than gold ETFs, S&amp;P 500 ETFs, bond ETFs, everything. Within months, the Bitcoin spot ETFs collectively held more Bitcoin than Satoshi Nakamoto's estimated stash. This wasn't retail speculation - this was pension funds, endowments, and sovereign wealth funds gaining exposure to Bitcoin through the world's most trusted financial infrastructure. Wall Street didn't kill Bitcoin. Wall Street <em>adopted</em> it.</p>
+<p>FINANCIAL PRODUCTS Strike: Borrow Against Your Bitcoin, Never Sell</p>
+<p>Strike has built lending products that let you <strong>borrow against your Bitcoin</strong> without ever selling it. Need cash for a house, a car, or an emergency? Put up your BTC as collateral, get a loan in dollars, and keep your upside exposure. When the loan is paid off, your Bitcoin comes back - and it may be worth far more than when you borrowed against it. This is the "never sell" strategy that the ultra-wealthy have used for generations with stocks and real estate - now available to anyone with Bitcoin.</p>
+<p>FIXED INCOME Bitcoin-Backed Financial Products Enter Wall Street</p>
+<p>Strategy (the company holding 762,000+ BTC) has started issuing traditional Wall Street instruments - preferred stock (STRC) and convertible notes - all backed by a corporate treasury denominated in Bitcoin. This is a big deal: for the first time, the <strong>$130+ trillion bond market</strong> has a bridge into Bitcoin. Pensions, endowments, and sovereign wealth funds that are <em>required</em> to hold fixed income instruments can now get Bitcoin exposure through products that fit their existing frameworks. Bitcoin is being <strong>embedded into the infrastructure of global capital markets</strong>.</p>
+<h3>🎯 The Adoption Scoreboard</h3>
+<p>Payments Block/Square, Lightning Network, BTCPay Server, Strike</p>
+<p>Treasuries Strategy (762K BTC), Tesla, Marathon, Metaplanet, Semler Scientific</p>
+<p>Wall Street BlackRock IBIT, Fidelity, ARK, VanEck, Invesco spot ETFs</p>
+<p>Nations El Salvador (legal tender), US Strategic Bitcoin Reserve</p>
+<p>Lending Strike, Unchained, Ledn - borrow against BTC, never sell</p>
+<p>Fixed Income Strategy preferred stock (STRC), convertible notes - Bitcoin entering the $130T+ bond market</p>
+<p>"No one uses Bitcoin" is the new "no one uses the internet" - said in 1995 while the revolution was already underway.</p>
+<h3>You understand <em>why</em>. Now learn how.</h3>
+<p>Time for the practical side - set up your first wallet, buy Bitcoin, send it anywhere, and keep it safe.</p>
+  </article>
+  <section class="terms"><h2>Key terms</h2><dl><dt>Lightning Network</dt><dd>A "Layer 2" protocol built on top of Bitcoin that enables instant, high-volume micropayments. Transactions settle in milliseconds for fractions of a penny.</dd><dt>"never sell" strategy</dt><dd>By borrowing against Bitcoin instead of selling, you avoid triggering capital gains taxes, keep your long-term position intact, and benefit from future appreciation. This is how the wealthy have always managed assets - borrow against, never sell.</dd><dt>preferred stock</dt><dd>Preferred stock sits between common stock and bonds. It pays a fixed dividend (like a bond) but represents ownership in the company (like a stock). It's a core instrument used by pensions, endowments, and insurance companies.</dd></dl></section>
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/goldvsbtc/">&#8592; Bitcoin vs Gold</a><a rel="next" href="/lessons/wallets/">Wallets &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

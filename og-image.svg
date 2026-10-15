@@ -84,12 +84,12 @@
     <rect x="-145" y="-8" width="1" height="30" fill="#f59e0b" opacity="0.3"/>
 
     <text x="0" font-family="monospace" font-size="14" fill="#f59e0b" font-weight="bold">17+ YEARS</text>
-    <text x="0" y="20" font-family="monospace" font-size="11" fill="#6b7280">100% uptime</text>
+    <text x="0" y="20" font-family="monospace" font-size="11" fill="#6b7280">99.98% uptime</text>
 
     <rect x="155" y="-8" width="1" height="30" fill="#f59e0b" opacity="0.3"/>
 
-    <text x="300" font-family="monospace" font-size="14" fill="#f59e0b" font-weight="bold">5 CHAPTERS</text>
-    <text x="300" y="20" font-family="monospace" font-size="11" fill="#6b7280">30 interactive lessons</text>
+    <text x="300" font-family="monospace" font-size="14" fill="#f59e0b" font-weight="bold">7 CHAPTERS</text>
+    <text x="300" y="20" font-family="monospace" font-size="11" fill="#6b7280">46 interactive lessons</text>
   </g>
 
   <!-- Border glow -->
