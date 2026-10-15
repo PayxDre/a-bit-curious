@@ -1,7 +1,7 @@
 {
   "name": "A Bit Curious - The Interactive Guide to Bitcoin",
   "short_name": "A Bit Curious",
-  "description": "The free interactive guide to understanding money and Bitcoin. 42 lessons with real cryptography demos.",
+  "description": "The free interactive guide to understanding money and Bitcoin. 46 lessons with real cryptography demos.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b0b18",

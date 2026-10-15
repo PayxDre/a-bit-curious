@@ -5,35 +5,93 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>The Pizza Dilemma - A Bit Curious</title>
 <meta name="description" content="Two pizzas for 10,000 BTC: the first real Bitcoin purchase and what it teaches about divisibility and dilution."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/pizza/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/pizza/"/>
 <meta property="og:title" content="The Pizza Dilemma - A Bit Curious"/>
 <meta property="og:description" content="Two pizzas for 10,000 BTC: the first real Bitcoin purchase and what it teaches about divisibility and dilution."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="The Pizza Dilemma - A Bit Curious"/>
+<meta name="twitter:description" content="Two pizzas for 10,000 BTC: the first real Bitcoin purchase and what it teaches about divisibility and dilution."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"The Pizza Dilemma","description":"Two pizzas for 10,000 BTC: the first real Bitcoin purchase and what it teaches about divisibility and dilution.","url":"https://www.a-bit-curious.com/lessons/pizza/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "The Pizza Dilemma", "description": "Two pizzas for 10,000 BTC: the first real Bitcoin purchase and what it teaches about divisibility and dilution.", "url": "https://www.a-bit-curious.com/lessons/pizza/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#pizza">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; II. The Origin Story</nav>
   <h1>The Pizza Dilemma</h1>
-  <p>Two pizzas for 10,000 BTC: the first real Bitcoin purchase and what it teaches about divisibility and dilution.</p>
-  <a class="cta" href="/#pizza">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">You can cut a pizza smaller, but you can't make more pizza</p>
+  <div class="cta-box">
+    <p>Two pizzas for 10,000 BTC: the first real Bitcoin purchase and what it teaches about divisibility and dilution. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#pizza">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p class="note">"But if there are only 21 million Bitcoin, how can it work for 8 billion people?" This is the first question every beginner asks - and the answer is elegant.</p>
+<h3>Fiat: Make More Pizza</h3>
+<p>The government "solves" scarcity by baking more pizzas. But each new pizza is made of cardboard. More slices, less nutrition. Everyone has "more" but each slice is worth less.</p>
+<h3>Bitcoin: Cut Smaller Slices</h3>
+<p>One pizza, perfectly made, cut into smaller and smaller pieces as needed. 21 million BTC = 2.1 quadrillion satoshis. Every slice is real. Nothing is diluted.</p>
+<p>Imagine you have one perfect pizza. It represents all the wealth in the world. Under the fiat system, when the economy needs "more money," the central bank doesn't cut the pizza into smaller slices - it pretends to bake more pizzas. But these new pizzas aren't backed by new wealth. They're just numbers on a screen. Every fake pizza dilutes every real slice. This is inflation: not "prices going up" but <em>your slice of the pizza shrinking</em> while the total number of slices multiplies. You still "have a slice," but it buys less and less each year.</p>
+<p>Bitcoin takes the opposite approach. There will only ever be 21 million Bitcoin. No new coins will ever be created after ~2140. That sounds limiting until you realize: each Bitcoin can be divided into 100 million satoshis. That's 2.1 <em>quadrillion</em> individual units. If you divided them equally among every person on Earth, each person would get over 262,000 sats. And if the world's economy keeps growing? You don't need <em>more</em> units - each unit simply becomes <em>more valuable</em>. The pizza stays the same size; your slice just buys more.</p>
+<p>This is the key insight mainstream economists miss: <strong>you don't need inflation for a functioning economy</strong>. For most of human history under gold standards, prices gently <em>fell</em> as productivity improved. The industrial revolution - the greatest period of economic growth in human history - happened during an era of deflation. Workers' wages bought more every year. Savings were rewarded, not punished. The idea that "we need 2% inflation" is a modern invention by central bankers who benefit from the money printer. It has no historical basis and no logical foundation.</p>
+<p>In fact, deflation in a Bitcoin economy is a <em>feature</em>, not a bug. As technology makes goods cheaper to produce (remember Jeff Booth's thesis?), prices naturally fall in Bitcoin terms. Your satoshis buy more food, more energy, more housing every year - not because you earned more, but because the world got more productive. Saving becomes the most rational strategy. Patience is rewarded. You don't need to gamble in the stock market just to stay afloat. The pizza stays the same size, your slice is unchanged, but the <em>quality of each slice improves</em> every year as technology advances.</p>
+<p>Bitcoin's divisibility makes it usable at any price level. Even at $10 million per Bitcoin, a sat would be worth $0.10 - perfect for everyday transactions.</p>
+<p>So the next time someone says "there aren't enough Bitcoin for everyone," you know the answer: there are 2.1 quadrillion sats. The issue was never about having enough pieces - it was about making sure no one could secretly create more. <strong>You can always cut a pizza into smaller slices. You can never un-dilute a pizza that's been mixed with cardboard.</strong> That's the difference between sound money and fiat. That's the Bitcoin pizza dilemma, resolved.</p>
+<h3>People have been trying to build better money for decades.</h3>
+<p>Now that you understand the problem and how Bitcoin's properties solve it, let's look at the origin story. Before Bitcoin, many tried and failed - but each failure taught us something crucial.</p>
+  </article>
+  <section class="terms"><h2>Key terms</h2><dl><dt>100 million satoshis</dt><dd>One Bitcoin = 100,000,000 satoshis (sats). That means the total supply is actually 2,100,000,000,000,000 units (2.1 quadrillion). Even if every human on Earth used Bitcoin, there would be over 262,000 sats per person. And if needed, the protocol could subdivide further (called "millisatoshis") through layers like Lightning.</dd><dt>deflation</dt><dd>Prices falling over time because productivity and technology make goods cheaper to produce. This is healthy deflation - entirely different from the destructive deflation of a credit collapse. Confusing the two is the fiat system's greatest intellectual trick.</dd></dl></section>
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/fiatgraveyard/">&#8592; The Fiat Graveyard</a><a rel="next" href="/lessons/digimoney/">Digital Money Before Bitcoin &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

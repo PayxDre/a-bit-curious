@@ -3,37 +3,151 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>bibliography - A Bit Curious</title>
+<title>Go Deeper &amp; Sources - A Bit Curious</title>
 <meta name="description" content="Every source behind the course: books, papers, primary data, and where to go deeper."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/bibliography/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/bibliography/"/>
-<meta property="og:title" content="bibliography - A Bit Curious"/>
+<meta property="og:title" content="Go Deeper &amp; Sources - A Bit Curious"/>
 <meta property="og:description" content="Every source behind the course: books, papers, primary data, and where to go deeper."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Go Deeper &amp; Sources - A Bit Curious"/>
+<meta name="twitter:description" content="Every source behind the course: books, papers, primary data, and where to go deeper."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"bibliography","description":"Every source behind the course: books, papers, primary data, and where to go deeper.","url":"https://www.a-bit-curious.com/lessons/bibliography/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Go Deeper & Sources", "description": "Every source behind the course: books, papers, primary data, and where to go deeper.", "url": "https://www.a-bit-curious.com/lessons/bibliography/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#bibliography">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
-  <h1>bibliography</h1>
-  <p>Every source behind the course: books, papers, primary data, and where to go deeper.</p>
-  <a class="cta" href="/#bibliography">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; VII. The Future</nav>
+  <h1>Go Deeper &amp; Sources</h1>
+  <p class="sub">Your next steps and where the data comes from</p>
+  <div class="cta-box">
+    <p>Every source behind the course: books, papers, primary data, and where to go deeper. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#bibliography">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p class="note">Every claim in this guide is verifiable. Below are the sources for specific data points, statistics, and historical facts cited throughout. Superscript numbers [N] in the text link back to these references. Verify everything yourself. That's the Bitcoin ethos.</p>
+<h3>🎓 Your Next Steps</h3>
+<p>If this guide sparked your interest, here's the path forward, in order of priority:</p>
+<h3>Read the Bitcoin whitepaper</h3>
+<p>9 pages. You now have the background to understand every word. bitcoin.org/bitcoin.pdf</p>
+<h3>Download a wallet and buy a small amount</h3>
+<p>$10 is enough. Use a non-custodial wallet (Muun, Blue Wallet, or Phoenix). Send it to yourself. Feel how it works.</p>
+<h3>Read "The Bitcoin Standard" by Saifedean Ammous</h3>
+<p>The book that has converted more skeptics than any other. Covers the monetary history that makes Bitcoin's design choices click.</p>
+<h3>Run a node</h3>
+<p>A Raspberry Pi and a hard drive. You become part of the network that enforces the 21 million cap. This is how you stop trusting and start verifying.</p>
+<h3>Watch Saylor's "Bitcoin for Everybody"</h3>
+<p>Free MIT-level course. Goes deeper on the economics and game theory behind Bitcoin's design.</p>
+<p id="ref-1" class="ref">[1] Bureau of Labor Statistics, CPI Detailed Report; Federal Reserve Economic Data (FRED), Purchasing Power of the Consumer Dollar</p>
+<p id="ref-2" class="ref">[2] Bitcoin Protocol Source Code, bitcoin/bitcoin repository, consensus/amount.h</p>
+<p id="ref-3" class="ref">[3] Bitnodes.io, Global Bitcoin Nodes Distribution (live tracker)</p>
+<p id="ref-4" class="ref">[4] Uptime Robot &amp; community monitoring; Bitcoin network has maintained 99.98%+ uptime since Jan 3, 2009</p>
+<p id="ref-5" class="ref">[5] Hanke, S. &amp; Krus, N., 'World Hyperinflation Table,' Cato Institute Working Paper, 2012</p>
+<p id="ref-6" class="ref">[6] Fergusson, A., 'When Money Dies: The Nightmare of Deficit Spending, Devaluation, and Hyperinflation in Weimar Germany,' 1975</p>
+<p id="ref-7" class="ref">[7] Hanke, S., 'Zimbabwe Hyperinflation,' Cato Institute, 2008. Monthly rate of 79.6 billion percent (Nov 2008)</p>
+<p id="ref-8" class="ref">[8] US Treasury, 'Debt to the Penny' dataset, fiscaldata.treasury.gov</p>
+<p id="ref-9" class="ref">[9] Federal Reserve, 'Total Assets' (WALCL), FRED Economic Data</p>
+<p id="ref-10" class="ref">[10] Federal Reserve Bank of St. Louis, M2 Money Supply (M2SL). M2 rose from ~$15.4T (Jan 2020) to ~$21.7T (Dec 2021)</p>
+<p id="ref-11" class="ref">[11] Williams, J., ShadowStats.com, Alternate CPI methodology using pre-1980 BLS formulas</p>
+<p id="ref-12" class="ref">[12] Breedlove, R., 'Masters and Slaves of Money' series, What is Money podcast, 2021</p>
+<p id="ref-13" class="ref">[13] Chainalysis, '2024 Crypto Crime Report,' Chapter 1: Illicit Transaction Volume</p>
+<p id="ref-14" class="ref">[14] Cambridge Centre for Alternative Finance (CCAF), 'Bitcoin Electricity Consumption Index'; Bitcoin Mining Council Q4 2024 Survey</p>
+<p id="ref-15" class="ref">[15] CoinGecko historical price data; Bitcoin price milestones: $0.003 (2010) to ~$100K (2024)</p>
+<p id="ref-16" class="ref">[16] Ethereum Foundation, 'The DAO' post-mortem; EIP-779 hard fork to reverse DAO hack, July 2016</p>
+<p id="ref-17" class="ref">[17] Messari Research, 'Solana Initial Token Distribution'; ~48% allocated to insiders/VCs at launch</p>
+<p id="ref-18" class="ref">[18] Ripple Labs SEC filings; XRP Ledger genesis: 100B pre-mined tokens, Ripple retained ~60B</p>
+<p id="ref-19" class="ref">[19] Ethereum Foundation, 'Ether Sale' (2014 ICO); raised ~$18.3M in BTC at ~$0.31/ETH</p>
+<p id="ref-20" class="ref">[20] Solana Status (@SolanaStatus); documented network outages: Feb 2023, Feb 2024, and 5+ prior incidents</p>
+<p id="ref-21" class="ref">[21] BlackRock iShares, 'IBIT Fund Facts'; SEC 19b-4 approval Jan 10, 2024; $10B AUM reached in ~7 weeks</p>
+<p id="ref-22" class="ref">[22] Strategy (MicroStrategy) SEC Form 8-K filings; Bitcoin holdings tracker by bitcointreasuries.net</p>
+<p id="ref-23" class="ref">[23] Booth, J., 'The Price of Tomorrow: Why Deflation is the Key to an Abundant Future,' Stanley Press, 2020</p>
+<p id="ref-24" class="ref">[24] Legislative Assembly of El Salvador, 'Bitcoin Law' (Decree No. 57), passed June 9, 2021</p>
+<p id="ref-25" class="ref">[25] Bitcoin Protocol: block reward halving every 210,000 blocks. Current reward: 3.125 BTC (post-April 2024 halving)</p>
+<p id="ref-26" class="ref">[26] Bitcoin Genesis Block, Block #0, mined January 3, 2009. First transaction: Block #170, January 12, 2009</p>
+<p id="ref-27" class="ref">[27] Back, A., 'Hashcash - A Denial of Service Counter-Measure,' 2002; Nakamoto, S., Bitcoin Whitepaper citations</p>
+<p id="ref-28" class="ref">[28] Dai, W., 'b-money,' 1998; Szabo, N., 'Bit Gold,' 2005; cited in Bitcoin whitepaper references</p>
+<p id="ref-29" class="ref">[29] Hungarian National Bank historical records; Bomberger &amp; Makinen, 'The Hungarian Hyperinflation and Stabilization of 1945-1946,' 1983</p>
+<p id="ref-30" class="ref">[30] Reserve currency average lifespan estimate from Ray Dalio, 'Principles for Dealing with the Changing World Order,' 2021</p>
+<p id="ref-31" class="ref">[31] Blockchain.com, chain size statistics; as of 2025, full blockchain exceeds 600 GB</p>
+<p id="ref-32" class="ref">[32] Congressional Budget Office (CBO), 'The Budget and Economic Outlook: 2025 to 2035,' January 2025; US Treasury 'Monthly Treasury Statement' FY 2024</p>
+<p id="ref-33" class="ref">[33] US Treasury, 'Interest Expense on the Debt Outstanding,' fiscaldata.treasury.gov; FY 2024 net interest: $882B vs defense: $849B (OMB Historical Tables)</p>
+<p id="ref-34" class="ref">[34] Nakamoto, S., BitcoinTalk forum posts: 'Re: Dealing with SHA-256 Collisions (June 2010)' and 'Re: Hash collisions (July 10, 2010)' - bitcointalk.org</p>
+<p id="ref-35" class="ref">[35] Google Quantum AI, 'Willow: Our quantum chip' (Dec 2024, 105 qubits); IBM, 'IBM Quantum Condor' (2023, 1,121 qubits); Gidney &amp; Ekerå, 'How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits,' 2021</p>
+<p id="ref-36" class="ref">[36] NIST, 'Post-Quantum Cryptography Standardization' (FIPS 203, 204, 205), finalized August 2024; BIP-360 draft proposal for quantum-resistant Bitcoin addresses</p>
+<p id="ref-37" class="ref">[37] Lightning Network statistics: 1ML.com, mempool.space/lightning, Amboss.space; River Financial 'Lightning Network Report' 2024; Coinbase 'Lightning adoption metrics' 2024</p>
+<p id="ref-38" class="ref">[38] Global asset estimates: Gold Council ($18T market cap, 2025); Savills 'Global Real Estate Value' report ($330T, 2024); SIFMA 'Fixed Income Outstanding' ($130T, 2024); World Federation of Exchanges ($115T equities, 2024)</p>
+<p id="ref-39" class="ref">[39] Poon, J. &amp; Dryja, T., 'The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments,' 2016 (lightning.network/lightning-network-paper.pdf)</p>
+<p id="ref-40" class="ref">[40] Economic Policy Institute, 'The Productivity-Pay Gap' (epi.org/productivity-pay-gap); BLS productivity and compensation series; chart collection at wtfhappenedin1971.com</p>
+<p id="ref-41" class="ref">[41] US Census Bureau (median family income 1971, P-60 series; median new home sales price); CMS National Health Expenditure Accounts (per-capita health spending); CDC NHANES I (1971-74) and 2021-2023 adult obesity surveys; CDC/NCHS suicide statistics 2023; NAR 'Profile of Home Buyers and Sellers' 2024 (median first-time buyer age 38)</p>
+<p id="ref-42" class="ref">[42] Chetty, R. et al., 'The Fading American Dream: Trends in Absolute Income Mobility Since 1940,' Science, 2017; Federal Reserve Distributional Financial Accounts (generational wealth shares); EPI CEO compensation report 2024; BEA personal saving rate; Jack Mallers, 'The Cost of Our Inheritance,' BTC Prague 2025 keynote</p>
+<p id="ref-43" class="ref">[43] Zcash Orchard counterfeiting vulnerability (June 2026): Shielded Labs disclosure, June 5, 2026; Taylor Hornby AI-assisted audit using Anthropic Opus 4.8; NU6.2 emergency hard fork June 3, 2026; Zooko Wilcox on supply unverifiability; CoinDesk, The Block, CryptoBriefing coverage; Ironwood upgrade proposal by Wilcox, McGee &amp; Hornby</p>
+<p id="ref-44" class="ref">[44] Case against Bitcoin data: historical drawdowns from CoinMetrics and TradingView BTC/USD price history (2011: -93%, 2013-15: -85%, 2017-18: -84%, 2021-22: -77%); lost coin estimates from Chainalysis (2020) and Glassnode dormancy analyses (~3-4M BTC); energy consumption from Cambridge Bitcoin Electricity Consumption Index (CBECI); Executive Order 6102 (April 5, 1933), US National Archives; FTC and Chainalysis Crypto Crime Reports on annual scam losses</p>
+<p id="ref-45" class="ref">[45] Debt by administration: US Treasury Fiscal Data, "Historical Debt Outstanding" (fiscaldata.treasury.gov); crisis legislation scores from CBO cost estimates (CARES Act 2020, Consolidated Appropriations Act Dec 2020, American Rescue Plan Act 2021) and CRS reports on TARP (2008) and ARRA (2009)</p>
+<p id="ref-46" class="ref">[46] Coldcard entropy vulnerability (July 2026): Coinkite security advisory and technical backgrounder, blog.coinkite.com, July 30-31, 2026 (libngu preprocessor fallback to the MicroPython "Yasmarang" PRNG instead of the STM32 hardware TRNG, introduced in firmware 4.0.1, March 2021; effective entropy ~40 bits on Mk2/Mk3 and ~72 bits on Mk4/Q/Mk5 against 128 expected; patched in Mk3 4.2.0, Mk4/Mk5 5.6.0, Q 1.5.0Q, Edge 6.6.0X/6.6.0QX); independent analysis by Block Engineering, "Predictable RNG Fallback and 32-Bit Reseed in COLDCARD Firmware"; on-chain sweep forensics from Galaxy Research (three waves, July 30 - August 1, 2026, 1,367.05 BTC across 4,585 addresses); CoinDesk, Decrypt and The Hacker News coverage</p>
+<h3>🔗 Live Data Sources</h3>
+<p><strong>BTC/USD &amp; BTC/Gold prices:</strong> CoinGecko API (api.coingecko.com), with mempool.space as fallback</p>
+<p><strong>Block height, mempool, hash rate:</strong> mempool.space open-source API</p>
+<h3>📖 Recommended Reading</h3>
+<p>Nakamoto, S., “Bitcoin: A Peer-to-Peer Electronic Cash System,” 2008 (bitcoin.org/bitcoin.pdf)</p>
+<p>Ammous, S., <em>The Bitcoin Standard: The Decentralized Alternative to Central Banking</em>, Wiley, 2018</p>
+<p>Booth, J., <em>The Price of Tomorrow: Why Deflation is the Key to an Abundant Future</em>, Stanley Press, 2020</p>
+<p>Dalio, R., <em>Principles for Dealing with the Changing World Order</em>, Avid Reader Press, 2021</p>
+<p>Breedlove, R., “Masters and Slaves of Money” (essay series &amp; podcast), 2020-2021</p>
+<p>This guide is educational and open source. Data points are current as of early 2025.<br> Live statistics update automatically from public APIs. All claims are independently verifiable.<br> Don’t trust. Verify.</p>
+  </article>
+  
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/lore/">&#8592; Bitcoin Lore</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

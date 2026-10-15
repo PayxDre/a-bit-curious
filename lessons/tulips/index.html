@@ -5,35 +5,112 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Bitcoin vs Tulip Mania - A Bit Curious</title>
 <meta name="description" content="Is Bitcoin a tulip mania? Compare the 1637 bubble with 17 years of Bitcoin drawdowns and recoveries."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/tulips/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/tulips/"/>
 <meta property="og:title" content="Bitcoin vs Tulip Mania - A Bit Curious"/>
 <meta property="og:description" content="Is Bitcoin a tulip mania? Compare the 1637 bubble with 17 years of Bitcoin drawdowns and recoveries."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Bitcoin vs Tulip Mania - A Bit Curious"/>
+<meta name="twitter:description" content="Is Bitcoin a tulip mania? Compare the 1637 bubble with 17 years of Bitcoin drawdowns and recoveries."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Bitcoin vs Tulip Mania","description":"Is Bitcoin a tulip mania? Compare the 1637 bubble with 17 years of Bitcoin drawdowns and recoveries.","url":"https://www.a-bit-curious.com/lessons/tulips/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Bitcoin vs Tulip Mania", "description": "Is Bitcoin a tulip mania? Compare the 1637 bubble with 17 years of Bitcoin drawdowns and recoveries.", "url": "https://www.a-bit-curious.com/lessons/tulips/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#tulips">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; III. Bitcoin vs The World</nav>
   <h1>Bitcoin vs Tulip Mania</h1>
-  <p>Is Bitcoin a tulip mania? Compare the 1637 bubble with 17 years of Bitcoin drawdowns and recoveries.</p>
-  <a class="cta" href="/#tulips">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">The laziest comparison in finance · ~4 min read</p>
+  <div class="cta-box">
+    <p>Is Bitcoin a tulip mania? Compare the 1637 bubble with 17 years of Bitcoin drawdowns and recoveries. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#tulips">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p>"Bitcoin is just Tulip Mania" is the most common comparison critics make. It sounds clever. It makes the speaker seem historically literate. And it falls apart completely under even 30 seconds of analysis. Let's actually look at what happened in the Dutch Republic in the 1630s - and why Bitcoin is the <strong>exact opposite</strong>.</p>
+<h3>🌷 The Dutch Tulip Bubble (1634-1637)</h3>
+<p>During the Dutch Golden Age, rare tulip bulbs became status symbols among the wealthy. A virus called the <strong>mosaic virus</strong> created unpredictable color patterns on petals, making certain bulbs uniquely beautiful - and uniquely scarce. Speculation exploded. At the peak in February 1637, a single <strong>Semper Augustus</strong> bulb sold for <strong>10,000 guilders</strong> - enough to buy a luxury canal house in Amsterdam. Futures contracts traded on bulbs that hadn't even been dug up yet. Then on <strong>February 5, 1637</strong>, at a routine auction in Haarlem, nobody bid. The market collapsed virtually overnight. Prices fell 99% within weeks.</p>
+<h3>💡 Why It Collapsed</h3>
+<p>Tulips had <strong>no utility beyond beauty</strong>. They rotted. They could be grown by anyone with soil and patience - supply was <strong>theoretically infinite</strong>. The "rare" patterns from the mosaic virus could appear on any bulb unpredictably. There was no network. No protocol. No mathematical scarcity. No use case beyond "look at my flower." It was a pure speculative mania driven by social status and FOMO, with absolutely nothing underneath when sentiment shifted.</p>
+<h3>🌷 Tulips - Supply</h3>
+<p><strong>Infinite.</strong> Anyone can grow tulips. Bulbs multiply naturally every season. The "scarcity" was artificial and temporary.</p>
+<h3>₿ Bitcoin - Supply</h3>
+<p><strong>21 million. Forever.</strong> Enforced by math, verified by 60,000+ nodes. No government, company, or individual can change it.</p>
+<h3>🌷 Tulips - Utility</h3>
+<p><strong>None beyond decoration.</strong> You can look at them. They rot in weeks. They cannot be sent, divided, or used as money.</p>
+<h3>₿ Bitcoin - Utility</h3>
+<p><strong>Global, censorship-resistant money.</strong> Sendable anywhere in minutes. Divisible to 8 decimal places. Programmable. Unstoppable.</p>
+<h3>🌷 Tulips - Network</h3>
+<p><strong>A few hundred Dutch traders.</strong> No global market. No infrastructure. No protocol. Localized to a handful of cities.</p>
+<h3>₿ Bitcoin - Network</h3>
+<p><strong>Billions of dollars in infrastructure.</strong> 60,000+ nodes. 700+ EH/s hash rate. Spot ETFs. Sovereign adoption. Satellite broadcasts.</p>
+<h3>🌷 Tulips - Duration</h3>
+<p><strong>3 years.</strong> Peak to crash in months. Never recovered. Nobody trades tulip futures today.</p>
+<h3>₿ Bitcoin - Duration</h3>
+<p><strong>17+ years and counting.</strong> Survived every crash, every ban, every obituary. New all-time highs in every cycle. The trend is up.</p>
+<h3>🌷 Tulips - After the Crash</h3>
+<p><strong>Dead forever.</strong> Prices never recovered. The bulbs rotted. The market ceased to exist. Total loss for all speculators.</p>
+<h3>₿ Bitcoin - After Every Crash</h3>
+<p><strong>Higher than before.</strong> 2011: $31 → $2 → $1,000. 2017: $20K → $3K → $69K. 2022: $69K → $16K → new highs. Every "death" is a rebirth.</p>
+<h3>The Real Lesson</h3>
+<p>Here's what's ironic: the people who compare Bitcoin to tulips are actually making an argument <strong>for</strong> Bitcoin, not against it. Tulip Mania teaches us that assets without <strong>mathematical scarcity</strong>, <strong>utility</strong>, and <strong>a decentralized network</strong> eventually collapse. Bitcoin has all three. It's the anti-tulip.</p>
+<p>The comparison also reveals something else: the people making it have usually never read the whitepaper, never run a node, and never examined the monetary properties of Bitcoin. They heard someone on TV say "tulips" and repeated it. That's not analysis - that's a <strong>meme disguised as an argument</strong>.</p>
+<h3>The next time someone says "tulips"</h3>
+<p>Ask them: Can you send a tulip to someone in Nigeria in 10 minutes? Can you verify there will only ever be 21 million tulips? Can you store a tulip in your brain by memorizing 12 words? Can a tulip run 24/7 for 17 years with 99.99% uptime? No? Then it's not the same thing.</p>
+<h3>"But won't quantum computers break it?"</h3>
+<p>The biggest FUD in crypto. Let's look at the actual math, the actual hardware, and what Satoshi said about it.</p>
+  </article>
+  
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/myths/">&#8592; 6 Myths Debunked</a><a rel="next" href="/lessons/quantum/">The Quantum Question &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

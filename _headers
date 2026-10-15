@@ -5,11 +5,13 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src https://api.coincap.io https://mempool.space https://api.coingecko.com; img-src 'self' data:; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src https://api.exchange.coinbase.com https://mempool.space https://api.coingecko.com https://api.blockchain.info; img-src 'self' data:; frame-ancestors 'none'
+
+# Embeddable demos must be frameable by other sites
+/embed/*
+  ! X-Frame-Options
+  ! Content-Security-Policy
 
 /og-image.png
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
-
-/.git/*
-  X-Robots-Tag: noindex

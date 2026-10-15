@@ -5,35 +5,111 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Lightning Network - A Bit Curious</title>
 <meta name="description" content="The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/lightning/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/lightning/"/>
 <meta property="og:title" content="Lightning Network - A Bit Curious"/>
 <meta property="og:description" content="The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Lightning Network - A Bit Curious"/>
+<meta name="twitter:description" content="The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Lightning Network","description":"The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work.","url":"https://www.a-bit-curious.com/lessons/lightning/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Lightning Network", "description": "The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work.", "url": "https://www.a-bit-curious.com/lessons/lightning/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#lightning">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; VI. Transactions &amp; Cryptography</nav>
   <h1>Lightning Network</h1>
-  <p>The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work.</p>
-  <a class="cta" href="/#lightning">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">Bitcoin's instant payment layer · ~4 min read</p>
+  <div class="cta-box">
+    <p>The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#lightning">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p>Bitcoin's base layer is intentionally slow. It processes about <strong>7 transactions per second</strong> - by design. That's the tradeoff for maximum decentralization and security. But you don't need to broadcast every coffee purchase to 50,000 nodes worldwide. That's where <strong>the Lightning Network</strong> comes in.</p>
+<p>Lightning is Bitcoin's <strong>Layer 2</strong> - a payment network built <em>on top of</em> Bitcoin. Think of it like this: Layer 1 (the blockchain) is the settlement layer - like a central bank clearing large transfers. Layer 2 (Lightning) is the payment layer - like swiping a debit card for everyday purchases. Both use real BTC. There is no separate "Lightning coin."</p>
+<h3>⚡ How Lightning Works - In 4 Steps</h3>
+<p>Alice and Bob each lock some BTC into a shared 2-of-2 multisig wallet on the blockchain. This is the only on-chain transaction needed. Think of it like putting cash into a joint tab at a bar.</p>
+<p>Now Alice and Bob can send BTC back and forth <strong>unlimited times</strong> - instantly, for nearly zero fees. Each payment updates their balance in the channel. None of these transactions touch the blockchain. It's like passing IOUs back and forth on the tab.</p>
+<p>Alice doesn't need a direct channel with everyone. If Alice has a channel with Bob, and Bob has one with Carol, Alice can pay Carol by routing through Bob - using Hashed Timelock Contracts (HTLCs)<sup><a href="/lessons/bibliography/#ref-39">[39]</a></sup> that make the payment trustless. No one can steal funds in transit. It works like internet routing - data finds a path.</p>
+<p>When they're done, either party closes the channel. One final on-chain transaction records the net result of all their Lightning payments. Hundreds or thousands of payments get compressed into a single blockchain entry.</p>
+<h3>Layer 1: Bitcoin Blockchain</h3>
+<p>🔒 Maximum security<br> ⏳ ~10 minute confirmations<br> 💰 Higher fees ($1-50+)<br> 🌐 ~7 transactions/second<br> 📜 Final settlement layer<br> 💫 Every node validates</p>
+<h3>Layer 2: Lightning Network</h3>
+<p>⚡ Instant (&lt;1 second)<br> 💲 Near-zero fees (&lt;$0.01)<br> 🚀 Millions of TPS possible<br> 🌎 Micropayments enabled<br> 🔓 Settled to L1 when closed<br> 🕵️ Onion-routed privacy</p>
+<p>Think of Layer 1 as the vault. Layer 2 as your wallet. You don't carry the vault to buy coffee.</p>
+<p>The analogy people use most: <strong>Layer 1 is like the Federal Reserve's settlement system</strong> - secure, slow, for large transfers. <strong>Layer 2 is like Visa's payment network</strong> - fast, cheap, for everyday use. Except Lightning is open, permissionless, and doesn't take 3% of every transaction.</p>
+<h3>📈 Lightning Network Growth<sup><a href="/lessons/bibliography/#ref-37">[37]</a></sup></h3>
+<p>The network is growing in capacity even as it consolidates into more efficient, larger channels.</p>
+<p>Coinbase: 15% of BTC withdrawals use Lightning · Cash App: 7x Lightning usage growth · Steak 'n Shake: 50% lower fees vs credit cards</p>
+<h3>☕ 7:00 AM - Coffee</h3>
+<p>You scan a QR code at the cafe. 5,000 sats (~$2.50) leave your phone wallet instantly. The barista's register beeps. Total fee: 0.01 cents. No bank, no card network, no 3% merchant fee.</p>
+<h3>🎧 9:00 AM - Streaming podcast</h3>
+<p>You listen to a podcast that charges 1 sat per minute. After an hour, you've paid 60 sats (~$0.03) - streamed in real time, per second. The creator gets paid directly. No ads, no subscription, no platform taking 30%.</p>
+<h3>🌎 12:00 PM - Send money home</h3>
+<p>A worker in New York sends $200 to family in El Salvador. It arrives in 3 seconds. Fee: less than a penny. Western Union would have charged $15-25 and taken 3-5 days.</p>
+<h3>🎮 6:00 PM - Online gaming</h3>
+<p>You earn 500 sats for winning a match in a mobile game. Real money, instantly in your wallet. No minimum withdrawal, no payout delay, no PayPal holding your funds for 21 days.</p>
+<h3>💻 9:00 PM - Pay-per-article</h3>
+<p>Instead of a $15/month subscription to a news site, you pay 200 sats (~$0.10) per article you actually read. Journalism funded by readers, not advertisers. Micropayments make it possible.</p>
+<p>Lightning doesn't just make Bitcoin faster - it unlocks entirely new economic models that weren't possible when the minimum viable payment was $0.50+ in fees.</p>
+<p>Lightning also uses <strong>onion routing</strong> - the same privacy concept as Tor. Each node in the payment path only knows the previous and next hop, never the full route. This gives Lightning payments better privacy than on-chain transactions in many cases.</p>
+<p class="note">Real example: A family in the Philippines receives $200/month from a relative working in the US. Through Western Union, that costs $12 in fees and takes 3-5 business days. Through Lightning, it costs less than a penny and arrives in two seconds. Remittances are a $700 billion per year market. Lightning is eating it.</p>
+<p>This is already happening. <strong>El Salvador</strong> runs its national Bitcoin payment system on Lightning. <strong>Steak 'n Shake</strong> accepts Lightning at every location, saving 50% on processing fees vs credit cards. <strong>Coinbase, Cash App, Kraken, and Strike</strong> all support Lightning withdrawals.</p>
+<p>The key insight: Bitcoin doesn't need to compete with Visa at Layer 1. It needs to be <strong>more secure than any vault</strong> at Layer 1, and <strong>faster than any card</strong> at Layer 2. Lightning delivers both - without compromising Bitcoin's core principles of decentralization and fixed supply.</p>
+  </article>
+  
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/consensus/">&#8592; Consensus &amp; Upgrades</a><a rel="next" href="/lessons/toolate/">Am I Too Late? &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

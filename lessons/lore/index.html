@@ -5,35 +5,111 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Bitcoin Lore - A Bit Curious</title>
 <meta name="description" content="Bitcoin lore: pizza day, the landfill fortune, Hal Finney, and the folklore of the hardest money ever made."/>
+<meta name="theme-color" content="#0b0b18"/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/lore/"/>
 <meta property="og:type" content="article"/>
+<meta property="og:site_name" content="A Bit Curious"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/lore/"/>
 <meta property="og:title" content="Bitcoin Lore - A Bit Curious"/>
 <meta property="og:description" content="Bitcoin lore: pizza day, the landfill fortune, Hal Finney, and the folklore of the hardest money ever made."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Bitcoin Lore - A Bit Curious"/>
+<meta name="twitter:description" content="Bitcoin lore: pizza day, the landfill fortune, Hal Finney, and the folklore of the hardest money ever made."/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
+<link rel="stylesheet" href="/styles.css"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Bitcoin Lore","description":"Bitcoin lore: pizza day, the landfill fortune, Hal Finney, and the folklore of the hardest money ever made.","url":"https://www.a-bit-curious.com/lessons/lore/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context": "https://schema.org", "@type": "LearningResource", "name": "Bitcoin Lore", "description": "Bitcoin lore: pizza day, the landfill fortune, Hal Finney, and the folklore of the hardest money ever made.", "url": "https://www.a-bit-curious.com/lessons/lore/", "isAccessibleForFree": true, "inLanguage": "en", "educationalLevel": "Beginner", "isPartOf": {"@type": "Course", "name": "A Bit Curious - The Interactive Guide to Bitcoin", "url": "https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.75;}
+  a{color:#fbbf24;}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(245,158,11,0.28);background:#0f0f26;}
+  .brand{font-family:'Syne',system-ui,sans-serif;font-weight:800;color:#fff;text-decoration:none;font-size:17px;}
+  .brand span{color:#f59e0b;}
+  .top .open{font-size:14px;font-weight:600;text-decoration:none;}
+  main{max-width:720px;margin:0 auto;padding:32px 20px 48px;}
+  .crumbs{font-size:13px;color:#8888b8;margin-bottom:10px;}
+  .crumbs a{color:#8888b8;}
+  h1{font-family:'Syne',system-ui,sans-serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:#fbbf24;margin-bottom:8px;}
+  .sub{font-family:'Space Mono',ui-monospace,monospace;font-size:13px;color:#8888b8;margin-bottom:24px;}
+  article p,article li,article blockquote{margin-bottom:18px;}
+  article h2,.terms h2{font-family:'Syne',system-ui,sans-serif;font-size:22px;color:#fff;margin:32px 0 12px;}
+  article h3{font-size:17px;color:#fbbf24;margin:24px 0 6px;}
+  article ul,article ol{padding-left:24px;}
+  article sup{font-size:11px;}
+  article sup a{text-decoration:none;}
+  .note{border-left:3px solid #f59e0b;background:rgba(245,158,11,0.08);padding:14px 16px;border-radius:8px;}
+  .ref{font-size:14px;color:#b8b8d8;margin-bottom:10px;}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px;display:block;overflow-x:auto;}
+  td,th{border:1px solid rgba(255,255,255,0.1);padding:6px 10px;text-align:left;vertical-align:top;}
+  th{color:#fbbf24;}
+  .cta-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:18px 20px;margin:0 0 32px;}
+  .cta-box p{font-size:15px;color:#b8b8d8;margin-bottom:12px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:15px;}
+  .terms dt{font-weight:700;color:#fff;margin-top:14px;}
+  .terms dd{color:#b8b8d8;font-size:15px;}
+  .pager{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:15px;}
+  .pager a{text-decoration:none;}
+  footer{max-width:720px;margin:0 auto;padding:0 20px 48px;font-size:14px;}
+  footer h2{font-family:'Syne',system-ui,sans-serif;font-size:18px;color:#fff;margin:24px 0 8px;}
+  footer h3{font-size:13px;color:#8888b8;text-transform:uppercase;letter-spacing:.06em;margin:16px 0 4px;}
+  footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:4px 16px;}
 </style>
 </head>
 <body>
+<header class="top">
+  <a class="brand" href="/">A <span>&#8383;</span>it Curious</a>
+  <a class="open" href="/#lore">Interactive version &#8594;</a>
+</header>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">A Bit Curious</a> &rsaquo; VII. The Future</nav>
   <h1>Bitcoin Lore</h1>
-  <p>Bitcoin lore: pizza day, the landfill fortune, Hal Finney, and the folklore of the hardest money ever made.</p>
-  <a class="cta" href="/#lore">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="sub">The moments that made history</p>
+  <div class="cta-box">
+    <p>Bitcoin lore: pizza day, the landfill fortune, Hal Finney, and the folklore of the hardest money ever made. This is the reading version - the interactive lesson has the live demos, quizzes, and progress tracking.</p>
+    <a class="cta" href="/#lore">Start the interactive lesson &#8594;</a>
+  </div>
+  <article>
+<p>Bitcoin has legendary moments, bizarre accidents, and characters who'd fit in a heist movie. Here's the lore every Bitcoiner should know.</p>
+<h3>📅 Key Dates in Bitcoin History</h3>
+<p>Satoshi Nakamoto publishes "Bitcoin: A Peer-to-Peer Electronic Cash System" to the cryptography mailing list. Nine pages that changed the world.</p>
+<p>Satoshi mines the first block, embedding a <em>Times</em> headline: <strong>"Chancellor on brink of second bailout for banks."</strong> A timestamp and a manifesto in one.</p>
+<p>Satoshi sends 10 BTC to Hal Finney - a cryptographer, cypherpunk, and the first person (besides Satoshi) to run Bitcoin software. Finney's response that day: <strong>"Running bitcoin."</strong></p>
+<p>New Liberty Standard publishes the first BTC exchange rate: <strong>$1 = 1,309.03 BTC</strong> (about $0.00076 per bitcoin), calculated from the cost of electricity to mine them.</p>
+<p>BitcoinMarket.com launches - the first exchange where people could buy and sell BTC with dollars. The starting price was about $0.003. It's now a historical footnote, but it made Bitcoin tradeable for the first time.</p>
+<p>Laszlo Hanyecz pays <strong>10,000 BTC for two Papa John's pizzas</strong>. The first real-world Bitcoin purchase. At today's prices, that's roughly $1 billion per pizza. Celebrated every May 22nd by Bitcoiners worldwide.</p>
+<p>Bitcoin reaches <strong>$1.00</strong> for the first time. From $0.00076 to $1 in under two years. The first of many "this changes everything" moments.</p>
+<p>Satoshi Nakamoto sends their final known communication, then vanishes from public life. Their estimated ~1.1 million BTC has <strong>never been moved</strong>. One of the internet's greatest mysteries.</p>
+<p>Block reward drops from 50 BTC to 25 BTC. The first test of Satoshi's monetary policy in the real world. Price at the time: ~$12. Within a year: $1,000+.</p>
+<p>El Salvador becomes the <strong>first country to adopt Bitcoin as legal tender</strong>. President Bukele's "Bitcoin Law" means every business must accept it. Love it or hate it, a nation-state just validated a 12-year-old open-source project.</p>
+<p>The SEC approves 11 spot Bitcoin ETFs simultaneously - including BlackRock's IBIT, which becomes the <strong>fastest ETF to reach $10 billion in assets in history</strong>. Wall Street can no longer ignore Bitcoin.</p>
+<p>Block reward drops from 6.25 BTC to 3.125 BTC. Only ~1.3 million BTC left to mine, spread over the next ~116 years. The supply squeeze continues.</p>
+<h3>🌱 The Bitcoin Faucet</h3>
+<p>In 2010, developer Gavin Andresen created a website that gave away <strong>5 BTC to anyone who visited</strong> - for free. The goal was to spread Bitcoin adoption. He gave away over 19,700 BTC total. At today's prices, each visitor's gift would be worth ~$500,000. The faucet ran until 2012, when 5 BTC was no longer pocket change.</p>
+<h3>🪙 Casascius Coins</h3>
+<p>Between 2011 and 2013, Mike Caldwell minted physical brass and silver coins with a Bitcoin private key hidden under a tamper-evident hologram on the back. Each coin was "loaded" with real BTC. They're now prized collector's items - a 1 BTC Casascius coin from 2011 has sold for over <strong>$100,000+</strong> at auction (the physical coin plus the Bitcoin it holds). FinCEN shut down production in 2013.</p>
+<h3>😱 It's Not Exactly 21 Million</h3>
+<p>The real cap is <strong>20,999,999.9769 BTC</strong>. Why? Several quirks: the genesis block's 50 BTC reward is unspendable (it was hardcoded, not a normal coinbase transaction). Some early miners accidentally claimed <em>less</em> than the full block reward due to bugs. And the halving math means the final satoshi is mined around year 2140, never quite reaching a clean 21 million. Close enough - but technically, never exactly.</p>
+<h3>💫 "HODL" Was a Typo</h3>
+<p>On December 18, 2013, a user named GameKyuubi posted on Bitcointalk: <strong>"I AM HODLING"</strong> - a drunken, typo-filled rant about why he wasn't selling during a crash. The misspelling stuck. "HODL" became Bitcoin's unofficial motto and was retroactively turned into a backronym: <em>Hold On for Dear Life</em>.</p>
+<h3>📡 "Running bitcoin" - The First Tweet</h3>
+<p>On January 11, 2009 - the day before receiving the first Bitcoin transaction - Hal Finney tweeted simply: <strong>"Running bitcoin"</strong>. Two words. No hashtags, no hype. It might be the most understated announcement of a world-changing technology ever. Finney passed away in 2014 from ALS. He was cryopreserved - a fitting choice for someone who believed in the long arc of technology.</p>
+<h3>🛡️ The Lost Coins</h3>
+<p>An estimated <strong>3-4 million BTC are permanently lost</strong> - forgotten hard drives, discarded laptops, lost passwords, deceased holders with no backup. James Howells of Wales famously threw away a hard drive with 8,000 BTC in 2013. He's been fighting his local council for permission to dig up the landfill ever since. The hard drive is still there. Somewhere.</p>
+<h3>🛰 Bitcoin From Space</h3>
+<p>Blockstream operates a <strong>satellite network that broadcasts the Bitcoin blockchain from space</strong> for free. Anyone with a small satellite dish can receive the full blockchain without an internet connection. It covers every continent. Bitcoin literally works even if the internet goes down in your region.</p>
+<h3>💻 The Value Overflow Bug</h3>
+<p>On August 15, 2010, someone exploited a bug to create <strong>184 billion BTC out of thin air</strong> in block 74,638. Satoshi (still active at the time) deployed a fix within 5 hours. The bad block was orphaned and the bug was patched. It's the only time Bitcoin's supply was ever compromised, and it lasted less than a day.</p>
+<p>Every "$1 = 1,309 BTC" and every lost hard drive is a reminder that we're still in the early chapters of this story. The protocol is 17 years old. The dollar is 250. Gold is 5,000. Bitcoin is just getting started.</p>
+  </article>
+  
+  <nav class="pager" aria-label="Lessons"><a rel="prev" href="/lessons/finalexam/">&#8592; The Final Exam</a><a rel="next" href="/lessons/bibliography/">Go Deeper &amp; Sources &#8594;</a></nav>
 </main>
+<footer>
+  <h2>All 46 lessons</h2>
+  <h3>Start here</h3><ul><li><a href="/lessons/welcome/">Welcome</a></li></ul><h3>I. The Problem with Money</h3><ul><li><a href="/lessons/money/">Nature of Money</a></li><li><a href="/lessons/inflation/">Monetary Inflation</a></li><li><a href="/lessons/faithcredit/">Full Faith &amp; Credit</a></li><li><a href="/lessons/year1971/">1971: The Year Money Broke</a></li><li><a href="/lessons/deflation/">Deflation vs Fiat</a></li><li><a href="/lessons/fiatgraveyard/">The Fiat Graveyard</a></li></ul><h3>II. The Origin Story</h3><ul><li><a href="/lessons/pizza/">The Pizza Dilemma</a></li><li><a href="/lessons/digimoney/">Digital Money Before Bitcoin</a></li><li><a href="/lessons/satoshi/">Who Is Satoshi?</a></li><li><a href="/lessons/whitepaper/">The Whitepaper</a></li></ul><h3>III. Bitcoin vs The World</h3><ul><li><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos</a></li><li><a href="/lessons/powvpos/">Proof of Work vs Proof of Stake</a></li><li><a href="/lessons/myths/">6 Myths Debunked</a></li><li><a href="/lessons/tulips/">Bitcoin vs Tulip Mania</a></li><li><a href="/lessons/quantum/">The Quantum Question</a></li><li><a href="/lessons/caseagainst/">The Case Against Bitcoin</a></li><li><a href="/lessons/goldvsbtc/">Bitcoin vs Gold</a></li><li><a href="/lessons/adoption/">Bitcoin Adoption</a></li></ul><h3>IV. Getting Started</h3><ul><li><a href="/lessons/wallets/">Wallets</a></li><li><a href="/lessons/exchanges/">Exchanges</a></li><li><a href="/lessons/firstbitcoin/">Your First $10, Safely</a></li><li><a href="/lessons/sending/">Sending</a></li><li><a href="/lessons/security/">Security</a></li><li><a href="/lessons/scamdrill/">The Scam Drill</a></li></ul><h3>V. How Bitcoin Works</h3><ul><li><a href="/lessons/network/">Bitcoin Network</a></li><li><a href="/lessons/node/">Node</a></li><li><a href="/lessons/mining/">Mining</a></li><li><a href="/lessons/blockchain/">Blockchain</a></li><li><a href="/lessons/blocks/">Blocks</a></li><li><a href="/lessons/difficulty/">Difficulty</a></li><li><a href="/lessons/attackvectors/">Attack Vectors</a></li></ul><h3>VI. Transactions &amp; Cryptography</h3><ul><li><a href="/lessons/transactions/">Transactions</a></li><li><a href="/lessons/outputs/">Outputs</a></li><li><a href="/lessons/locks/">Locks</a></li><li><a href="/lessons/keys/">Keys &amp; Addresses</a></li><li><a href="/lessons/privatekeys/">Private Keys</a></li><li><a href="/lessons/publickeys/">Public Keys</a></li><li><a href="/lessons/signatures/">Digital Signatures</a></li><li><a href="/lessons/signetlab/">The Lab: Use Real Bitcoin</a></li><li><a href="/lessons/consensus/">Consensus &amp; Upgrades</a></li><li><a href="/lessons/lightning/">Lightning Network</a></li></ul><h3>VII. The Future</h3><ul><li><a href="/lessons/toolate/">Am I Too Late?</a></li><li><a href="/lessons/perspective/">A Bit New Perspective</a></li><li><a href="/lessons/finalexam/">The Final Exam</a></li><li><a href="/lessons/lore/">Bitcoin Lore</a></li><li><a href="/lessons/bibliography/">Go Deeper &amp; Sources</a></li></ul>
+</footer>
 </body>
 </html>

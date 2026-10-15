@@ -14,6 +14,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
       - name: Extract and check inline JavaScript
         run: python3 scripts/check-js.py
       - name: Lesson SEO pages in sync with course
