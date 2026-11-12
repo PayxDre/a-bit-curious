@@ -14,26 +14,39 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Public Keys","description":"One-way cryptography you can feel: derive addresses instantly, then try to reverse one and see why you cannot.","url":"https://www.a-bit-curious.com/lessons/publickeys/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Public Keys","description":"One-way cryptography you can feel: derive addresses instantly, then try to reverse one and see why you cannot.","url":"https://www.a-bit-curious.com/lessons/publickeys/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 38 of 47</div>
   <h1>Public Keys</h1>
-  <p>One-way cryptography you can feel: derive addresses instantly, then try to reverse one and see why you cannot.</p>
-  <a class="cta" href="/#publickeys">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">One-way cryptography you can feel: derive addresses instantly, then try to reverse one and see why you cannot.</p>
+  <a class="cta" href="/#publickeys">Open the interactive lesson &#8594;</a>
+  <p>A public key is derived from your private key using elliptic curve multiplication . Think of it like mixing paint: starting with a secret color, you apply a recipe to get a new color. Anyone can see the result, but they can&#x27;t figure out the original.</p>
+  <p>Public keys are 33 bytes (compressed). From your public key, your address is derived via SHA-256 then RIPEMD-160 .</p>
+  <h2>📢 From Public Key to Address</h2>
+  <p>Public keys are safe to share. After spending from an address, your public key is revealed, so best practice is to use each address only once for privacy.</p>
+  <p>The relationship: private key is your identity proof, public key is your verifiable credential, address is your shareable contact info. None of this requires a passport, a bank account, or anyone&#x27;s permission.</p>
+  <p>Your public key is calculated from your private key by a step that cannot be reversed. Your address is a shorter fingerprint of that. Anyone can pay it, and nobody can work backwards from it.</p>
+  <a class="cta" href="/#publickeys">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/privatekeys/">&#8592; Private Keys</a><a href="/lessons/signatures/">Digital Signatures &#8594;</a></nav>
 </main>
 </body>
 </html>

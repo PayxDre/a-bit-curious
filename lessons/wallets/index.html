@@ -14,26 +14,44 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Wallets","description":"A wallet holds keys, not coins. Hot vs cold, custodial vs self-custody, and how to choose your first one.","url":"https://www.a-bit-curious.com/lessons/wallets/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Wallets","description":"A wallet holds keys, not coins. Hot vs cold, custodial vs self-custody, and how to choose your first one.","url":"https://www.a-bit-curious.com/lessons/wallets/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 20 of 47</div>
   <h1>Wallets</h1>
-  <p>A wallet holds keys, not coins. Hot vs cold, custodial vs self-custody, and how to choose your first one.</p>
-  <a class="cta" href="/#wallets">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">A wallet holds keys, not coins. Hot vs cold, custodial vs self-custody, and how to choose your first one.</p>
+  <a class="cta" href="/#wallets">Open the interactive lesson &#8594;</a>
+  <p>This is the most important phrase in all of Bitcoin. We&#x27;ll explain exactly what it means right here.</p>
+  <p>Think of a Bitcoin wallet like a special email account - but instead of storing emails, it stores the secret codes that prove you own your Bitcoin. The wallet itself doesn&#x27;t actually hold any coins (Bitcoin lives on the blockchain, a shared public record everyone can see). What the wallet holds is something far more important: your private key, which is like the master key to your safety deposit box at the bank.</p>
+  <p>There are several types of wallets. A hardware wallet is like a super-secure USB stick that keeps your keys offline and safe from hackers. A software wallet is an app on your phone - great for small amounts and everyday spending. A &quot;paper wallet&quot; is literally your key written on a piece of paper - old school, but completely hack-proof as long as you don&#x27;t lose it or spill coffee on it!</p>
+  <h2>💼 Wallet Types at a Glance</h2>
+  <p>The phrase &quot;not your keys, not your coins&quot; means this: if someone else (like an exchange) is holding your Bitcoin for you, they actually control it, not you. It&#x27;s like letting a stranger hold your wallet and trusting they won&#x27;t run away. When you control your own wallet and private key, you truly own your Bitcoin - no bank, no government, no company can freeze or seize it. That&#x27;s the whole superpower of Bitcoin.</p>
+  <p>Click below to see how a real Bitcoin wallet is created. This is just for education - don&#x27;t use these on mainnet!</p>
+  <p>⚠️ In a real wallet, your seed phrase generates your private key, which generates your address. Never share your seed phrase with ANYONE.</p>
+  <h2>🎯 Don&#x27;t have a Bitcoin address yet?</h2>
+  <p>Need an address to see what one looks like? Let us generate a demo address for you instantly. This is for education only - for real Bitcoin, always use a proper wallet app (like BlueWallet, Sparrow, or a Ledger/Trezor hardware wallet) that securely generates and stores your private keys.</p>
+  <p>🔒 This is a random demo address with no private key. To receive real Bitcoin, generate an address using a proper wallet.</p>
+  <p>A wallet does not contain coins. It holds the keys that let you move coins recorded on the blockchain. Whoever holds the keys controls the money, which is the whole meaning of &quot;not your keys, not your coins&quot;.</p>
+  <a class="cta" href="/#wallets">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/adoption/">&#8592; Bitcoin Adoption</a><a href="/lessons/exchanges/">Exchanges &#8594;</a></nav>
 </main>
 </body>
 </html>

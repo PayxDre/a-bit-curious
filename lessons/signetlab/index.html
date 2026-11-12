@@ -14,26 +14,48 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"The Lab: Use Real Bitcoin","description":"Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction.","url":"https://www.a-bit-curious.com/lessons/signetlab/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"The Lab: Use Real Bitcoin","description":"Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction.","url":"https://www.a-bit-curious.com/lessons/signetlab/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 40 of 47</div>
   <h1>The Lab: Use Real Bitcoin</h1>
-  <p>Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction.</p>
-  <a class="cta" href="/#signetlab">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">Use real Bitcoin on the Signet test network: generate keys, receive coins, sign and broadcast a genuine transaction.</p>
+  <a class="cta" href="/#signetlab">Open the interactive lesson &#8594;</a>
+  <p>After this lesson you can explainhow to make a real Bitcoin transaction with your own hands.</p>
+  <p>Everything you have learned so far, you are now going to do. In the next ten minutes you will generate a real Bitcoin key pair, receive real coins, sign a real transaction with real ECDSA cryptography running in your browser, broadcast it to a live network, and watch a real miner seal it into a block that anyone on Earth can verify.</p>
+  <p>The network is Signet, Bitcoin&#x27;s official test network. It runs the same software, the same cryptography, and the same rules as Bitcoin - but its coins are free and worthless by design. That makes it the perfect gym: real weights, zero risk.</p>
+  <h2>⚠️ The two rules of the lab</h2>
+  <p>1. Test coins only. The wallet you create here is for Signet. Never send real bitcoin to it.</p>
+  <p>2. This page generates keys inside your browser and never transmits them - there is no server. But the habit matters more than the fact: never type a real seed phrase or private key into any website. Ever. Including this one.</p>
+  <p>One click runs the full derivation you learned in Chapter VI: 256 random bits, secp256k1 point multiplication, SHA-256, RIPEMD-160, bech32. All of it in your browser, all of it real.</p>
+  <p>Copy your address above and paste it into a faucet - a site that gives away free Signet coins. This is a real payment from a stranger&#x27;s wallet to yours.</p>
+  <p>This spends your coins back to your own address (minus a real miner fee), exactly like the coin picker demo taught - except this time the signature is real ECDSA, the sighash is real BIP 143, and the network will actually verify it.</p>
+  <p>Signet blocks arrive roughly every 10 minutes, just like Bitcoin. When a miner includes your transaction, it becomes permanent history.</p>
+  <p>Your transaction is now public data on a real blockchain. Pull it back down and take it apart: every byte you broadcast, what each one means, and - once it confirms - the block header that sealed it into history.</p>
+  <h2>🎓 What you just did</h2>
+  <p>You held a private key, received a UTXO, built a transaction that consumed it and created a new one, signed it with elliptic curve cryptography, paid a miner a fee, and got your payment sealed into a block by proof of work. That is the entire Bitcoin system, end to end, operated by you. Moving real bitcoin works exactly the same way - the only differences are the network name and the stakes.</p>
+  <p>Your transaction obeyed rules no company wrote and no government passed. Time to see how a leaderless network agrees on anything - and how it upgrades without breaking.</p>
+  <p>You created a key, received coins, built and signed a transaction and watched a block confirm it on a live test network. Real bitcoin works in exactly the same way. Only the stakes differ.</p>
+  <a class="cta" href="/#signetlab">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/signatures/">&#8592; Digital Signatures</a><a href="/lessons/consensus/">Consensus &amp; Upgrades &#8594;</a></nav>
 </main>
 </body>
 </html>

@@ -14,26 +14,64 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Proof of Work vs Proof of Stake","description":"Proof of work vs proof of stake, explained honestly: what each secures, what each costs, and why Bitcoin chose work.","url":"https://www.a-bit-curious.com/lessons/powvpos/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Proof of Work vs Proof of Stake","description":"Proof of work vs proof of stake, explained honestly: what each secures, what each costs, and why Bitcoin chose work.","url":"https://www.a-bit-curious.com/lessons/powvpos/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 13 of 47</div>
   <h1>Proof of Work vs Proof of Stake</h1>
-  <p>Proof of work vs proof of stake, explained honestly: what each secures, what each costs, and why Bitcoin chose work.</p>
-  <a class="cta" href="/#powvpos">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">Proof of work vs proof of stake, explained honestly: what each secures, what each costs, and why Bitcoin chose work.</p>
+  <a class="cta" href="/#powvpos">Open the interactive lesson &#8594;</a>
+  <p>After this lesson you can explainwhy Bitcoin secures itself with energy rather than deposits.</p>
+  <p>Every blockchain needs a way to decide which transactions are valid and who gets to add the next block. This mechanism - called consensus - determines who holds power over the network, how that power is distributed, and whether it concentrates over time. Bitcoin uses Proof of Work. Most other major cryptocurrencies have moved to Proof of Stake. The differences are fundamental.</p>
+  <h2>⚒️ Proof of Work (PoW)</h2>
+  <p>In Proof of Work, miners compete to solve a computationally difficult puzzle. The first to find a valid solution gets to propose the next block and earns the block reward. This process requires real-world resources - specialized hardware (ASICs) and electricity - creating an external cost that cannot be faked or shortcut.</p>
+  <p>Anyone with hardware and electricity can mine. No permission needed, no minimum balance required. A miner in Nigeria competes on equal terms with a miner in Texas.</p>
+  <p>Security is backed by physics, not financial promises. To attack Bitcoin, you&#x27;d need to outspend the entire network&#x27;s energy output - currently billions of dollars per year in electricity alone.</p>
+  <p>Holding a large amount of bitcoin does not give you any influence over block production or network rules. Mining power comes from ongoing operational expenditure, not from accumulated wealth.</p>
+  <p>Bitcoin&#x27;s Proof of Work has secured the network for 17 years with zero downtime, zero rollbacks, and zero successful attacks. No other consensus mechanism has this track record.</p>
+  <h2>💰 Proof of Stake (PoS)</h2>
+  <p>In Proof of Stake, validators are selected to propose blocks based on how many tokens they hold and &quot;stake&quot; as collateral. The more tokens you lock up, the more likely you are to be chosen to validate the next block - and the more rewards you earn. There is no external cost like electricity; validation requires only holding the token itself.</p>
+  <p>Validators with larger stakes earn proportionally more rewards, which they can re-stake to earn even more. Over time, the largest holders grow their share of the network, while smaller participants fall further behind. The rich get richer by design.</p>
+  <p>In PoS systems, the entities with the most tokens have the most influence over which transactions are validated and which blocks are accepted. Holding a large balance directly translates into control over what the network considers valid.</p>
+  <p>Since validation doesn&#x27;t require energy expenditure, the cost of attacking a PoS network is purely financial - buy enough tokens and you control the chain. In PoW, you&#x27;d also need physical infrastructure and ongoing electricity, which can&#x27;t be acquired instantly.</p>
+  <p>Large PoS validators are identifiable entities with known holdings. Governments can pressure them to censor specific transactions or addresses. After Ethereum&#x27;s move to PoS, research showed that a majority of blocks were being produced by validators running OFAC-compliant relay software, filtering certain transactions.</p>
+  <p>📈 The compounding problem: In Proof of Stake, staking rewards function like interest - your tokens generate more tokens. A validator staking 1,000,000 ETH earns proportionally more than someone staking 1,000 ETH. Those rewards are then re-staked, earning even more. Over time, this creates a compounding effect where the largest holders capture an ever-growing share of the total supply. This dynamic mirrors the traditional financial system, where those with the most capital earn the highest returns and accumulate wealth at a faster rate than smaller participants.</p>
+  <h2>⚖️ Side-by-Side Comparison</h2>
+  <p>Large validators are known entities, subject to government pressure and compliance requirements.</p>
+  <h2>🔄 Why Proof of Work distributes wealth and Proof of Stake concentrates it</h2>
+  <p>Bitcoin miners have significant ongoing costs - electricity, cooling, hardware replacement, facility leases. To cover these expenses, miners must regularly sell a portion of their bitcoin earnings on the open market. This creates constant sell pressure that distributes newly mined coins into circulation. The coins flow outward, from miners to the broader economy.</p>
+  <p>Proof of Stake validators, by contrast, have minimal operating costs. Their primary &quot;expense&quot; is the opportunity cost of locking tokens. Since they don&#x27;t need to sell to cover real-world bills, they can re-stake 100% of their rewards, compounding their position. A validator staking 10% of the total supply today will hold an even larger percentage next year, and an even larger one the year after that - without doing any additional work.</p>
+  <p>This is the same dynamic that exists in traditional finance: capital generates returns, returns are reinvested, and wealth concentrates at the top. Proof of Work breaks this cycle by requiring ongoing real-world expenditure. Proof of Stake replicates it.</p>
+  <h2>🔒 Censorship in practice: the OFAC example</h2>
+  <p>After Ethereum transitioned to Proof of Stake in September 2022, researchers began tracking how many blocks were produced by validators running MEV-Boost relays that comply with U.S. Treasury OFAC sanctions. At its peak, over 70% of Ethereum blocks were being built by OFAC-compliant relays - meaning transactions involving sanctioned addresses were being excluded from the majority of blocks.</p>
+  <p>This happened because large PoS validators - companies like Coinbase, Lido, and Kraken - are identifiable, regulated entities. When the U.S. government sanctioned Tornado Cash (a privacy tool) in August 2022, these validators had strong incentives to comply. Their staked capital was at risk if they were deemed non-compliant.</p>
+  <p>In Bitcoin&#x27;s Proof of Work system, miners are more geographically distributed and mining operations can be relocated. When China banned Bitcoin mining in 2021, hashrate moved to the U.S., Kazakhstan, Russia, and elsewhere within months. The network never went down and no transactions were censored. The physical nature of mining equipment makes it harder - though not impossible - for any single government to enforce transaction-level censorship across the network.</p>
+  <h2>⚠️ The &quot;nothing at stake&quot; problem</h2>
+  <p>In Proof of Work, mining on a competing fork costs real electricity. Miners must choose which chain to dedicate their hardware to, because they can&#x27;t mine both simultaneously without splitting their hashrate. This economic cost enforces a natural commitment to one chain.</p>
+  <p>In Proof of Stake, validators can theoretically sign blocks on multiple competing forks at zero additional cost - since there&#x27;s no energy expenditure per signature. This is known as the &quot;nothing at stake&quot; problem. PoS systems attempt to address this through &quot;slashing&quot; penalties (destroying a validator&#x27;s stake if they&#x27;re caught signing competing blocks), but these mechanisms add complexity and rely on the correct functioning of the penalty system itself. Proof of Work solves this problem through physics: you can&#x27;t use the same electricity twice.</p>
+  <p>The core tradeoff is straightforward. Proof of Stake is more energy-efficient - that is its primary advantage. But in exchange, it creates a system where the wealthiest participants control validation, earn the most rewards, and grow their influence over time. Proof of Work requires real-world resources, which means mining power is earned through ongoing expenditure rather than accumulated through existing wealth. Bitcoin&#x27;s design choice to use Proof of Work reflects its core purpose: a monetary system where no one gets special privileges based on how much they already hold.</p>
+  <p>Proof of work makes rewriting history cost real energy that cannot be faked afterwards. Proof of stake replaces that with locked-up coins, which is cheaper but hands lasting control to the largest holders and needs trusted checkpoints.</p>
+  <p>You&#x27;ve probably heard that Bitcoin &quot;wastes energy,&quot; &quot;is used by criminals,&quot; or &quot;has no value.&quot; Let&#x27;s debunk the biggest myths.</p>
+  <a class="cta" href="/#powvpos">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/altcoins/">&#8592; Bitcoin vs Other Cryptos</a><a href="/lessons/myths/">6 Myths Debunked &#8594;</a></nav>
 </main>
 </body>
 </html>

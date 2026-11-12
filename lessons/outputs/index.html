@@ -14,26 +14,40 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Outputs","description":"UTXOs explained: why your wallet has coins instead of a balance, and how coin selection actually works.","url":"https://www.a-bit-curious.com/lessons/outputs/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Outputs","description":"UTXOs explained: why your wallet has coins instead of a balance, and how coin selection actually works.","url":"https://www.a-bit-curious.com/lessons/outputs/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 34 of 47</div>
   <h1>Outputs</h1>
-  <p>UTXOs explained: why your wallet has coins instead of a balance, and how coin selection actually works.</p>
-  <a class="cta" href="/#outputs">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">UTXOs explained: why your wallet has coins instead of a balance, and how coin selection actually works.</p>
+  <a class="cta" href="/#outputs">Open the interactive lesson &#8594;</a>
+  <p>In Bitcoin, there&#x27;s no such thing as a &quot;balance.&quot; Instead, Bitcoin exists as UTXOs - Unspent Transaction Outputs. Think of it like a piggy bank full of physical coins and bills of different denominations.</p>
+  <p>When Alice sends 0.3 BTC to Bob, a new UTXO is created: &quot;0.3 BTC locked to Bob&#x27;s address.&quot; When Bob spends it later, he creates a new transaction that references this UTXO as input and creates new outputs. The old UTXO is &quot;consumed.&quot;</p>
+  <h2>🪙 Your UTXOs (Unspent Coins)</h2>
+  <p>Your &quot;balance&quot; is just a pile of separate UTXOs. Like coins in a jar - each one is its own piece.</p>
+  <p>You must use whole UTXOs as inputs. If you have a 1 BTC UTXO and want to send 0.3 BTC, you spend the entire 1 BTC, create a 0.3 BTC output for the recipient and a ~0.699X BTC output back to yourself (change). Just like paying for a $3 coffee with a $10 bill.</p>
+  <p>A wallet with many small UTXOs creates large transactions when spending - and larger transactions cost more in fees. Consolidating small UTXOs during low-fee periods is called UTXO consolidation .</p>
+  <p>Your balance is a total your wallet calculates from separate unspent coins. Paying means spending whole coins and receiving change, exactly like handing over a banknote.</p>
+  <a class="cta" href="/#outputs">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/transactions/">&#8592; Transactions</a><a href="/lessons/locks/">Locks &#8594;</a></nav>
 </main>
 </body>
 </html>

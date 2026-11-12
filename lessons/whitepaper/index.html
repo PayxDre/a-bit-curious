@@ -14,26 +14,60 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"The Whitepaper","description":"The nine pages that started it all: a guided tour of the Bitcoin whitepaper in plain English.","url":"https://www.a-bit-curious.com/lessons/whitepaper/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"The Whitepaper","description":"The nine pages that started it all: a guided tour of the Bitcoin whitepaper in plain English.","url":"https://www.a-bit-curious.com/lessons/whitepaper/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 11 of 47</div>
   <h1>The Whitepaper</h1>
-  <p>The nine pages that started it all: a guided tour of the Bitcoin whitepaper in plain English.</p>
-  <a class="cta" href="/#whitepaper">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">The nine pages that started it all: a guided tour of the Bitcoin whitepaper in plain English.</p>
+  <a class="cta" href="/#whitepaper">Open the interactive lesson &#8594;</a>
+  <p>On Halloween 2008, a pseudonymous figure named Satoshi Nakamoto published a 9-page paper to a cryptography mailing list. No venture capital. No marketing. No hype. Just a technical proposal that would go on to create a trillion-dollar asset class and challenge the foundations of modern finance.</p>
+  <p>The paper is brilliant but dense. Below, we break down every section of the whitepaper into plain English so anyone can understand what Satoshi actually proposed - and why each piece matters.</p>
+  <p>“A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution.”</p>
+  <p>In plain English: Satoshi opens with the entire vision in one sentence - send money directly to anyone, anywhere, without needing a bank, PayPal, or any middleman. The abstract lays out the core innovation: a system that uses cryptographic proof instead of trust. Instead of trusting a bank to process your payment honestly, math does the job. The key ingredients: digital signatures prove ownership, a peer-to-peer network timestamps transactions, and proof-of-work prevents double-spending.</p>
+  <p>“Commerce on the Internet has come to rely almost exclusively on financial institutions serving as trusted third parties to process electronic payments.”</p>
+  <p>In plain English: Satoshi explains the problem. Every online payment today goes through a middleman - Visa, PayPal, your bank. This creates three issues: transaction costs rise because middlemen take a cut, small payments become impractical because fees eat them up, and transactions can be reversed, meaning merchants need to collect extra personal information as protection. Satoshi argues we need a system based on cryptographic proof rather than trust - where payments are irreversible (like handing someone cash) and no third party can freeze, reverse, or censor them.</p>
+  <p>In plain English: A bitcoin isn’t a file on your computer. It’s a chain of signatures - a history of who sent it to whom. When Alice pays Bob, she digitally signs a message saying “I’m sending this coin to Bob” using her private key. Bob can verify the signature using Alice’s public key. Each new owner adds their signature to the chain, creating an unbroken record of ownership. The challenge: how does Bob know Alice didn’t also send the same coin to Charlie? That’s the double-spending problem, and the rest of the paper solves it.</p>
+  <p>“The solution we propose begins with a timestamp server. A timestamp server works by taking a hash of a block of items to be timestamped and widely publishing the hash.”</p>
+  <p>In plain English: To prove a transaction happened at a specific time, you need a public clock everyone agrees on. Satoshi’s timestamp server groups transactions into blocks and creates a mathematical fingerprint (hash) of each block. Each block includes the hash of the previous block, creating an unbreakable chain. Think of it like a public notary that stamps documents - except instead of one person, the entire network does the stamping, and the stamps are linked in sequence. If anyone tampered with an old block, every stamp after it would break.</p>
+  <p>“The proof-of-work involves scanning for a value that when hashed, the hash begins with a number of zero bits.”</p>
+  <p>In plain English: This is Bitcoin’s security engine. To add a block of transactions, a computer must solve a math puzzle - find a number that, when hashed, produces a result starting with a specific number of zeros. It’s like a global lottery: trillions of guesses per second, and the winner gets to add the next block. This is expensive on purpose. To rewrite history, an attacker would have to redo all that work faster than the entire honest network - which is practically impossible. Satoshi borrowed this idea from Adam Back’s Hashcash (1997), originally designed to prevent email spam. The difficulty adjusts automatically so blocks arrive roughly every 10 minutes regardless of how much computing power joins the network.</p>
+  <p>“Nodes always consider the longest chain to be the correct one and will keep working on extending it.”</p>
+  <p>In plain English: Satoshi lays out the network in five elegant steps: 1) New transactions are broadcast to all nodes. 2) Each node collects transactions into a block. 3) Each node works on finding proof-of-work for its block. 4) When a node solves it, it broadcasts the block. 5) Nodes accept the block only if all transactions in it are valid. The beauty is that nodes don’t all have to be online at the same time. If a node goes offline and comes back, it simply downloads any blocks it missed and catches up. The longest chain (most accumulated work) always wins.</p>
+  <p>“The first transaction in a block is a special transaction that starts a new coin owned by the creator of the block.”</p>
+  <p>In plain English: Why would anyone spend electricity solving these puzzles? Because they get paid. The first transaction in every block is special - it creates brand-new bitcoin and awards it to the miner who solved the puzzle. This is how new bitcoin enters circulation (the “block reward”). Miners also collect transaction fees. Satoshi makes a profound argument: this incentive structure keeps miners honest. A miner with enough power to attack the network would find it more profitable to play by the rules and earn rewards than to undermine the system and destroy the value of their own earnings. Greed, channeled correctly, becomes security.</p>
+  <p>“Once the latest transaction in a coin is buried under enough blocks, the spent transactions before it can be discarded to save disk space.”</p>
+  <p>In plain English: Satoshi anticipated that storing every transaction forever would take a lot of space. His solution: Merkle trees. Transactions in a block are organized into a tree structure where you can verify any individual transaction without storing all of them. Once a coin has been spent and buried under enough new blocks, the old transaction data can be pruned while keeping the mathematical proof intact. It’s like keeping the summary of a receipt book - you can prove any entry existed without carrying the whole book around. Even at scale, Satoshi estimated block headers alone would only use about 4.2 MB per year.</p>
+  <p>In plain English: Not everyone needs to run a full node storing the entire blockchain. Satoshi describes SPV (Simplified Payment Verification) - a way for lightweight clients (like phone wallets) to verify transactions by only downloading block headers instead of full blocks. An SPV client asks the network “is this transaction in a valid block?” and gets a Merkle proof as evidence. It’s like calling a library to confirm a book exists without reading the whole catalog yourself. The trade-off: SPV users trust that the longest chain is valid, so they’re slightly less secure than full nodes, but it’s enough for most everyday payments.</p>
+  <p>“Although it would be possible to handle coins individually, it would be unwieldy to make a separate transaction for every cent in a transfer.”</p>
+  <p>In plain English: In the real world, you might pay for a $15 item using a $10 bill and a $5 bill, or pay with a $20 and get $5 back. Bitcoin transactions work the same way. A single transaction can have multiple inputs (combining smaller amounts) and multiple outputs (splitting into a payment and change). You don’t need to handle each “satoshi” individually. This section is short but critical - it’s the mechanism that makes Bitcoin practical for real-world use rather than just a theoretical exercise.</p>
+  <p>“The public can see that someone is sending an amount to someone else, but without information linking the transaction to anyone.”</p>
+  <p>In plain English: Traditional banks keep transactions private but know everything about you. Bitcoin flips this: transactions are public, but identities are private. Everyone can see that “address A sent 0.5 BTC to address B” but nobody knows who owns those addresses (unless you tell them). Satoshi compares this to the stock market - trade prices and volumes are public, but you don’t know who is trading. He recommends using a new address for each transaction to prevent linking. Bitcoin is pseudonymous, not anonymous - like writing under a pen name that could theoretically be uncovered with enough detective work.</p>
+  <p>“We consider the scenario of an attacker trying to generate an alternate chain faster than the honest chain.”</p>
+  <p>In plain English: This is the math section - Satoshi proves Bitcoin’s security with probability theory. Imagine an attacker trying to rewrite the blockchain. They’re in a race against the honest network, and the math shows their chances of catching up drop exponentially with every new block added on top. With less than 50% of computing power, an attacker’s probability of success becomes vanishingly small after just a few confirmations. This is why merchants typically wait for 6 confirmations (~1 hour) - at that point, the probability of a successful attack is less than 0.00002%. Satoshi uses a Poisson distribution model to prove this, similar to the math used in insurance and gambling.</p>
+  <p>In plain English: Satoshi wraps up the entire proposal in one page. The system works because: digital signatures give owners control, proof-of-work prevents double-spending, and the peer-to-peer network keeps everything honest. Nodes vote with their CPU power - the longest chain represents the majority decision. No central authority needed. No trust required. The rules are enforced by math, and anyone can participate. What makes this conclusion remarkable is its restraint. No grand promises, no price predictions, no revolution manifesto - just a calm summary of a system that would go on to change the world.</p>
+  <p>None of the individual components were new. Digital signatures, hash chains, proof-of-work, peer-to-peer networks - all existed before. Satoshi’s breakthrough was combining them into a system where the incentives align so that rational self-interest produces honest behavior. It’s not just computer science - it’s game theory, economics, and cryptography woven together into 9 pages.</p>
+  <p>In nine pages the whitepaper combines digital signatures, a chain of timestamped blocks and proof of work so that strangers can agree on who owns what. Nothing in it requires trusting anyone.</p>
+  <a class="cta" href="/#whitepaper">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/satoshi/">&#8592; Who Is Satoshi?</a><a href="/lessons/altcoins/">Bitcoin vs Other Cryptos &#8594;</a></nav>
 </main>
 </body>
 </html>

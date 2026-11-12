@@ -14,26 +14,39 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Locks","description":"Every coin is locked by a script. See how keys, multisig, and timelocks decide who can spend what.","url":"https://www.a-bit-curious.com/lessons/locks/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Locks","description":"Every coin is locked by a script. See how keys, multisig, and timelocks decide who can spend what.","url":"https://www.a-bit-curious.com/lessons/locks/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 35 of 47</div>
   <h1>Locks</h1>
-  <p>Every coin is locked by a script. See how keys, multisig, and timelocks decide who can spend what.</p>
-  <a class="cta" href="/#locks">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">Every coin is locked by a script. See how keys, multisig, and timelocks decide who can spend what.</p>
+  <a class="cta" href="/#locks">Open the interactive lesson &#8594;</a>
+  <p>Every UTXO is protected by a locking script . Think of every UTXO as a locked treasure chest. To spend it, you must provide a valid cryptographic signature .</p>
+  <p>The lock is written in a simple programming language called Script . The most common lock says: &quot;provide a public key that hashes to this address AND a valid signature.&quot; The matching unlock is the scriptSig .</p>
+  <p>Bitcoin allows complex locks too. Multisig requires multiple signatures. Time-locked UTXOs can&#x27;t be spent until a future date.</p>
+  <h2>🔒 Types of Bitcoin Locks</h2>
+  <p>This lock-and-key system is Bitcoin&#x27;s security foundation. Every full node independently verifies that every spending attempt satisfies the lock. Mathematics doesn&#x27;t care who you are.</p>
+  <p>Every coin is locked by a small program that states the condition for spending it. Usually that is one signature. It can also be two of three keys, or a date in the future. Every node checks the condition.</p>
+  <a class="cta" href="/#locks">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/outputs/">&#8592; Outputs</a><a href="/lessons/keys/">Keys &amp; Addresses &#8594;</a></nav>
 </main>
 </body>
 </html>

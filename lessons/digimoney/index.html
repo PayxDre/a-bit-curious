@@ -14,26 +14,42 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Digital Money Before Bitcoin","description":"DigiCash, Hashcash, b-money, Bit Gold: the failed digital monies before Bitcoin and the lesson each one taught.","url":"https://www.a-bit-curious.com/lessons/digimoney/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Digital Money Before Bitcoin","description":"DigiCash, Hashcash, b-money, Bit Gold: the failed digital monies before Bitcoin and the lesson each one taught.","url":"https://www.a-bit-curious.com/lessons/digimoney/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 9 of 47</div>
   <h1>Digital Money Before Bitcoin</h1>
-  <p>DigiCash, Hashcash, b-money, Bit Gold: the failed digital monies before Bitcoin and the lesson each one taught.</p>
-  <a class="cta" href="/#digimoney">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">DigiCash, Hashcash, b-money, Bit Gold: the failed digital monies before Bitcoin and the lesson each one taught.</p>
+  <a class="cta" href="/#digimoney">Open the interactive lesson &#8594;</a>
+  <p>Bitcoin didn&#x27;t appear out of thin air. For over 30 years, brilliant cryptographers, hackers, and visionaries tried to build digital money. Every one of them failed. But every failure taught us something - and Bitcoin stands on all of their shoulders.</p>
+  <p>The dream of digital cash started long before Bitcoin. In the early 1980s, cryptographer David Chaum invented eCash and founded DigiCash, a company that created the first real anonymous digital payment system. Banks in the Netherlands and the US actually piloted it. But DigiCash had a fatal flaw: it depended on a central company to operate. When DigiCash went bankrupt in 1998, the entire system died. Lesson learned: digital money that depends on a single company is no better than money that depends on a single government.</p>
+  <p>In 1996, e-gold took a different approach - backing digital accounts with physical gold in a vault. It became wildly popular, processing billions of dollars annually by the mid-2000s. But again: centralized. The US government shut it down in 2007, charging the operators with money laundering. Lesson: even if the money itself is sound (gold), a central point of failure means a central point of government control.</p>
+  <p>The cypherpunks - a community of cryptography activists - kept pushing. In 1997, Adam Back invented HashCash , a proof-of-work system to combat email spam. You had to prove your computer did work before sending a message - the same concept Bitcoin would later use for mining. In 1998, Wei Dai published b-money , a proposal for anonymous digital money using proof of work. The same year, Nick Szabo designed Bit Gold - often called Bitcoin&#x27;s closest ancestor - which proposed chaining proof-of-work puzzles together to create digital scarcity. Neither was ever fully built, but their DNA is everywhere in Bitcoin.</p>
+  <p>In the 2000s, more attempts followed. Liberty Reserve grew to process $6 billion in digital transfers - then was seized by the US government in 2013. RPOW (Reusable Proofs of Work), built by Hal Finney in 2004, was the first working implementation of proof-of-work currency - but it still relied on a central server. Every single predecessor shared the same fatal vulnerability: a single point of failure, a single throat to choke, a single entity a government could shut down.</p>
+  <h2>💻 The Road to Bitcoin</h2>
+  <p>Then, on October 31, 2008, a pseudonymous person or group called Satoshi Nakamoto posted a nine-page whitepaper to a cryptography mailing list. It was titled &quot;Bitcoin: A Peer-to-Peer Electronic Cash System.&quot; It solved the one problem none of the predecessors could: how to build decentralized digital money with no central authority, no single point of failure, and no trusted third party. By combining proof of work (from HashCash), chained blocks (from Bit Gold), peer-to-peer networking, and a novel difficulty adjustment mechanism, Satoshi created something none of the prior systems achieved: a digital currency that cannot be shut down because there is no one to shut down. Bitcoin didn&#x27;t just improve on its predecessors - it made the breakthrough that made all of them possible in retrospect.</p>
+  <p>People tried to build internet money for twenty years before Bitcoin. Each attempt had a company or server at its centre, and each was shut down or went bust. Bitcoin removed the centre.</p>
+  <p>Bitcoin succeeded where all predecessors failed. But what about Ethereum, Solana, and the thousands of other &quot;cryptos&quot;? Are they the same thing? Not even close.</p>
+  <a class="cta" href="/#digimoney">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/pizza/">&#8592; The Pizza Dilemma</a><a href="/lessons/satoshi/">Who Is Satoshi? &#8594;</a></nav>
 </main>
 </body>
 </html>

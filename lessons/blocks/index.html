@@ -14,26 +14,39 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Blocks","description":"Inside a Bitcoin block: height, timestamps, the merkle root, the nonce, and the header that chains history together.","url":"https://www.a-bit-curious.com/lessons/blocks/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Blocks","description":"Inside a Bitcoin block: height, timestamps, the merkle root, the nonce, and the header that chains history together.","url":"https://www.a-bit-curious.com/lessons/blocks/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 30 of 47</div>
   <h1>Blocks</h1>
-  <p>Inside a Bitcoin block: height, timestamps, the merkle root, the nonce, and the header that chains history together.</p>
-  <a class="cta" href="/#blocks">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">Inside a Bitcoin block: height, timestamps, the merkle root, the nonce, and the header that chains history together.</p>
+  <a class="cta" href="/#blocks">Open the interactive lesson &#8594;</a>
+  <p>A block is like a single page in Bitcoin&#x27;s ledger. Every ~10 minutes, a new page is written. A typical block holds about 2,000-4,000 transactions with a ~4MB weight limit. Once enough blocks are stacked on top, those transactions are considered finalized.</p>
+  <p>Every block has a header containing the previous block&#x27;s hash , a Merkle root , and the all-important nonce .</p>
+  <h2>📦 Inside a Block</h2>
+  <p>The first transaction in every block is special: the coinbase transaction . This is how new Bitcoin is created.</p>
+  <p>Once a block has 6 subsequent blocks on top, it&#x27;s considered deeply confirmed and essentially irreversible. Bitcoin works on Christmas, weekends, and at 3am.</p>
+  <p>A block is a batch of transactions plus an 80-byte header. The header holds one fingerprint that stands for every transaction in the batch, the fingerprint of the previous block, and the nonce that proves the work.</p>
+  <a class="cta" href="/#blocks">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/blockchain/">&#8592; Blockchain</a><a href="/lessons/difficulty/">Difficulty &#8594;</a></nav>
 </main>
 </body>
 </html>

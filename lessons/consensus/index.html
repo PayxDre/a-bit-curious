@@ -3,37 +3,81 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Consensus & Upgrades - A Bit Curious</title>
+<title>Consensus &amp; Upgrades - A Bit Curious</title>
 <meta name="description" content="How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war."/>
 <link rel="canonical" href="https://www.a-bit-curious.com/lessons/consensus/"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="https://www.a-bit-curious.com/lessons/consensus/"/>
-<meta property="og:title" content="Consensus & Upgrades - A Bit Curious"/>
+<meta property="og:title" content="Consensus &amp; Upgrades - A Bit Curious"/>
 <meta property="og:description" content="How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war."/>
 <meta property="og:image" content="https://www.a-bit-curious.com/og-image.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Consensus & Upgrades","description":"How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war.","url":"https://www.a-bit-curious.com/lessons/consensus/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Consensus &amp; Upgrades","description":"How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war.","url":"https://www.a-bit-curious.com/lessons/consensus/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
-  <h1>Consensus & Upgrades</h1>
-  <p>How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war.</p>
-  <a class="cta" href="/#consensus">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 41 of 47</div>
+  <h1>Consensus &amp; Upgrades</h1>
+  <p class="lede">How a leaderless network changes its rules: soft forks, SegWit, Taproot, and the blocksize war.</p>
+  <a class="cta" href="/#consensus">Open the interactive lesson &#8594;</a>
+  <p>Bitcoin has no CEO, no board of directors, no foundation with veto power. Yet its code has been upgraded dozens of times since 2009. How? Through a process called rough consensus - a messy, slow, beautiful system where changes only happen when nearly everyone agrees.</p>
+  <p>Most tech companies push updates overnight. Bitcoin&#x27;s upgrade process is deliberately slow and conservative. That&#x27;s not a bug - it&#x27;s what makes it trustworthy as a monetary protocol.</p>
+  <h2>📜 The BIP Process - How Changes Are Proposed</h2>
+  <p>BIP = Bitcoin Improvement Proposal. Anyone in the world can submit one. Here&#x27;s how it works:</p>
+  <p>A developer writes a formal proposal (BIP) describing the change, its motivation, and technical specification. It gets posted to the bitcoin-dev mailing list and debated publicly. Anyone can participate.</p>
+  <p>If the idea gains traction, developers write the actual code. Multiple independent reviewers audit it. This phase can take months or years. There&#x27;s no deadline - the code ships when it&#x27;s ready.</p>
+  <p>For consensus changes, miners signal readiness by including a flag in the blocks they mine. When a supermajority (usually 90-95%) signals support over a defined period, the upgrade activates. Nodes that haven&#x27;t upgraded still work - that&#x27;s the beauty of soft forks.</p>
+  <h2>🔀 Soft Fork vs Hard Fork</h2>
+  <p>Think of a soft fork as adding a speed bump to a road - all cars still work. A hard fork is changing the road to train tracks - cars can&#x27;t drive on them.</p>
+  <p>Bitcoin strongly favors soft forks because they don&#x27;t force anyone to upgrade. If you&#x27;re running a node from 2017, it still validates the chain today. That&#x27;s 9 years of backwards compatibility - unheard of in software.</p>
+  <h2>📅 Major Bitcoin Upgrades</h2>
+  <p>Enabled multi-signature wallets and complex spending conditions. Before P2SH, the sender had to include the full script in the transaction. P2SH moved that burden to the recipient, making advanced transactions practical. Soft fork.</p>
+  <p>Added CHECKLOCKTIMEVERIFY and CHECKSEQUENCEVERIFY - letting you lock bitcoin until a specific time or block height. These are essential building blocks for payment channels and the Lightning Network. Soft forks.</p>
+  <p>The most significant upgrade in Bitcoin&#x27;s history. SegWit moved signature (&quot;witness&quot;) data out of the main transaction body into a separate, discounted area. The results were transformative:</p>
+  <p>Before SegWit, signature data (often 60%+ of transaction size) took up precious block space at full price. SegWit introduced witness data counting as only 0.25× its actual size - effectively increasing capacity without changing the base block size.</p>
+  <p>Crucially, SegWit fixed transaction malleability - a bug where a transaction&#x27;s ID could be changed before confirmation. This fix was the prerequisite for the Lightning Network. No SegWit, no Lightning.</p>
+  <p>SegWit didn&#x27;t happen easily. It emerged from a bitter 2-year civil war over how to scale Bitcoin. One side (mostly large companies and miners) wanted to increase the block size via hard fork. The other side (mostly developers and node operators) pushed SegWit as a soft fork. The conflict peaked with the SegWit2x proposal - a backroom deal by major companies to force both SegWit and a 2MB hard fork. Users revolted. They ran nodes signaling &quot;NO2X.&quot; SegWit2x collapsed weeks before activation. The lesson: in Bitcoin, users - not companies - have the final say.</p>
+  <p>Modern SegWit addresses (&quot;bc1q...&quot;) use less block space and cost less than legacy addresses (&quot;1...&quot;). If your wallet still uses old addresses, upgrade to save on every transaction. Soft fork - activated August 2017.</p>
+  <p>Bitcoin&#x27;s most recent major upgrade, activated November 2021. Taproot introduced three powerful changes:</p>
+  <p>Replaced ECDSA for Taproot outputs. Schnorr signatures are smaller, faster to verify, and enable signature aggregation - combining multiple signatures into one. A 3-of-5 multisig transaction becomes indistinguishable from a simple payment.</p>
+  <p>Allows complex spending conditions (like &quot;Alice after 1 year OR Bob+Carol together&quot;) to be hidden in a Merkle tree. Only the condition actually used gets revealed on-chain. Better privacy, lower fees.</p>
+  <p>An upgraded scripting language that makes future soft forks easier to deploy. Think of it as future-proofing Bitcoin&#x27;s programming language.</p>
+  <p>Taproot was activated via &quot;Speedy Trial&quot; - miners signaled 90% support within a single difficulty period. Notably non-contentious compared to SegWit. Soft fork.</p>
+  <h2>🔥 Current &amp; Proposed Changes (2024-2026)</h2>
+  <p>These proposals are actively debated. None are activated. This is consensus in action - the slow, careful process working as designed.</p>
+  <p>Would re-enable the ability to concatenate (join) two pieces of data in Bitcoin&#x27;s scripting language. Satoshi originally included OP_CAT but disabled it in 2010 as a precaution. Proponents say it enables covenants, vaults, and bridges to other chains. Critics worry about unintended consequences and complexity creep. Status: actively debated.</p>
+  <p>Would allow a transaction to commit to the exact shape of future transactions that spend it. Enables &quot;covenants&quot; - restrictions on how bitcoin can be spent in the future. Use cases include vaults (delayed withdrawals for security) and congestion control. Status: proposed since 2020, debated.</p>
+  <p>A specialized covenant design for Bitcoin vaults - a security feature where you can &quot;unvault&quot; bitcoin with a time delay, giving you a window to claw it back if your keys are compromised. Like a safe with a time lock and a panic button. Status: draft proposal.</p>
+  <p>A proposal by Rusty Russell to re-enable many of the original opcodes Satoshi disabled in 2010, plus add new ones. The idea: give Bitcoin a more expressive scripting language for building advanced contracts, layer 2 protocols, and vaults. Controversial because it significantly expands Bitcoin&#x27;s attack surface. Status: early discussion.</p>
+  <p>The most contentious Bitcoin debate since the 2017 Blocksize War. Proposed in late 2025 by developer Dathon Ohm and backed by the Bitcoin Knots team, BIP 110 would impose a one-year soft fork limiting non-monetary data in transactions - targeting Ordinals inscriptions, BRC-20 tokens, and large OP_RETURN payloads. Outputs would be capped at 34 bytes, OP_RETURN at 83 bytes.</p>
+  <p>Arbitrary data bloats the blockchain, drives up fees for real payments, and burdens node operators. Bitcoin should prioritize its monetary function.</p>
+  <p>Consensus-level content filtering violates Bitcoin&#x27;s neutrality. It disables OP_SUCCESS (needed for future upgrades) and could set a precedent for transaction censorship. Adam Back and Michael Saylor have both warned against it.</p>
+  <p>The debate echoes the 2017 war: who decides what Bitcoin is &quot;for&quot;? Ocean pool mined the first BIP-110 signaling block in early 2026. As of now, ~2.4% of nodes support it - far from the activation threshold, but the ideological rift runs deep. Status: actively contentious, signaling underway.</p>
+  <p>The fact that these proposals take years to debate is a feature, not a bug. Bitcoin&#x27;s monetary policy is settled. Everything else moves carefully.</p>
+  <p>Here&#x27;s what makes Bitcoin&#x27;s governance unique: no single entity can push through a change. Not the developers (they write code, but can&#x27;t force anyone to run it). Not the miners (they process transactions, but users choose which chain to follow). Not the exchanges (they list coins, but can&#x27;t change the protocol). Power is distributed across all participants - and that distribution is what makes Bitcoin&#x27;s monetary properties trustworthy.</p>
+  <p>Compare this to every other monetary system in history. The Federal Reserve can change interest rates in an afternoon. A government can freeze bank accounts overnight. Even Ethereum&#x27;s leadership pushed through a chain rollback in 2016 (the DAO fork). Bitcoin&#x27;s upgrade process is slow and frustrating by design - because the alternative is a monetary system that can be changed on a whim.</p>
+  <p>Anyone can propose a change, and nobody can impose one. Upgrades spread only when the people running nodes choose to adopt them, which makes Bitcoin slow to change and very hard to capture.</p>
+  <a class="cta" href="/#consensus">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/signetlab/">&#8592; The Lab: Use Real Bitcoin</a><a href="/lessons/lightning/">Lightning Network &#8594;</a></nav>
 </main>
 </body>
 </html>

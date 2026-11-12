@@ -14,26 +14,53 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Security","description":"The simple habits that cover 95% of Bitcoin security risks: seed phrases, backups, and multisig basics.","url":"https://www.a-bit-curious.com/lessons/security/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Security","description":"The simple habits that cover 95% of Bitcoin security risks: seed phrases, backups, and multisig basics.","url":"https://www.a-bit-curious.com/lessons/security/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 24 of 47</div>
   <h1>Security</h1>
-  <p>The simple habits that cover 95% of Bitcoin security risks: seed phrases, backups, and multisig basics.</p>
-  <a class="cta" href="/#security">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">The simple habits that cover 95% of Bitcoin security risks: seed phrases, backups, and multisig basics.</p>
+  <a class="cta" href="/#security">Open the interactive lesson &#8594;</a>
+  <p>Your Bitcoin is only as safe as your weakest security habit. The good news: a few simple rules keep you safer than 99% of people.</p>
+  <p>The number one security rule in Bitcoin: back up your seed phrase. This is the 12 or 24 words your wallet generates when you first set it up. Write them on paper, store them somewhere safe (not on your computer, not in the cloud, not in your email). If your phone breaks or you forget your password, these words let you recover everything. Lose the seed phrase, lose your Bitcoin forever.</p>
+  <p>Enable two-factor authentication (2FA) on every exchange account. Use a hardware wallet for any amount you&#x27;d be upset to lose. Never click links in emails claiming to be from an exchange (these are phishing attacks ). Bitcoin scams are everywhere - if someone promises to &quot;double your Bitcoin,&quot; they&#x27;re lying. Always.</p>
+  <h2>🛡 Bitcoin Threat Levels</h2>
+  <p>Diversify where you store Bitcoin. Small spending amounts can stay on an exchange or phone wallet for convenience. Large savings should be on a hardware wallet kept offline. Consider creating a &quot;decoy wallet&quot; with a small amount if you ever feel physically threatened. And tell someone you trust where your seed phrase backup is hidden - not the phrase itself, but where to find it in an emergency.</p>
+  <h2>⚠️ Case Study: The Coldcard Entropy Bug (July 2026)</h2>
+  <p>In late July 2026, Coinkite disclosed that a bug in Coldcard firmware had been quietly crippling seed generation since March 2021. Inside libngu, the device&#x27;s cryptography library, a preprocessor check tested whether a configuration macro was defined rather than whether it was actually switched on. Every build from firmware 4.0.1 onward silently fell back to Yasmarang - a fast, non-cryptographic pseudo-random generator borrowed from MicroPython - instead of the STM32 chip&#x27;s hardware true random number generator. Worse, that fallback was seeded once from the chip&#x27;s unique ID and timer registers, then never fed fresh randomness again.</p>
+  <p>A 24-word seed is supposed to carry 128 bits of entropy - more possible keys than there are atoms in our galaxy, which is the entire reason nobody can guess yours. On affected devices, real entropy collapsed to roughly 72 bits on Mk4, Q and Mk5, and roughly 40 bits on Mk2 and Mk3. Forty bits is about a trillion possibilities. That is not a universe. That is a weekend and a decent graphics card.</p>
+  <h2>🎲 Entropy Actually Delivered</h2>
+  <p>Someone found it. Beginning around 01:10 UTC on July 30, 2026, coins started leaving wallets whose owners had done nothing wrong that morning - no phishing link, no leaked backup, no malware. Galaxy Research went on to map three waves of sweeps through August 1, totalling roughly 1,367 BTC (about $88.6 million) across 4,585 addresses. The victims were overwhelmingly single-signature wallets. Coinkite shipped patched firmware on July 31.</p>
+  <p>Seeds generated on the device itself on firmware 4.0.1 or later, held in a single-signature wallet, with no passphrase and no dice rolls added. They were guessable from the moment they were created - the owners just did not know it for five years.</p>
+  <p>Anyone who mixed in 50+ of their own dice rolls or used a strong, unique BIP-39 passphrase. Also safe: seeds made before v4.0.0, the Mk1, Tapsigner, Opendime and Satscard, and multisig quorums whose other keys came from a different vendor.</p>
+  <p>1. Update to patched firmware - Mk3 to 4.2.0, Mk4 and Mk5 to 5.6.0, Q to 1.5.0Q (Edge builds: 6.6.0X and 6.6.0QX).</p>
+  <p>2. Understand that updating does not repair a seed that was already made weakly. The damage is baked into the words.</p>
+  <p>3. Generate a brand new seed on the patched firmware and move your coins to it, treating the old wallet as compromised.</p>
+  <p>4. Add your own dice rolls while you do it, and write the new words down before you send a single satoshi.</p>
+  <p>Here is the uncomfortable part: the protocol never wavered. No consensus rule broke, no node was fooled, and every one of those thefts was a perfectly valid Bitcoin transaction signed by a key the attacker had legitimately guessed. Bitcoin will faithfully execute a theft if someone can produce your key - and weak randomness hands that key over quietly, years in advance. &quot;Don&#x27;t trust, verify&quot; is not only about the ledger. It applies to the box that generates your keys too, which is exactly why rolling your own dice and spreading a multisig across different vendors are worth the extra ten minutes.</p>
+  <h2>🛡 Security Checklist</h2>
+  <p>Write the seed phrase on paper, keep it offline and never type it into anything. Use a hardware wallet for savings, add your own randomness when creating it, and treat every urgent message as a scam.</p>
+  <p>You know the why and you&#x27;ve got the basics. Time to explore the engine under the hood - the network, miners, and blockchain.</p>
+  <a class="cta" href="/#security">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/sending/">&#8592; Sending</a><a href="/lessons/scamdrill/">The Scam Drill &#8594;</a></nav>
 </main>
 </body>
 </html>
