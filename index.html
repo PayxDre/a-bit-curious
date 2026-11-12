@@ -219,6 +219,7 @@
 
 </style>
 <script src="/app.js" defer></script>
+<script src="/js/demos.js" defer></script>
 <script src="/js/engage.js" defer></script>
 <style>
   :root {
@@ -1432,6 +1433,47 @@
   .lab-verdict.no strong{color:var(--orange);}
   .lab-check #quickCheck{margin-bottom:0;}
   @media(max-width:640px){.lab{padding:14px;border-radius:14px;}.lab-title{font-size:16px;}}
+
+  /* ── Newer demos (js/demos.js) ── */
+  .xd-bar{display:flex;height:22px;border-radius:11px;overflow:hidden;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);}
+  .xd-bar-you{background:linear-gradient(90deg,#f59e0b,#fbbf24);transition:width .35s cubic-bezier(.4,0,.2,1);}
+  .xd-bar-them{background:linear-gradient(90deg,#60a5fa,#3b82f6);transition:width .35s cubic-bezier(.4,0,.2,1);margin-left:auto;}
+  .xd-row{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--text2);margin:8px 0 14px;font-family:'Space Mono',monospace;}
+  .xd-k{color:var(--muted);font-family:'Inter',sans-serif;font-size:12px;}
+  .xd-btns{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+  .xd-btns .demo-btn{padding:11px 16px;font-size:13px;flex:1 1 auto;}
+  .xd-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;}
+  .xd-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+  .xd-card{padding:16px;border-radius:14px;background:rgba(0,0,0,0.25);border:1px solid var(--glass-border);}
+  .xd-card .demo-btn{width:100%;padding:11px 14px;font-size:13px;margin-top:12px;}
+  .xd-card-h{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;margin-bottom:4px;}
+  .xd-big{font-family:'Space Mono',monospace;font-weight:700;font-size:26px;color:var(--orange);margin:10px 0 2px;}
+  .xd-meter{height:10px;border-radius:5px;background:rgba(255,255,255,0.06);overflow:hidden;margin:14px 0 4px;}
+  .xd-meter>div{height:100%;border-radius:5px;transition:width .25s,background .25s;}
+  .xd-toggle{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:var(--text2);cursor:pointer;min-height:44px;}
+  .xd-toggle input{width:20px;height:20px;accent-color:var(--orange);}
+  .xd-rank{padding:12px 0;border-bottom:1px solid var(--glass-border);}
+  .xd-rank-p{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--text);margin-bottom:8px;}
+  .xd-rank-b{display:flex;gap:8px;}
+  .xd-rank-b .demo-btn{flex:1;padding:10px 14px;font-size:13px;}
+  .xd-rank-why{font-size:13px;line-height:1.6;color:var(--text3);margin-top:10px;}
+  .xd-fields{display:grid;gap:8px;}
+  .xd-field{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;font-size:13px;color:var(--muted);}
+  .xd-field code,.xd-hash code{font-family:'Space Mono',monospace;font-size:12px;color:var(--text2);word-break:break-all;}
+  .xd-field .demo-input{padding:8px 12px;}
+  .xd-hash{padding:16px;border-radius:14px;background:rgba(0,0,0,0.35);border:2px solid var(--glass-border);margin:14px 0;transition:border-color .3s;}
+  .xd-hash code{font-size:13px;}
+  @keyframes xdFlash{0%{color:#fbbf24;text-shadow:0 0 12px rgba(251,191,36,.8);}100%{color:var(--text2);text-shadow:none;}}
+  .xd-flash{animation:xdFlash 1s ease-out;}
+  .xd-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .xd-key{display:flex;flex-direction:column;gap:4px;text-align:left;padding:14px;border-radius:14px;border:2px solid var(--glass-border);background:rgba(0,0,0,0.25);color:var(--text2);font:inherit;font-size:13px;cursor:pointer;transition:all .2s;}
+  .xd-key span{color:var(--muted);font-size:12px;}
+  .xd-key em{font-style:normal;font-size:12px;margin-top:6px;}
+  .xd-key-safe{border-color:rgba(74,222,128,0.45);}
+  .xd-key-lost{opacity:.6;}
+  .xd-key-stolen{border-color:rgba(248,113,113,0.6);background:rgba(248,113,113,0.06);}
+  @media(max-width:640px){.xd-two,.xd-stats,.xd-keys{grid-template-columns:1fr;}.xd-field{grid-template-columns:1fr;gap:2px;}}
+  @media(prefers-reduced-motion:reduce){.xd-flash{animation:none;}.xd-bar-you,.xd-bar-them{transition:none;}}
 </style>
 </head>
 <body>
@@ -1856,6 +1898,8 @@
       </div>
       <div class="highlight-box">Think of a Bitcoin exchange like an airport currency booth - except instead of swapping dollars for euros, you're swapping dollars for Bitcoin.</div>
       <p class="body-text">Exchanging is the oldest economic activity in human civilization. Long before money existed, humans gathered at crossroads, river forks, and market squares to trade what they had for what they needed - fish for firewood, grain for tools, labor for shelter. When gold and silver coins emerged, dedicated <span class="tooltip-word" tabindex="0">money changers<span class="tooltip-box">Ancient money changers sat at benches (called "bancos" in Italian - the origin of the word "bank") in markets and ports, weighing and exchanging one form of money for another. They were the original exchanges.</span></span> set up tables at ports and bazaars, weighing coins from different kingdoms and converting them for a fee. A Bitcoin exchange is simply the digital evolution of this ancient practice - a platform where you trade one form of money (dollars, euros, pounds) for another form of money (Bitcoin). The difference? This time, the money you're buying can't be debased, counterfeited, or seized.</p>
+
+      <div class="inline-demo" data-demo="exchanges"></div>
       <p class="body-text">A cryptocurrency exchange is a website or app where you can buy Bitcoin using regular money (US dollars, euros, etc.). Popular ones include <span class="tooltip-word" tabindex="0">Coinbase<span class="tooltip-box">One of the largest and most beginner-friendly exchanges, based in the USA. Great for first-time buyers.</span></span>, <span class="tooltip-word" tabindex="0">Kraken<span class="tooltip-box">A well-respected exchange known for security and lower fees. Good for more experienced users.</span></span>, and <span class="tooltip-word" tabindex="0">Binance<span class="tooltip-box">The world's largest exchange by trading volume. Has almost every cryptocurrency you can think of.</span></span>. They work like stock exchanges - people post offers to buy or sell, and the platform matches buyers with sellers automatically.</p>
       <p class="body-text">To get started on an exchange, you typically need to create an account, verify your identity (called <span class="tooltip-word" tabindex="0">KYC<span class="tooltip-box">Know Your Customer - a legal requirement where exchanges must verify who you are, just like a bank does. You'll usually upload a photo ID.</span></span> - "Know Your Customer"), link your bank account or credit card, and then you can buy Bitcoin instantly. The exchange holds your Bitcoin for you - which is convenient but means you're trusting them. Many experts recommend withdrawing your Bitcoin to your own wallet after buying.</p>
       <p class="body-text">Exchanges charge fees for their services - usually a small percentage of each trade (like 0.5% to 1.5%). When comparing exchanges, look at fees, security history, and whether they're licensed in your country. A good rule: only use exchanges that are regulated and have a strong reputation. And remember - once you buy Bitcoin, consider moving it to YOUR own wallet. Your keys = your coins!</p>
@@ -4012,6 +4056,8 @@
 
       <p class="body-text">Every blockchain needs a way to decide which transactions are valid and who gets to add the next block. This mechanism - called <strong style="color:var(--orange);">consensus</strong> - determines who holds power over the network, how that power is distributed, and whether it concentrates over time. Bitcoin uses Proof of Work. Most other major cryptocurrencies have moved to Proof of Stake. The differences are fundamental.</p>
 
+      <div class="inline-demo" data-demo="powvpos"></div>
+
       <!-- ── What is Proof of Work? ── -->
       <div class="glass p-5 my-6" style="border:2px solid rgba(74,222,128,0.25);">
         <div class="text-sm font-bold mb-3" style="color:#4ade80;">&#9874;&#65039; Proof of Work (PoW)</div>
@@ -4817,6 +4863,8 @@
       </div>
 
       <p class="body-text">Every culture that has ever kept records - Sumer, Egypt, Lydia, Rome, the Islamic caliphates, imperial China, the British Empire - eventually converged on <strong style="color:var(--orange);">gold</strong> as its benchmark money. Not because kings decreed it. Because gold, uniquely among the hundred-plus elements on the periodic table, happens to be rare, durable, divisible, fungible, and hard to counterfeit. It is the only asset that has held its purchasing power across every collapse, every empire, every currency experiment. An ounce of gold bought a decent toga in Caesar's Rome, a tailored suit in 1920s London, and a tailored suit today. That isn't a coincidence - it's the consequence of physics.</p>
+
+      <div class="inline-demo" data-demo="goldvsbtc"></div>
 
       <div class="neon-divider"></div>
 
@@ -5652,6 +5700,8 @@
         <div class="text-xs mb-3" style="color:var(--muted);">The most discussed threat - and the most misunderstood.</div>
 
         <p class="body-text" style="margin-bottom:14px;">Here's the idea: if someone controlled more than half of all the computing power (hash rate) on the Bitcoin network, they could theoretically <span class="tooltip-word" tabindex="0">rewrite recent blocks<span class="tooltip-box">An attacker with 51%+ hash rate could mine an alternative chain faster than the honest network, then broadcast it to replace the "real" chain. This would let them reverse their own recent transactions - a "double spend."</span></span> and reverse their own transactions. This is called a <strong style="color:#f87171;">double spend</strong> - spending the same Bitcoin twice.</p>
+
+      <div class="inline-demo" data-demo="attackvectors"></div>
 
         <p class="body-text" style="margin-bottom:14px;">Sounds terrifying. But let's look at what it would actually take:</p>
 
@@ -6649,6 +6699,8 @@
       </div>
 
       <p class="body-text">Bitcoin's base layer is intentionally slow. It processes about <strong style="color:var(--orange);">7 transactions per second</strong> - by design. That's the tradeoff for maximum decentralization and security. But you don't need to broadcast every coffee purchase to 50,000 nodes worldwide. That's where <strong style="color:#60a5fa;">the Lightning Network</strong> comes in.</p>
+
+      <div class="inline-demo" data-demo="lightning"></div>
 
       <p class="body-text">Lightning is Bitcoin's <strong style="color:#60a5fa;">Layer 2</strong> - a payment network built <em>on top of</em> Bitcoin. Think of it like this: Layer 1 (the blockchain) is the settlement layer - like a central bank clearing large transfers. Layer 2 (Lightning) is the payment layer - like swiping a debit card for everyday purchases. Both use real BTC. There is no separate "Lightning coin."</p>
 
