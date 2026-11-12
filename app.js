@@ -966,7 +966,7 @@ document.getElementById('mob-next-btn').addEventListener('click', () => mobileNa
     swipeValid = false;
     if(e.touches.length !== 1) return;
     // Ignore swipes that start on interactive elements or scrollable widgets
-    if(e.target.closest('input, button, select, textarea, a, canvas, table, [role="slider"], .demo-coin, .chain-block')) return;
+    if(e.target.closest('input, button, select, textarea, a, canvas, table, [role="slider"], .demo-coin, .chain-block, .lab')) return;
     if(document.getElementById('modalOverlay').classList.contains('open')) return;
     swipeX = e.touches[0].clientX;
     swipeY = e.touches[0].clientY;
@@ -1001,6 +1001,8 @@ document.addEventListener('keydown', function(e){
   if(document.getElementById('searchOverlay').classList.contains('open')) return;
   // Only navigate if no input/textarea is focused
   if(document.activeElement && ['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
+  // Arrow keys belong to the demo while focus is inside one
+  if(document.activeElement && document.activeElement.closest && document.activeElement.closest('.lab')) return;
   const idx = sectionOrder.indexOf(currentSection);
   if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){
     e.preventDefault();
@@ -2119,7 +2121,7 @@ modalInitFns.network = function(){
     log.scrollTop = log.scrollHeight;
   }
   function drawNet(){
-    if(!document.getElementById('modalOverlay').classList.contains('open')) return;
+    if(!cvs.isConnected) return; // stop when the demo is unmounted
     c.clearRect(0, 0, W, H);
     for(let i = 0; i < netNodes.length; i++){
       for(let j = i+1; j < netNodes.length; j++){

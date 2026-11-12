@@ -219,6 +219,7 @@
 
 </style>
 <script src="/app.js" defer></script>
+<script src="/js/engage.js" defer></script>
 <style>
   :root {
     --orange: #f59e0b;
@@ -1397,6 +1398,40 @@
     .tooltip-word{padding:6px 0;}
     input[type="range"]{min-height:32px;}
   }
+
+  /* ── Inline guided labs ── */
+  .inline-demo{margin:26px 0;}
+  .inline-demo:empty{display:none;}
+  .lab{border:1px solid rgba(245,158,11,0.35);border-radius:18px;background:linear-gradient(180deg,rgba(245,158,11,0.05),rgba(0,0,0,0.18));padding:20px;}
+  .lab-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px;}
+  .lab-tag{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(245,158,11,0.4);border-radius:999px;padding:3px 10px;}
+  .lab-title{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);flex:1;min-width:160px;}
+  .lab-badge{font-size:12px;font-weight:700;color:#4ade80;border:1px solid rgba(74,222,128,0.45);background:rgba(74,222,128,0.08);border-radius:999px;padding:3px 10px;}
+  .lab-rail{list-style:none;display:flex;gap:6px;margin:0 0 16px;padding:0;flex-wrap:wrap;}
+  .lab-rail-step{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);padding:5px 12px 5px 5px;border-radius:999px;border:1px solid var(--glass-border);background:rgba(0,0,0,0.2);transition:all .25s;}
+  .lab-rail-num{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;background:rgba(255,255,255,0.06);}
+  .lab-rail-step.active{color:var(--orange);border-color:var(--orange);}
+  .lab-rail-step.active .lab-rail-num{background:var(--orange);color:#000;}
+  .lab-rail-step.done{color:#4ade80;border-color:rgba(74,222,128,0.4);}
+  .lab-rail-step.done .lab-rail-num{background:rgba(74,222,128,0.18);color:#4ade80;}
+  .lab-predict{margin-bottom:16px;}
+  .lab-predict-q{font-size:15px;font-weight:600;line-height:1.55;color:var(--text);margin-bottom:12px;}
+  .lab-predict-label{display:block;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#a78bfa;margin-bottom:6px;font-weight:400;}
+  .lab-predict-opts{display:grid;gap:8px;}
+  .lab-opt{text-align:left;font:inherit;font-size:14px;line-height:1.45;color:var(--text2);background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.35);border-radius:12px;padding:12px 14px;cursor:pointer;transition:all .15s;}
+  .lab-opt:hover,.lab-opt:focus-visible{border-color:#a78bfa;background:rgba(167,139,250,0.14);color:var(--text);outline:none;}
+  .lab-skip{margin-top:10px;background:none;border:none;color:var(--muted);font:inherit;font-size:12px;text-decoration:underline;cursor:pointer;padding:6px 0;}
+  .lab-predict-done{font-size:13px;color:var(--text3);padding:10px 14px;border-radius:10px;background:rgba(167,139,250,0.07);border:1px solid rgba(167,139,250,0.25);}
+  .lab-body{position:relative;transition:opacity .3s,filter .3s;}
+  .lab-body.locked{opacity:.28;filter:blur(2px);pointer-events:none;user-select:none;max-height:260px;overflow:hidden;}
+  .lab-why{margin-top:16px;padding:16px;border-radius:14px;background:rgba(74,222,128,0.05);border:1px solid rgba(74,222,128,0.3);}
+  .lab-why-label{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#4ade80;margin-bottom:8px;}
+  .lab-why p{font-size:14px;line-height:1.7;color:var(--text2);margin:0;}
+  .lab-verdict{font-size:14px;line-height:1.55;margin-bottom:10px;color:var(--text2);}
+  .lab-verdict.ok{color:#4ade80;font-weight:600;}
+  .lab-verdict.no strong{color:var(--orange);}
+  .lab-check #quickCheck{margin-bottom:0;}
+  @media(max-width:640px){.lab{padding:14px;border-radius:14px;}.lab-title{font-size:16px;}}
 </style>
 </head>
 <body>
@@ -2188,6 +2223,8 @@
         <span class="font-bold" style="color:#f87171;">&#9888;&#65039; NOTICE:</span> The dollar has lost 97% of its purchasing power since 1913. Your government calls this "price stability." Read the next few sections and decide for yourself what to call it.
       </div>
       <p class="body-text">Money is the single greatest tool for human cooperation ever invented. Before money existed, people had to <span class="tooltip-word" tabindex="0">barter<span class="tooltip-box">Barter = trade goods directly. "I'll give you five fish if you fix my roof." The problem: what if the roofer doesn't want fish? Economists call this the "double coincidence of wants" problem - both parties must want exactly what the other has. Massively inefficient.</span></span> - swapping goods directly. Imagine trying to pay your dentist with a chicken. Money solved this by becoming a universal medium of exchange: instead of trading things for things, you trade things for money, then trade money for anything else you need. But money is also a device for storing the value of your <span class="tooltip-word" tabindex="0">time and labor<span class="tooltip-box">When you work for 8 hours, you are converting your irreplaceable time - the hours of your life - into money. Money is literally crystallized human time and energy. This is why inflation, which silently erodes money's value, is not merely an economic phenomenon. It is time theft.</span></span>. Every dollar you earn represents hours of your life you can never get back. Money allows you to store that labor and deploy it in the future - to save for retirement, build a business, or leave something for your children. A civilization without sound money is a civilization that cannot cooperate, cannot plan, and cannot build long-term prosperity.</p>
+
+      <div class="inline-demo" data-demo="money"></div>
       <p class="body-text">Throughout human history, many different things have served as money. <span class="tooltip-word" tabindex="0">Cowrie shells<span class="tooltip-box">Used for thousands of years across Africa, Asia, and the Americas. Durable, portable, and beautiful. But fatally easy to find near any ocean - meaning anyone with a bucket and a boat could "create" more money, destroying its value instantly.</span></span> were used in Africa and Asia for centuries. Glass beads, wampum belts, and decorated stones served similar roles in various cultures. Salt was so valuable in ancient Rome that soldiers were sometimes paid in it - the origin of the word "salary." Cattle and livestock served as money across most of the ancient world. Eventually, societies converged on <span class="tooltip-word" tabindex="0">precious metals<span class="tooltip-box">Gold and silver became the dominant forms of money for most of recorded history because they had the ideal properties: rare (hard to mine), durable (don't rust or rot), divisible (can be melted and recast), and recognizable (hard to fake). For 5,000 years, gold was the global reserve asset.</span></span> - particularly gold and silver - as the dominant monetary medium. This convergence happened independently across cultures that had no contact with each other: Mesopotamia, China, Greece, Rome, the Aztec Empire. The world kept reinventing gold-based money because gold has properties nothing else could match.</p>
       <p class="body-text">Every form of money that has ever existed has been tested against one brutal, simple question: <em>can someone else easily create more of it?</em> If the answer is yes, that money eventually fails. Cowrie shells seemed scarce until Europeans arrived with ships and dumped millions of them on African markets, destroying the purchasing power of indigenous wealth overnight. Tobacco was used as money in colonial Virginia until overproduction collapsed its value. <span class="tooltip-word" tabindex="0">Rai stones<span class="tooltip-box">Enormous limestone discs used as money on the Pacific island of Yap. They worked well - until an Irish-American adventurer named David O'Keefe figured out he could import them by ship in bulk, massively inflating the supply and wrecking the monetary system.</span></span> from the island of Yap seemed impossible to counterfeit - until a single outsider with a boat broke the system. The consistent lesson of monetary history is this: good money must be <span class="tooltip-word" tabindex="0">scarce by nature<span class="tooltip-box">Scarcity cannot be granted by a king, a central bank, or a constitution. It must be an intrinsic property of the money itself - like gold's rarity in the Earth's crust, or Bitcoin's hard-coded 21-million cap. Any money whose supply can be expanded by human decision will eventually be expanded - and debased.</span></span>, durable, divisible, portable, and recognizable. Most historical monies failed on at least one of these dimensions.</p>
       <p class="body-text">Gold came closest to ideal money and reigned for millennia - but it has critical weaknesses. It is <span class="tooltip-word" tabindex="0">heavy and difficult to transport<span class="tooltip-box">A million dollars in gold weighs about 50 pounds and fills a briefcase. Try paying for a house, a ship, or an army with it. Throughout history, transporting gold required armored wagons, warships, and armed guards. This is extraordinarily impractical for a modern global economy.</span></span>. It is hard to divide precisely - you cannot easily send someone 0.000001 oz of gold. It is not instantly verifiable - is that coin real gold or gold-plated lead? Crucially, gold led inexorably to <span class="tooltip-word" tabindex="0">centralization<span class="tooltip-box">Because gold is hard to transport and store, people naturally deposited it with trusted institutions - first goldsmiths, then banks. Banks issued "receipts" (early paper money) redeemable for gold. But banks quickly realized: most depositors never claimed their gold at once. So they started issuing MORE receipts than they had gold. Fractional reserve banking - and the seed of every monetary crisis in modern history - was born.</span></span>. Governments and banks took custody of everyone's gold, issued paper receipts, then quietly printed more receipts than they had gold. When people eventually tried to redeem their paper for real gold - as in 1933 in the USA, when FDR confiscated private gold - the game was up. By 1971, Nixon <span class="tooltip-word" tabindex="0">closed the gold window<span class="tooltip-box">On August 15, 1971, President Nixon announced the US dollar would no longer be redeemable for gold at the fixed rate of $35/oz. This ended the Bretton Woods system and untethered every currency on Earth from physical reality. Since that day, every national currency in the world is backed by nothing but government promises.</span></span> entirely, severing the last link between paper money and physical gold. Humanity's 5,000-year experiment with gold-backed money ended with a unilateral government decree.</p>
@@ -2233,8 +2270,6 @@
         Bitcoin is the first monetary technology in human history to solve every single flaw of every previous form of money - simultaneously, permanently, and without trusting any human institution.
       </div>
       <p class="body-text">Bitcoin has a <span class="tooltip-word" tabindex="0">mathematically enforced supply cap<span class="tooltip-box">21 million Bitcoin. Not because a CEO decided it. Not because a government decreed it. Because it is written into the code that runs on every node in the world simultaneously. No single person, company, government, or army can change it.</span></span> of exactly 21 million coins - enforced by thousands of independent computers worldwide, not by the goodwill of any government. It is infinitely divisible (one Bitcoin = 100 million satoshis), instantly portable across any border, verifiable by anyone in seconds, censorship-resistant, and completely transparent. Bitcoin is not merely better money. It is the <span class="tooltip-word" tabindex="0">hardest money ever created<span class="tooltip-box">"Hard money" means money that is hard to produce more of. Gold was hard money. Bitcoin is the hardest money ever created: after the year 2140, no new Bitcoin will ever be created. Its stock-to-flow ratio already surpasses gold and rises with every halving.</span></span>, the most portable, the most divisible, the most verifiable, and the most decentralized.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="money">Start Interactive Lesson &rarr;</button>
 
       <!-- Bridge to Inflation -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -2291,6 +2326,8 @@
       </div>
 
       <p class="body-text">The word "fiat" means "by decree" - money that exists because a government says it does. It sounds modern, but governments have been running this experiment for centuries. And the result is always the same. Not sometimes. Not usually. <em>Always.</em> Every fiat currency ever created has either collapsed to zero, been replaced, or survived only by being devalued beyond recognition. There are no exceptions. Let's walk through the graveyard.</p>
+
+      <div class="inline-demo" data-demo="fiatgraveyard"></div>
 
       <!-- ── Fiat Graveyard Timeline ── -->
       <div class="glass p-5 my-6">
@@ -2353,9 +2390,6 @@
         <p style="font-size:12px;color:var(--muted);margin:0;font-family:'Space Mono',monospace;"> -  Edward Griffin, <em>The Creature from Jekyll Island</em></p>
       </div>
 
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="fiatgraveyard">Start Interactive Lesson &rarr;</button>
-
       <!-- Bridge to Pizza -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -2417,6 +2451,8 @@
 
       <p class="body-text">The dream of digital cash started long before Bitcoin. In the early 1980s, cryptographer <span class="tooltip-word" tabindex="0">David Chaum<span class="tooltip-box">Often called the "father of digital cash." Chaum invented blind signatures - a way to prove a transaction is valid without revealing who made it. This privacy breakthrough would later influence Bitcoin's design.</span></span> invented <em>eCash</em> and founded DigiCash, a company that created the first real anonymous digital payment system. Banks in the Netherlands and the US actually piloted it. But DigiCash had a fatal flaw: it depended on a <strong style="color:#f87171;">central company</strong> to operate. When DigiCash went bankrupt in 1998, the entire system died. Lesson learned: digital money that depends on a single company is no better than money that depends on a single government.</p>
 
+      <div class="inline-demo" data-demo="digimoney"></div>
+
       <p class="body-text">In 1996, <span class="tooltip-word" tabindex="0">e-gold<span class="tooltip-box">Founded by Douglas Jackson, e-gold let users hold accounts denominated in grams of actual gold stored in a vault. At its peak in 2006, it processed over $2 billion worth of transactions per year.</span></span> took a different approach - backing digital accounts with physical gold in a vault. It became wildly popular, processing billions of dollars annually by the mid-2000s. But again: <strong style="color:#f87171;">centralized</strong>. The US government shut it down in 2007, charging the operators with money laundering. Lesson: even if the money itself is sound (gold), a central point of failure means a central point of government control.</p>
 
       <p class="body-text">The <span class="tooltip-word" tabindex="0">cypherpunks<span class="tooltip-box">A movement of activists and cryptographers in the 1990s who believed strong cryptography was the key to preserving individual freedom in the digital age. Their mailing list included many future Bitcoin pioneers. "Cypherpunks write code" was their motto.</span></span> - a community of cryptography activists - kept pushing. In 1997, Adam Back invented <span class="tooltip-word" tabindex="0">HashCash<span class="tooltip-box">A proof-of-work system originally designed to combat email spam. It required your computer to solve a small mathematical puzzle before sending an email - trivial for normal users, expensive for spammers. Satoshi later cited HashCash as a direct influence on Bitcoin's mining system.</span></span>, a proof-of-work system to combat email spam. You had to prove your computer did work before sending a message - the same concept Bitcoin would later use for mining. In 1998, Wei Dai published <span class="tooltip-word" tabindex="0">b-money<span class="tooltip-box">A theoretical proposal for an anonymous, distributed electronic cash system. It described many concepts that would appear in Bitcoin: proof of work for money creation, a decentralized ledger, and collective enforcement of rules. Satoshi cited it in the Bitcoin whitepaper.</span></span>, a proposal for anonymous digital money using proof of work. The same year, Nick Szabo designed <span class="tooltip-word" tabindex="0">Bit Gold<span class="tooltip-box">Widely considered Bitcoin's most direct intellectual ancestor. Bit Gold proposed using proof of work to create digital scarcity - a chain of computational puzzles where each solution was linked to the previous one. Sound familiar? Szabo never implemented it, but the conceptual DNA is unmistakable.</span></span> - often called Bitcoin's closest ancestor - which proposed chaining proof-of-work puzzles together to create digital scarcity. Neither was ever fully built, but their DNA is everywhere in Bitcoin.</p>
@@ -2444,9 +2480,6 @@
       </div>
 
       <p class="body-text">Then, on October 31, 2008, a pseudonymous person or group called <span class="tooltip-word" tabindex="0">Satoshi Nakamoto<span class="tooltip-box">The creator of Bitcoin. Published the whitepaper on October 31, 2008 and launched the network on January 3, 2009. Communicated only by email and forum posts. Disappeared in 2011. Their identity has never been confirmed.</span></span> posted a nine-page whitepaper to a cryptography mailing list. It was titled "Bitcoin: A Peer-to-Peer Electronic Cash System." It solved the one problem none of the predecessors could: <strong style="color:var(--orange);">how to build decentralized digital money with no central authority, no single point of failure, and no trusted third party</strong>. By combining proof of work (from HashCash), chained blocks (from Bit Gold), peer-to-peer networking, and a novel difficulty adjustment mechanism, Satoshi created something none of the prior systems achieved: a digital currency that <em>cannot be shut down</em> because there is no one to shut down. Bitcoin didn't just improve on its predecessors - it made the breakthrough that made all of them possible in retrospect.</p>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="digimoney">Start Interactive Lesson &rarr;</button>
 
       <!-- Bridge to Altcoins -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -2501,6 +2534,8 @@
       </div>
 
       <p class="body-text">Every month, the Bureau of Labor Statistics publishes the <span class="tooltip-word" tabindex="0">Consumer Price Index (CPI)<span class="tooltip-box">A government statistic that measures the average change in prices paid by consumers for a "basket" of goods and services. It's the most widely cited measure of inflation - and the most manipulated.</span></span>, the official measure of inflation. Politicians point to it, central bankers target it, and your employer uses it to justify your annual raise (or lack thereof). In 2025, official CPI hovered around 2-3%. Sounds manageable, right? But the way CPI is calculated has been quietly, fundamentally changed - multiple times - always in the direction of making inflation look <em>lower</em> than it actually is.</p>
+
+      <div class="inline-demo" data-demo="inflation"></div>
 
       <p class="body-text">The tricks are subtle but devastating. <span class="tooltip-word" tabindex="0">Substitution<span class="tooltip-box">If steak gets too expensive, the BLS assumes you'll switch to hamburger - and counts the cheaper item instead. Your standard of living drops, but CPI doesn't notice.</span></span>: when steak gets expensive, the government assumes you'll buy hamburger instead, and measures the cheaper item. <span class="tooltip-word" tabindex="0">Hedonic adjustments<span class="tooltip-box">"Hedonic" means relating to pleasure. If your new laptop is 20% faster, the BLS treats it as if the price dropped 20% - even if you paid the exact same amount.</span></span>: your new phone costs $1,200 (same as last year), but the BLS says it's "really" cheaper because it has a better camera. <span class="tooltip-word" tabindex="0">Geometric weighting<span class="tooltip-box">A formula introduced in 1999 that automatically reduces the weight of items that rise in price and increases the weight of items that fall. CPI always trends lower than a straightforward measurement.</span></span>: a formula change in 1999 that automatically reduces the weight of things rising in price. If you measured inflation today the same way it was measured in 1980, the real rate would be closer to <strong style="color:#f87171;">8-12%</strong>.</p>
 
@@ -2709,9 +2744,6 @@
       </div>
 
       <p class="body-text">Why does this matter for Bitcoin? Because the entire argument for fiat money rests on the claim that inflation is "low and stable." If it were honestly reported at 8-12%, the public would immediately see the system is broken. Bitcoin fixes this by making the statistics irrelevant: <strong style="color:var(--orange);">a money with a fixed supply cannot be inflated, period</strong>. No hedonic adjustments. No substitution tricks. Just 21 million, forever.</p>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="inflation">Start Interactive Lesson &rarr;</button>
 
       <!-- Bridge to Full Faith & Credit -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -3184,6 +3216,8 @@
 
       <p class="body-text">Think about how technology has transformed the world. A smartphone today has more computing power than the machines that sent astronauts to the moon. Storage costs dropped from $300,000 per gigabyte in 1980 to fractions of a penny. <span class="tooltip-word" tabindex="0">Software<span class="tooltip-box">Software has near-zero marginal cost - once built, copying it costs nothing. This deflationary force is accelerating with AI.</span></span> can be copied for free. AI is beginning to automate expensive human labor. The natural trajectory of technology is to drive costs relentlessly <em>downward</em>, toward the marginal cost of production - which often approaches zero.</p>
 
+      <div class="inline-demo" data-demo="deflation"></div>
+
       <p class="body-text">This is <span class="tooltip-word" tabindex="0">natural deflation<span class="tooltip-box">When productivity improvements cause prices to fall. This is a GOOD thing - more for less. But fiat-trained economists confuse it with destructive deflation from credit collapses.</span></span> - and it should be the defining feature of our era. If technology makes everything cheaper to produce, prices should be falling. Your salary should buy more every year - not because you got a raise, but because everything got cheaper.</p>
 
       <!-- ── Inline Visual: The Hidden Equation ── -->
@@ -3227,9 +3261,6 @@
       </div>
 
       <p class="body-text">Bitcoin breaks this cycle. With a fixed supply, Bitcoin lets technology's natural gift - <strong style="color:var(--orange);">falling prices and rising abundance</strong> - reach you directly. When AI makes manufacturing 10% more efficient, goods actually become 10% cheaper. Productivity gains flow to the people who created them, not the money printers who intercepted them. Saving becomes a winning strategy. There is no debt pyramid requiring perpetual debasement. Bitcoin is simply <em>honest money</em> - and in an honest monetary system, technology's deflation is a gift, not a threat.</p>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="deflation">Start Interactive Lesson &rarr;</button>
 
       <!-- Bridge to Fiat Graveyard -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -3304,6 +3335,8 @@
 
       <p class="body-text">Imagine you have one perfect pizza. It represents all the wealth in the world. Under the fiat system, when the economy needs "more money," the central bank doesn't cut the pizza into smaller slices - it pretends to bake more pizzas. But these new pizzas aren't backed by new wealth. They're just numbers on a screen. Every fake pizza dilutes every real slice. This is inflation: not "prices going up" but <em>your slice of the pizza shrinking</em> while the total number of slices multiplies. You still "have a slice," but it buys less and less each year.</p>
 
+      <div class="inline-demo" data-demo="pizza"></div>
+
       <p class="body-text">Bitcoin takes the opposite approach. There will only ever be 21 million Bitcoin. No new coins will ever be created after ~2140. That sounds limiting until you realize: each Bitcoin can be divided into <span class="tooltip-word" tabindex="0">100 million satoshis<span class="tooltip-box">One Bitcoin = 100,000,000 satoshis (sats). That means the total supply is actually 2,100,000,000,000,000 units (2.1 quadrillion). Even if every human on Earth used Bitcoin, there would be over 262,000 sats per person. And if needed, the protocol could subdivide further (called "millisatoshis") through layers like Lightning.</span></span>. That's 2.1 <em>quadrillion</em> individual units. If you divided them equally among every person on Earth, each person would get over 262,000 sats. And if the world's economy keeps growing? You don't need <em>more</em> units - each unit simply becomes <em>more valuable</em>. The pizza stays the same size; your slice just buys more.</p>
 
       <p class="body-text">This is the key insight mainstream economists miss: <strong style="color:var(--orange);">you don't need inflation for a functioning economy</strong>. For most of human history under gold standards, prices gently <em>fell</em> as productivity improved. The industrial revolution - the greatest period of economic growth in human history - happened during an era of deflation. Workers' wages bought more every year. Savings were rewarded, not punished. The idea that "we need 2% inflation" is a modern invention by central bankers who benefit from the money printer. It has no historical basis and no logical foundation.</p>
@@ -3334,9 +3367,6 @@
       </div>
 
       <p class="body-text">So the next time someone says "there aren't enough Bitcoin for everyone," you know the answer: there are 2.1 quadrillion sats. The issue was never about having enough pieces - it was about making sure no one could secretly create more. <strong style="color:var(--orange);">You can always cut a pizza into smaller slices. You can never un-dilute a pizza that's been mixed with cardboard.</strong> That's the difference between sound money and fiat. That's the Bitcoin pizza dilemma, resolved.</p>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="pizza">Start Interactive Lesson &rarr;</button>
 
       <!-- Bridge to Digital Money -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -3381,6 +3411,8 @@
       </div>
 
       <p class="body-text">On October 31, 2008, someone using the name <strong style="color:var(--orange);">Satoshi Nakamoto</strong> published a nine-page paper titled "Bitcoin: A Peer-to-Peer Electronic Cash System" to a cryptography mailing list. On January 3, 2009, they mined the first block. By April 2011, they vanished. To this day, nobody knows who Satoshi is.</p>
+
+      <div class="inline-demo" data-demo="satoshi"></div>
 
       <p class="body-text">Think about what that means. Satoshi mined roughly <strong style="color:var(--orange);">1.1 million Bitcoin</strong> in those early years. At today's prices, that stash is worth over $100 billion. They never spent a single coin. Never cashed out. Never came forward to claim credit. In an era where every tech founder becomes a celebrity billionaire, someone created the most consequential financial technology in a generation and <em>walked away</em>. The wallet addresses sit untouched to this day. The last known message was an email to developer Gavin Andresen: "I've moved on to other things." Then silence.</p>
 
@@ -3466,9 +3498,6 @@
       <p class="body-text">Compare this to every other cryptocurrency. Ethereum has Vitalik Buterin. Solana has Anatoly Yakovenko. Ripple has Brad Garlinghouse (currently in an SEC lawsuit). Every project with a known leader has a single point of failure - someone who can be pressured, someone who can change direction, someone who can be arrested. Bitcoin is the only major digital asset where the creator is <strong style="color:var(--orange);">permanently absent</strong> and the system doesn't care.</p>
 
       <p class="body-text">Satoshi didn't just build Bitcoin. They <strong style="color:var(--orange);">gave it away</strong> - to everyone, forever. No patent. No company. No retained control. That act of surrender is what makes Bitcoin fundamentally different from everything else in crypto.</p>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="satoshi">Start Interactive Lesson &rarr;</button>
     </div>
     <!-- ════ THE BITCOIN WHITEPAPER ════ -->
     <div class="section-content" id="sec-whitepaper">
@@ -3486,6 +3515,8 @@
       </div>
 
       <p class="body-text">On Halloween 2008, a pseudonymous figure named Satoshi Nakamoto published a <strong style="color:var(--orange);">9-page paper</strong> to a cryptography mailing list. No venture capital. No marketing. No hype. Just a technical proposal that would go on to create a trillion-dollar asset class and challenge the foundations of modern finance.</p>
+
+      <div class="inline-demo" data-demo="whitepaper"></div>
 
       <p class="body-text">The paper is brilliant but dense. Below, we break down <strong style="color:var(--orange);">every section</strong> of the whitepaper into plain English so anyone can understand what Satoshi actually proposed - and why each piece matters.</p>
 
@@ -3714,9 +3745,6 @@
         <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;">The genius of the whitepaper</div>
         <p style="font-size:13px;color:var(--text3);max-width:560px;margin:0 auto;line-height:1.7;">None of the individual components were new. Digital signatures, hash chains, proof-of-work, peer-to-peer networks - all existed before. Satoshi&rsquo;s breakthrough was <strong style="color:var(--orange);">combining them into a system where the incentives align</strong> so that rational self-interest produces honest behavior. It&rsquo;s not just computer science - it&rsquo;s game theory, economics, and cryptography woven together into 9 pages.</p>
       </div>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="whitepaper">Start Interactive Lesson &rarr;</button>
     </div>
     <!-- ════ BITCOIN VS OTHER CRYPTOS ════ -->
     <div class="section-content" id="sec-altcoins">
@@ -3789,6 +3817,8 @@
       </div>
 
       <p class="body-text">There are over 20,000 cryptocurrencies. Most people assume they're all variations of the same idea - like different brands of the same product. This is the single most dangerous misunderstanding in the entire space. Bitcoin was created to be <span class="tooltip-word" tabindex="0">sound money<span class="tooltip-box">Money that cannot be easily created, manipulated, or debased. Gold was sound money for millennia. Bitcoin is sound money perfected: fixed supply, decentralized, censorship-resistant, and verifiable by anyone.</span></span> - a replacement for the broken fiat system. The vast majority of other cryptocurrencies were created to <strong style="color:#f87171;">make their founders rich</strong>. This isn't cynicism; it's a verifiable structural difference that shows up in how they're built, governed, and distributed.</p>
+
+      <div class="inline-demo" data-demo="altcoins"></div>
 
       <p class="body-text">For each of the top cryptocurrencies, ask yourself: <strong style="color:var(--orange);">Who created it? Who controls it? Can they change the rules? Can they freeze your funds?</strong> Bitcoin's answers are unique: no one, no one, no, and no. Let's go through the biggest names one by one.</p>
 
@@ -3935,9 +3965,6 @@
       </div>
 
       <p class="body-text"><strong style="color:var(--orange);">The track record speaks for itself.</strong> Bitcoin has operated continuously since January 3, 2009 - no outages, no rollbacks, no frozen funds, no supply changes. Governments have attempted to ban it in multiple countries; the network continued uninterrupted. By contrast, Ethereum has rolled back its blockchain, Solana has gone offline 7+ times, Tether and USDC have frozen user funds, and XRP was the subject of an SEC enforcement action. Each of these projects involves identifiable founders, companies, or foundations that control key decisions. Bitcoin is the only major cryptocurrency where no individual, company, or organization controls the supply, the rules, or the network.</p>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="altcoins">Start Interactive Lesson &rarr;</button>
 
       <!-- Bridge to PoW vs PoS -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -4195,6 +4222,8 @@
           <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">"Bitcoin has no intrinsic value"</span>
         </div>
         <p class="body-text" style="margin-bottom:10px;">Neither does a dollar bill. It's a piece of cotton-linen blend with ink on it. Its value comes from collective agreement - people accept it because other people accept it. Bitcoin has the same network effect, plus something the dollar doesn't: <strong style="color:var(--orange);">provable mathematical scarcity</strong>. Bitcoin is backed by the largest computing network in human history, consuming more energy than many countries. That energy expenditure is what makes it impossible to counterfeit or reverse. The dollar is backed by a promise from politicians. Which one sounds more reliable?</p>
+
+      <div class="inline-demo" data-demo="myths"></div>
       </div>
 
       <!-- Myth 2 -->
@@ -4302,9 +4331,6 @@
         </div>
       </div>
 
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="myths">Start Interactive Lesson &rarr;</button>
-
       <!-- Bridge to Tulips -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -4340,6 +4366,8 @@
       </div>
 
       <p class="body-text">"Bitcoin is just Tulip Mania" is the most common comparison critics make. It sounds clever. It makes the speaker seem historically literate. And it falls apart completely under even 30 seconds of analysis. Let's actually look at what happened in the Dutch Republic in the 1630s - and why Bitcoin is the <strong style="color:var(--orange);">exact opposite</strong>.</p>
+
+      <div class="inline-demo" data-demo="tulips"></div>
 
       <div class="neon-divider"></div>
 
@@ -4455,9 +4483,6 @@
         <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px;">The next time someone says "tulips"</div>
         <p style="font-size:13px;color:var(--text3);max-width:520px;margin:0 auto;line-height:1.7;">Ask them: Can you send a tulip to someone in Nigeria in 10 minutes? Can you verify there will only ever be 21 million tulips? Can you store a tulip in your brain by memorizing 12 words? Can a tulip run 24/7 for 17 years with 99.99% uptime? No? Then it's not the same thing.</p>
       </div>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="tulips">Start Interactive Lesson &rarr;</button>
 
       <!-- Bridge to Quantum -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -4745,7 +4770,7 @@
       <div class="glass p-5 my-6 text-center">
         <div class="text-sm font-bold mb-2" style="color:var(--orange);">&#127919; Interactive: The Honest Skeptic</div>
         <p style="color:var(--text3);font-size:13px;margin:0 auto 16px;max-width:440px;line-height:1.6;">Five criticisms, one question each: is it overstated, fair, or understated? See how your judgment compares with the evidence.</p>
-        <button class="btn-orange" data-modal="caseagainst">Rate the arguments &rarr;</button>
+      <div class="inline-demo" data-demo="caseagainst"></div>
       </div>
 
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -5224,6 +5249,8 @@
         </svg>
       </div>
       <p class="body-text">Imagine if, instead of one big central bank keeping track of everyone's money, <em>millions of ordinary computers around the world</em> all kept a copy of the same record book simultaneously. That's exactly what the Bitcoin network is. It's a <span class="tooltip-word" tabindex="0">peer-to-peer network<span class="tooltip-box">A network where every participant is equal - there's no central server or controller. Every computer talks directly to other computers. Think BitTorrent, but for money.</span></span>, which means there's no head office, no CEO, no single computer running the show.</p>
+
+      <div class="inline-demo" data-demo="network"></div>
       <p class="body-text">The Bitcoin network has been running continuously since January 3, 2009.<sup><a href="#ref-26" style="color:var(--orange);text-decoration:none;font-size:10px;">[26]</a></sup> In that time, it has never been successfully hacked, never gone down for more than a few minutes, and has processed trillions of dollars in transactions. To attack Bitcoin, you'd need to simultaneously overpower more than half of all the computers on the network - called the <span class="tooltip-word" tabindex="0">51% attack threshold<span class="tooltip-box">To cheat the Bitcoin network, you'd need to control 51% of all its computing power simultaneously. At current network size, this would cost billions of dollars and is practically impossible.</span></span>.</p>
       <p class="body-text">Every time you send Bitcoin, your transaction is broadcast to the entire network. Thousands of computers hear it, verify that you actually have the coins, and then agree to record it permanently. This process of agreement is called <span class="tooltip-word" tabindex="0">consensus<span class="tooltip-box">The process by which all computers on the Bitcoin network agree on the same version of truth. It's democracy for computers - majority rules, and the majority is always honest.</span></span>. No single computer can lie, because everyone else would reject the lie immediately.</p>
 
@@ -5248,8 +5275,6 @@
       </div>
 
       <p class="body-text">The beauty of this system is that it needs no trust. The rules of Bitcoin are enforced by mathematics and code, not by humans. Anyone can join the network, anyone can leave, and the system keeps working perfectly regardless. It's the most resilient financial network ever built.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="network">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ NODE ════ -->
@@ -5285,6 +5310,8 @@
         </svg>
       </div>
       <p class="body-text">A Bitcoin node is simply any computer running the Bitcoin software and participating in the network. Think of it like a volunteer fact-checker in a massive, decentralized jury. Your node downloads a copy of <em>every single Bitcoin transaction ever made</em> - the full history going back to 2009 - and verifies that every new block follows all of Bitcoin's rules.</p>
+
+      <div class="inline-demo" data-demo="node"></div>
       <p class="body-text">There are currently tens of thousands of nodes spread across the globe. Some people run nodes on a Raspberry Pi. You don't earn money for running a node (that's mining's job) - you run a node because you want to <span class="tooltip-word" tabindex="0">verify for yourself<span class="tooltip-box">"Don't trust, verify" is a Bitcoin motto. Running your own node means you never have to trust anyone else's word about what's in the blockchain.</span></span> that Bitcoin is working as designed.</p>
       <p class="body-text">A <span class="tooltip-word" tabindex="0">full node<span class="tooltip-box">A node that downloads and verifies the ENTIRE blockchain from the beginning (more than 700 GB and growing). Maximum security and privacy.</span></span> downloads every block since the genesis block. A <span class="tooltip-word" tabindex="0">pruned node<span class="tooltip-box">A full node that verifies everything but discards old blocks to save space. Less storage, still high security.</span></span> verifies everything but discards old blocks. A <span class="tooltip-word" tabindex="0">light node<span class="tooltip-box">Also called SPV. Trusts other nodes rather than verifying everything itself. Faster but requires more trust.</span></span> trusts other nodes - useful for mobile wallets.</p>
 
@@ -5299,8 +5326,6 @@
       </div>
 
       <p class="body-text">Nodes are Bitcoin's immune system. They enforce the rules, make sure miners can't cheat, and ensure the 21 million supply cap is never broken. Every node you add makes the network stronger.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="node">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ MINING ════ -->
@@ -5337,6 +5362,8 @@
         </svg>
       </div>
       <p class="body-text">Bitcoin mining sounds complicated, but the basic idea is simple: miners are computers that compete to solve a <span class="tooltip-word" tabindex="0">mathematical puzzle<span class="tooltip-box">They're trying to find a number (called a "nonce") that, when combined with the block's data and run through a SHA-256 hash function, produces a hash starting with a certain number of zeros.</span></span> to earn the right to add the next block. The first one to solve it wins a reward in Bitcoin - the <em>block reward</em>, currently 3.125 BTC per block<sup><a href="#ref-25" style="color:var(--orange);text-decoration:none;font-size:10px;">[25]</a></sup>.</p>
+
+      <div class="inline-demo" data-demo="mining"></div>
       <p class="body-text">Here's the genius: mining makes adding transactions <em>expensive</em>. To cheat, you'd need to redo all that expensive work - and faster than the entire rest of the network. This is called <span class="tooltip-word" tabindex="0">Proof of Work<span class="tooltip-box">The system where you prove you did hard mathematical work to earn the right to add a block. The work is expensive to do but cheap to verify.</span></span>.</p>
       <p class="body-text">Modern mining uses dedicated chips called <span class="tooltip-word" tabindex="0">ASICs<span class="tooltip-box">Application-Specific Integrated Circuit - a chip designed to do ONE thing: calculate Bitcoin hashes as fast as possible.</span></span>. Many miners are now located near cheap, renewable energy sources. A new block is found roughly every <span class="tooltip-word" tabindex="0">10 minutes<span class="tooltip-box">Bitcoin is designed to always target 10 minutes per block. If blocks come too fast, difficulty increases. Too slow, difficulty decreases.</span></span> - by design.</p>
 
@@ -5356,8 +5383,6 @@
       </div>
 
       <p class="body-text">Every 210,000 blocks (~4 years), the block reward gets cut in half - the <span class="tooltip-word" tabindex="0">halving<span class="tooltip-box">Bitcoin's supply schedule: every 4 years the new supply per block is halved. This continues until around 2140, when the last fraction of a Bitcoin will be mined. Total supply is capped at 21 million BTC, forever.</span></span>. It's built into Bitcoin's code from day one.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="mining">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ BLOCKCHAIN ════ -->
@@ -5420,6 +5445,8 @@
         </svg>
       </div>
       <p class="body-text">The blockchain is Bitcoin's record book - but it's not like any you've ever seen. Imagine a notebook where every page is connected to the previous page with a mathematical lock. If you tried to change something on page 50, you'd break the lock connecting it to page 51, which breaks the lock to page 52, all the way to today's page. That's why it's called a <em>blockchain</em> - a chain of blocks of data, each locked to the one before it.</p>
+
+      <div class="inline-demo" data-demo="blockchain"></div>
       <p class="body-text">The blockchain is <span class="tooltip-word" tabindex="0">immutable<span class="tooltip-box">Immutable means "cannot be changed." Once a transaction is written into the blockchain and several blocks are added on top, it is practically impossible to alter.</span></span>. Every single Bitcoin transaction ever made - going back to the first one on January 12, 2009 - is permanently recorded and visible to anyone on a <span class="tooltip-word" tabindex="0">block explorer<span class="tooltip-box">A website like mempool.space or blockstream.info that lets you browse the blockchain like a search engine.</span></span>.</p>
 
       <!-- ── Inline Illustration ── -->
@@ -5446,9 +5473,6 @@
         <a href="https://mempool.space" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:var(--orange);color:#000;font-weight:700;padding:12px 28px;border-radius:10px;text-decoration:none;font-size:14px;font-family:'Syne',sans-serif;transition:transform 0.2s, box-shadow 0.2s;box-shadow:0 0 16px var(--orange-glow);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Explore the Live Blockchain on mempool.space &rarr;</a>
         <div style="font-size:12px;color:var(--muted);margin-top:10px;font-family:'Space Mono',monospace;">mempool.space - open source, real-time Bitcoin block explorer</div>
       </div>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="blockchain">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ BLOCKS ════ -->
@@ -5490,6 +5514,8 @@
         </svg>
       </div>
       <p class="body-text">A block is like a single page in Bitcoin's ledger. Every ~10 minutes, a new page is written. A typical block holds about 2,000-4,000 transactions with a ~4MB weight limit. Once enough blocks are stacked on top, those transactions are considered finalized.</p>
+
+      <div class="inline-demo" data-demo="blocks"></div>
       <p class="body-text">Every block has a <span class="tooltip-word" tabindex="0">header<span class="tooltip-box">The block header is a small (80-byte) summary: previous block's hash, timestamp, difficulty target, nonce, and Merkle root.</span></span> containing the <span class="tooltip-word" tabindex="0">previous block's hash<span class="tooltip-box">A hash is like a fingerprint. Including it in the new block is what "chains" them together.</span></span>, a <span class="tooltip-word" tabindex="0">Merkle root<span class="tooltip-box">A single hash that fingerprints ALL transactions in the block. Change even one transaction and it changes completely.</span></span>, and the all-important <span class="tooltip-word" tabindex="0">nonce<span class="tooltip-box">A "Number used ONCE" - a random number miners change billions of times per second while trying to find a valid hash.</span></span>.</p>
 
       <!-- ── Inline Illustration ── -->
@@ -5508,8 +5534,6 @@
 
       <p class="body-text">The first transaction in every block is special: the <span class="tooltip-word" tabindex="0">coinbase transaction<span class="tooltip-box">Not the exchange! The coinbase tx is how the miner sends themselves the block reward plus all fees. Satoshi famously wrote a message about the banking crisis in the very first one.</span></span>. This is how new Bitcoin is created.</p>
       <p class="body-text">Once a block has 6 subsequent blocks on top, it's considered <span class="tooltip-word" tabindex="0">deeply confirmed<span class="tooltip-box">Six confirmations (~60 minutes) is considered safe for most transactions. Large payments sometimes wait for 100+.</span></span> and essentially irreversible. Bitcoin works on Christmas, weekends, and at 3am.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="blocks">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ DIFFICULTY ════ -->
@@ -5559,6 +5583,8 @@
         </svg>
       </div>
       <p class="body-text">No matter how many miners join or leave, a new block is always found approximately every 10 minutes. Bitcoin has a built-in <span class="tooltip-word" tabindex="0">difficulty adjustment<span class="tooltip-box">Every 2,016 blocks (~2 weeks), Bitcoin automatically measures how fast blocks have been coming in and adjusts the puzzle difficulty.</span></span> that recalibrates every 2,016 blocks (~two weeks).</p>
+
+      <div class="inline-demo" data-demo="difficulty"></div>
       <p class="body-text">Think of it like a school exam that automatically adjusts. If too many students get answers too quickly, questions get harder. If students drop out, questions get easier. No one is in charge.</p>
       <p class="body-text">The difficulty is expressed as a <span class="tooltip-word" tabindex="0">target hash<span class="tooltip-box">A valid block hash must be smaller than this target. Currently, a valid hash must start with ~20+ zeros - astronomically rare.</span></span>. The entire network's combined guessing speed is called the <span class="tooltip-word" tabindex="0">hash rate<span class="tooltip-box">Currently hundreds of Exahashes per second. One Exahash = one quintillion hashes per second.</span></span>.</p>
 
@@ -5574,8 +5600,6 @@
       </div>
 
       <p class="body-text">The difficulty mechanism is one of Bitcoin's most elegant inventions. It means Bitcoin cannot be "sped up" by adding more computing power. The 10-minute block time is maintained through pure mathematics.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="difficulty">Start Interactive Lesson &rarr;</button>
 
       <!-- Bridge to Attack Vectors -->
       <div class="neon-divider" style="margin-top:40px;"></div>
@@ -5823,6 +5847,8 @@
         </svg>
       </div>
       <p class="body-text">A Bitcoin transaction is a digitally signed message that says "I, the owner of <em>this</em> Bitcoin, authorize sending <em>this much</em> to <em>this address</em>." It's like writing an unforgeable check that doesn't need a bank to process.</p>
+
+      <div class="inline-demo" data-demo="transactions"></div>
       <p class="body-text">Every transaction has <span class="tooltip-word" tabindex="0">inputs<span class="tooltip-box">References to previous outputs you received. If you received 0.5 BTC from Alice and 0.3 BTC from Bob, you have two inputs totaling 0.8 BTC.</span></span> and <span class="tooltip-word" tabindex="0">outputs<span class="tooltip-box">New "parcels" of Bitcoin the transaction creates. One output to the recipient, usually another back to yourself as "change."</span></span>. There's no "balance" stored anywhere - your balance is calculated by looking at all unspent outputs ever sent to your address.</p>
       <p class="body-text">Transactions include a <span class="tooltip-word" tabindex="0">transaction fee<span class="tooltip-box">The difference between inputs and outputs. Miners collect this as a bonus on top of the block reward.</span></span> - like a tip to the miner. Bigger tip = faster service.</p>
 
@@ -5846,8 +5872,6 @@
       </div>
 
       <p class="body-text">Transactions sit in the <span class="tooltip-word" tabindex="0">mempool<span class="tooltip-box">"Memory pool" - all valid unconfirmed transactions waiting for a miner. During busy times, fees rise as everyone competes for block space.</span></span> until a miner picks them up and includes them in a block.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="transactions">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ OUTPUTS ════ -->
@@ -5907,6 +5931,8 @@
         </svg>
       </div>
       <p class="body-text">In Bitcoin, there's no such thing as a "balance." Instead, Bitcoin exists as <span class="tooltip-word" tabindex="0">UTXOs<span class="tooltip-box">Unspent Transaction Outputs - the technical term for "Bitcoin you've received but haven't spent yet." Each UTXO is like a distinct physical coin. Your "balance" is just the sum of all your UTXOs.</span></span> - Unspent Transaction Outputs. Think of it like a piggy bank full of physical coins and bills of different denominations.</p>
+
+      <div class="inline-demo" data-demo="outputs"></div>
       <p class="body-text">When Alice sends 0.3 BTC to Bob, a new UTXO is created: "0.3 BTC locked to Bob's address." When Bob spends it later, he creates a new transaction that references this UTXO as input and creates new outputs. The old UTXO is "consumed."</p>
 
       <!-- ── Inline Illustration ── -->
@@ -5922,8 +5948,6 @@
 
       <p class="body-text">You must use whole UTXOs as inputs. If you have a 1 BTC UTXO and want to send 0.3 BTC, you spend the entire 1 BTC, create a 0.3 BTC output for the recipient and a ~0.699X BTC output back to yourself (change). Just like paying for a $3 coffee with a $10 bill.</p>
       <p class="body-text">A wallet with many small UTXOs creates large transactions when spending - and larger transactions cost more in fees. Consolidating small UTXOs during low-fee periods is called <span class="tooltip-word" tabindex="0">UTXO consolidation<span class="tooltip-box">Sending all your small UTXOs to yourself in one transaction. You pay a fee now but save on future fees.</span></span>.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="outputs">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ LOCKS ════ -->
@@ -5973,6 +5997,8 @@
         </svg>
       </div>
       <p class="body-text">Every UTXO is protected by a <span class="tooltip-word" tabindex="0">locking script<span class="tooltip-box">Also called "scriptPubKey" - a small piece of code that defines the conditions someone must meet to spend this UTXO.</span></span>. Think of every UTXO as a locked treasure chest. To spend it, you must provide a valid <span class="tooltip-word" tabindex="0">cryptographic signature<span class="tooltip-box">A mathematical proof generated with your private key that proves you authorized a transaction, without revealing the private key itself.</span></span>.</p>
+
+      <div class="inline-demo" data-demo="locks"></div>
       <p class="body-text">The lock is written in a simple programming language called <span class="tooltip-word" tabindex="0">Script<span class="tooltip-box">Bitcoin's stack-based scripting language. Intentionally simple (not Turing-complete) to prevent bugs and make transactions predictable.</span></span>. The most common lock says: "provide a public key that hashes to this address AND a valid signature." The matching unlock is the <span class="tooltip-word" tabindex="0">scriptSig<span class="tooltip-box">The data you provide to unlock a UTXO - typically your signature and public key.</span></span>.</p>
       <p class="body-text">Bitcoin allows complex locks too. <span class="tooltip-word" tabindex="0">Multisig<span class="tooltip-box">Multi-signature - e.g., "2-of-3" requires any 2 out of 3 specific keys. Great for corporate treasuries.</span></span> requires multiple signatures. <span class="tooltip-word" tabindex="0">Time-locked<span class="tooltip-box">A Bitcoin output that cannot be spent until a certain block height or time has passed.</span></span> UTXOs can't be spent until a future date.</p>
 
@@ -5987,8 +6013,6 @@
       </div>
 
       <p class="body-text">This lock-and-key system is Bitcoin's security foundation. Every full node independently verifies that every spending attempt satisfies the lock. Mathematics doesn't care who you are.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="locks">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ KEYS & ADDRESSES ════ -->
@@ -6042,6 +6066,8 @@
         </svg>
       </div>
       <p class="body-text">Bitcoin's identity system has three main concepts: the <span class="tooltip-word" tabindex="0">private key<span class="tooltip-box">A secret 256-bit number - an astronomically large random password. This proves you own Bitcoin.</span></span>, the <span class="tooltip-word" tabindex="0">public key<span class="tooltip-box">Derived from the private key using elliptic curve math. Safe to share.</span></span>, and the <span class="tooltip-word" tabindex="0">address<span class="tooltip-box">A shortened, encoded version of your public key hash. Like an email address for money.</span></span>. They work in a one-way chain: private key &rarr; public key &rarr; address.</p>
+
+      <div class="inline-demo" data-demo="keys"></div>
       <p class="body-text">The important property is that these derivations are <em>one-way</em>. You can never figure out someone's private key from their public key or address. This is the magic of <span class="tooltip-word" tabindex="0">elliptic curve cryptography<span class="tooltip-box">The mathematical system Bitcoin uses. Certain calculations are easy in one direction and practically impossible in reverse.</span></span>.</p>
       <p class="body-text">Modern addresses start with "bc1q" (<span class="tooltip-word" tabindex="0">SegWit<span class="tooltip-box">The modern Bitcoin address format - more efficient, cheaper fees.</span></span>) or "bc1p" (Taproot). Best practice: use a new address for every transaction. Modern <span class="tooltip-word" tabindex="0">HD wallets<span class="tooltip-box">Hierarchical Deterministic - generates unlimited key pairs from a single seed phrase.</span></span> do this automatically.</p>
 
@@ -6059,8 +6085,6 @@
       </div>
 
       <p class="body-text">Your seed phrase (12 or 24 words) is the master key that generates ALL of your key pairs. One seed = billions of private keys, public keys, and addresses. This is why your seed phrase is so precious.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="keys">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ PRIVATE KEYS ════ -->
@@ -6103,6 +6127,8 @@
         </svg>
       </div>
       <p class="body-text">A Bitcoin private key is just a number between 1 and 2&sup2;&sup5;&sup6;. There are roughly 2&sup2;&sup5;&sup8; atoms in the observable universe. Your private key is a random point in a space almost as vast. It's impossible to guess someone's private key - even if every computer ever built worked on it together for longer than the universe has existed.</p>
+
+      <div class="inline-demo" data-demo="privatekeys"></div>
       <p class="body-text">Private keys are generated from <span class="tooltip-word" tabindex="0">entropy<span class="tooltip-box">Randomness from unpredictable sources - mouse movements, keyboard timings, hardware noise. Bad randomness is one of the rare ways Bitcoin security has been compromised.</span></span>. The key is encoded in <span class="tooltip-word" tabindex="0">WIF<span class="tooltip-box">Wallet Import Format - encoding a raw key as a shorter, error-checked string starting with "K", "L", or "5".</span></span> for human readability.</p>
       <p class="body-text">This is the part nobody checks and everybody depends on. Your key is only unguessable if the randomness behind it was genuine - and in July 2026 a firmware bug in Coldcard hardware wallets quietly replaced the chip's true random number generator with a predictable one, leaving thousands of seeds guessable and around 1,367 BTC swept from wallets that were never otherwise touched. <button type="button" data-section="security" style="background:none;border:none;padding:0;font:inherit;color:var(--orange);text-decoration:underline;cursor:pointer;">Read the full case study in Security &rarr;</button></p>
 
@@ -6117,8 +6143,6 @@
 
       <p class="body-text">The private key is what you use to <em>sign transactions</em>. The signature proves you authorized it but never reveals the private key itself. It's like proving you own a special pen without ever showing the pen.</p>
       <p class="body-text">A private key should <strong style="color:#f87171;">never</strong> be typed into a website, shared in a message, stored in cloud storage, or photographed. Hardware wallets keep the key on a specialized chip that never connects to the internet - even when signing, the private key never leaves the device.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="privatekeys">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ PUBLIC KEYS ════ -->
@@ -6164,6 +6188,8 @@
         </svg>
       </div>
       <p class="body-text">A public key is derived from your private key using <span class="tooltip-word" tabindex="0">elliptic curve multiplication<span class="tooltip-box">A mathematical operation on the secp256k1 elliptic curve. You take a generator point and add it to itself (private key) times. Fast to do, impossible to reverse.</span></span>. Think of it like mixing paint: starting with a secret color, you apply a recipe to get a new color. Anyone can see the result, but they can't figure out the original.</p>
+
+      <div class="inline-demo" data-demo="publickeys"></div>
       <p class="body-text">Public keys are 33 bytes (compressed). From your public key, your address is derived via <span class="tooltip-word" tabindex="0">SHA-256<span class="tooltip-box">Secure Hash Algorithm 256-bit - converts any input into a unique 32-byte fingerprint.</span></span> then <span class="tooltip-word" tabindex="0">RIPEMD-160<span class="tooltip-box">Another hash that shortens the output to 20 bytes. Two different hash functions provide extra security.</span></span>.</p>
 
       <!-- ── Inline Illustration ── -->
@@ -6181,8 +6207,6 @@
 
       <p class="body-text">Public keys are safe to share. After spending from an address, your public key is revealed, so best practice is to use each address only once for privacy.</p>
       <p class="body-text">The relationship: private key is your identity proof, public key is your verifiable credential, address is your shareable contact info. None of this requires a passport, a bank account, or anyone's permission.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="publickeys">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ DIGITAL SIGNATURES ════ -->
@@ -6238,6 +6262,8 @@
         </svg>
       </div>
       <p class="body-text">A digital signature is like signing a check - but mathematically impossible to forge. Your wallet takes your private key and transaction data and runs them through <span class="tooltip-word" tabindex="0">ECDSA<span class="tooltip-box">Elliptic Curve Digital Signature Algorithm - generates a unique signature for each transaction that can be verified by anyone using the public key.</span></span> (recently upgraded to <span class="tooltip-word" tabindex="0">Schnorr signatures<span class="tooltip-box">A newer, more efficient scheme via Taproot. Smaller, faster, and allows multiple signatures to be aggregated into one.</span></span> via Taproot).</p>
+
+      <div class="inline-demo" data-demo="signatures"></div>
       <p class="body-text">Every signature is unique, even for the same private key. Yet anyone with your public key can instantly verify it - without knowing your private key. This verification is what every node does for every new transaction.</p>
 
       <!-- ── Inline Illustration ── -->
@@ -6253,8 +6279,6 @@
 
       <p class="body-text">Signatures bind three things: the private key (who you are), the transaction (what you authorized), and the signature (the proof). Change even a single byte of the transaction after signing and the signature becomes invalid.</p>
       <p class="body-text">In 2021, <span class="tooltip-word" tabindex="0">Taproot<span class="tooltip-box">A major upgrade introducing Schnorr signatures. Allows "signature aggregation" - combining many signatures into one, making complex transactions cheaper and more private.</span></span> brought Schnorr signatures, enabling "signature aggregation" - combining many signatures into one. Multi-signature transactions became cheaper and indistinguishable from regular transactions.</p>
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="signatures">Start Interactive Lesson &rarr;</button>
     </div>
 
 
@@ -6383,6 +6407,8 @@
       </div>
 
       <p class="body-text">Bitcoin has no CEO, no board of directors, no foundation with veto power. Yet its code has been upgraded dozens of times since 2009. How? Through a process called <strong style="color:var(--orange);">rough consensus</strong> - a messy, slow, beautiful system where changes only happen when nearly everyone agrees.</p>
+
+      <div class="inline-demo" data-demo="consensus"></div>
 
       <p class="body-text">Most tech companies push updates overnight. Bitcoin's upgrade process is <em>deliberately</em> slow and conservative. That's not a bug - it's what makes it trustworthy as a monetary protocol.</p>
 
@@ -6579,9 +6605,6 @@
       <p class="body-text">Here's what makes Bitcoin's governance unique: <strong style="color:var(--orange);">no single entity can push through a change.</strong> Not the developers (they write code, but can't force anyone to run it). Not the miners (they process transactions, but users choose which chain to follow). Not the exchanges (they list coins, but can't change the protocol). Power is distributed across all participants - and that distribution is what makes Bitcoin's monetary properties trustworthy.</p>
 
       <p class="body-text">Compare this to every other monetary system in history. The Federal Reserve can change interest rates in an afternoon. A government can freeze bank accounts overnight. Even Ethereum's leadership pushed through a chain rollback in 2016 (the DAO fork). Bitcoin's upgrade process is slow and frustrating by design - because the alternative is a monetary system that can be changed on a whim.</p>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="consensus">Start Interactive Lesson &rarr;</button>
     </div>
 
     <!-- ════ LIGHTNING NETWORK ════ -->
@@ -7071,8 +7094,7 @@
         <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin-bottom:8px;">You did it. <span class="glow-text">You're no longer just a &#8383;it curious.</span></div>
         <p style="color:var(--text3);font-size:14px;max-width:480px;margin:0 auto 24px;line-height:1.7;">You now understand money, Bitcoin, and the cryptography that powers it - from first principles. That puts you ahead of almost everyone.</p>
       </div>
-
-      <button class="btn-orange" data-modal="perspective" style="display:block;margin:0 auto;">Start Interactive Lesson &rarr;</button>
+      <div class="inline-demo" data-demo="perspective"></div>
     </div>
 
 
@@ -7273,9 +7295,7 @@
       </div>
 
       <p class="body-text">Every "$1 = 1,309 BTC" and every lost hard drive is a reminder that we're still in the early chapters of this story. The protocol is 17 years old. The dollar is 250. Gold is 5,000. Bitcoin is just getting started.</p>
-
-      <div class="neon-divider"></div>
-      <button class="btn-orange" data-modal="lore">Start Interactive Lesson &rarr;</button>
+      <div class="inline-demo" data-demo="lore"></div>
     </div>
     <!-- ════ BIBLIOGRAPHY ════ -->
     <div class="section-content" id="sec-bibliography">
