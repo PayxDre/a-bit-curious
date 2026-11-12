@@ -14,26 +14,53 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Who Is Satoshi?","description":"Who is Satoshi Nakamoto, why they vanished, and why Bitcoin is stronger because its creator cannot be found.","url":"https://www.a-bit-curious.com/lessons/satoshi/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Who Is Satoshi?","description":"Who is Satoshi Nakamoto, why they vanished, and why Bitcoin is stronger because its creator cannot be found.","url":"https://www.a-bit-curious.com/lessons/satoshi/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 10 of 47</div>
   <h1>Who Is Satoshi?</h1>
-  <p>Who is Satoshi Nakamoto, why they vanished, and why Bitcoin is stronger because its creator cannot be found.</p>
-  <a class="cta" href="/#satoshi">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">Who is Satoshi Nakamoto, why they vanished, and why Bitcoin is stronger because its creator cannot be found.</p>
+  <a class="cta" href="/#satoshi">Open the interactive lesson &#8594;</a>
+  <p>On October 31, 2008, someone using the name Satoshi Nakamoto published a nine-page paper titled &quot;Bitcoin: A Peer-to-Peer Electronic Cash System&quot; to a cryptography mailing list. On January 3, 2009, they mined the first block. By April 2011, they vanished. To this day, nobody knows who Satoshi is.</p>
+  <p>Think about what that means. Satoshi mined roughly 1.1 million Bitcoin in those early years. At today&#x27;s prices, that stash is worth over $100 billion. They never spent a single coin. Never cashed out. Never came forward to claim credit. In an era where every tech founder becomes a celebrity billionaire, someone created the most consequential financial technology in a generation and walked away. The wallet addresses sit untouched to this day. The last known message was an email to developer Gavin Andresen: &quot;I&#x27;ve moved on to other things.&quot; Then silence.</p>
+  <p>That anonymity may be the most important design decision in Bitcoin. It means there is no CEO to subpoena, no founder to pressure, no figurehead to arrest. Even if Satoshi came back tomorrow, they could not change the protocol. The system runs on math, not authority.</p>
+  <h2>🔎 The Profile of a Ghost</h2>
+  <p>Satoshi left enough breadcrumbs to sketch a profile - but not enough to identify a person.</p>
+  <p>Bitcoin combines SHA-256 hashing , ECDSA signatures , Merkle trees, and proof-of-work in ways nobody had assembled before. Whoever built this understood cryptography at a deep academic level - not just how to use it, but how to compose primitives into a novel system.</p>
+  <p>The original Bitcoin codebase was ~36,000 lines of C++ - a networking-heavy, systems-level program. Satoshi&#x27;s code was functional but idiosyncratic, suggesting a self-taught or unconventional style rather than a corporate software background. Early contributors noted the code worked well but wasn&#x27;t written by a &quot;typical&quot; software engineer.</p>
+  <p>The whitepaper also solved the Byzantine Generals Problem for money. Satoshi understood Austrian economics, inflation mechanics, and central bank policy. The genesis block&#x27;s embedded headline (&quot;Chancellor on brink of second bailout for banks&quot;) was a deliberate statement about the 2008 financial crisis.</p>
+  <p>Satoshi communicated only through pseudonymous email and forum posts. They used Tor and anonymizing tools. They left no metadata leaks, no accidental real-name slips, no traceable payment records. Despite billions of dollars in motivation and years of investigation by journalists, intelligence agencies, and hobbyists, no one has conclusively identified Satoshi. That itself demonstrates mastery of privacy that very few people possess.</p>
+  <p>Perhaps the most underrated skill: Satoshi designed a system where selfish actors, acting in their own interest, produce a collectively honest result. Miners are incentivized to be honest. Attackers are incentivized not to attack. Users are incentivized to run nodes. The incentive structure has worked for 17 years without a single rule change.</p>
+  <h2>🔍 The Usual Suspects</h2>
+  <p>Cypherpunk, first Bitcoin recipient. Lived near a man named Dorian Satoshi Nakamoto. Denied it. Passed away 2014.</p>
+  <p>Created &quot;Bit Gold&quot; (the closest precursor to Bitcoin). Writing style analysis matches. Has denied it repeatedly.</p>
+  <p>Publicly claimed to be Satoshi. Failed to provide cryptographic proof. A UK court ruled in 2024 he is not Satoshi.</p>
+  <h2>💡 Why Satoshi&#x27;s Identity Doesn&#x27;t Matter</h2>
+  <p>Satoshi can&#x27;t change Bitcoin. Even if Satoshi came back tomorrow, they couldn&#x27;t alter the protocol. They could propose a BIP like anyone else, but there is no admin key, no backdoor, no override. The code is open source. Consensus rules are enforced by tens of thousands of independent nodes. No single person - not even the creator - has special privileges.</p>
+  <p>Satoshi can&#x27;t take your bitcoin. The estimated ~1.1 million BTC in Satoshi-era wallets have never moved since they were mined. If Satoshi wanted to sell, they could only sell their own coins. They have no access to anyone else&#x27;s. That&#x27;s the whole point of private keys.</p>
+  <p>The disappearance was the final gift. By vanishing, Satoshi removed the single point of failure that every other system has - a leader who can be pressured, bribed, arrested, or corrupted. Bitcoin has no Zuckerberg, no Musk, no CEO, no face. That makes it impossible to &quot;arrest Bitcoin&quot; or subpoena its creator. It belongs to everyone and no one.</p>
+  <p>Compare this to every other cryptocurrency. Ethereum has Vitalik Buterin. Solana has Anatoly Yakovenko. Ripple has Brad Garlinghouse (currently in an SEC lawsuit). Every project with a known leader has a single point of failure - someone who can be pressured, someone who can change direction, someone who can be arrested. Bitcoin is the only major digital asset where the creator is permanently absent and the system doesn&#x27;t care.</p>
+  <p>Satoshi didn&#x27;t just build Bitcoin. They gave it away - to everyone, forever. No patent. No company. No retained control. That act of surrender is what makes Bitcoin fundamentally different from everything else in crypto.</p>
+  <a class="cta" href="/#satoshi">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/digimoney/">&#8592; Digital Money Before Bitcoin</a><a href="/lessons/whitepaper/">The Whitepaper &#8594;</a></nav>
 </main>
 </body>
 </html>

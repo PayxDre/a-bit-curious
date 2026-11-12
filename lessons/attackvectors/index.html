@@ -14,26 +14,54 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Attack Vectors","description":"51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice.","url":"https://www.a-bit-curious.com/lessons/attackvectors/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Attack Vectors","description":"51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice.","url":"https://www.a-bit-curious.com/lessons/attackvectors/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 32 of 47</div>
   <h1>Attack Vectors</h1>
-  <p>51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice.</p>
-  <a class="cta" href="/#attackvectors">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">51% attacks, Sybil attacks, and every other way people try to break Bitcoin - and why they fail in practice.</p>
+  <a class="cta" href="/#attackvectors">Open the interactive lesson &#8594;</a>
+  <p>Bitcoin has been running for 17+ years with zero successful attacks on the protocol. Not because no one has tried - billions of dollars in incentive sit behind that shield. It survives because the system makes attacking it more expensive than cooperating with it.</p>
+  <h2>⚠️ The 51% Attack</h2>
+  <p>Here&#x27;s the idea: if someone controlled more than half of all the computing power (hash rate) on the Bitcoin network, they could theoretically rewrite recent blocks and reverse their own transactions. This is called a double spend - spending the same Bitcoin twice.</p>
+  <p>You would need to acquire more mining hardware than every other miner on Earth combined. The Bitcoin hash rate currently exceeds 700 EH/s (700 quintillion calculations per second). The hardware alone would cost tens of billions of dollars. The electricity to run it would cost millions per day. And you&#x27;d need to do this covertly - buying that much hardware on the open market would spike prices, alert the community, and likely trigger defensive responses before you even switched it on.</p>
+  <p>Even with 51%, you cannot: steal other people&#x27;s Bitcoin, change the 21M supply cap, create coins from nothing, or alter old transactions deep in the chain. All you can do is reverse your own recent transactions. You&#x27;d spend tens of billions to pull off... one double spend. Meanwhile, the moment it&#x27;s detected, exchanges halt trading, the price crashes, and your stolen coins become worthless.</p>
+  <p>As Andreas Antonopoulos put it: a 51% attack would require a massive covert effort by nation states or large industrial complexes, spending enormous amounts of energy, all to achieve one double spend - when they could have simply pointed that same hash power at mining honestly and earned the block rewards. The incentives are completely backward. It&#x27;s cheaper to play by the rules.</p>
+  <p>The game theory is simple: attacking Bitcoin destroys the value of the very thing you&#x27;re trying to steal.</p>
+  <p>In many networks, an attacker can create thousands of fake identities to overwhelm the system. On social media, these are bot armies. Could someone do this to Bitcoin?</p>
+  <p>No - because Bitcoin doesn&#x27;t care about identities. Proof of Work makes identity irrelevant. It doesn&#x27;t matter if you run one node or ten thousand - you can only mine blocks by doing real computational work and spending real energy. You can&#x27;t fake a valid hash. You can&#x27;t vote your way to control. Every block must contain real proof that real electricity was burned. Running a million fake nodes gives you exactly zero advantage.</p>
+  <p>What if someone sends Bitcoin to a merchant and then quickly sends the same coins elsewhere before the first transaction confirms?</p>
+  <p>Confirmations solve this. Once a transaction is included in a block (1 confirmation), reversing it requires outpacing the entire network. After 6 confirmations (~60 minutes), the probability of reversal is effectively zero - you&#x27;d need more computing power than exists on Earth. For small purchases, even 1 confirmation is sufficient. For large transfers, waiting for 6 is standard. The deeper a transaction is buried in the chain, the more energy it would cost to undo - exponentially.</p>
+  <p>They&#x27;d have to shut down the internet - globally, simultaneously, forever. Bitcoin nodes run in 100+ countries. The protocol can transmit over satellite (Blockstream Satellite), mesh radio, and even SMS. China - the most powerful censorship apparatus in history - banned Bitcoin mining twice. The hash rate recovered in months as miners relocated. The network didn&#x27;t skip a beat. A government can ban exchanges within its borders, but it cannot stop two people from sending math to each other over the internet.</p>
+  <p>Bitcoin&#x27;s code is the most scrutinized open-source project in history. Hundreds of developers review every line. There have been bugs - in 2010, an overflow bug briefly allowed someone to create 184 billion Bitcoin, which was patched within hours. But here&#x27;s the key: Bitcoin&#x27;s consensus mechanism means every node independently validates every transaction. Even if one version of the software has a bug, the rest of the network rejects invalid blocks. There is no single point of failure. No &quot;main server&quot; to hack. No CEO to coerce. The code is public, the network is distributed, and anyone can audit it.</p>
+  <p>Instead of attacking the whole network, what if you surround a single node with attacker-controlled nodes, feeding it false information?</p>
+  <p>This targets individuals, not the network itself. Even if successful, it only affects the isolated node - the rest of the network is unaffected. Bitcoin Core has built-in defenses: diversified peer connections, anchor connections, and limits on connections from the same IP range. Running your own node with multiple connection sources makes this attack extremely difficult. And it still can&#x27;t create fake Bitcoin or alter the chain - it can only delay your view of new blocks.</p>
+  <p>What if powerful companies or influential developers try to change Bitcoin&#x27;s rules - like raising the 21 million cap?</p>
+  <p>This was tried in 2017 - and it failed spectacularly. Major companies, exchanges, and miners backed the &quot;SegWit2x&quot; proposal to increase block size. They had overwhelming corporate support. But Bitcoin&#x27;s rules are enforced by node operators - the thousands of individuals running the software. The nodes rejected the change. The corporate-backed fork died. This proved something remarkable: no one controls Bitcoin. Not the miners, not the developers, not the corporations. The users - through their nodes - have the final say.</p>
+  <h2>🛡 Why Bitcoin Is Antifragile</h2>
+  <p>Bitcoin turns the attacker&#x27;s own resources against them. The bigger the attack, the more expensive it gets, the less it accomplishes, and the stronger the network becomes afterward.</p>
+  <p>This is why Bitcoin is often called antifragile. Unlike traditional systems that get weaker under stress, Bitcoin gets stronger. Every attack attempt, every ban, every crash - the network adapts, the community hardens, and the protocol keeps producing blocks. Every 10 minutes. Without fail. For 17 years and counting.</p>
+  <p>You understand the system and its defenses. Now let&#x27;s zoom in on the machinery - how transactions are built, how outputs work, how locks and keys protect your Bitcoin, and the elegant math behind digital signatures.</p>
+  <a class="cta" href="/#attackvectors">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/difficulty/">&#8592; Difficulty</a><a href="/lessons/transactions/">Transactions &#8594;</a></nav>
 </main>
 </body>
 </html>

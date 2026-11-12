@@ -14,26 +14,57 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Lightning Network","description":"The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work.","url":"https://www.a-bit-curious.com/lessons/lightning/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Lightning Network","description":"The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work.","url":"https://www.a-bit-curious.com/lessons/lightning/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 42 of 47</div>
   <h1>Lightning Network</h1>
-  <p>The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work.</p>
-  <a class="cta" href="/#lightning">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">The Lightning Network: instant, nearly free Bitcoin payments and how payment channels actually work.</p>
+  <a class="cta" href="/#lightning">Open the interactive lesson &#8594;</a>
+  <p>Bitcoin&#x27;s base layer is intentionally slow. It processes about 7 transactions per second - by design. That&#x27;s the tradeoff for maximum decentralization and security. But you don&#x27;t need to broadcast every coffee purchase to 50,000 nodes worldwide. That&#x27;s where the Lightning Network comes in.</p>
+  <p>Lightning is Bitcoin&#x27;s Layer 2 - a payment network built on top of Bitcoin. Think of it like this: Layer 1 (the blockchain) is the settlement layer - like a central bank clearing large transfers. Layer 2 (Lightning) is the payment layer - like swiping a debit card for everyday purchases. Both use real BTC. There is no separate &quot;Lightning coin.&quot;</p>
+  <h2>⚡ How Lightning Works - In 4 Steps</h2>
+  <p>Alice and Bob each lock some BTC into a shared 2-of-2 multisig wallet on the blockchain. This is the only on-chain transaction needed. Think of it like putting cash into a joint tab at a bar.</p>
+  <p>Now Alice and Bob can send BTC back and forth unlimited times - instantly, for nearly zero fees. Each payment updates their balance in the channel. None of these transactions touch the blockchain. It&#x27;s like passing IOUs back and forth on the tab.</p>
+  <p>Alice doesn&#x27;t need a direct channel with everyone. If Alice has a channel with Bob, and Bob has one with Carol, Alice can pay Carol by routing through Bob - using Hashed Timelock Contracts (HTLCs) that make the payment trustless. No one can steal funds in transit. It works like internet routing - data finds a path.</p>
+  <p>When they&#x27;re done, either party closes the channel. One final on-chain transaction records the net result of all their Lightning payments. Hundreds or thousands of payments get compressed into a single blockchain entry.</p>
+  <h2>⚖️ Layer 1 vs Layer 2 - Why Both Matter</h2>
+  <p>Think of Layer 1 as the vault. Layer 2 as your wallet. You don&#x27;t carry the vault to buy coffee.</p>
+  <p>The analogy people use most: Layer 1 is like the Federal Reserve&#x27;s settlement system - secure, slow, for large transfers. Layer 2 is like Visa&#x27;s payment network - fast, cheap, for everyday use. Except Lightning is open, permissionless, and doesn&#x27;t take 3% of every transaction.</p>
+  <h2>📈 Lightning Network Growth</h2>
+  <p>The network is growing in capacity even as it consolidates into more efficient, larger channels.</p>
+  <p>Coinbase: 15% of BTC withdrawals use Lightning · Cash App: 7x Lightning usage growth · Steak &#x27;n Shake: 50% lower fees vs credit cards</p>
+  <h2>🌎 Lightning in Everyday Life - A Day in 2030</h2>
+  <p>You scan a QR code at the cafe. 5,000 sats (~$2.50) leave your phone wallet instantly. The barista&#x27;s register beeps. Total fee: 0.01 cents. No bank, no card network, no 3% merchant fee.</p>
+  <p>You listen to a podcast that charges 1 sat per minute. After an hour, you&#x27;ve paid 60 sats (~$0.03) - streamed in real time, per second. The creator gets paid directly. No ads, no subscription, no platform taking 30%.</p>
+  <p>A worker in New York sends $200 to family in El Salvador. It arrives in 3 seconds. Fee: less than a penny. Western Union would have charged $15-25 and taken 3-5 days.</p>
+  <p>You earn 500 sats for winning a match in a mobile game. Real money, instantly in your wallet. No minimum withdrawal, no payout delay, no PayPal holding your funds for 21 days.</p>
+  <p>Instead of a $15/month subscription to a news site, you pay 200 sats (~$0.10) per article you actually read. Journalism funded by readers, not advertisers. Micropayments make it possible.</p>
+  <p>Lightning doesn&#x27;t just make Bitcoin faster - it unlocks entirely new economic models that weren&#x27;t possible when the minimum viable payment was $0.50+ in fees.</p>
+  <p>Lightning also uses onion routing - the same privacy concept as Tor. Each node in the payment path only knows the previous and next hop, never the full route. This gives Lightning payments better privacy than on-chain transactions in many cases.</p>
+  <p>Real example: A family in the Philippines receives $200/month from a relative working in the US. Through Western Union, that costs $12 in fees and takes 3-5 business days. Through Lightning, it costs less than a penny and arrives in two seconds. Remittances are a $700 billion per year market. Lightning is eating it.</p>
+  <p>This is already happening. El Salvador runs its national Bitcoin payment system on Lightning. Steak &#x27;n Shake accepts Lightning at every location, saving 50% on processing fees vs credit cards. Coinbase, Cash App, Kraken, and Strike all support Lightning withdrawals.</p>
+  <p>The key insight: Bitcoin doesn&#x27;t need to compete with Visa at Layer 1. It needs to be more secure than any vault at Layer 1, and faster than any card at Layer 2. Lightning delivers both - without compromising Bitcoin&#x27;s core principles of decentralization and fixed supply.</p>
+  <a class="cta" href="/#lightning">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/consensus/">&#8592; Consensus &amp; Upgrades</a><a href="/lessons/toolate/">Am I Too Late? &#8594;</a></nav>
 </main>
 </body>
 </html>

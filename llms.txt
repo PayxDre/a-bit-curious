@@ -13,10 +13,10 @@ The site teaches money from first principles: why gold became money, why governm
 
 ## Chapters
 
-### I. The Problem with Money (5 lessons)
+### I. The Problem with Money (6 lessons)
 - [The Nature of Money](https://www.a-bit-curious.com): What makes money "money"? The 6 properties of sound money and how Bitcoin satisfies all of them.
 - [Monetary Inflation](https://www.a-bit-curious.com): M2 money supply grew from $4.6T (2000) to $21T+ (2024). The dollar has lost 97% of its purchasing power since 1913.
-- [Full Faith & Credit](https://www.a-bit-curious.com): US national debt exceeds $36 trillion. Interest payments now exceed defense spending. Live debt clock.
+- [Full Faith & Credit](https://www.a-bit-curious.com): US national debt passed $40 trillion in August 2026. Interest payments now exceed defense spending. Live debt clock.
 - [1971: The Year Money Broke](https://www.a-bit-curious.com): Nixon ended gold convertibility August 15, 1971. Since then wages decoupled from productivity, houses went from 2x to 5x+ median income, savings rates collapsed, and the wealth gap exploded. Priced in gold, houses are cheaper than in 1971.
 - [Deflation vs Fiat](https://www.a-bit-curious.com): Technology creates natural deflation. Central banks fight it with money printing. Bitcoin lets deflation win.
 - [The Fiat Graveyard](https://www.a-bit-curious.com): The average fiat currency lasts 27 years. Every one in history has failed or been debased. Interactive timeline.
@@ -27,7 +27,7 @@ The site teaches money from first principles: why gold became money, why governm
 - [Who Is Satoshi Nakamoto?](https://www.a-bit-curious.com): Published the whitepaper Oct 31, 2008. Vanished April 2011. ~1.1M BTC in Satoshi-era wallets has never moved.
 - [The Bitcoin Whitepaper](https://www.a-bit-curious.com): 9 pages, 12 sections. The key innovation: combining existing ideas into a system where incentives align honest behavior.
 
-### III. Bitcoin vs The World (7 lessons)
+### III. Bitcoin vs The World (8 lessons)
 - [Bitcoin vs Other Cryptos](https://www.a-bit-curious.com): Bitcoin is the only major crypto with no known founder, no foundation control, and no pre-mine.
 - [Proof of Work vs Proof of Stake](https://www.a-bit-curious.com): Why proof of work provides security guarantees that proof of stake cannot.
 - [6 Bitcoin Myths Debunked](https://www.a-bit-curious.com): No value, only criminals, wastes energy, too volatile, governments will ban it, no yield - all debunked with data.
@@ -43,12 +43,12 @@ The site teaches money from first principles: why gold became money, why governm
 - [Sending Bitcoin](https://www.a-bit-curious.com): Transactions, fees, mempool, replace-by-fee. Interactive fee estimator.
 - [Security](https://www.a-bit-curious.com): Multi-sig, passphrases, metal seed backups, address verification. Includes a case study on the July 2026 Coldcard entropy bug, where a firmware fallback to a predictable PRNG cut seed entropy to ~40 bits and led to roughly 1,367 BTC being swept.
 - [Your First $10, Safely](https://www.a-bit-curious.com/lessons/firstbitcoin/): The knowledge-to-action bridge - wallet decision quiz, five-step training path, and withdrawal checklist.
-- [The Scam Drill](https://www.a-bit-curious.com/lessons/scamdrill/): Scored drill against the eight scams that actually steal bitcoin, from seed phishing to pig butchering.
+- [The Scam Drill](https://www.a-bit-curious.com/lessons/scamdrill/): Scored drill of eight realistic messages (six scams, two legitimate), from seed phishing to pig butchering.
 
 ### V. How Bitcoin Works (7 lessons)
 - [The Bitcoin Network](https://www.a-bit-curious.com): 50,000+ nodes, peer-to-peer, no central server, 99.99%+ uptime since 2009.
 - [Running a Node](https://www.a-bit-curious.com): Full validation on a Raspberry Pi for under $300.
-- [Mining](https://www.a-bit-curious.com): Proof of work, block rewards, halving schedule, 700+ EH/s hash rate.
+- [Mining](https://www.a-bit-curious.com): Proof of work, block rewards, halving schedule, roughly 1,000 EH/s hash rate.
 - [The Blockchain](https://www.a-bit-curious.com): Append-only linked list. Changing history invalidates every subsequent block.
 - [Blocks](https://www.a-bit-curious.com): 80-byte header, Merkle root, 4M weight unit limit, coinbase transaction.
 - [Difficulty Adjustment](https://www.a-bit-curious.com): Self-regulating every 2,016 blocks to maintain 10-minute intervals.
@@ -66,7 +66,7 @@ The site teaches money from first principles: why gold became money, why governm
 - [Lightning Network](https://www.a-bit-curious.com): Layer 2 instant payments. Payment channels, HTLCs, onion routing.
 - [The Lab: Use Real Bitcoin](https://www.a-bit-curious.com/lessons/signetlab/): Generate real keys, receive coins from a Signet faucet, sign a genuine BIP 143 transaction in-browser, and watch it confirm on a live blockchain.
 
-### VII. The Future (6 lessons)
+### VII. The Future (5 lessons)
 - [The Final Exam](https://www.a-bit-curious.com/lessons/finalexam/): 25 questions across the course, 80% to pass, with a certificate whose SHA-256 ID can be anchored into Bitcoin via OpenTimestamps.
 - [Am I Too Late?](https://www.a-bit-curious.com): Bitcoin is 0.19% of global store-of-value assets. S-curve adoption at ~5% (internet in 1997).
 - [A Bit New Perspective](https://www.a-bit-curious.com): What happens when saving is rewarded again. Technology deflates, Bitcoin lets it.
@@ -91,7 +91,7 @@ The site teaches money from first principles: why gold became money, why governm
 - Block reward: 3.125 BTC (since April 2024 halving)
 - Next halving: ~2028
 - Network uptime: 99.99%+ since 2009
-- Hash rate: 700+ EH/s
+- Hash rate: ~1,000 EH/s (November 2026)
 - Full nodes: 50,000+
 - Lightning capacity: 5,600+ BTC
 - Energy usage: ~150 TWh/year (vs ~260 TWh/year for traditional finance)

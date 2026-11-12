@@ -14,26 +14,38 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Mining","description":"Mine a block yourself with real SHA-256 hashing in your browser and feel exactly what proof of work is.","url":"https://www.a-bit-curious.com/lessons/mining/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Mining","description":"Mine a block yourself with real SHA-256 hashing in your browser and feel exactly what proof of work is.","url":"https://www.a-bit-curious.com/lessons/mining/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 28 of 47</div>
   <h1>Mining</h1>
-  <p>Mine a block yourself with real SHA-256 hashing in your browser and feel exactly what proof of work is.</p>
-  <a class="cta" href="/#mining">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">Mine a block yourself with real SHA-256 hashing in your browser and feel exactly what proof of work is.</p>
+  <a class="cta" href="/#mining">Open the interactive lesson &#8594;</a>
+  <p>Bitcoin mining sounds complicated, but the basic idea is simple: miners are computers that compete to solve a mathematical puzzle to earn the right to add the next block. The first one to solve it wins a reward in Bitcoin - the block reward, currently 3.125 BTC per block .</p>
+  <p>Here&#x27;s the genius: mining makes adding transactions expensive. To cheat, you&#x27;d need to redo all that expensive work - and faster than the entire rest of the network. This is called Proof of Work .</p>
+  <p>Modern mining uses dedicated chips called ASICs . Many miners are now located near cheap, renewable energy sources. A new block is found roughly every 10 minutes - by design.</p>
+  <h2>⛏ What It Takes to Mine a Block</h2>
+  <p>Every 210,000 blocks (~4 years), the block reward gets cut in half - the halving . It&#x27;s built into Bitcoin&#x27;s code from day one.</p>
+  <a class="cta" href="/#mining">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/node/">&#8592; Node</a><a href="/lessons/blockchain/">Blockchain &#8594;</a></nav>
 </main>
 </body>
 </html>

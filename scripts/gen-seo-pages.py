@@ -1,12 +1,20 @@
 #!/usr/bin/env python3
-"""Generate static SEO landing pages for every lesson, plus sitemap.xml.
+"""Generate everything that is derived from the course itself.
 
-Reads sectionOrder and sectionNames straight from index.html so the pages
-can never drift from the real course. Each page is a small self-contained
-landing with unique copy and a link into the app at /#<slug>.
+Reads sectionOrder, sectionNames and DATA_VERIFIED from app.js and the lesson
+markup from index.html, then writes:
+
+  lessons/<slug>/index.html  full-text, crawlable page for every lesson
+  sitemap.xml                with lastmod
+  for-bots/knowledge.json    lesson count + updated date (fails on missing lessons)
+  llms.txt                   chapter lesson counts
+
+CI runs this and fails on any diff, so none of these can drift from the app.
 
 Run from the repo root:  python3 scripts/gen-seo-pages.py
 """
+import html as htmllib
+import json
 import os
 import re
 import sys
@@ -63,28 +71,97 @@ DESCRIPTIONS = {
     'bibliography': 'Every source behind the course: books, papers, primary data, and where to go deeper.',
 }
 
+NOISE = [
+    r'<svg\b.*?</svg>', r'<script\b.*?</script>', r'<style\b.*?</style>', r'<button\b.*?</button>',
+    r'<canvas\b.*?</canvas>', r'<sup\b.*?</sup>', r'<input\b[^>]*>', r'<!--.*?-->',
+    r'<span class="tooltip-box">.*?</span>',
+]
+
+
+def lesson_blocks(section_html):
+    """Turn one lesson's app markup into a list of ('h'|'p', text) blocks."""
+    h = section_html
+    for pat in NOISE:
+        h = re.sub(pat, ' ', h, flags=re.DOTALL)
+    # Drop the "up next" bridge card at the end of each lesson
+    h = re.sub(r'<!-- Bridge.*$', ' ', h, flags=re.DOTALL)
+    h = re.sub(r'<div class="text-sm font-bold[^"]*"[^>]*>(.*?)</div>', r'\n@@H@@\1\n', h, flags=re.DOTALL)
+    h = re.sub(r'<h[23][^>]*>(.*?)</h[23]>', r'\n@@T@@\1\n', h, flags=re.DOTALL)
+    h = re.sub(r'</(p|div|li|tr|h\d)>|<br\s*/?>', '\n', h)
+    h = re.sub(r'<[^>]+>', '', h)
+    blocks = []
+    for line in h.split('\n'):
+        line = re.sub(r'\s+', ' ', htmllib.unescape(line)).strip()
+        if line.startswith('@@T@@'):
+            continue  # lesson title is the page <h1>
+        if line.startswith('@@H@@'):
+            t = line[5:].strip()
+            if 3 < len(t) < 90:
+                blocks.append(('h', t))
+        elif len(line) >= 90:
+            blocks.append(('p', line))
+    # A heading with no paragraph after it is a widget label, not prose
+    out = []
+    for i, (kind, t) in enumerate(blocks):
+        if kind == 'h' and (i + 1 >= len(blocks) or blocks[i + 1][0] == 'h'):
+            continue
+        out.append((kind, t))
+    return out
+
+
+def esc(t):
+    return htmllib.escape(t, quote=True)
+
+
 def main():
+    with open('app.js', encoding='utf-8') as f:
+        js = f.read()
     with open('index.html', encoding='utf-8') as f:
         html = f.read()
 
-    m = re.search(r"const sectionOrder = \[([^\]]+)\]", html)
+    m = re.search(r"const sectionOrder = \[([^\]]+)\]", js)
     order = re.findall(r"'([a-z0-9]+)'", m.group(1))
-
-    m = re.search(r"const sectionNames = \{(.*?)\};", html, re.DOTALL)
+    m = re.search(r"const sectionNames = \{(.*?)\};", js, re.DOTALL)
     names = dict(re.findall(r"([a-z0-9]+):\s*'((?:[^'\\]|\\.)*)'", m.group(1)))
+    verified = re.search(r"const DATA_VERIFIED = '(\d{4}-\d{2}-\d{2})'", js).group(1)
 
     missing = [s for s in order if s not in DESCRIPTIONS]
     if missing:
         print('FAIL: missing descriptions for: ' + ', '.join(missing))
         return 1
 
+    # Slice index.html into per-lesson markup
+    starts = sorted((mm.start(), mm.group(1)) for mm in re.finditer(r'<div class="section-content[^"]*" id="sec-([a-z0-9]+)"', html))
+    end_of_main = html.index('</main>')
+    sections = {}
+    for i, (pos, slug) in enumerate(starts):
+        nxt = starts[i + 1][0] if i + 1 < len(starts) else end_of_main
+        sections[slug] = html[pos:nxt]
+    absent = [s for s in order if s not in sections]
+    if absent:
+        print('FAIL: lessons in sectionOrder with no markup: ' + ', '.join(absent))
+        return 1
+
+    def title(slug):
+        return names.get(slug, slug).replace("\\'", "'").replace('\\u20BF', 'B')
+
+    n_lessons = len(order) - 1
     urls = [SITE + '/']
-    for slug in order:
-        name = names.get(slug, slug).replace("\\'", "'").replace('\\u20BF', 'B')
-        desc = DESCRIPTIONS[slug]
+    for idx, slug in enumerate(order):
+        name = esc(title(slug))
+        desc = esc(DESCRIPTIONS[slug])
         url = SITE + '/lessons/' + slug + '/'
         urls.append(url)
         os.makedirs('lessons/' + slug, exist_ok=True)
+        parts = []
+        for kind, text in lesson_blocks(sections[slug]):
+            parts.append(('  <h2>%s</h2>' if kind == 'h' else '  <p>%s</p>') % esc(text))
+        article = '\n'.join(parts)
+        nav = []
+        if idx > 0:
+            nav.append('<a href="/lessons/%s/">&#8592; %s</a>' % (order[idx - 1], esc(title(order[idx - 1]))))
+        if idx + 1 < len(order):
+            nav.append('<a href="/lessons/%s/">%s &#8594;</a>' % (order[idx + 1], esc(title(order[idx + 1]))))
         page = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,26 +178,34 @@ def main():
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"LearningResource","name":"{name}","description":"{desc}","url":"{url}","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"{SITE}/"}}}}
+{{"@context":"https://schema.org","@type":"LearningResource","name":"{name}","description":"{desc}","url":"{url}","dateModified":"{verified}","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"{SITE}/"}}}}
 </script>
 <style>
   *{{box-sizing:border-box;margin:0;padding:0;}}
-  body{{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}}
-  main{{max-width:560px;text-align:center;}}
-  .brand{{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}}
-  h1{{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}}
-  p{{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}}
-  a.cta{{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}}
-  .free{{font-size:12px;color:#7878a0;margin-top:12px;}}
+  body{{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}}
+  main{{max-width:720px;margin:0 auto;}}
+  .brand{{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}}
+  .brand a{{color:inherit;text-decoration:none;}}
+  h1{{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}}
+  h2{{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}}
+  p{{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}}
+  .lede{{font-size:18px;color:#e2e2f0;margin-bottom:22px;}}
+  a.cta{{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}}
+  .note{{font-size:13px;color:#8888b8;}}
+  nav{{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}}
+  nav a{{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson {idx + 1} of {len(order)}</div>
   <h1>{name}</h1>
-  <p>{desc}</p>
-  <a class="cta" href="/#{slug}">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a {len(order) - 1}-lesson interactive Bitcoin course</div>
+  <p class="lede">{desc}</p>
+  <a class="cta" href="/#{slug}">Open the interactive lesson &#8594;</a>
+{article}
+  <a class="cta" href="/#{slug}">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a {n_lessons}-lesson interactive Bitcoin course &bull; figures last verified {verified}</p>
+  <nav>{''.join(nav)}</nav>
 </main>
 </body>
 </html>
@@ -131,10 +216,50 @@ def main():
     with open('sitemap.xml', 'w', encoding='utf-8') as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
         for u in urls:
-            f.write('  <url><loc>' + u + '</loc></url>\n')
+            f.write('  <url><loc>' + u + '</loc><lastmod>' + verified + '</lastmod></url>\n')
         f.write('</urlset>\n')
 
-    print('OK: ' + str(len(order)) + ' lesson pages + sitemap.xml (' + str(len(urls)) + ' URLs)')
+    # for-bots/knowledge.json: every lesson must be present; header fields are derived
+    kpath = 'for-bots/knowledge.json'
+    with open(kpath, encoding='utf-8') as f:
+        ktext = f.read()
+    known = set(re.findall(r'\{"slug":"([a-z0-9]+)"', ktext))
+    gaps = [s for s in order if s != 'welcome' and s not in known]
+    if gaps:
+        print('FAIL: for-bots/knowledge.json has no entry for: ' + ', '.join(gaps))
+        return 1
+    ktext = re.sub(r'"lessons": \d+', '"lessons": %d' % n_lessons, ktext, count=1)
+    ktext = re.sub(r'"updated": "[^"]+"', '"updated": "%s"' % verified, ktext, count=1)
+    json.loads(ktext)
+    with open(kpath, 'w', encoding='utf-8') as f:
+        f.write(ktext)
+
+    # llms.txt: each chapter heading states the number of bullets beneath it
+    with open('llms.txt', encoding='utf-8') as f:
+        lines = f.read().split('\n')
+    head_idx, count = None, 0
+    def flush():
+        if head_idx is not None:
+            lines[head_idx] = re.sub(r'\(\d+ lessons?\)', '(%d lessons)' % count, lines[head_idx])
+    for i, line in enumerate(lines):
+        if line.startswith('### ') or line.startswith('## '):
+            flush()
+            head_idx, count = (i, 0) if line.startswith('### ') else (None, 0)
+        elif line.startswith('- [') and head_idx is not None:
+            count += 1
+    flush()
+    with open('llms.txt', 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines))
+
+    # The lesson count is quoted in several places; all must agree with the app
+    for path in ('index.html', 'llms.txt', 'for-bots/index.html', 'robots.txt'):
+        with open(path, encoding='utf-8') as f:
+            for n in re.findall(r'(?<!\()\b(\d{2}) (?:interactive |visual |structured )?lessons\b', f.read()):
+                if int(n) != n_lessons:
+                    print('FAIL: %s says "%s lessons" but the course has %d' % (path, n, n_lessons))
+                    return 1
+
+    print('OK: %d lesson pages, sitemap.xml (%d URLs), knowledge.json and llms.txt in sync' % (len(order), len(urls)))
     return 0
 
 if __name__ == '__main__':

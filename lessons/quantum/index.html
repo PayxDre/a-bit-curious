@@ -14,26 +14,60 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"The Quantum Question","description":"Will quantum computers break Bitcoin? What the qubit math actually says, and how Bitcoin would upgrade.","url":"https://www.a-bit-curious.com/lessons/quantum/","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"The Quantum Question","description":"Will quantum computers break Bitcoin? What the qubit math actually says, and how Bitcoin would upgrade.","url":"https://www.a-bit-curious.com/lessons/quantum/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#0b0b18;color:#f5f5fa;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
-  main{max-width:560px;text-align:center;}
-  .brand{font-size:13px;letter-spacing:.14em;color:#7878a0;margin-bottom:18px;}
-  h1{font-size:30px;line-height:1.25;margin-bottom:14px;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-  p{font-size:15px;line-height:1.7;color:#b8b8d8;margin-bottom:26px;}
-  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 30px;border-radius:12px;text-decoration:none;font-size:15px;}
-  .free{font-size:12px;color:#7878a0;margin-top:12px;}
+  body{background:#0b0b18;color:#e2e2f0;font-family:system-ui,sans-serif;padding:32px 20px 64px;}
+  main{max-width:720px;margin:0 auto;}
+  .brand{font-size:13px;letter-spacing:.14em;color:#8888b8;margin-bottom:18px;}
+  .brand a{color:inherit;text-decoration:none;}
+  h1{font-size:32px;line-height:1.25;margin-bottom:12px;color:#f59e0b;}
+  h2{font-size:19px;line-height:1.35;margin:30px 0 10px;color:#fff;}
+  p{font-size:16px;line-height:1.75;color:#c8c8e0;margin-bottom:16px;}
+  .lede{font-size:18px;color:#e2e2f0;margin-bottom:22px;}
+  a.cta{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-weight:800;padding:14px 28px;border-radius:12px;text-decoration:none;font-size:15px;margin:6px 0 28px;}
+  .note{font-size:13px;color:#8888b8;}
+  nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:36px;padding-top:20px;border-top:1px solid rgba(245,158,11,.25);}
+  nav a{color:#f59e0b;text-decoration:none;font-size:15px;padding:10px 0;}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand">A &#8383;IT CURIOUS</div>
+  <div class="brand"><a href="/">A &#8383;IT CURIOUS</a> &middot; lesson 16 of 47</div>
   <h1>The Quantum Question</h1>
-  <p>Will quantum computers break Bitcoin? What the qubit math actually says, and how Bitcoin would upgrade.</p>
-  <a class="cta" href="/#quantum">Start this interactive lesson &#8594;</a>
-  <div class="free">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course</div>
+  <p class="lede">Will quantum computers break Bitcoin? What the qubit math actually says, and how Bitcoin would upgrade.</p>
+  <a class="cta" href="/#quantum">Open the interactive lesson &#8594;</a>
+  <p>Every few months, a headline screams: &quot;Quantum computers will destroy Bitcoin!&quot; It gets clicks. It generates fear. And it&#x27;s based on a fundamental misunderstanding of where quantum computing actually is versus where it would need to be.</p>
+  <h2>⚛️ The Quantum Gap: Where We Are vs. Where We&#x27;d Need to Be</h2>
+  <p>Bitcoin uses Elliptic Curve Digital Signature Algorithm (ECDSA) with the secp256k1 curve, and SHA-256 hashing. Breaking ECDSA requires running Shor&#x27;s algorithm on a quantum computer.</p>
+  <p>Current qubits are incredibly fragile - they lose their quantum state within microseconds due to thermal noise and environmental interference. To get one reliable logical qubit, you need hundreds to thousands of physical qubits working together for error correction. Running Shor&#x27;s algorithm to break 256-bit elliptic curve cryptography requires ~1,500 logical qubits sustained for hours of computation. That translates to millions of physical qubits with error rates orders of magnitude lower than anything that exists today.</p>
+  <p>That&#x27;s like comparing a paper airplane to a Mars rocket. Same category - radically different capability.</p>
+  <p>Adam Back, co-founder of Blockstream and the inventor of Hashcash (cited in the Bitcoin whitepaper), calls the quantum threat &quot;ridiculously early.&quot; The a16z crypto research team wrote in 2025: &quot;We are nowhere near a cryptographically relevant quantum computer by any reasonable reading of public milestones.&quot;</p>
+  <h2>🕒 Expert Timeline Estimates</h2>
+  <p>Even the most aggressive estimate gives only a 20% chance by 2030. And Bitcoin doesn&#x27;t sit still - it upgrades.</p>
+  <h2>🚨 If Quantum Breaks Bitcoin, Everything Else Is Already Dead</h2>
+  <p>This is the part the FUD never mentions. Bitcoin&#x27;s cryptography (ECDSA, SHA-256) is the same cryptography that protects the entire modern financial system.</p>
+  <p>Every website with a padlock icon uses TLS/SSL with RSA or ECC - the same family of cryptography. A quantum computer that breaks Bitcoin also breaks every bank login, every credit card transaction, every secure website on Earth.</p>
+  <p>Visa, Mastercard, SWIFT - all rely on public-key cryptography for transaction authentication. A quantum break means every payment system in the world is compromised simultaneously.</p>
+  <p>Nuclear launch codes, classified communications, intelligence networks - all protected by the same math. If quantum breaks ECDSA, national security is gone before anyone worries about Bitcoin.</p>
+  <p>NYSE, NASDAQ, electronic trading platforms - all use digital signatures for trade authentication. Quantum breaks mean anyone can forge trades.</p>
+  <p>Saying &quot;quantum will break Bitcoin&quot; without mentioning it breaks all of finance first is like warning that an asteroid will damage your car without mentioning it also destroys the planet.</p>
+  <h2>💬 Satoshi Already Addressed This - In July 2010</h2>
+  <p>On the BitcoinTalk forum, a user named &quot;llama&quot; raised the concern about quantum computers breaking Bitcoin&#x27;s signatures. Satoshi responded directly.</p>
+  <p>&quot;However, if something happened and the signatures were compromised (perhaps integer factorization is solved, quantum computers?), then even agreeing upon the last valid block would be worthless.&quot;</p>
+  <p>&quot;True, if it happened suddenly. If it happens gradually, we can still transition to something stronger. When you run the upgraded software for the first time, it would re-sign all your money with the new stronger signature algorithm. (by creating a transaction sending the money to yourself with the stronger sig)&quot;</p>
+  <p>Satoshi foresaw this 16 years ago. The solution is straightforward: if quantum computing advances gradually (which it is), Bitcoin upgrades its signature algorithm before it becomes a threat. Users simply send their coins to a new quantum-resistant address - a self-transaction that re-signs everything with the stronger algorithm.</p>
+  <p>And the Bitcoin community isn&#x27;t sitting idle. BIP-360 is already in development - a Bitcoin Improvement Proposal that introduces quantum-resistant address formats, allowing users to gradually transition to post-quantum cryptographic standards like lattice-based signatures. The same post-quantum algorithms (CRYSTALS-Dilithium, SPHINCS+) that NIST standardized in 2024 for government use can be integrated into Bitcoin.</p>
+  <h2>💬 Satoshi on SHA-256 Breaking</h2>
+  <p>&quot;If SHA-256 became completely broken, I think we could come to some agreement about what the honest blockchain was before the trouble started, lock that in and continue from there with a new hash function.&quot;</p>
+  <p>And on gradual transition: &quot;The software would be programmed to start using a new hash after a certain block number. Everyone would have to upgrade by that time. The software could save the new hash of all the old blocks to make sure a different block with the same old hash can&#x27;t be used.&quot;</p>
+  <p>The bottom line: quantum computing is a real technology with real potential - someday. But it is not an imminent threat to Bitcoin, any more than it is to your bank account, your credit card, or the Pentagon. If anything, Bitcoin is better positioned than traditional finance because it can upgrade through community consensus without waiting for a corporation or government to act.</p>
+  <p>The FUD exists because &quot;quantum breaks Bitcoin&quot; makes a great headline. The truth is boring by comparison: we&#x27;re thousands of times away from the hardware needed, Bitcoin can upgrade its cryptography, and every other financial system would break first.</p>
+  <p>Before comparing Bitcoin to dollars, let&#x27;s compare it to the money that outlasted every empire - and see why measuring Bitcoin in ounces tells a cleaner story than measuring it in inflating paper.</p>
+  <a class="cta" href="/#quantum">Try it yourself in the interactive lesson &#8594;</a>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <nav><a href="/lessons/tulips/">&#8592; Bitcoin vs Tulip Mania</a><a href="/lessons/caseagainst/">The Case Against Bitcoin &#8594;</a></nav>
 </main>
 </body>
 </html>
