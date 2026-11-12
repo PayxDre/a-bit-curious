@@ -1545,9 +1545,9 @@
 
 <!-- ═══════════════ MOBILE BOTTOM NAV ═══════════════ -->
 <div id="mobile-bottom-nav" role="navigation" aria-label="Section navigation">
-  <button class="mob-nav-btn" id="mob-prev-btn" aria-label="Previous section">&#8592; Prev</button>
+  <button class="mob-nav-btn" id="mob-prev-btn" aria-label="Prev: previous section">&#8592; Prev</button>
   <div id="mobile-section-label" aria-live="polite">Wallets</div>
-  <button class="mob-nav-btn" id="mob-next-btn" aria-label="Next section">Next &#8594;</button>
+  <button class="mob-nav-btn" id="mob-next-btn" aria-label="Next: next section">Next &#8594;</button>
 </div>
 
 <!-- ═══════════════ TOP NAVIGATION BAR ═══════════════ -->
@@ -1586,9 +1586,9 @@
 <div class="relative z-10 flex" style="margin-top:58px;min-height:calc(100vh - 58px);">
 
   <!-- ─── LEFT SIDEBAR ─── -->
-  <aside id="left-sidebar" class="fixed overflow-y-auto py-4"
+  <nav id="left-sidebar" class="fixed overflow-y-auto py-4"
          style="background:#0f0f26;border-right:1px solid var(--glass-border);width:230px;top:58px;left:0;bottom:0;border-radius:0;z-index:40;"
-         role="navigation" aria-label="Course sections">
+         aria-label="Course sections">
 
     <button id="sidebar-close-btn" aria-label="Close menu"
         style="display:none;position:absolute;top:12px;right:12px;background:var(--orange-dim);border:1px solid var(--glass-border);border-radius:8px;color:var(--orange);font-size:16px;width:32px;height:32px;cursor:pointer;z-index:60;line-height:1;">&#10005;</button>
@@ -1671,7 +1671,7 @@
         </div>
       </div>
     </div>
-  </aside>
+  </nav>
   <!-- ─── MAIN CONTENT ─── -->
   <main id="main-content" class="flex-1 px-8 py-8" style="margin-left:230px;margin-right:280px;max-width:100%;min-height:calc(100vh - 58px);" tabindex="-1">
 
@@ -1693,7 +1693,7 @@
         <p style="color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:28px;">The answers might surprise you.</p>
 
         <!-- ═══════ COURSE SEARCH ═══════ -->
-        <button class="welcome-search" onclick="openSearch()" aria-label="Search the course">
+        <button class="welcome-search" onclick="openSearch()" aria-label="Got a question? Search the course">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" style="flex:none;" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
           <span>Got a question? Search the course...</span>
         </button>
