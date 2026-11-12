@@ -1474,6 +1474,62 @@
   .xd-key-stolen{border-color:rgba(248,113,113,0.6);background:rgba(248,113,113,0.06);}
   @media(max-width:640px){.xd-two,.xd-stats,.xd-keys{grid-template-columns:1fr;}.xd-field{grid-template-columns:1fr;gap:2px;}}
   @media(prefers-reduced-motion:reduce){.xd-flash{animation:none;}.xd-bar-you,.xd-bar-them{transition:none;}}
+
+  /* ── Lesson scaffolding ── */
+  .lesson-goal{margin:14px 0 4px;padding:12px 16px;border-radius:12px;border-left:3px solid #a78bfa;background:rgba(167,139,250,0.07);font-size:15px;line-height:1.55;color:var(--text);}
+  .lesson-goal-label{display:block;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#a78bfa;margin-bottom:3px;}
+  .lesson-recap{margin:28px 0;padding:18px 20px;border-radius:14px;background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.3);}
+  .lesson-recap-label{font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#60a5fa;margin-bottom:8px;}
+  .lesson-recap p{font-size:15px;line-height:1.75;color:var(--text2);margin:0;}
+
+  /* ── Journey strip ── */
+  .journey{margin:16px 0 6px;padding:12px 14px;border-radius:14px;background:rgba(0,0,0,0.25);border:1px solid var(--glass-border);}
+  .journey-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  .journey-next{font:inherit;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--orange);background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.4);border-radius:999px;padding:6px 14px;cursor:pointer;}
+  .journey-done{color:#4ade80;}
+  .journey-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;}
+  .journey-step button{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:10px;border:1px dashed var(--glass-border);background:none;color:var(--muted);font:inherit;font-size:12px;cursor:pointer;transition:all .2s;}
+  .journey-step.got button{border:1px solid rgba(74,222,128,0.45);background:rgba(74,222,128,0.06);color:#4ade80;}
+  .journey-step.next button{border:1px solid var(--orange);color:var(--orange);}
+  .journey-ico{font-size:18px;filter:grayscale(1);opacity:.55;}
+  .journey-step.got .journey-ico,.journey-step.next .journey-ico{filter:none;opacity:1;}
+  .journey-val{font-family:'Space Mono',monospace;font-size:12px;color:var(--text3);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .journey-note{margin-bottom:14px;padding:10px 14px;border-radius:10px;background:rgba(96,165,250,0.07);border:1px solid rgba(96,165,250,0.3);font-size:13px;line-height:1.6;color:var(--text2);}
+  .journey-note code{font-family:'Space Mono',monospace;font-size:12px;color:#60a5fa;}
+  .journey-link{background:none;border:none;padding:0;font:inherit;color:var(--orange);text-decoration:underline;cursor:pointer;}
+  /* ── Go deeper ── */
+  [data-depth="deep"]{display:none;}
+  [data-depth="deep"].deep-open,.depth-deep [data-depth="deep"]{display:block;}
+  .deep-toggle{display:flex;align-items:center;gap:10px;width:100%;text-align:left;margin:18px 0 0;padding:12px 16px;border-radius:12px;border:1px dashed rgba(167,139,250,0.45);background:rgba(167,139,250,0.05);color:var(--text2);font:inherit;font-size:14px;cursor:pointer;transition:all .2s;}
+  .deep-toggle:hover,.deep-toggle:focus-visible{border-style:solid;background:rgba(167,139,250,0.1);outline:none;}
+  .deep-plus{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(167,139,250,0.2);color:#a78bfa;font-weight:700;flex-shrink:0;}
+  .deep-label{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#a78bfa;flex-shrink:0;}
+  .deep-title{font-weight:600;}
+  .depth-deep .deep-toggle{display:none;}
+  .depth-switch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:12px 0 4px;font-size:12px;color:var(--muted);}
+  .depth-switch span{margin-right:4px;}
+  .depth-switch button{font:inherit;font-size:12px;padding:6px 12px;border-radius:999px;border:1px solid var(--glass-border);background:none;color:var(--muted);cursor:pointer;}
+  .depth-switch button[aria-pressed="true"]{border-color:#a78bfa;color:#a78bfa;background:rgba(167,139,250,0.1);}
+  /* ── Progress ── */
+  .nav-group-label{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .ch-prog{display:inline-flex;flex-shrink:0;}
+  .nav-group-label.ch-complete{color:#4ade80;}
+  .nav-item.lab-done{position:relative;}
+  .nav-item.lab-done::after{content:'\2713\2713';position:absolute;right:10px;top:50%;transform:translateY(-50%);color:#4ade80;font-size:11px;letter-spacing:-3px;opacity:1;}
+  #abcToast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:300;max-width:min(92vw,420px);padding:12px 18px;border-radius:14px;background:#15152e;border:1px solid rgba(74,222,128,0.5);color:var(--text);font-size:14px;box-shadow:0 10px 40px rgba(0,0,0,0.5);transition:opacity .3s,transform .3s;}
+  #abcToast.show{opacity:1;transform:translate(-50%,0);}
+  #homeProgress{max-width:640px;margin:0 auto 28px;padding:18px 20px;border-radius:16px;text-align:left;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.35);}
+  .home-prog-head{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--orange);margin-bottom:12px;}
+  .home-prog-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+  .home-prog-stats strong{display:block;font-family:'Space Mono',monospace;font-size:24px;color:var(--text);}
+  .home-prog-stats span{font-size:12px;color:var(--muted);}
+  .home-prog-ch{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+  .home-ch{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--glass-border);background:none;color:var(--text3);font:inherit;font-size:12px;font-family:'Space Mono',monospace;cursor:pointer;}
+  .home-ch.complete{border-color:rgba(74,222,128,0.5);color:#4ade80;}
+  .home-prog-btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .home-last{background:none;border:none;color:var(--muted);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;padding:10px 4px;}
+  @media(max-width:640px){.journey-steps{grid-template-columns:repeat(3,1fr);}.home-prog-stats strong{font-size:20px;}}
+  @media(prefers-reduced-motion:reduce){#abcToast{transition:none;}}
 </style>
 </head>
 <body>
@@ -1766,6 +1822,7 @@
     <div class="section-content" id="sec-wallets">
       <h2 class="section-title">&#128188; <span class="glow-text">Wallets</span></h2>
       <div class="section-subtitle">// Your front door to Bitcoin  ·  ~3 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what a wallet really holds.</div>
 
       <!-- Section illustration: Wallet types -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -1867,12 +1924,15 @@
           <div class="mt-2 text-xs" style="color:var(--muted);">&#128274; This is a random demo address with no private key. To receive real Bitcoin, generate an address using a proper wallet.</div>
         </div>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A wallet does not contain coins. It holds the keys that let you move coins recorded on the blockchain. Whoever holds the keys controls the money, which is the whole meaning of "not your keys, not your coins".</p></div>
+
     </div>
 
     <!-- ════ EXCHANGES ════ -->
     <div class="section-content" id="sec-exchanges">
       <h2 class="section-title">&#127974; <span class="glow-text">Exchanges</span></h2>
       <div class="section-subtitle">// Where you trade regular money for Bitcoin</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how to buy bitcoin without leaving it at risk.</div>
 
       <!-- Section illustration: Exchange -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -1949,6 +2009,8 @@
       <div class="highlight-box" style="border-left-color:#f87171;background:rgba(248,113,113,0.06);">
         <span class="font-bold" style="color:#f87171;">&#9888;&#65039; Remember:</span> When your Bitcoin sits on an exchange, <em>they</em> hold the private keys - not you. History is littered with exchanges that were hacked, went bankrupt, or froze withdrawals (Mt. Gox, FTX, Celsius). An exchange is a marketplace, not a vault. Buy on the exchange, then transfer to <strong style="color:var(--orange);">your own wallet</strong>. Not your keys, not your coins.
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>An exchange is the easy way in, and a poor place to stay. The balance it shows you is a promise, not a coin. Buy there, then withdraw to a wallet whose keys you hold.</p></div>
+
     </div>
 
     <!-- ════ SENDING ════ -->
@@ -1956,6 +2018,7 @@
     <div class="section-content" id="sec-firstbitcoin">
       <h2 class="section-title">&#128640; <span class="glow-text">Your First $10, Safely</span></h2>
       <div class="section-subtitle">// From understanding Bitcoin to actually holding some - the training-wheels path  ·  ~6 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how to take your first real step with ten dollars.</div>
 
       <p class="body-text">Knowledge that never becomes action is trivia. This lesson is the bridge: a step-by-step path to owning your first ten dollars of bitcoin with essentially zero risk, and graduating to real self-custody only when you have practiced every move with amounts that do not matter.</p>
 
@@ -1998,11 +2061,14 @@
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Fees, confirmations, and why a Bitcoin payment is more like mailing gold than sending an email.</p>
         <button class="btn-orange" data-section="sending" style="font-size:15px;padding:14px 32px;">Next: Sending Bitcoin &#128228; &rarr;</button>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Start with an amount too small to hurt. Buy it, hold it for a week, set up your own wallet, then withdraw to it. Every beginner mistake is cheap at ten dollars and expensive later.</p></div>
+
     </div>
 
     <div class="section-content" id="sec-sending">
       <h2 class="section-title">&#128228; <span class="glow-text">Sending Bitcoin</span></h2>
       <div class="section-subtitle">// Sending money anywhere in the world in minutes</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what happens between pressing send and the payment being final.</div>
 
       <!-- Section illustration: Global sending -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -2096,12 +2162,15 @@
         </div>
         <div id="sendResult" class="hidden mt-4 p-3 rounded-lg text-sm text-center" style="background:var(--orange-dim);border:1px solid var(--orange);color:var(--orange);font-family:'Space Mono',monospace;" aria-live="polite"></div>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A payment is a signed message that waits in a queue until a miner includes it in a block. A higher fee means a shorter wait. Once confirmed it cannot be undone, so the address is worth checking twice.</p></div>
+
     </div>
 
     <!-- ════ SECURITY ════ -->
     <div class="section-content" id="sec-security">
       <h2 class="section-title">&#128272; <span class="glow-text">Security</span></h2>
       <div class="section-subtitle">// Protecting your digital treasure</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>the few habits that prevent most losses.</div>
 
       <!-- Section illustration: Security shield -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -2209,6 +2278,8 @@
         <div id="securityChecklist" class="space-y-2" role="group" aria-label="Security checklist"></div>
       </div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Write the seed phrase on paper, keep it offline and never type it into anything. Use a hardware wallet for savings, add your own randomness when creating it, and treat every urgent message as a scam.</p></div>
+
       <!-- Bridge to Chapter V -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -2223,6 +2294,7 @@
     <div class="section-content" id="sec-money">
       <h2 class="section-title">&#128128; <span class="glow-text">The Nature of Money</span></h2>
       <div class="section-subtitle">// The foundation of everything that follows  ·  ~5 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why some things become money and others never do.</div>
       <!-- Section illustration: Evolution of money -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Evolution of money" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -2315,6 +2387,8 @@
       </div>
       <p class="body-text">Bitcoin has a <span class="tooltip-word" tabindex="0">mathematically enforced supply cap<span class="tooltip-box">21 million Bitcoin. Not because a CEO decided it. Not because a government decreed it. Because it is written into the code that runs on every node in the world simultaneously. No single person, company, government, or army can change it.</span></span> of exactly 21 million coins - enforced by thousands of independent computers worldwide, not by the goodwill of any government. It is infinitely divisible (one Bitcoin = 100 million satoshis), instantly portable across any border, verifiable by anyone in seconds, censorship-resistant, and completely transparent. Bitcoin is not merely better money. It is the <span class="tooltip-word" tabindex="0">hardest money ever created<span class="tooltip-box">"Hard money" means money that is hard to produce more of. Gold was hard money. Bitcoin is the hardest money ever created: after the year 2140, no new Bitcoin will ever be created. Its stock-to-flow ratio already surpasses gold and rises with every halving.</span></span>, the most portable, the most divisible, the most verifiable, and the most decentralized.</p>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Money is whatever a society finds hardest to fake and easiest to trade. Gold won for five thousand years because nobody could make more of it on demand. Every later lesson tests Bitcoin against that same standard.</p></div>
+
       <!-- Bridge to Inflation -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -2329,6 +2403,7 @@
     <div class="section-content" id="sec-fiatgraveyard">
       <h2 class="section-title">&#128123; <span class="glow-text">The Fiat Graveyard</span></h2>
       <div class="section-subtitle">// Every paper currency eventually returns to its intrinsic value: zero</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why paper currencies keep dying the same way.</div>
       <!-- Section illustration: Fiat currency graveyard -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Fiat currency graveyard" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -2434,6 +2509,8 @@
         <p style="font-size:12px;color:var(--muted);margin:0;font-family:'Space Mono',monospace;"> -  Edward Griffin, <em>The Creature from Jekyll Island</em></p>
       </div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Every currency backed only by a promise has eventually been printed into decline. The pattern is the same from imperial China to Weimar to Venezuela. The dollar has lasted longer than most, which is not the same as being exempt.</p></div>
+
       <!-- Bridge to Pizza -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -2448,6 +2525,7 @@
     <div class="section-content" id="sec-digimoney">
       <h2 class="section-title">&#128187; <span class="glow-text">Digital Money Before Bitcoin</span></h2>
       <div class="section-subtitle">// The pioneers who paved the way</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why Bitcoin succeeded where earlier digital cash failed.</div>
       <!-- Section illustration: Digital money timeline -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Digital money timeline" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -2525,6 +2603,8 @@
 
       <p class="body-text">Then, on October 31, 2008, a pseudonymous person or group called <span class="tooltip-word" tabindex="0">Satoshi Nakamoto<span class="tooltip-box">The creator of Bitcoin. Published the whitepaper on October 31, 2008 and launched the network on January 3, 2009. Communicated only by email and forum posts. Disappeared in 2011. Their identity has never been confirmed.</span></span> posted a nine-page whitepaper to a cryptography mailing list. It was titled "Bitcoin: A Peer-to-Peer Electronic Cash System." It solved the one problem none of the predecessors could: <strong style="color:var(--orange);">how to build decentralized digital money with no central authority, no single point of failure, and no trusted third party</strong>. By combining proof of work (from HashCash), chained blocks (from Bit Gold), peer-to-peer networking, and a novel difficulty adjustment mechanism, Satoshi created something none of the prior systems achieved: a digital currency that <em>cannot be shut down</em> because there is no one to shut down. Bitcoin didn't just improve on its predecessors - it made the breakthrough that made all of them possible in retrospect.</p>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>People tried to build internet money for twenty years before Bitcoin. Each attempt had a company or server at its centre, and each was shut down or went bust. Bitcoin removed the centre.</p></div>
+
       <!-- Bridge to Altcoins -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -2539,6 +2619,7 @@
     <div class="section-content" id="sec-inflation">
       <h2 class="section-title">&#128200; <span class="glow-text">Monetary Inflation</span></h2>
       <div class="section-subtitle">// The number they don't want you to understand</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>where new money comes from and why your savings shrink.</div>
       <!-- Section illustration: Dollar purchasing power loss -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Dollar purchasing power loss" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -2789,6 +2870,8 @@
 
       <p class="body-text">Why does this matter for Bitcoin? Because the entire argument for fiat money rests on the claim that inflation is "low and stable." If it were honestly reported at 8-12%, the public would immediately see the system is broken. Bitcoin fixes this by making the statistics irrelevant: <strong style="color:var(--orange);">a money with a fixed supply cannot be inflated, period</strong>. No hedonic adjustments. No substitution tricks. Just 21 million, forever.</p>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>When more money is created, each existing unit buys less. The official inflation figure understates what you feel because the basket it measures keeps changing. Rising prices are a symptom. The growing money supply is the cause.</p></div>
+
       <!-- Bridge to Full Faith & Credit -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -2803,6 +2886,7 @@
     <div class="section-content" id="sec-faithcredit">
       <h2 class="section-title">&#127963;&#65039; <span class="glow-text">Full Faith &amp; Credit</span></h2>
       <div class="section-subtitle">// The $40 trillion promise backed by... what exactly?</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what actually stands behind a dollar.</div>
       <!-- Section illustration: Debt clock and balance scale -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Debt clock and balance scale" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -3027,6 +3111,8 @@
 
       <div class="neon-divider"></div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A dollar is a claim on a government that owes more than $40 trillion and borrows more every day, under both parties. The debt can only be serviced by taxing, borrowing again, or creating money. Savers pay for the third option.</p></div>
+
       <!-- Bridge to Deflation -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -3041,6 +3127,7 @@
     <div class="section-content" id="sec-year1971">
       <h2 class="section-title">&#128201; <span class="glow-text">1971: The Year Money Broke</span></h2>
       <div class="section-subtitle">// One decision. Five decades of fallout.  ·  ~6 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what changed when the dollar lost its link to gold.</div>
 
       <!-- Section illustration: productivity and pay diverging at 1971 -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -3215,6 +3302,8 @@
 
       <div class="neon-divider"></div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Until 1971 a dollar was a claim on gold. Since then it has been backed by nothing but policy. Wages, housing and savings all changed course around that date, and measured in gold many things have barely risen in price at all.</p></div>
+
       <!-- Bridge to Deflation -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -3229,6 +3318,7 @@
     <div class="section-content" id="sec-deflation">
       <h2 class="section-title">&#9878;&#65039; <span class="glow-text">Deflation vs Fiat Inflation</span></h2>
       <div class="section-subtitle">// The invisible war for your prosperity  ·  ~4 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why falling prices are not the enemy.</div>
       <!-- Section illustration: Technology vs Money Printing -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Technology vs Money Printing" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -3306,6 +3396,8 @@
 
       <p class="body-text">Bitcoin breaks this cycle. With a fixed supply, Bitcoin lets technology's natural gift - <strong style="color:var(--orange);">falling prices and rising abundance</strong> - reach you directly. When AI makes manufacturing 10% more efficient, goods actually become 10% cheaper. Productivity gains flow to the people who created them, not the money printers who intercepted them. Saving becomes a winning strategy. There is no debt pyramid requiring perpetual debasement. Bitcoin is simply <em>honest money</em> - and in an honest monetary system, technology's deflation is a gift, not a threat.</p>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Technology keeps making things cheaper to produce. Left alone, that would show up as falling prices and richer savers. Money creation cancels it out, so the gains go to whoever receives the new money first.</p></div>
+
       <!-- Bridge to Fiat Graveyard -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -3320,6 +3412,7 @@
     <div class="section-content" id="sec-pizza">
       <h2 class="section-title">&#127829; <span class="glow-text">The Pizza Dilemma</span></h2>
       <div class="section-subtitle">// You can cut a pizza smaller, but you can't make more pizza</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why a fixed supply does not stop bitcoin being spendable.</div>
       <!-- Section illustration: Pizza divisibility -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Pizza divisibility" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -3412,6 +3505,8 @@
 
       <p class="body-text">So the next time someone says "there aren't enough Bitcoin for everyone," you know the answer: there are 2.1 quadrillion sats. The issue was never about having enough pieces - it was about making sure no one could secretly create more. <strong style="color:var(--orange);">You can always cut a pizza into smaller slices. You can never un-dilute a pizza that's been mixed with cardboard.</strong> That's the difference between sound money and fiat. That's the Bitcoin pizza dilemma, resolved.</p>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Ten thousand bitcoin once bought two pizzas. A fixed supply does not mean too few coins, because each one divides into 100 million units. Divisibility lets a scarce money serve everyone.</p></div>
+
       <!-- Bridge to Digital Money -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -3427,6 +3522,7 @@
     <div class="section-content" id="sec-satoshi">
       <h2 class="section-title">&#128373;&#65039; <span class="glow-text">Who Is Satoshi Nakamoto?</span></h2>
       <div class="section-subtitle">// The most important person nobody knows</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why it matters that nobody knows who made Bitcoin.</div>
       <!-- Section illustration: Silhouette with question mark -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Silhouette with question mark" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -3542,11 +3638,14 @@
       <p class="body-text">Compare this to every other cryptocurrency. Ethereum has Vitalik Buterin. Solana has Anatoly Yakovenko. Ripple has Brad Garlinghouse (currently in an SEC lawsuit). Every project with a known leader has a single point of failure - someone who can be pressured, someone who can change direction, someone who can be arrested. Bitcoin is the only major digital asset where the creator is <strong style="color:var(--orange);">permanently absent</strong> and the system doesn't care.</p>
 
       <p class="body-text">Satoshi didn't just build Bitcoin. They <strong style="color:var(--orange);">gave it away</strong> - to everyone, forever. No patent. No company. No retained control. That act of surrender is what makes Bitcoin fundamentally different from everything else in crypto.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Bitcoin's creator published the design, ran it for two years and vanished without spending a coin. There is no founder to arrest, sue or persuade. The rules belong to everyone running the software.</p></div>
+
     </div>
     <!-- ════ THE BITCOIN WHITEPAPER ════ -->
     <div class="section-content" id="sec-whitepaper">
       <h2 class="section-title">&#128220; <span class="glow-text">The Bitcoin Whitepaper</span></h2>
       <div class="section-subtitle">// 9 pages that changed money forever</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>the handful of ideas the whole system rests on.</div>
 
       <!-- Section illustration -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -3789,11 +3888,14 @@
         <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;">The genius of the whitepaper</div>
         <p style="font-size:13px;color:var(--text3);max-width:560px;margin:0 auto;line-height:1.7;">None of the individual components were new. Digital signatures, hash chains, proof-of-work, peer-to-peer networks - all existed before. Satoshi&rsquo;s breakthrough was <strong style="color:var(--orange);">combining them into a system where the incentives align</strong> so that rational self-interest produces honest behavior. It&rsquo;s not just computer science - it&rsquo;s game theory, economics, and cryptography woven together into 9 pages.</p>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>In nine pages the whitepaper combines digital signatures, a chain of timestamped blocks and proof of work so that strangers can agree on who owns what. Nothing in it requires trusting anyone.</p></div>
+
     </div>
     <!-- ════ BITCOIN VS OTHER CRYPTOS ════ -->
     <div class="section-content" id="sec-altcoins">
       <h2 class="section-title">&#128302; <span class="glow-text">Bitcoin vs Other Cryptos</span></h2>
       <div class="section-subtitle">// Not all "crypto" is created equal</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how to tell Bitcoin apart from the thousands of imitations.</div>
 
       <!-- Section illustration: Bitcoin vs altcoins -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -4010,6 +4112,8 @@
 
       <p class="body-text"><strong style="color:var(--orange);">The track record speaks for itself.</strong> Bitcoin has operated continuously since January 3, 2009 - no outages, no rollbacks, no frozen funds, no supply changes. Governments have attempted to ban it in multiple countries; the network continued uninterrupted. By contrast, Ethereum has rolled back its blockchain, Solana has gone offline 7+ times, Tether and USDC have frozen user funds, and XRP was the subject of an SEC enforcement action. Each of these projects involves identifiable founders, companies, or foundations that control key decisions. Bitcoin is the only major cryptocurrency where no individual, company, or organization controls the supply, the rules, or the network.</p>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Ask one question of any coin: who can change the rules? If the answer is a founder, a foundation or a small group of validators, it is a company with a token. For Bitcoin the answer is nobody.</p></div>
+
       <!-- Bridge to PoW vs PoS -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -4024,6 +4128,7 @@
     <div class="section-content" id="sec-powvpos">
       <h2 class="section-title">&#9874;&#65039; <span class="glow-text">Proof of Work vs Proof of Stake</span></h2>
       <div class="section-subtitle">// How consensus mechanisms shape who has power</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why Bitcoin secures itself with energy rather than deposits.</div>
 
       <!-- Section illustration: PoW vs PoS -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -4196,6 +4301,8 @@
 
       <div class="neon-divider"></div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Proof of work makes rewriting history cost real energy that cannot be faked afterwards. Proof of stake replaces that with locked-up coins, which is cheaper but hands lasting control to the largest holders and needs trusted checkpoints.</p></div>
+
       <!-- Bridge to Myths -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -4210,6 +4317,7 @@
     <div class="section-content" id="sec-myths">
       <h2 class="section-title">&#128165; <span class="glow-text">6 Bitcoin Myths Debunked</span></h2>
       <div class="section-subtitle">// The lies you've been told, corrected  ·  ~4 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how to check a scary Bitcoin headline for yourself.</div>
 
       <!-- Section illustration: Myths shattered -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -4377,6 +4485,8 @@
         </div>
       </div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Most objections to Bitcoin were built on one early impression and never updated. Crime, energy and bans all have data you can look up. The habit worth keeping is to ask for the number.</p></div>
+
       <!-- Bridge to Tulips -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -4391,6 +4501,7 @@
     <div class="section-content" id="sec-tulips">
       <h2 class="section-title">&#127799; <span class="glow-text">Bitcoin vs Tulip Mania</span></h2>
       <div class="section-subtitle">// The laziest comparison in finance  ·  ~4 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why Bitcoin does not behave like a bubble.</div>
 
       <!-- Section illustration -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -4530,6 +4641,8 @@
         <p style="font-size:13px;color:var(--text3);max-width:520px;margin:0 auto;line-height:1.7;">Ask them: Can you send a tulip to someone in Nigeria in 10 minutes? Can you verify there will only ever be 21 million tulips? Can you store a tulip in your brain by memorizing 12 words? Can a tulip run 24/7 for 17 years with 99.99% uptime? No? Then it's not the same thing.</p>
       </div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A bubble inflates once, bursts and never returns. Bitcoin has crashed by more than three quarters four times and recovered to a higher peak every time, with a supply nobody can expand.</p></div>
+
       <!-- Bridge to Quantum -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -4543,6 +4656,7 @@
     <div class="section-content" id="sec-quantum">
       <h2 class="section-title">&#9883;&#65039; <span class="glow-text">The Quantum Question</span></h2>
       <div class="section-subtitle">// Will quantum computers break Bitcoin? (No. Here's why.)  ·  ~5 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how real the quantum threat is, and what would be done about it.</div>
       <!-- Section illustration: Quantum vs Bitcoin -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Quantum vs Bitcoin" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -4735,6 +4849,8 @@
 
       <div class="neon-divider"></div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Breaking Bitcoin's signatures needs thousands of error-corrected qubits. Today's machines have none at that quality. If that ever changes, every bank and government shares the problem, and Bitcoin can move to quantum-resistant signatures.</p></div>
+
       <!-- Bridge to Bitcoin vs Gold -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -4749,6 +4865,7 @@
     <div class="section-content" id="sec-caseagainst">
       <h2 class="section-title">&#9876;&#65039; <span class="glow-text">The Case Against Bitcoin</span></h2>
       <div class="section-subtitle">// The strongest arguments against Bitcoin, presented at full strength  ·  ~7 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>the strongest honest arguments against owning bitcoin.</div>
 
       <p class="body-text">Every other page on this site makes the case <em>for</em> Bitcoin. This one does the opposite, and it does it honestly. No strawmen, no "myths to debunk." These are the six strongest arguments against Bitcoin, presented the way a smart critic would present them. Some of them are partly right. If your conviction cannot survive this page, it was never conviction.</p>
 
@@ -4826,12 +4943,15 @@
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You have now heard the strongest case against Bitcoin. Time to compare it against the only money that ever lasted - and see which properties it keeps, and which it fixes.</p>
         <button class="btn-orange" data-section="goldvsbtc" style="font-size:15px;padding:14px 32px;">Next: Bitcoin vs Gold &#129351; &rarr;</button>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Bitcoin is volatile, unforgiving of mistakes, energy hungry and unevenly held, and governments can make it hard to use. All of that is true. Knowing it lets you decide how much risk you can actually live with.</p></div>
+
     </div>
 
     <!-- ════ BITCOIN vs GOLD ════ -->
     <div class="section-content" id="sec-goldvsbtc">
       <h2 class="section-title">&#129351; <span class="glow-text">Bitcoin vs Gold</span></h2>
       <div class="section-subtitle">// Measuring digital scarcity against 5,000 years of physical scarcity  ·  ~6 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>where bitcoin beats gold and where it does not.</div>
 
       <!-- Section illustration: Gold vs Bitcoin -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -5059,6 +5179,8 @@
 
       <div class="neon-divider"></div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Bitcoin is scarcer, easier to move, easier to divide and easier to verify than gold. Gold has five thousand years of history and a far steadier price. Pricing bitcoin in gold instead of dollars removes the distortion of a shrinking ruler.</p></div>
+
       <!-- Bridge to Adoption -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -5073,6 +5195,7 @@
     <div class="section-content" id="sec-adoption">
       <h2 class="section-title">&#128640; <span class="glow-text">"Well, No One Uses Bitcoin"</span></h2>
       <div class="section-subtitle">// The adoption wave hiding in plain sight</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>who is actually using Bitcoin, in numbers.</div>
 
       <!-- Section illustration: Adoption curve -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -5221,6 +5344,8 @@
 
       <div class="neon-divider"></div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Adoption has moved from hobbyists to companies, funds and governments. Exchange-traded funds made it available in ordinary retirement accounts. It is still a small fraction of the world's savings.</p></div>
+
       <!-- Bridge to Getting Started -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -5235,6 +5360,7 @@
     <div class="section-content" id="sec-scamdrill">
       <h2 class="section-title">&#127907; <span class="glow-text">The Scam Drill</span></h2>
       <div class="section-subtitle">// The #1 way beginners lose bitcoin is not hacking. It is being asked nicely  ·  ~8 min drill</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how to recognise a scam before it costs you.</div>
 
       <p class="body-text">Nobody breaks Bitcoin's cryptography. They break YOU - with urgency, authority, and greed. Billions of dollars are stolen every year through messages exactly like the ones below. Some of these are scams. Some are legitimate. Your job: tell them apart, before it costs you.</p>
 
@@ -5259,11 +5385,14 @@
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">You can use Bitcoin safely now. Time to understand the machine - starting with the network no one can switch off.</p>
         <button class="btn-orange" data-section="network" style="font-size:15px;padding:14px 32px;">Next: The Bitcoin Network &#127760; &rarr;</button>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Nobody legitimate needs your seed phrase, ever. Guaranteed returns, urgency and unexpected contact from "support" are the reliable warning signs. Real software is boring and asks for nothing.</p></div>
+
     </div>
 
     <div class="section-content" id="sec-network">
       <h2 class="section-title">&#127760; <span class="glow-text">The Bitcoin Network</span></h2>
       <div class="section-subtitle">// A global web of computers with no boss</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how thousands of computers stay in agreement with no boss.</div>
 
       <!-- Section illustration: Distributed network -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -5323,12 +5452,15 @@
       </div>
 
       <p class="body-text">The beauty of this system is that it needs no trust. The rules of Bitcoin are enforced by mathematics and code, not by humans. Anyone can join the network, anyone can leave, and the system keeps working perfectly regardless. It's the most resilient financial network ever built.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Each node passes transactions and blocks to its neighbours until the whole network has them. There is no headquarters to raid and no server to switch off. If one node disappears the rest carry on.</p></div>
+
     </div>
 
     <!-- ════ NODE ════ -->
     <div class="section-content" id="sec-node">
       <h2 class="section-title">&#128421; <span class="glow-text">Node</span></h2>
       <div class="section-subtitle">// The guardians of Bitcoin's truth</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what running a node gives you.</div>
 
       <!-- Section illustration: Node verification -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -5374,12 +5506,15 @@
       </div>
 
       <p class="body-text">Nodes are Bitcoin's immune system. They enforce the rules, make sure miners can't cheat, and ensure the 21 million supply cap is never broken. Every node you add makes the network stronger.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A node checks every block against the rules and ignores anything that breaks them. Running your own means you verify your own payments instead of trusting someone else's word, on a cheap computer.</p></div>
+
     </div>
 
     <!-- ════ MINING ════ -->
     <div class="section-content" id="sec-mining">
       <h2 class="section-title">&#9935; <span class="glow-text">Mining</span></h2>
       <div class="section-subtitle">// The lottery that secures the world's money</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what miners are actually doing with all that electricity.</div>
 
       <!-- Section illustration: Mining -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -5431,12 +5566,15 @@
       </div>
 
       <p class="body-text">Every 210,000 blocks (~4 years), the block reward gets cut in half - the <span class="tooltip-word" tabindex="0">halving<span class="tooltip-box">Bitcoin's supply schedule: every 4 years the new supply per block is halved. This continues until around 2140, when the last fraction of a Bitcoin will be mined. Total supply is capped at 21 million BTC, forever.</span></span>. It's built into Bitcoin's code from day one.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Miners guess numbers until one produces a hash that starts with enough zeros. Finding it is expensive and checking it is instant. The winner adds the next block and earns new bitcoin, which is how coins are issued.</p></div>
+
     </div>
 
     <!-- ════ BLOCKCHAIN ════ -->
     <div class="section-content" id="sec-blockchain">
       <h2 class="section-title">&#9939; <span class="glow-text">The Blockchain</span></h2>
       <div class="section-subtitle">// The world's most transparent record book</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why past transactions cannot be quietly edited.</div>
 
       <!-- Section illustration: Blockchain chain -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -5521,12 +5659,15 @@
         <a href="https://mempool.space" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:var(--orange);color:#000;font-weight:700;padding:12px 28px;border-radius:10px;text-decoration:none;font-size:14px;font-family:'Syne',sans-serif;transition:transform 0.2s, box-shadow 0.2s;box-shadow:0 0 16px var(--orange-glow);" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Explore the Live Blockchain on mempool.space &rarr;</a>
         <div style="font-size:12px;color:var(--muted);margin-top:10px;font-family:'Space Mono',monospace;">mempool.space - open source, real-time Bitcoin block explorer</div>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Each block carries the fingerprint of the block before it. Change one old transaction and every block after it stops matching. Rewriting history means redoing all of that work faster than everyone else combined.</p></div>
+
     </div>
 
     <!-- ════ BLOCKS ════ -->
     <div class="section-content" id="sec-blocks">
       <h2 class="section-title">&#128230; <span class="glow-text">Blocks</span></h2>
       <div class="section-subtitle">// The pages of Bitcoin's permanent history book</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what is inside a block.</div>
       <!-- Section illustration: Stacked blocks with transaction data -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Stacked blocks with transaction data" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -5582,12 +5723,15 @@
 
       <p class="body-text">The first transaction in every block is special: the <span class="tooltip-word" tabindex="0">coinbase transaction<span class="tooltip-box">Not the exchange! The coinbase tx is how the miner sends themselves the block reward plus all fees. Satoshi famously wrote a message about the banking crisis in the very first one.</span></span>. This is how new Bitcoin is created.</p>
       <p class="body-text">Once a block has 6 subsequent blocks on top, it's considered <span class="tooltip-word" tabindex="0">deeply confirmed<span class="tooltip-box">Six confirmations (~60 minutes) is considered safe for most transactions. Large payments sometimes wait for 100+.</span></span> and essentially irreversible. Bitcoin works on Christmas, weekends, and at 3am.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A block is a batch of transactions plus an 80-byte header. The header holds one fingerprint that stands for every transaction in the batch, the fingerprint of the previous block, and the nonce that proves the work.</p></div>
+
     </div>
 
     <!-- ════ DIFFICULTY ════ -->
     <div class="section-content" id="sec-difficulty">
       <h2 class="section-title">&#127919; <span class="glow-text">Difficulty</span></h2>
       <div class="section-subtitle">// Bitcoin's self-balancing superpower</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how Bitcoin keeps time by itself.</div>
       <!-- Section illustration: Difficulty adjustment balancing scale -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Difficulty adjustment balancing scale" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -5649,6 +5793,8 @@
 
       <p class="body-text">The difficulty mechanism is one of Bitcoin's most elegant inventions. It means Bitcoin cannot be "sped up" by adding more computing power. The 10-minute block time is maintained through pure mathematics.</p>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Every 2,016 blocks the network measures how fast blocks arrived and makes the puzzle harder or easier. Blocks keep coming about every ten minutes whether mining power doubles or halves.</p></div>
+
       <!-- Bridge to Attack Vectors -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -5663,6 +5809,7 @@
     <div class="section-content" id="sec-attackvectors">
       <h2 class="section-title">&#128737; <span class="glow-text">Attack Vectors</span></h2>
       <div class="section-subtitle">// Every way someone could try to break Bitcoin - and why they can't</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what it would take to attack Bitcoin, and what an attacker could not do.</div>
 
       <!-- Section illustration -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -5844,6 +5991,8 @@
 
       <div class="neon-divider"></div>
 
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Even an attacker with most of the mining power can only reverse their own recent payments, at enormous cost. They cannot spend your coins or create new ones, because every node rejects invalid blocks.</p></div>
+
       <!-- Bridge to Chapter VI -->
       <div class="neon-divider" style="margin-top:40px;"></div>
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.06),rgba(245,158,11,0.02));border:1px solid rgba(245,158,11,0.2);border-radius:16px;padding:28px 24px;text-align:center;">
@@ -5856,6 +6005,7 @@
     <div class="section-content" id="sec-transactions">
       <h2 class="section-title">&#128184; <span class="glow-text">Transactions</span></h2>
       <div class="section-subtitle">// The heartbeat of the Bitcoin network</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what a transaction is made of.</div>
       <!-- Section illustration: Transaction flow diagram -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Transaction flow diagram" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -5922,12 +6072,15 @@
       </div>
 
       <p class="body-text">Transactions sit in the <span class="tooltip-word" tabindex="0">mempool<span class="tooltip-box">"Memory pool" - all valid unconfirmed transactions waiting for a miner. During busy times, fees rise as everyone competes for block space.</span></span> until a miner picks them up and includes them in a block.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A transaction melts down coins you own and mints new ones for the people you are paying, plus change back to yourself. Anything left unclaimed goes to the miner as the fee.</p></div>
+
     </div>
 
     <!-- ════ OUTPUTS ════ -->
     <div class="section-content" id="sec-outputs">
       <h2 class="section-title">&#128228; <span class="glow-text">Outputs</span></h2>
       <div class="section-subtitle">// How Bitcoin is actually "stored"</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why your wallet holds coins rather than a balance.</div>
       <!-- Section illustration: UTXO model visualization -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: UTXO model visualization" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -5998,12 +6151,15 @@
 
       <p class="body-text">You must use whole UTXOs as inputs. If you have a 1 BTC UTXO and want to send 0.3 BTC, you spend the entire 1 BTC, create a 0.3 BTC output for the recipient and a ~0.699X BTC output back to yourself (change). Just like paying for a $3 coffee with a $10 bill.</p>
       <p class="body-text">A wallet with many small UTXOs creates large transactions when spending - and larger transactions cost more in fees. Consolidating small UTXOs during low-fee periods is called <span class="tooltip-word" tabindex="0">UTXO consolidation<span class="tooltip-box">Sending all your small UTXOs to yourself in one transaction. You pay a fee now but save on future fees.</span></span>.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Your balance is a total your wallet calculates from separate unspent coins. Paying means spending whole coins and receiving change, exactly like handing over a banknote.</p></div>
+
     </div>
 
     <!-- ════ LOCKS ════ -->
     <div class="section-content" id="sec-locks">
       <h2 class="section-title">&#128274; <span class="glow-text">Locks</span></h2>
       <div class="section-subtitle">// The puzzle that protects every UTXO</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how a coin knows who is allowed to spend it.</div>
       <!-- Section illustration: Lock and key puzzle -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Lock and key puzzle" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -6063,12 +6219,15 @@
       </div>
 
       <p class="body-text">This lock-and-key system is Bitcoin's security foundation. Every full node independently verifies that every spending attempt satisfies the lock. Mathematics doesn't care who you are.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Every coin is locked by a small program that states the condition for spending it. Usually that is one signature. It can also be two of three keys, or a date in the future. Every node checks the condition.</p></div>
+
     </div>
 
     <!-- ════ KEYS & ADDRESSES ════ -->
     <div class="section-content" id="sec-keys">
       <h2 class="section-title">&#128477; <span class="glow-text">Keys &amp; Addresses</span></h2>
       <div class="section-subtitle">// The identity system of Bitcoin</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how twelve words become a whole wallet.</div>
       <!-- Section illustration: Key pair relationship -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Key pair relationship" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -6135,12 +6294,15 @@
       </div>
 
       <p class="body-text">Your seed phrase (12 or 24 words) is the master key that generates ALL of your key pairs. One seed = billions of private keys, public keys, and addresses. This is why your seed phrase is so precious.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A seed phrase is a very large random number written as words. Every private key, public key and address is calculated from it, always in the same way. Keep the words and you can rebuild the wallet anywhere.</p></div>
+
     </div>
 
     <!-- ════ PRIVATE KEYS ════ -->
     <div class="section-content" id="sec-privatekeys">
       <h2 class="section-title">&#128374; <span class="glow-text">Private Keys</span></h2>
       <div class="section-subtitle">// The secret that controls everything  ·  ~4 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what a private key is and why randomness is everything.</div>
       <!-- Section illustration: Private key security visualization -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Private key security visualization" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -6193,12 +6355,15 @@
 
       <p class="body-text">The private key is what you use to <em>sign transactions</em>. The signature proves you authorized it but never reveals the private key itself. It's like proving you own a special pen without ever showing the pen.</p>
       <p class="body-text">A private key should <strong style="color:#f87171;">never</strong> be typed into a website, shared in a message, stored in cloud storage, or photographed. Hardware wallets keep the key on a specialized chip that never connects to the internet - even when signing, the private key never leaves the device.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A private key is a random number so large that nobody could guess it in the lifetime of the universe. That only holds if it really is random. Weak randomness has been the cause of real thefts.</p></div>
+
     </div>
 
     <!-- ════ PUBLIC KEYS ════ -->
     <div class="section-content" id="sec-publickeys">
       <h2 class="section-title">&#128226; <span class="glow-text">Public Keys</span></h2>
       <div class="section-subtitle">// The ID card you CAN share safely</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>why you can share an address without risking your coins.</div>
       <!-- Section illustration: Public key derivation and sharing -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Public key derivation and sharing" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -6257,12 +6422,15 @@
 
       <p class="body-text">Public keys are safe to share. After spending from an address, your public key is revealed, so best practice is to use each address only once for privacy.</p>
       <p class="body-text">The relationship: private key is your identity proof, public key is your verifiable credential, address is your shareable contact info. None of this requires a passport, a bank account, or anyone's permission.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Your public key is calculated from your private key by a step that cannot be reversed. Your address is a shorter fingerprint of that. Anyone can pay it, and nobody can work backwards from it.</p></div>
+
     </div>
 
     <!-- ════ DIGITAL SIGNATURES ════ -->
     <div class="section-content" id="sec-signatures">
       <h2 class="section-title">&#9997;&#65039; <span class="glow-text">Digital Signatures</span></h2>
       <div class="section-subtitle">// The unforgeable proof that you authorized a transaction</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how you prove a payment is yours without revealing your key.</div>
       <!-- Section illustration: Digital signature process -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Digital signature process" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -6329,6 +6497,8 @@
 
       <p class="body-text">Signatures bind three things: the private key (who you are), the transaction (what you authorized), and the signature (the proof). Change even a single byte of the transaction after signing and the signature becomes invalid.</p>
       <p class="body-text">In 2021, <span class="tooltip-word" tabindex="0">Taproot<span class="tooltip-box">A major upgrade introducing Schnorr signatures. Allows "signature aggregation" - combining many signatures into one, making complex transactions cheaper and more private.</span></span> brought Schnorr signatures, enabling "signature aggregation" - combining many signatures into one. Multi-signature transactions became cheaper and indistinguishable from regular transactions.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A signature is made from your private key and the exact transaction. Anyone can check it against your public key. It proves you approved this payment and nothing else, and it gives the key away to nobody.</p></div>
+
     </div>
 
 
@@ -6336,6 +6506,7 @@
     <div class="section-content" id="sec-signetlab">
       <h2 class="section-title">&#129514; <span class="glow-text">The Lab: Use Real Bitcoin</span></h2>
       <div class="section-subtitle">// Not a simulation. A real wallet, real coins, a real blockchain  ·  ~10 min hands-on</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how to make a real Bitcoin transaction with your own hands.</div>
 
       <p class="body-text">Everything you have learned so far, you are now going to <em>do</em>. In the next ten minutes you will generate a real Bitcoin key pair, receive real coins, sign a real transaction with real ECDSA cryptography running in your browser, broadcast it to a live network, and watch a real miner seal it into a block that anyone on Earth can verify.</p>
 
@@ -6418,12 +6589,15 @@
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Your transaction obeyed rules no company wrote and no government passed. Time to see how a leaderless network agrees on anything - and how it upgrades without breaking.</p>
         <button class="btn-orange" data-section="consensus" style="font-size:15px;padding:14px 32px;">Next: Consensus &amp; Upgrades &#9878;&#65039; &rarr;</button>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>You created a key, received coins, built and signed a transaction and watched a block confirm it on a live test network. Real bitcoin works in exactly the same way. Only the stakes differ.</p></div>
+
     </div>
 
     <!-- ════ CONSENSUS & UPGRADES ════ -->
     <div class="section-content" id="sec-consensus">
       <h2 class="section-title">&#9878;&#65039; <span class="glow-text">Consensus &amp; Upgrades</span></h2>
       <div class="section-subtitle">// How Bitcoin evolves without a CEO</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how Bitcoin changes when nobody is in charge.</div>
       <!-- Section illustration: Fork diagram -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Fork diagram" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -6655,12 +6829,15 @@
       <p class="body-text">Here's what makes Bitcoin's governance unique: <strong style="color:var(--orange);">no single entity can push through a change.</strong> Not the developers (they write code, but can't force anyone to run it). Not the miners (they process transactions, but users choose which chain to follow). Not the exchanges (they list coins, but can't change the protocol). Power is distributed across all participants - and that distribution is what makes Bitcoin's monetary properties trustworthy.</p>
 
       <p class="body-text">Compare this to every other monetary system in history. The Federal Reserve can change interest rates in an afternoon. A government can freeze bank accounts overnight. Even Ethereum's leadership pushed through a chain rollback in 2016 (the DAO fork). Bitcoin's upgrade process is slow and frustrating by design - because the alternative is a monetary system that can be changed on a whim.</p>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Anyone can propose a change, and nobody can impose one. Upgrades spread only when the people running nodes choose to adopt them, which makes Bitcoin slow to change and very hard to capture.</p></div>
+
     </div>
 
     <!-- ════ LIGHTNING NETWORK ════ -->
     <div class="section-content" id="sec-lightning">
       <h2 class="section-title">&#9889; <span class="glow-text">The Lightning Network</span></h2>
       <div class="section-subtitle">// Bitcoin's instant payment layer  ·  ~4 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how Bitcoin can handle everyday payments.</div>
       <!-- Section illustration: Layer 1 and Layer 2 -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Layer 1 and Layer 2" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -6851,12 +7028,15 @@
       <p class="body-text">The key insight: Bitcoin doesn't need to compete with Visa at Layer 1. It needs to be <strong>more secure than any vault</strong> at Layer 1, and <strong style="color:#60a5fa;">faster than any card</strong> at Layer 2. Lightning delivers both - without compromising Bitcoin's core principles of decentralization and fixed supply.</p>
 
       <div class="neon-divider"></div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Lightning locks bitcoin into a channel between two parties and lets them pay each other instantly by updating who owns what. Only opening and closing touch the blockchain, so small payments become fast and nearly free.</p></div>
+
     </div>
 
     <!-- ════ AM I TOO LATE? ════ -->
     <div class="section-content" id="sec-toolate">
       <h2 class="section-title">&#9203; <span class="glow-text">Am I Too Late?</span></h2>
       <div class="section-subtitle">// Bitcoin's market cap is still a rounding error  ·  ~5 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how to think about whether you have missed it.</div>
       <!-- Section illustration: Bitcoin tiny slice vs global assets -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Bitcoin tiny slice vs global assets" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -7076,12 +7256,15 @@
       <p class="body-text">The question isn't whether you're too late. <strong style="color:var(--orange);">The question is whether Bitcoin has finished absorbing value from inferior assets.</strong> At 0.2% penetration, the answer is almost certainly no.</p>
 
       <div class="neon-divider"></div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Bitcoin is still a small slice of the world's stored wealth. Whether it grows depends on adoption nobody can promise. The useful question is not the price but what share of your savings you are comfortable holding in it.</p></div>
+
     </div>
 
     <!-- ════ A ₿IT NEW PERSPECTIVE ════ -->
     <div class="section-content" id="sec-perspective">
       <h2 class="section-title">&#127775; <span class="glow-text">A &#8383;it New Perspective</span></h2>
       <div class="section-subtitle">// What happens when saving is rewarded again  ·  ~5 min read</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>what changes when money holds its value.</div>
       <!-- Section illustration: Two contrasting monetary futures -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Two contrasting monetary futures" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -7147,6 +7330,8 @@
         <p style="color:var(--text3);font-size:14px;max-width:480px;margin:0 auto 24px;line-height:1.7;">You now understand money, Bitcoin, and the cryptography that powers it - from first principles. That puts you ahead of almost everyone.</p>
       </div>
       <div class="inline-demo" data-demo="perspective"></div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>If money cannot be diluted, saving is rewarded and long-term planning makes sense again. That is the case for Bitcoin in one sentence, and it is why people care about it beyond the price.</p></div>
+
     </div>
 
 
@@ -7156,6 +7341,7 @@
     <div class="section-content" id="sec-finalexam">
       <h2 class="section-title">&#127942; <span class="glow-text">The Final Exam</span></h2>
       <div class="section-subtitle">// 25 questions across the whole course. Pass at 80% and mint your certificate  ·  ~15 min</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how much of the course has stuck.</div>
 
       <p class="body-text">You have hashed blocks by hand, broken and repaired a blockchain, signed with real cryptography, and moved real coins on a real network. One question remains: did it stick? Twenty-five questions, drawn from every chapter. No timer, no tricks, no retakes limit - but the questions do not go easy on you.</p>
 
@@ -7206,11 +7392,14 @@
         <p style="color:var(--text3);font-size:14px;max-width:500px;margin:0 auto 20px;line-height:1.7;">Pizza days, lost fortunes in landfills, and the strange folklore of the hardest money ever made.</p>
         <button class="btn-orange" data-section="lore" style="font-size:15px;padding:14px 32px;">Next: Bitcoin Lore &#127922; &rarr;</button>
       </div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>The exam draws twenty-five questions from every chapter. Passing means you can explain how Bitcoin works to someone else, which is the real test of understanding.</p></div>
+
     </div>
 
     <div class="section-content" id="sec-lore">
       <h2 class="section-title">&#127922; <span class="glow-text">Bitcoin Lore &amp; Milestones</span></h2>
       <div class="section-subtitle">// The moments that made history</div>
+      <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>the stories Bitcoin people tell each other.</div>
       <!-- Section illustration: Timeline -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
         <svg role="img" aria-label="Illustration: Timeline" viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
@@ -7348,6 +7537,8 @@
 
       <p class="body-text">Every "$1 = 1,309 BTC" and every lost hard drive is a reminder that we're still in the early chapters of this story. The protocol is 17 years old. The dollar is 250. Gold is 5,000. Bitcoin is just getting started.</p>
       <div class="inline-demo" data-demo="lore"></div>
+      <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>Bitcoin has a history as well as a design: the pizzas, the lost hard drive, the first transaction to Hal Finney. The stories carry the culture that keeps the rules from being bent.</p></div>
+
     </div>
     <!-- ════ BIBLIOGRAPHY ════ -->
     <div class="section-content" id="sec-bibliography">

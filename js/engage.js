@@ -237,6 +237,296 @@ function mountWhenVisible(id){
     if(++tries < 120) setTimeout(wait, 50);
   })();
 }
+
+// ═══════════════════════════════════════════════════════════════
+//   JOURNEY: one story carried through the technical labs
+//   Make a key -> get an address -> build a transaction -> sign it
+//   -> broadcast it -> mine it. Each lab picks up what the last made.
+// ═══════════════════════════════════════════════════════════════
+const JOURNEY = [
+  {k:'key',  label:'Key',         icon:'&#128273;', lab:'keys',         hint:'Create a seed phrase'},
+  {k:'addr', label:'Address',     icon:'&#128236;', lab:'keys',         hint:'Derive your address'},
+  {k:'tx',   label:'Transaction', icon:'&#129534;', lab:'transactions', hint:'Build a payment'},
+  {k:'sig',  label:'Signature',   icon:'&#9997;&#65039;', lab:'signatures', hint:'Sign it'},
+  {k:'sent', label:'Broadcast',   icon:'&#128225;', lab:'network',      hint:'Send it to the network'},
+  {k:'block',label:'Block',       icon:'&#9935;&#65039;', lab:'mining', hint:'Mine it into a block'}
+];
+const JOURNEY_LESSONS = ['network','node','mining','blockchain','blocks','difficulty','transactions','outputs','locks','keys','privatekeys','publickeys','signatures'];
+
+function journeySet(k, value){
+  const first = !engage.journey[k];
+  engage.journey[k] = value || true;
+  engageSave();
+  renderJourney(currentSection);
+  if(first){
+    const step = JOURNEY.filter(function(j){ return j.k === k; })[0];
+    const left = JOURNEY.filter(function(j){ return !engage.journey[j.k]; });
+    toast(step.icon + ' ' + step.label + ' added to your journey' + (left.length ? '' : '. You have taken a payment from seed phrase to block.'));
+    renderHome();
+  }
+}
+
+function renderJourney(sectionId){
+  const sec = document.getElementById('sec-' + sectionId);
+  if(!sec) return;
+  let strip = sec.querySelector('.journey');
+  if(JOURNEY_LESSONS.indexOf(sectionId) < 0){ if(strip) strip.remove(); return; }
+  if(!strip){
+    strip = document.createElement('div');
+    strip.className = 'journey';
+    const anchor = sec.querySelector('.lesson-goal') || sec.querySelector('.section-subtitle');
+    anchor.insertAdjacentElement('afterend', strip);
+  }
+  const j = engage.journey;
+  const next = JOURNEY.filter(function(s){ return !j[s.k]; })[0];
+  strip.innerHTML = '<div class="journey-head"><span>Your payment, start to finish</span>'
+    + (next ? '<button type="button" class="journey-next" data-section="' + next.lab + '">Next: ' + next.hint + ' &rarr;</button>' : '<span class="journey-done">&#10003; Complete</span>') + '</div>'
+    + '<ol class="journey-steps">' + JOURNEY.map(function(s){
+        const got = j[s.k];
+        const detail = typeof got === 'string' ? got : '';
+        return '<li class="journey-step' + (got ? ' got' : '') + (next && next.k === s.k ? ' next' : '') + '">'
+          + '<button type="button" data-section="' + s.lab + '" title="' + (got ? 'Done' : s.hint) + '">'
+          + '<span class="journey-ico" aria-hidden="true">' + s.icon + '</span><span class="journey-lab">' + s.label + '</span>'
+          + (detail ? '<span class="journey-val">' + detail + '</span>' : '') + '</button></li>';
+      }).join('') + '</ol>';
+}
+
+function short(h, n){ n = n || 6; return h.length > n * 2 + 3 ? h.slice(0, n) + '...' + h.slice(-n) : h; }
+
+// Called by mountLab after a demo's own init has run
+function journeyApply(id, host){
+  const j = engage.journey;
+  const $ = function(i){ return document.getElementById(i); };
+  const note = function(html){
+    const n = document.createElement('div'); n.className = 'journey-note'; n.innerHTML = html;
+    host.querySelector('.lab-body').insertAdjacentElement('afterbegin', n);
+  };
+  const watch = function(el, test, fn){
+    if(!el) return;
+    const mo = new MutationObserver(function(){ if(test()){ fn(); } });
+    mo.observe(el, {childList:true, subtree:true, attributes:true, characterData:true});
+  };
+
+  if(id === 'keys'){
+    const grab = function(){
+      const a = $('seedAddr'); if(!a || !a.textContent.trim()) return;
+      engage.journey.address = a.textContent.trim(); engageSave();
+      journeySet('key'); journeySet('addr', short(engage.journey.address));
+    };
+    host.querySelector('.lab-body').addEventListener('input', function(){ setTimeout(grab, 50); });
+    host.querySelector('.lab-body').addEventListener('click', function(){ setTimeout(grab, 50); });
+    if(j.address) note('This is where your journey begins. The address you make here is the one your later labs will pay change back to.');
+  }
+  if(id === 'transactions'){
+    note(j.address
+      ? 'Change from this payment returns to <strong>your address</strong> from the seed phrase lab: <code>' + short(j.address, 10) + '</code>'
+      : 'Tip: do the <button type="button" class="journey-link" data-section="keys">seed phrase lab</button> first and your change will come back to an address you made yourself.');
+    watch($('txBroadcastResult'), function(){ return /confirmed/i.test($('txBroadcastResult').textContent); }, function(){
+      const change = ($('txChange') && $('txChange').value) || '0';
+      const text = 'Pay Carol 0.3000 BTC, change ' + parseFloat(change).toFixed(4) + ' BTC to ' + (j.address ? short(j.address, 8) : 'me');
+      engage.journey.txText = text; engage.journey.txid = sha256Hex(sha256Hex(text)); engageSave();
+      journeySet('tx', short(engage.journey.txid));
+    });
+  }
+  if(id === 'signatures'){
+    if(j.txText && $('sigMessage')){
+      $('sigMessage').value = j.txText;
+      note('The message below is <strong>the transaction you built</strong>. Sign it, then try to change the amount.');
+    }
+    watch($('sigOutput'), function(){ return !$('sigOutput').classList.contains('hidden'); }, function(){ journeySet('sig', j.txid ? 'tx ' + short(j.txid, 4) : true); });
+  }
+  if(id === 'network'){
+    if(j.txid) note('Click any node to broadcast. Imagine it is <strong>your transaction</strong> <code>' + short(j.txid, 8) + '</code> leaving your wallet.');
+    const sent = function(){ journeySet('sent'); };
+    if($('netCanvas')) $('netCanvas').addEventListener('click', sent);
+    if($('netDoubleSpendBtn')) $('netDoubleSpendBtn').addEventListener('click', sent);
+  }
+  if(id === 'mining'){
+    if(j.txText && $('mineData')){
+      $('mineData').value = j.txText + ' [' + short(j.txid, 6) + ']';
+      $('mineData').dispatchEvent(new Event('input', {bubbles:true}));
+      note('The block data in step 2 is <strong>your own transaction</strong>. Mine it and it becomes history.');
+    }
+    watch($('mineResult'), function(){ return !$('mineResult').classList.contains('hidden'); }, function(){
+      const h = ($('mineHash') && $('mineHash').textContent.trim()) || '';
+      journeySet('block', h ? short(h, 6) : true);
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+//   GO DEEPER: supporting detail is collapsed until asked for
+// ═══════════════════════════════════════════════════════════════
+const DEEP_HEADINGS = [
+  'Case Study: The Coldcard', 'Case Study: Zcash', 'How the Federal Reserve Actually Creates Money',
+  'U.S. Government Income Statement', 'Interest on Debt vs Defense', 'Red Ink Is Bipartisan',
+  'The Scoreboard Since 1971', 'Is All of This Really Because of 1971', 'Why the Fiat System Cannot Let Deflation Win',
+  'The Usual Suspects', 'Censorship in practice', 'The "nothing at stake" problem', 'Why Proof of Work distributes',
+  'Expert Timeline Estimates', 'Satoshi on SHA-256 Breaking', 'Satoshi Already Addressed This',
+  'The problem with pricing Bitcoin in USD', 'Why Bitcoin Makes a Strong Treasury Asset',
+  'The BIP Process', 'Current & Proposed Changes', 'Lightning Network Growth', 'Why Value Migrates to Bitcoin'
+];
+function setupDeepBlocks(){
+  document.querySelectorAll('.section-content > .glass').forEach(function(card){
+    const h = card.querySelector(':scope > .text-sm.font-bold');
+    if(!h) return;
+    const title = h.textContent.replace(/\[\d+\]/g, '').trim();
+    if(!DEEP_HEADINGS.some(function(d){ return title.indexOf(d) >= 0; })) return;
+    card.dataset.depth = 'deep';
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'deep-toggle';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="deep-plus" aria-hidden="true">+</span><span class="deep-label">Go deeper</span><span class="deep-title">' + title.replace(/^[^A-Za-z0-9"]+/, '') + '</span>';
+    card.insertAdjacentElement('beforebegin', btn);
+    btn.addEventListener('click', function(){
+      const open = card.classList.toggle('deep-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.querySelector('.deep-plus').textContent = open ? '−' : '+';
+    });
+  });
+  applyDepth();
+}
+function applyDepth(){
+  document.documentElement.classList.toggle('depth-deep', engage.depth === 'deep');
+  document.querySelectorAll('.depth-switch button').forEach(function(b){
+    b.setAttribute('aria-pressed', b.dataset.depth === engage.depth ? 'true' : 'false');
+  });
+}
+function renderDepthSwitch(sectionId){
+  const sec = document.getElementById('sec-' + sectionId);
+  if(!sec || sec.querySelector('.depth-switch') || !sec.querySelector('[data-depth="deep"]')) return;
+  const n = sec.querySelectorAll('[data-depth="deep"]').length;
+  const sw = document.createElement('div');
+  sw.className = 'depth-switch'; sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'Reading depth');
+  sw.innerHTML = '<span>Reading depth</span><button type="button" data-depth="core">Essentials</button><button type="button" data-depth="deep">Everything (+' + n + ')</button>';
+  (sec.querySelector('.journey') || sec.querySelector('.lesson-goal') || sec.querySelector('.section-subtitle')).insertAdjacentElement('afterend', sw);
+  sw.addEventListener('click', function(e){
+    const b = e.target.closest('button'); if(!b) return;
+    engage.depth = b.dataset.depth; engageSave(); applyDepth();
+  });
+  applyDepth();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//   PROGRESS: chapter rings, lab marks, toasts, welcome card
+// ═══════════════════════════════════════════════════════════════
+function toast(html){
+  let t = document.getElementById('abcToast');
+  if(!t){
+    t = document.createElement('div'); t.id = 'abcToast'; t.setAttribute('role', 'status'); t.setAttribute('aria-live', 'polite');
+    document.body.appendChild(t);
+  }
+  t.innerHTML = html; t.classList.add('show');
+  clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('show'); }, 3800);
+}
+
+function chapters(){
+  const out = [];
+  document.querySelectorAll('#left-sidebar .nav-group-label, .nav-group-label').forEach(function(g){
+    if(!g.id || out.some(function(c){ return c.id === g.id; })) return;
+    const lessons = Array.prototype.map.call(document.querySelectorAll('.nav-item[aria-describedby="' + g.id + '"]'), function(n){ return n.dataset.section; });
+    if(lessons.length) out.push({id: g.id, el: g, name: g.textContent.replace(/\s*\d+\/\d+\s*$/, '').trim(), lessons: lessons});
+  });
+  return out;
+}
+function labOf(sectionId){
+  const h = document.querySelector('#sec-' + sectionId + ' .inline-demo');
+  return h ? h.dataset.demo : null;
+}
+function chapterStats(c){
+  let seen = 0, labs = 0, labsDone = 0;
+  c.lessons.forEach(function(l){
+    if(abcVisited.has(l)) seen++;
+    const lab = labOf(l);
+    if(lab){ labs++; if(engage.done[lab]) labsDone++; }
+  });
+  return {seen: seen, total: c.lessons.length, labs: labs, labsDone: labsDone, complete: seen === c.lessons.length && labsDone === labs};
+}
+function ringSVG(frac, complete){
+  const r = 7, c = 2 * Math.PI * r;
+  return '<svg class="ch-ring" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="' + r + '" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3"/>'
+    + '<circle cx="10" cy="10" r="' + r + '" fill="none" stroke="' + (complete ? '#4ade80' : '#f59e0b') + '" stroke-width="3" stroke-linecap="round" stroke-dasharray="' + (c * frac).toFixed(2) + ' ' + c.toFixed(2) + '" transform="rotate(-90 10 10)"/></svg>';
+}
+function renderProgress(){
+  chapters().forEach(function(c){
+    const s = chapterStats(c);
+    const frac = (s.seen + s.labsDone) / (s.total + s.labs);
+    let badge = c.el.querySelector('.ch-prog');
+    if(!badge){ badge = document.createElement('span'); badge.className = 'ch-prog'; c.el.appendChild(badge); }
+    badge.innerHTML = ringSVG(frac, s.complete);
+    badge.title = s.seen + ' of ' + s.total + ' lessons read, ' + s.labsDone + ' of ' + s.labs + ' labs done';
+    c.el.classList.toggle('ch-complete', s.complete);
+    c.lessons.forEach(function(l){
+      const nav = document.getElementById('nav-' + l), lab = labOf(l);
+      if(nav) nav.classList.toggle('lab-done', !!(lab && engage.done[lab]));
+    });
+  });
+}
+
+function renderHome(){
+  const sec = document.getElementById('sec-welcome');
+  if(!sec) return;
+  const labsTotal = document.querySelectorAll('.inline-demo').length;
+  const labsDone = Object.keys(engage.done).filter(function(k){ return document.querySelector('.inline-demo[data-demo="' + k + '"]'); }).length;
+  const seen = Math.min(abcVisited.size, sectionOrder.length);
+  const started = seen > 1 || labsDone > 0;
+  let card = document.getElementById('homeProgress');
+  if(!started){ if(card) card.remove(); return; }
+  if(!card){
+    card = document.createElement('div'); card.id = 'homeProgress';
+    const hero = sec.querySelector('.welcome-hero') || sec;
+    const h1 = hero.querySelector('h1');
+    (h1 || hero.firstElementChild).insertAdjacentElement('beforebegin', card);
+  }
+  const last = (abcLastSection && abcLastSection !== 'welcome') ? abcLastSection : null;
+  // Resume at the first unread lesson after the furthest one read
+  let resume = null;
+  for(let i = 1; i < sectionOrder.length; i++){ if(!abcVisited.has(sectionOrder[i])){ resume = sectionOrder[i]; break; } }
+  const ch = chapters();
+  const jDone = JOURNEY.filter(function(j){ return engage.journey[j.k]; }).length;
+  card.innerHTML = '<div class="home-prog-head">Welcome back</div>'
+    + '<div class="home-prog-stats"><div><strong>' + seen + '</strong><span>of ' + sectionOrder.length + ' lessons read</span></div>'
+    + '<div><strong>' + labsDone + '</strong><span>of ' + labsTotal + ' labs completed</span></div>'
+    + '<div><strong>' + jDone + '</strong><span>of 6 journey steps</span></div></div>'
+    + '<div class="home-prog-ch">' + ch.map(function(c){
+        const s = chapterStats(c), frac = (s.seen + s.labsDone) / (s.total + s.labs);
+        return '<button type="button" class="home-ch' + (s.complete ? ' complete' : '') + '" data-section="' + (c.lessons.filter(function(l){ return !abcVisited.has(l); })[0] || c.lessons[0]) + '" title="' + c.name + '">'
+          + ringSVG(frac, s.complete) + '<span>' + c.name.replace(/^([IVX]+)\..*$/, '$1') + '</span></button>';
+      }).join('') + '</div>'
+    + '<div class="home-prog-btns">'
+    + (resume ? '<button type="button" class="btn-orange" data-section="' + resume + '">Continue: ' + (sectionNames[resume] || resume) + ' &rarr;</button>' : '<button type="button" class="btn-orange" data-section="finalexam">Take the final exam &rarr;</button>')
+    + (last && last !== resume ? '<button type="button" class="home-last" data-section="' + last + '">Back to ' + (sectionNames[last] || last) + '</button>' : '')
+    + '</div>';
+}
+
+// Hooks called by the lab framework above
+function onLabComplete(id){
+  const lab = LABS[id] || {};
+  toast('&#127942; Lab complete: ' + (lab.title || id));
+  renderProgress(); renderHome();
+  const before = onLabComplete._done || {};
+  chapters().forEach(function(c){
+    const s = chapterStats(c);
+    if(s.complete && !before[c.id]) setTimeout(function(){ toast('&#127881; Chapter complete: ' + c.name); }, 4200);
+    before[c.id] = s.complete;
+  });
+  onLabComplete._done = before;
+}
+function onSectionShown(id){
+  renderJourney(id);
+  renderDepthSwitch(id);
+  renderProgress();
+  if(id === 'welcome') renderHome();
+}
+
+setupDeepBlocks();
+(function(){
+  const d = {}; chapters().forEach(function(c){ d[c.id] = chapterStats(c).complete; }); onLabComplete._done = d;
+})();
+renderProgress();
+renderHome();
+
+// Wire into navigation last, once everything above is defined
 (function(){
   const original = showSection;
   window.showSection = showSection = function(id){
