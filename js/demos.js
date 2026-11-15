@@ -400,3 +400,155 @@ EXTRA_DEMOS.locks = {
     else modalInitFns[k] = init;
   });
 })();
+
+// ═══════════════ SENDING BITCOIN (in-page demo, Sending lesson) ═══════════════
+// Real bech32 checksum validation, a wallet balance, fees that change cost and
+// waiting time, a review step, and a confirmation timeline.
+(function(){
+  const root = document.getElementById('sendLab');
+  if(!root) return;
+  const CH = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+  function polymod(v){ const G=[0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3]; let c=1; for(const x of v){ const b=c>>>25; c=((c&0x1ffffff)<<5)^x; for(let i=0;i<5;i++) if((b>>i)&1) c^=G[i]; } return c>>>0; }
+  function hrpExp(h){ const o=[]; for(const c of h) o.push(c.charCodeAt(0)>>5); o.push(0); for(const c of h) o.push(c.charCodeAt(0)&31); return o; }
+  function encode(hrp, data){ const pm = polymod(hrpExp(hrp).concat(data,[0,0,0,0,0,0])) ^ 1; const cs=[]; for(let i=0;i<6;i++) cs.push((pm>>>(5*(5-i)))&31); return hrp+'1'+data.concat(cs).map(function(d){ return CH[d]; }).join(''); }
+  // Returns null when valid, otherwise a plain-language reason
+  function addressProblem(a){
+    if(!a) return 'Enter a recipient address.';
+    if(a !== a.toLowerCase() && a !== a.toUpperCase()) return 'Addresses are all lower case. Mixed case means it was typed or altered by hand.';
+    a = a.toLowerCase();
+    if(a.indexOf('bc1') !== 0) return 'This demo sends to modern addresses, which start with bc1. That text does not.';
+    const body = a.slice(3);
+    if(a.length !== 42 && a.length !== 62) return 'A bc1 address is 42 or 62 characters long. This one is ' + a.length + '.';
+    const data = [];
+    for(const c of body){ const i = CH.indexOf(c); if(i < 0) return 'The character "' + c + '" never appears in a Bitcoin address. Look-alikes such as 1, b, i and o are left out on purpose.'; data.push(i); }
+    if(polymod(hrpExp('bc').concat(data)) !== 1) return 'The checksum does not match. One or more characters are wrong, so your wallet refuses to send. This built-in check is what catches typos.';
+    return null;
+  }
+  function randomAddress(){ const d=[0]; for(let i=0;i<32;i++) d.push(Math.floor(Math.random()*32)); return encode('bc', d); }
+  window.demoBech32Address = randomAddress;
+  // Deterministic address from a hex hash (used by the seed and public-key labs)
+  window.demoBech32From = function(hex){ const d=[0]; for(let i=0;i<32;i++) d.push(parseInt(hex.substr(i*2,2),16)&31); return encode('bc', d); };
+
+  const $ = function(i){ return document.getElementById(i); };
+  const VSIZE = 141; // one input, two outputs, native SegWit
+  let balance = 5000000; // sats
+  let rates = {slow: 1, normal: 2, fast: 4}, liveFees = false;
+  let timer = null;
+  const price = function(){ return (typeof btcPrice !== 'undefined' && btcPrice > 0) ? btcPrice : 0; };
+  const usd = function(sats){ const p = price(); return p ? ' (about $' + (sats / 1e8 * p).toLocaleString('en-US', {maximumFractionDigits: sats / 1e8 * p < 10 ? 2 : 0}) + ')' : ''; };
+  const btc = function(sats){ return (sats / 1e8).toFixed(8).replace(/0{1,4}$/, '') + ' BTC'; };
+
+  root.innerHTML =
+      '<div class="send-bal"><span>Your wallet</span><strong id="sdBal"></strong></div>'
+    + '<label class="demo-desc" for="sdAddr" style="display:block;margin:14px 0 6px;">Recipient address</label>'
+    + '<input id="sdAddr" type="text" class="demo-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="bc1q..."/>'
+    + '<div class="xd-btns"><button type="button" class="demo-btn demo-btn-ghost" id="sdPaste">Paste Alice\'s address</button><button type="button" class="demo-btn demo-btn-ghost" id="sdTypo">Paste it with one typo</button></div>'
+    + '<div id="sdAddrMsg" class="demo-desc" aria-live="polite" style="min-height:20px;"></div>'
+    + '<label class="demo-desc" for="sdAmt" style="display:block;margin:10px 0 6px;">Amount in BTC <span id="sdAmtUsd"></span></label>'
+    + '<input id="sdAmt" type="number" class="demo-input" min="0" step="0.0001" value="0.001" inputmode="decimal"/>'
+    + '<div class="demo-desc" style="margin:14px 0 6px;">Fee: you choose how much to bid for space in the next blocks <span id="sdFeeSrc"></span></div>'
+    + '<div class="send-fees" role="radiogroup" aria-label="Fee level" id="sdFees"></div>'
+    + '<div id="sdReview" class="send-review hidden" aria-live="polite"></div>'
+    + '<div class="xd-btns"><button type="button" class="demo-btn demo-btn-orange" id="sdReviewBtn">Review payment</button><button type="button" class="demo-btn demo-btn-green hidden" id="sdSend">Sign and broadcast</button><button type="button" class="demo-btn demo-btn-ghost hidden" id="sdAgain">Send another</button></div>'
+    + '<div id="sdTimeline" class="hidden" aria-live="polite"></div>';
+
+  let level = 'normal';
+  const LV = {slow: ['Economy', 'about an hour', 6], normal: ['Standard', 'about 30 minutes', 3], fast: ['Priority', 'next block, about 10 minutes', 1]};
+  function drawFees(){
+    $('sdFees').innerHTML = ['slow','normal','fast'].map(function(k){
+      const f = rates[k] * VSIZE;
+      return '<button type="button" role="radio" aria-checked="' + (k === level) + '" class="send-fee' + (k === level ? ' on' : '') + '" data-k="' + k + '"><strong>' + LV[k][0] + '</strong><span>' + rates[k] + ' sat/vB</span><span>' + Math.round(f).toLocaleString() + ' sats' + usd(f) + '</span><em>' + LV[k][1] + '</em></button>';
+    }).join('');
+    $('sdFeeSrc').textContent = liveFees ? '(live network rates)' : '(typical rates)';
+  }
+  function draw(){
+    $('sdBal').textContent = btc(balance) + usd(balance);
+    const a = parseFloat($('sdAmt').value);
+    $('sdAmtUsd').textContent = a > 0 ? usd(a * 1e8).trim() : '';
+    drawFees();
+  }
+  function hideReview(){ $('sdReview').classList.add('hidden'); $('sdSend').classList.add('hidden'); $('sdReviewBtn').classList.remove('hidden'); }
+  function fail(msg){ const r = $('sdReview'); r.classList.remove('hidden'); r.className = 'send-review bad'; r.innerHTML = '<strong>Cannot send.</strong> ' + msg; $('sdSend').classList.add('hidden'); }
+
+  $('sdFees').addEventListener('click', function(e){ const b = e.target.closest('.send-fee'); if(!b) return; level = b.dataset.k; hideReview(); draw(); });
+  $('sdAmt').addEventListener('input', function(){ hideReview(); draw(); });
+  $('sdAddr').addEventListener('input', function(){
+    hideReview();
+    const v = this.value.trim(), m = $('sdAddrMsg');
+    if(!v){ m.textContent = ''; return; }
+    const p = addressProblem(v);
+    m.innerHTML = p ? '<span style="color:#f87171;">&#10007; ' + p + '</span>' : '<span style="color:#4ade80;">&#10003; Valid address. The checksum matches.</span>';
+  });
+  let alice = randomAddress();
+  $('sdPaste').addEventListener('click', function(){ $('sdAddr').value = alice; $('sdAddr').dispatchEvent(new Event('input')); });
+  $('sdTypo').addEventListener('click', function(){
+    const i = 10 + Math.floor(Math.random() * 20), c = alice[i];
+    let r = c; while(r === c) r = CH[Math.floor(Math.random() * 32)];
+    $('sdAddr').value = alice.slice(0, i) + r + alice.slice(i + 1); $('sdAddr').dispatchEvent(new Event('input'));
+  });
+
+  let pending = null;
+  $('sdReviewBtn').addEventListener('click', function(){
+    const addr = $('sdAddr').value.trim().toLowerCase();
+    const p = addressProblem($('sdAddr').value.trim());
+    if(p) return fail(p);
+    const amt = Math.round(parseFloat($('sdAmt').value) * 1e8);
+    if(!(amt > 0)) return fail('Enter an amount greater than zero.');
+    if(amt < 546) return fail('That is below the dust limit of 546 sats. The network will not relay an output that costs more to spend than it is worth.');
+    const fee = Math.round(rates[level] * VSIZE);
+    if(amt + fee > balance) return fail('You have ' + btc(balance) + '. The payment plus the ' + fee.toLocaleString() + ' sat fee comes to ' + btc(amt + fee) + '. The fee always comes out of your coins on top of the amount.');
+    pending = {addr: addr, amt: amt, fee: fee, level: level};
+    const r = $('sdReview'); r.classList.remove('hidden'); r.className = 'send-review';
+    r.innerHTML = '<div class="send-row"><span>To</span><code>' + addr.slice(0, 12) + '...' + addr.slice(-8) + '</code></div>'
+      + '<div class="send-row"><span>Amount</span><b>' + btc(amt) + usd(amt) + '</b></div>'
+      + '<div class="send-row"><span>Network fee (' + LV[level][0].toLowerCase() + ')</span><b>' + fee.toLocaleString() + ' sats' + usd(fee) + '</b></div>'
+      + '<div class="send-row total"><span>Leaves your wallet</span><b>' + btc(amt + fee) + '</b></div>'
+      + '<div class="send-row"><span>Change back to you</span><b>' + btc(balance - amt - fee) + '</b></div>'
+      + '<p><strong style="color:#fbbf24;">Check the first and last six characters of the address.</strong> There is no bank to call and no undo. Once this is confirmed it is final. Notice the fee depends on the size of the transaction in bytes, not on how much you send.</p>';
+    $('sdReviewBtn').classList.add('hidden'); $('sdSend').classList.remove('hidden');
+  });
+
+  $('sdSend').addEventListener('click', function(){
+    if(!pending) return;
+    const tx = pending; pending = null;
+    balance -= tx.amt + tx.fee;
+    const txid = sha256Hex(sha256Hex(tx.addr + '|' + tx.amt + '|' + tx.fee + '|' + Date.now()));
+    $('sdSend').classList.add('hidden'); $('sdReview').classList.add('hidden');
+    ['sdAddr','sdAmt','sdPaste','sdTypo'].forEach(function(i){ $(i).disabled = true; });
+    const tl = $('sdTimeline'); tl.classList.remove('hidden');
+    const waitBlocks = LV[tx.level][2];
+    const steps = [];
+    steps.push(['&#9997;&#65039;', 'Signed with your private key', 'Your wallet proved the coins are yours without revealing the key.']);
+    steps.push(['&#128225;', 'Broadcast to the network', 'TXID ' + txid.slice(0, 16) + '... is spreading from node to node.']);
+    steps.push(['&#9203;', 'Waiting in the mempool', waitBlocks > 1 ? 'Miners fill blocks with the highest bids first. At ' + rates[tx.level] + ' sat/vB you are outbid for ' + (waitBlocks - 1) + ' block' + (waitBlocks > 2 ? 's' : '') + '.' : 'Your bid is high enough for the very next block.']);
+    steps.push(['&#9935;&#65039;', '1 confirmation', 'A miner included it in a block after roughly ' + waitBlocks * 10 + ' minutes. Fine for a small payment.']);
+    steps.push(['&#128274;', '3 confirmations', 'Two more blocks are stacked on top. Reversing it would mean redoing all of that work.']);
+    steps.push(['&#9989;', '6 confirmations: final', 'About an hour after the first. Alice now holds ' + btc(tx.amt) + ' and nobody can take it back, including you.']);
+    tl.innerHTML = '<div class="demo-desc" style="margin-bottom:8px;">Time is sped up: each step would take about ten minutes on the real network.</div><ol class="send-tl">' + steps.map(function(s){ return '<li><span class="send-ico" aria-hidden="true">' + s[0] + '</span><div><strong>' + s[1] + '</strong><span>' + s[2] + '</span></div></li>'; }).join('') + '</ol>';
+    const items = tl.querySelectorAll('li');
+    const quick = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let i = 0;
+    (function next(){
+      if(i >= items.length){ $('sdAgain').classList.remove('hidden'); draw(); return; }
+      items[i].classList.add('on');
+      const delay = quick ? 0 : (i === 2 ? 700 * waitBlocks : 800);
+      i++; timer = setTimeout(next, delay);
+    })();
+    draw();
+  });
+
+  $('sdAgain').addEventListener('click', function(){
+    clearTimeout(timer);
+    ['sdAddr','sdAmt','sdPaste','sdTypo'].forEach(function(i){ $(i).disabled = false; });
+    $('sdAddr').value = ''; $('sdAddrMsg').textContent = ''; $('sdTimeline').classList.add('hidden');
+    $('sdAgain').classList.add('hidden'); alice = randomAddress(); hideReview(); draw();
+  });
+
+  // Use live fee estimates when the network is reachable
+  fetch('https://mempool.space/api/v1/fees/recommended').then(function(r){ return r.json(); }).then(function(f){
+    if(f && f.fastestFee){ rates = {slow: Math.max(1, f.hourFee), normal: Math.max(1, f.halfHourFee), fast: Math.max(1, f.fastestFee)}; liveFees = true; hideReview(); draw(); }
+  }).catch(function(){});
+  setInterval(draw, 30000); // keep dollar figures in step with the live price
+  draw();
+  window._sendLabAddressProblem = addressProblem; // exposed for tests
+})();

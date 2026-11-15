@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" type="image/png" href="/icon-192.png"/>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LearningResource","name":"Security","description":"The simple habits that cover 95% of Bitcoin security risks: seed phrases, backups, and multisig basics.","url":"https://www.a-bit-curious.com/lessons/security/","dateModified":"2026-11-12","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
+{"@context":"https://schema.org","@type":"LearningResource","name":"Security","description":"The simple habits that cover 95% of Bitcoin security risks: seed phrases, backups, and multisig basics.","url":"https://www.a-bit-curious.com/lessons/security/","dateModified":"2026-11-14","isAccessibleForFree":true,"inLanguage":"en","isPartOf":{"@type":"Course","name":"A Bit Curious - The Interactive Guide to Bitcoin","url":"https://www.a-bit-curious.com/"}}
 </script>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -47,7 +47,7 @@
   <p>In late July 2026, Coinkite disclosed that a bug in Coldcard firmware had been quietly crippling seed generation since March 2021. Inside libngu, the device&#x27;s cryptography library, a preprocessor check tested whether a configuration macro was defined rather than whether it was actually switched on. Every build from firmware 4.0.1 onward silently fell back to Yasmarang - a fast, non-cryptographic pseudo-random generator borrowed from MicroPython - instead of the STM32 chip&#x27;s hardware true random number generator. Worse, that fallback was seeded once from the chip&#x27;s unique ID and timer registers, then never fed fresh randomness again.</p>
   <p>A 24-word seed is supposed to carry 128 bits of entropy - more possible keys than there are atoms in our galaxy, which is the entire reason nobody can guess yours. On affected devices, real entropy collapsed to roughly 72 bits on Mk4, Q and Mk5, and roughly 40 bits on Mk2 and Mk3. Forty bits is about a trillion possibilities. That is not a universe. That is a weekend and a decent graphics card.</p>
   <h2>🎲 Entropy Actually Delivered</h2>
-  <p>Someone found it. Beginning around 01:10 UTC on July 30, 2026, coins started leaving wallets whose owners had done nothing wrong that morning - no phishing link, no leaked backup, no malware. Galaxy Research went on to map three waves of sweeps through August 1, totalling roughly 1,367 BTC (about $88.6 million) across 4,585 addresses. The victims were overwhelmingly single-signature wallets. Coinkite shipped patched firmware on July 31.</p>
+  <p>Someone found it. Beginning around 01:10 UTC on July 30, 2026, coins started leaving wallets whose owners had done nothing wrong that morning - no phishing link, no leaked backup, no malware. Galaxy Research went on to map three waves of sweeps through August 1, totalling roughly 1,367 BTC (about $88.6 million) across 4,585 addresses. Later tallies were higher: Galaxy and TRM Labs put the confirmed total at roughly 1,700 to 1,800 BTC, and Coinkite has announced no compensation. The victims were overwhelmingly single-signature wallets. Coinkite shipped patched firmware on July 31.</p>
   <p>Seeds generated on the device itself on firmware 4.0.1 or later, held in a single-signature wallet, with no passphrase and no dice rolls added. They were guessable from the moment they were created - the owners just did not know it for five years.</p>
   <p>Anyone who mixed in 50+ of their own dice rolls or used a strong, unique BIP-39 passphrase. Also safe: seeds made before v4.0.0, the Mk1, Tapsigner, Opendime and Satscard, and multisig quorums whose other keys came from a different vendor.</p>
   <p>1. Update to patched firmware - Mk3 to 4.2.0, Mk4 and Mk5 to 5.6.0, Q to 1.5.0Q (Edge builds: 6.6.0X and 6.6.0QX).</p>
@@ -59,7 +59,7 @@
   <p>Write the seed phrase on paper, keep it offline and never type it into anything. Use a hardware wallet for savings, add your own randomness when creating it, and treat every urgent message as a scam.</p>
   <p>You know the why and you&#x27;ve got the basics. Time to explore the engine under the hood - the network, miners, and blockchain.</p>
   <a class="cta" href="/#security">Try it yourself in the interactive lesson &#8594;</a>
-  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-12</p>
+  <p class="note">Free &bull; no account &bull; part of a 46-lesson interactive Bitcoin course &bull; figures last verified 2026-11-14</p>
   <nav><a href="/lessons/sending/">&#8592; Sending</a><a href="/lessons/scamdrill/">The Scam Drill &#8594;</a></nav>
 </main>
 </body>

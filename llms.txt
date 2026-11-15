@@ -22,7 +22,7 @@ The site teaches money from first principles: why gold became money, why governm
 - [The Fiat Graveyard](https://www.a-bit-curious.com): The average fiat currency lasts 27 years. Every one in history has failed or been debased. Interactive timeline.
 
 ### II. The Origin Story (4 lessons)
-- [The Pizza Dilemma](https://www.a-bit-curious.com): On May 22, 2010, 10,000 BTC bought two pizzas. Now worth over $1 billion each.
+- [The Pizza Dilemma](https://www.a-bit-curious.com): On May 22, 2010, 10,000 BTC bought two pizzas. Each pizza cost 5,000 BTC, worth hundreds of millions of dollars today.
 - [Digital Money Before Bitcoin](https://www.a-bit-curious.com): DigiCash, Hashcash, b-money, Bit Gold, RPOW - the failed predecessors that paved the way.
 - [Who Is Satoshi Nakamoto?](https://www.a-bit-curious.com): Published the whitepaper Oct 31, 2008. Vanished April 2011. ~1.1M BTC in Satoshi-era wallets has never moved.
 - [The Bitcoin Whitepaper](https://www.a-bit-curious.com): 9 pages, 12 sections. The key innovation: combining existing ideas into a system where incentives align honest behavior.
@@ -34,14 +34,14 @@ The site teaches money from first principles: why gold became money, why governm
 - [Bitcoin vs Tulip Mania](https://www.a-bit-curious.com): Tulips lasted 3 years. Bitcoin: 17+ years, new all-time highs every cycle, 21M fixed supply.
 - [The Quantum Question](https://www.a-bit-curious.com): Breaking Bitcoin's ECDSA would require 2,500-4,000 stable logical qubits. Current best: 1,121 physical qubits.
 - [Bitcoin vs Gold](https://www.a-bit-curious.com): Side-by-side comparison of monetary properties. Live BTC/gold ratio. Executive Order 6102 history.
-- [Bitcoin Adoption](https://www.a-bit-curious.com): El Salvador legal tender. Spot ETFs approved. BlackRock IBIT fastest ETF to $10B. Market cap is 0.19% of global store-of-value assets.
+- [Bitcoin Adoption](https://www.a-bit-curious.com): El Salvador made bitcoin legal tender in 2021 and made acceptance voluntary in 2025. US spot ETFs hold roughly 1.2 million BTC (November 2026). Strategy holds 850,364 BTC. Market cap is under 0.2% of global store-of-value assets.
 - [The Case Against Bitcoin](https://www.a-bit-curious.com/lessons/caseagainst/): The six strongest criticisms of Bitcoin presented at full strength - volatility, lost coins, energy, concentration, state risk, and pure-belief value - with honest data on each.
 
 ### IV. Getting Started (6 lessons)
 - [Wallets](https://www.a-bit-curious.com): Hardware, software, and paper wallets. "Not your keys, not your coins."
 - [Exchanges](https://www.a-bit-curious.com): How to buy Bitcoin. Centralized vs decentralized. Dollar-cost averaging.
 - [Sending Bitcoin](https://www.a-bit-curious.com): Transactions, fees, mempool, replace-by-fee. Interactive fee estimator.
-- [Security](https://www.a-bit-curious.com): Multi-sig, passphrases, metal seed backups, address verification. Includes a case study on the July 2026 Coldcard entropy bug, where a firmware fallback to a predictable PRNG cut seed entropy to ~40 bits and led to roughly 1,367 BTC being swept.
+- [Security](https://www.a-bit-curious.com): Multi-sig, passphrases, metal seed backups, address verification. Includes a case study on the July 2026 Coldcard entropy bug, where a firmware fallback to a predictable PRNG cut seed entropy to ~40 bits and led to at least 1,367 BTC being swept (later estimates run to about 1,800).
 - [Your First $10, Safely](https://www.a-bit-curious.com/lessons/firstbitcoin/): The knowledge-to-action bridge - wallet decision quiz, five-step training path, and withdrawal checklist.
 - [The Scam Drill](https://www.a-bit-curious.com/lessons/scamdrill/): Scored drill of eight realistic messages (six scams, two legitimate), from seed phishing to pig butchering.
 
@@ -68,7 +68,7 @@ The site teaches money from first principles: why gold became money, why governm
 
 ### VII. The Future (5 lessons)
 - [The Final Exam](https://www.a-bit-curious.com/lessons/finalexam/): 25 questions across the course, 80% to pass, with a certificate whose SHA-256 ID can be anchored into Bitcoin via OpenTimestamps.
-- [Am I Too Late?](https://www.a-bit-curious.com): Bitcoin is 0.19% of global store-of-value assets. S-curve adoption at ~5% (internet in 1997).
+- [Am I Too Late?](https://www.a-bit-curious.com): Bitcoin is under 0.2% of global store-of-value assets. S-curve adoption at ~5% (internet in 1997).
 - [A Bit New Perspective](https://www.a-bit-curious.com): What happens when saving is rewarded again. Technology deflates, Bitcoin lets it.
 - [Bitcoin Lore & Milestones](https://www.a-bit-curious.com): Genesis block, Hal Finney, Bitcoin Faucet, HODL, lost coins, the 184B bug.
 - [Go Deeper & Sources](https://www.a-bit-curious.com): Curated learning path. Whitepaper, The Bitcoin Standard, running a node, Saylor Academy.
