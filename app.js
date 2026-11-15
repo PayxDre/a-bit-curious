@@ -1,6 +1,6 @@
 // Date the hand-maintained figures in this course were last checked against sources.
 // scripts/gen-seo-pages.py reads this for sitemap lastmod and for-bots metadata.
-const DATA_VERIFIED = '2026-11-12';
+const DATA_VERIFIED = '2026-11-14';
 
 // ═══════════════════════════════════════
 //   APP STATE & CONSTANTS
@@ -332,7 +332,7 @@ async function fetchGoldPrice(){
     goldPrice = data['tether-gold'].usd;
     renderTicker();
   } catch(e) {
-    goldPrice = goldPrice || 3100; // fallback estimate
+    goldPrice = goldPrice || 4000; // fallback estimate (Nov 2026)
     console.warn('Gold price fetch failed, using estimate:', e);
   }
 }
@@ -427,11 +427,11 @@ const teachingNotes = {
 
 const didYouKnow = [
   "Bitcoin's creator, Satoshi Nakamoto, vanished in 2011. Their identity remains one of the internet's greatest mysteries.",
-  "The first real-world Bitcoin purchase was 2 pizzas for 10,000 BTC on May 22, 2010. At today's prices, that's ~$1 billion per pizza.",
+  "The first real-world Bitcoin purchase was 2 pizzas for 10,000 BTC on May 22, 2010. Each pizza cost 5,000 BTC, worth hundreds of millions of dollars today.",
   "There will only ever be 21 million Bitcoin. About 4 million are estimated to be permanently lost forever.",
   "Bitcoin has survived being declared 'dead' by mainstream media over 400 times.",
   "The smallest unit of Bitcoin is called a Satoshi (0.00000001 BTC), named after its creator.",
-  "El Salvador became the first country to adopt Bitcoin as legal tender in 2021.",
+  "El Salvador became the first country to adopt Bitcoin as legal tender in 2021. It made acceptance voluntary again in 2025 but kept its bitcoin reserve.",
   "Bitcoin's code was released on January 3, 2009 \u2014 the same day the first block was mined.",
   "A hardware wallet can fit in your pocket and costs less than $100.",
   "The Lightning Network can process over 1 million Bitcoin transactions per second in theory.",
@@ -699,6 +699,7 @@ document.getElementById('main-content').addEventListener('click', function(e){
     var qr = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
     var addr = 'bc1q';
     for(var gi = 0; gi < 38; gi++) addr += qr[Math.floor(Math.random() * qr.length)];
+  if(window.demoBech32Address) addr = window.demoBech32Address(); // valid checksum, so the Sending practice accepts it
     var el = document.getElementById('sendAddr');
     if(el){ el.value = addr; el.style.borderColor = 'var(--orange)'; setTimeout(function(){ el.style.borderColor = 'var(--glass-border)'; }, 1000); }
   }
@@ -1120,6 +1121,7 @@ function generateWallet(){
   const chars = '023456789acdefghjklmnpqrstuvwxyz';
   let addr = 'bc1q';
   for(let i = 0; i < 38; i++) addr += chars[Math.floor(Math.random() * chars.length)];
+  if(window.demoBech32Address) addr = window.demoBech32Address(); // valid checksum, so the Sending practice accepts it
   document.getElementById('walletAddress').textContent = addr;
   document.getElementById('walletOutput').classList.remove('hidden');
   if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -1736,7 +1738,7 @@ function getModalContent(section){
           <div class="grid grid-cols-2 gap-3 text-center text-xs mb-3">
             <div class="p-3 rounded-xl" style="background:rgba(0,0,0,0.3);border:1px solid var(--glass-border);">
               <div style="color:var(--muted);">Today: 1 BTC buys</div>
-              <div id="goldToday" style="color:var(--orange);font-family:'Space Mono',monospace;font-size:18px;font-weight:bold;">~34 oz gold</div>
+              <div id="goldToday" style="color:var(--orange);font-family:'Space Mono',monospace;font-size:18px;font-weight:bold;">~18 oz gold</div>
             </div>
             <div class="p-3 rounded-xl" style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);">
               <div style="color:var(--muted);">Future: 1 BTC buys</div>
@@ -1746,7 +1748,7 @@ function getModalContent(section){
           <div id="goldBar" class="rounded-full overflow-hidden" style="height:10px;background:rgba(255,255,255,0.05);">
             <div id="goldBarFill" style="height:10px;background:linear-gradient(90deg,#fbbf24,#f59e0b);border-radius:9999px;width:15%;transition:width .5s;"></div>
           </div>
-          <div class="flex justify-between text-xs mt-1" style="color:var(--muted);"><span>34 oz</span><span id="goldBarMax">\u2014</span></div>
+          <div class="flex justify-between text-xs mt-1" style="color:var(--muted);"><span id="goldBarMin">18 oz</span><span id="goldBarMax">\u2014</span></div>
         </div>
 
         <!-- Everyday prices in sats -->
@@ -2846,7 +2848,7 @@ function deriveWallet(seed){
   const pub = '02' + sha256Hex(priv).substring(0, 62);
   const addrHash = sha256Hex(pub);
   const b32 = '023456789acdefghjklmnpqrstuvwxyz';
-  const addr = 'bc1q' + Array.from(addrHash.substring(0, 38)).map(function(c){ return b32[parseInt(c, 16) % 32] || b32[0]; }).join('');
+  const addr = (window.demoBech32From ? window.demoBech32From(addrHash) : 'bc1q' + Array.from(addrHash.substring(0, 38)).map(function(c){ return b32[parseInt(c, 16) % 32] || b32[0]; }).join(''));
   return {priv: priv, pub: pub, addr: addr};
 }
 function renderSeedExperiment(){
@@ -2915,7 +2917,7 @@ function pkDerive(secret){
   const pub = '02' + sha256Hex(priv).substring(0, 62);
   const addrHash = sha256Hex(pub);
   const b32 = '023456789acdefghjklmnpqrstuvwxyz';
-  return 'bc1q' + Array.from(addrHash.substring(0, 38)).map(function(c){ return b32[parseInt(c, 16) % 32] || b32[0]; }).join('');
+  return (window.demoBech32From ? window.demoBech32From(addrHash) : 'bc1q' + Array.from(addrHash.substring(0, 38)).map(function(c){ return b32[parseInt(c, 16) % 32] || b32[0]; }).join(''));
 }
 modalInitFns.publickeys = function(){
   pkAttempts = 0;
@@ -3134,8 +3136,10 @@ function runFutureSim(){
   const yl = document.getElementById('futureYearsLabel');
   if(yl) yl.textContent = years + ' years';
 
-  // Gold: BTC starts at ~34 oz gold today, grows with adoption
-  const goldBase = 34;
+  // Gold: start from the live BTC/gold ratio, grow with adoption
+  const goldBase = (btcPrice > 0 && goldPrice > 0) ? btcPrice / goldPrice : 18;
+  const gt = document.getElementById('goldToday'); if(gt) gt.textContent = '~' + goldBase.toFixed(1) + ' oz gold';
+  const gb0 = document.getElementById('goldBarMin'); if(gb0) gb0.textContent = goldBase.toFixed(0) + ' oz';
   const goldFuture = Math.round(goldBase * Math.pow(1 + adoption, years));
   const goldMax = Math.round(goldBase * Math.pow(1 + 0.30, 30)); // max for bar scale
   const gf = document.getElementById('goldFuture');
@@ -3322,6 +3326,7 @@ document.getElementById('main-content').addEventListener('click', function handl
     const chars = '023456789acdefghjklmnpqrstuvwxyz';
     let addr = 'bc1q';
     for(let i = 0; i < 38; i++) addr += chars[Math.floor(Math.random() * chars.length)];
+  if(window.demoBech32Address) addr = window.demoBech32Address(); // valid checksum, so the Sending practice accepts it
     document.getElementById('quickAddr').textContent = addr;
     document.getElementById('quickAddrOutput').classList.remove('hidden');
     if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
@@ -3794,6 +3799,18 @@ document.getElementById('main-content').addEventListener('click', function(e){
     requestAnimationFrame(tick);
   }
   if(document.getElementById('debtClock')) tick();
+  // Replace the dated baseline with Treasury's latest published figure when reachable
+  fetch('https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny?sort=-record_date&page[size]=1')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var row = d && d.data && d.data[0];
+      var total = row && parseFloat(row.tot_pub_debt_out_amt);
+      var when = row && new Date(row.record_date + 'T21:00:00Z').getTime();
+      if(!(total > 3e13) || !when) return;
+      BASE_DEBT = total; BASE_DATE = when;
+      var basis = document.getElementById('debtBasis');
+      if(basis) basis.textContent = 'Based on $' + (total / 1e12).toFixed(2) + ' trillion, the US Treasury\'s Debt to the Penny figure for ' + row.record_date + ', growing at approximately $7 billion per day (the fiscal 2026 average).';
+    }).catch(function(){ /* keep the dated baseline */ });
 })();
 
 // ── Interest vs Defense Chart ──
@@ -5279,9 +5296,8 @@ document.addEventListener('click', function(e){
 
 /* ═══ Am I Too Late? - Interactive Market Cap Calculator ═══ */
 (function(){
-  const BTC_CIRCULATING = 19_800_000;
-  const CURRENT_MCAP = 1_700_000_000_000;
-  const CURRENT_PRICE = 87_000;
+  // Live values with dated fallbacks (see liveBtc in js/engage.js)
+  function live(){ return window.liveBtc ? window.liveBtc() : {price: 74000, supply: 20112500}; }
   const ASSETS = {gold:18_000_000_000_000, realEstate:100_000_000_000_000, bonds:130_000_000_000_000, art:6_000_000_000_000};
 
   function fmt$(n){
@@ -5300,9 +5316,10 @@ document.addEventListener('click', function(e){
     document.getElementById('bondsPctLabel').textContent=bp+'%';
     document.getElementById('artPctLabel').textContent=ap+'%';
     var captured=ASSETS.gold*(gp/100)+ASSETS.realEstate*(rp/100)+ASSETS.bonds*(bp/100)+ASSETS.art*(ap/100);
-    var impliedMcap=CURRENT_MCAP+captured;
-    var impliedPrice=Math.round(impliedMcap/BTC_CIRCULATING);
-    var multiple=(impliedPrice/CURRENT_PRICE).toFixed(1);
+    var lv=live();
+    var impliedMcap=lv.price*lv.supply+captured;
+    var impliedPrice=Math.round(impliedMcap/lv.supply);
+    var multiple=(impliedPrice/lv.price).toFixed(1);
     document.getElementById('impliedMarketCap').textContent=fmt$(impliedMcap);
     document.getElementById('impliedPrice').textContent='$'+impliedPrice.toLocaleString('en-US');
     document.getElementById('impliedMultiple').textContent=multiple+'x';
@@ -5320,6 +5337,7 @@ document.addEventListener('click', function(e){
     updateCalc();
   };
 
+  window.updateCaptureCalc = updateCalc;
   ['goldCapture','realEstateCapture','bondsCapture','artCapture'].forEach(function(id){
     var el=document.getElementById(id);
     if(el) el.addEventListener('input',updateCalc);

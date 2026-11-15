@@ -1530,6 +1530,32 @@
   .home-last{background:none;border:none;color:var(--muted);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer;padding:10px 4px;}
   @media(max-width:640px){.journey-steps{grid-template-columns:repeat(3,1fr);}.home-prog-stats strong{font-size:20px;}}
   @media(prefers-reduced-motion:reduce){#abcToast{transition:none;}}
+
+  /* ── Sending practice ── */
+  #sendLab.lab{border:none;background:none;padding:0;}
+  .send-bal{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-radius:12px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.3);font-size:13px;color:var(--muted);}
+  .send-bal strong{font-family:'Space Mono',monospace;font-size:15px;color:var(--orange);}
+  .send-fees{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+  .send-fee{display:flex;flex-direction:column;gap:3px;text-align:left;padding:12px;border-radius:12px;border:2px solid var(--glass-border);background:rgba(0,0,0,0.25);color:var(--text2);font:inherit;font-size:12px;cursor:pointer;}
+  .send-fee strong{font-family:'Syne',sans-serif;font-size:14px;color:var(--text);}
+  .send-fee em{font-style:normal;color:var(--muted);}
+  .send-fee.on{border-color:var(--orange);background:rgba(245,158,11,0.08);}
+  .send-review{margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(0,0,0,0.3);border:1px solid var(--glass-border);font-size:13px;color:var(--text2);}
+  .send-review.bad{border-color:rgba(248,113,113,0.5);background:rgba(248,113,113,0.07);line-height:1.6;}
+  .send-review.bad strong{color:#f87171;}
+  .send-review p{margin:12px 0 0;line-height:1.6;color:var(--text3);}
+  .send-row{display:flex;justify-content:space-between;gap:12px;padding:5px 0;}
+  .send-row span{color:var(--muted);}
+  .send-row b,.send-row code{font-family:'Space Mono',monospace;font-size:12px;font-weight:400;color:var(--text);text-align:right;}
+  .send-row.total{border-top:1px solid var(--glass-border);margin-top:4px;padding-top:9px;}
+  .send-row.total b{color:var(--orange);font-weight:700;}
+  .send-tl{list-style:none;margin:0;padding:0;}
+  .send-tl li{display:flex;gap:12px;padding:10px 0;opacity:.25;transition:opacity .4s;}
+  .send-tl li.on{opacity:1;}
+  .send-tl strong{display:block;font-size:14px;color:var(--text);}
+  .send-tl span{font-size:13px;color:var(--text3);line-height:1.5;}
+  .send-ico{font-size:20px;width:28px;text-align:center;flex-shrink:0;}
+  @media(max-width:640px){.send-fees{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -2128,39 +2154,10 @@
 
       <p class="body-text">One crucial tip: <strong style="color:#f87171;">always double-check the address before sending!</strong> Bitcoin transactions are irreversible - there's no "undo" button and no customer service to call. A handy trick: always send a tiny test amount first, confirm the recipient got it, then send the full amount. Think of it like dialing a phone number and saying "Can you hear me?" before starting a long conversation.</p>
       <div class="neon-divider"></div>
-      <div class="glass p-6">
-        <div class="text-sm font-bold mb-4" style="color:var(--orange);">&#128228; Demo: Send Bitcoin</div>
-        <div class="space-y-3">
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
-              <label for="sendAddr" class="text-xs" style="color:var(--muted);">Recipient Address</label>
-              <button id="generateAddrBtn" style="font-family:'Space Mono',monospace;font-size:12px;padding:3px 10px;border-radius:6px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:var(--orange);cursor:pointer;transition:all .15s;" onmouseenter="this.style.background='rgba(245,158,11,0.2)'" onmouseleave="this.style.background='rgba(245,158,11,0.1)'">&#9889; Generate demo address</button>
-            </div>
-            <input id="sendAddr" type="text" placeholder="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kjkjm9..."
-                   class="w-full px-3 py-2 rounded-lg text-xs"
-                   style="background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);color:var(--text);font-family:'Space Mono',monospace;outline:none;"
-                   autocomplete="off"/>
-          </div>
-          <div class="flex gap-3">
-            <div class="flex-1">
-              <label for="sendAmt" class="text-xs mb-1 block" style="color:var(--muted);">Amount (BTC)</label>
-              <input id="sendAmt" type="number" placeholder="0.001" step="0.0001" min="0"
-                     class="w-full px-3 py-2 rounded-lg text-xs"
-                     style="background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);color:var(--text);font-family:'Space Mono',monospace;outline:none;"/>
-            </div>
-            <div class="flex-1">
-              <label for="sendFee" class="text-xs mb-1 block" style="color:var(--muted);">Fee (sat/vB)</label>
-              <select id="sendFee" class="w-full px-3 py-2 rounded-lg text-xs"
-                      style="background:rgba(18,18,32,0.9);border:1px solid var(--glass-border);color:var(--text);outline:none;">
-                <option>&#128034; Low - 10 sat/vB</option>
-                <option selected>&#9889; Medium - 25 sat/vB</option>
-                <option>&#128640; High - 50 sat/vB</option>
-              </select>
-            </div>
-          </div>
-          <button class="btn-orange w-full" id="demoSendBtn">Send Bitcoin &#8383; &rarr;</button>
-        </div>
-        <div id="sendResult" class="hidden mt-4 p-3 rounded-lg text-sm text-center" style="background:var(--orange-dim);border:1px solid var(--orange);color:var(--orange);font-family:'Space Mono',monospace;" aria-live="polite"></div>
+      <div class="glass p-6 lab-like">
+        <div class="text-sm font-bold mb-1" style="color:var(--orange);">&#128228; Practice: send a payment</div>
+        <p class="demo-desc" style="margin:0 0 12px;">A practice wallet with pretend coins. The address check, the fee maths and the order of events are the real thing. Try the typo button, try to overspend, and compare the fee levels.</p>
+        <div id="sendLab" class="lab"></div>
       </div>
       <div class="lesson-recap"><div class="lesson-recap-label">&#128172; Explain it to a friend</div><p>A payment is a signed message that waits in a queue until a miner includes it in a block. A higher fee means a shorter wait. Once confirmed it cannot be undone, so the address is worth checking twice.</p></div>
 
@@ -2246,7 +2243,7 @@
           <div class="text-xs text-center mt-2" style="color:var(--muted);">Every bit you lose halves the attacker's work. Losing 88 of them ends the game.</div>
         </div>
 
-        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px;">Someone found it. Beginning around 01:10 UTC on <strong style="color:#f87171;">July 30, 2026</strong>, coins started leaving wallets whose owners had done nothing wrong that morning - no phishing link, no leaked backup, no malware. Galaxy Research went on to map three waves of sweeps through August 1, totalling roughly <strong style="color:#f87171;">1,367 BTC (about $88.6 million) across 4,585 addresses</strong>. The victims were overwhelmingly single-signature wallets. Coinkite shipped patched firmware on July 31.</p>
+        <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px;">Someone found it. Beginning around 01:10 UTC on <strong style="color:#f87171;">July 30, 2026</strong>, coins started leaving wallets whose owners had done nothing wrong that morning - no phishing link, no leaked backup, no malware. Galaxy Research went on to map three waves of sweeps through August 1, totalling roughly <strong style="color:#f87171;">1,367 BTC (about $88.6 million) across 4,585 addresses</strong>. Later tallies were higher: Galaxy and TRM Labs put the confirmed total at roughly 1,700 to 1,800 BTC, and Coinkite has announced no compensation. The victims were overwhelmingly single-signature wallets. Coinkite shipped patched firmware on July 31.</p>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;">
           <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);">
@@ -2928,7 +2925,7 @@
       <!-- ── Live Debt Clock ── -->
       <div class="glass p-5 my-6" style="border:2px solid rgba(248,113,113,0.3);">
         <div class="text-sm font-bold mb-2" style="color:#f87171;">&#9201; U.S. National Debt - Live Estimate</div>
-        <div class="text-xs mb-3" style="color:var(--muted);">Based on $40.55 trillion (early November 2026) growing at approximately $7 billion per day, the average pace since March 2025.</div>
+        <div class="text-xs mb-3" style="color:var(--muted);" id="debtBasis">Based on $40.55 trillion (early November 2026) growing at approximately $7 billion per day, the average pace since March 2025.</div>
         <div style="text-align:center;padding:20px 0;overflow:hidden;">
           <div style="font-family:'Space Mono',monospace;font-size:clamp(18px,5vw,36px);font-weight:700;color:#f87171;letter-spacing:0.5px;word-break:break-all;" id="debtClock">$40,550,000,000,000</div>
           <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px 24px;margin-top:12px;">
@@ -3554,7 +3551,7 @@
 
       <div class="inline-demo" data-demo="satoshi"></div>
 
-      <p class="body-text">Think about what that means. Satoshi mined roughly <strong style="color:var(--orange);">1.1 million Bitcoin</strong> in those early years. At today's prices, that stash is worth over $100 billion. They never spent a single coin. Never cashed out. Never came forward to claim credit. In an era where every tech founder becomes a celebrity billionaire, someone created the most consequential financial technology in a generation and <em>walked away</em>. The wallet addresses sit untouched to this day. The last known message was an email to developer Gavin Andresen: "I've moved on to other things." Then silence.</p>
+      <p class="body-text">Think about what that means. Satoshi mined roughly <strong style="color:var(--orange);">1.1 million Bitcoin</strong> in those early years. At today's prices, that stash is worth <span data-btc="1100000">roughly $80 billion</span>. They never spent a single coin. Never cashed out. Never came forward to claim credit. In an era where every tech founder becomes a celebrity billionaire, someone created the most consequential financial technology in a generation and <em>walked away</em>. The wallet addresses sit untouched to this day. The last known message was an email to developer Gavin Andresen: "I've moved on to other things." Then silence.</p>
 
       <p class="body-text">That anonymity may be the most important design decision in Bitcoin. It means there is no CEO to subpoena, no founder to pressure, no figurehead to arrest. Even if Satoshi came back tomorrow, they could not change the protocol. The system runs on math, not authority.</p>
 
@@ -3993,7 +3990,7 @@
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:22px;color:#6b7280;">&#10687;</span>
           <span style="font-family:'Syne',sans-serif;font-weight:800;color:#f87171;font-size:17px;">XRP (Ripple)</span>
-          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">#4 by market cap</span>
+          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">Top-15 by market cap</span>
         </div>
         <p class="body-text" style="margin:0 0 8px 0;">100 billion XRP tokens were pre-created at launch - none were mined. Ripple Labs retained over 60% of the total supply and has been selling into the market for over a decade.<sup><a href="#ref-18" style="color:var(--orange);text-decoration:none;font-size:10px;">[18]</a></sup> Co-founder Jed McCaleb sold roughly $3 billion worth of XRP after leaving the company. The SEC sued Ripple in 2020 for selling unregistered securities. The network operates on a "Unique Node List" of trusted validators, which Ripple has significant influence over. Unlike Bitcoin's permissionless mining, XRP's supply was entirely pre-allocated and its validation is restricted to approved participants.</p>
       </div>
@@ -4003,7 +4000,7 @@
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:22px;color:#6b7280;">&#9670;</span>
           <span style="font-family:'Syne',sans-serif;font-weight:800;color:#f87171;font-size:17px;">BNB (Binance)</span>
-          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">#5 by market cap</span>
+          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">Top-15 by market cap</span>
         </div>
         <p class="body-text" style="margin:0 0 8px 0;">BNB was created by the Binance exchange. 100% of the supply was created by the company, with 40% allocated to the team and founders. The BNB Chain operates with 21 validators, all selected by Binance. The chain has been halted multiple times by Binance's decision. Its founder, Changpeng Zhao (CZ), pled guilty to federal money laundering charges in 2023 and served prison time. Quarterly token "burns" are controlled entirely by Binance - the company decides how much supply to remove and when. BNB's supply, validation, and governance are all controlled by a single company.</p>
       </div>
@@ -4013,7 +4010,7 @@
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:22px;color:#6b7280;">&#9678;</span>
           <span style="font-family:'Syne',sans-serif;font-weight:800;color:#f87171;font-size:17px;">Solana (SOL)</span>
-          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">#6 by market cap</span>
+          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">Top-15 by market cap</span>
         </div>
         <p class="body-text" style="margin:0 0 8px 0;">Solana has experienced <strong style="color:#f87171;">7+ total network outages</strong> where the chain stopped producing blocks entirely.<sup><a href="#ref-20" style="color:var(--orange);text-decoration:none;font-size:10px;">[20]</a></sup> Each time, validator operators coordinated a restart through private channels. About 48% of the initial token supply went to insiders and venture capital firms at discounted rates<sup><a href="#ref-17" style="color:var(--orange);text-decoration:none;font-size:10px;">[17]</a></sup> - including FTX, whose founder Sam Bankman-Fried was later convicted of fraud. Solana has no hard supply cap and has ~4.6% annual inflation. Its validator set is concentrated among a relatively small number of well-funded operators. Bitcoin, by comparison, has never experienced an outage in 17 years of operation.</p>
       </div>
@@ -4023,7 +4020,7 @@
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:22px;color:#6b7280;">&#9673;</span>
           <span style="font-family:'Syne',sans-serif;font-weight:800;color:#f87171;font-size:17px;">USDC (Circle)</span>
-          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">#7 by market cap</span>
+          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">Top-15 by market cap</span>
         </div>
         <p class="body-text" style="margin:0 0 8px 0;">USDC is a stablecoin issued by Circle, a private company. Like Tether, Circle has the ability to <strong style="color:#f87171;">freeze and blacklist addresses</strong>, and has done so on multiple occasions. During the 2023 Silicon Valley Bank collapse, Circle had $3.3 billion in reserves held at SVB, causing USDC to temporarily de-peg to $0.87. The value of USDC depends entirely on Circle's reserve management and banking relationships. Circle controls issuance, redemption, and can render any address's USDC non-transferable. Bitcoin has no equivalent single point of failure.</p>
       </div>
@@ -4033,7 +4030,7 @@
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:22px;color:#6b7280;">&#208;</span>
           <span style="font-family:'Syne',sans-serif;font-weight:800;color:#f87171;font-size:17px;">Dogecoin (DOGE)</span>
-          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">#8 by market cap</span>
+          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">Top-15 by market cap</span>
         </div>
         <p class="body-text" style="margin:0 0 8px 0;">Dogecoin was created in 2013 as a parody of Bitcoin. It has <strong style="color:#f87171;">no supply cap</strong>: roughly 5 billion new DOGE are minted every year with no end date. Development activity has been minimal for long stretches, and there is no formal roadmap. Co-founder Billy Markus sold his holdings early on. The token's market price has been heavily influenced by social media activity, particularly tweets from Elon Musk. Dogecoin uses Proof of Work (Scrypt) and is merge-mined with Litecoin. Unlike Bitcoin's disinflationary design, Dogecoin's perpetual inflation means the supply grows indefinitely.</p>
       </div>
@@ -4043,7 +4040,7 @@
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:22px;color:#6b7280;">&#9675;</span>
           <span style="font-family:'Syne',sans-serif;font-weight:800;color:#f87171;font-size:17px;">Cardano (ADA)</span>
-          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">#9 by market cap</span>
+          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">Top-15 by market cap</span>
         </div>
         <p class="body-text" style="margin:0 0 8px 0;">Cardano was founded by Charles Hoskinson, a former Ethereum co-founder. It raised funds through an ICO and allocated ~16% of the supply to three organizations: IOHK, Emurgo, and the Cardano Foundation. Cardano emphasizes a "peer-reviewed" academic approach to development. After 8+ years, its smart contract functionality arrived later than initially planned, and on-chain activity remains modest compared to other platforms. Development is guided primarily by IOHK (now IOG), which Hoskinson leads. Cardano uses Proof of Stake (Ouroboros). Unlike Bitcoin, its roadmap and development priorities are set by identifiable organizations rather than decentralized consensus.</p>
       </div>
@@ -4053,7 +4050,7 @@
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:22px;color:#6b7280;">&#9683;</span>
           <span style="font-family:'Syne',sans-serif;font-weight:800;color:#f87171;font-size:17px;">TRON (TRX)</span>
-          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">#10 by market cap</span>
+          <span style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;margin-left:auto;">Top-15 by market cap</span>
         </div>
         <p class="body-text" style="margin:0 0 8px 0;">TRON was created by Justin Sun. Its original white paper contained sections that closely matched text from Ethereum and other projects. The SEC charged Sun with fraud and market manipulation in 2023, alleging wash trading and undisclosed celebrity endorsements of TRX. Sun has significant control over the TRON Foundation and network direction. He acquired BitTorrent for $140 million in 2018. TRON's block production is handled by 27 Super Representatives elected through a delegated Proof of Stake system. Unlike Bitcoin's ~60,000 independent nodes, TRON's governance is concentrated among a small number of block producers.</p>
       </div>
@@ -4433,7 +4430,7 @@
           <span style="background:rgba(248,113,113,0.15);color:#f87171;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;">MYTH #4</span>
           <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">"It's too volatile to be real money"</span>
         </div>
-        <p class="body-text" style="margin-bottom:10px;">Bitcoin is volatile in <em>dollar terms</em> because it's a new asset being adopted on a global scale - the fastest monetary adoption in history. Zoom out: Bitcoin has gone from $0 to ~$100,000 in 16 years.<sup><a href="#ref-15" style="color:var(--orange);text-decoration:none;font-size:10px;">[15]</a></sup> Every four-year cycle, its lows are higher than the previous cycle's highs. The volatility is the <em>price of admission</em> for a technology transitioning from zero to global reserve asset. Gold was volatile for decades during its monetary adoption too. The dollar itself lost 97% of its purchasing power - that's not stability, it's a slow, one-directional crash. Bitcoin's volatility is two-directional and decreasing over time as adoption grows.</p>
+        <p class="body-text" style="margin-bottom:10px;">Bitcoin is volatile in <em>dollar terms</em> because it's a new asset being adopted on a global scale - the fastest monetary adoption in history. Zoom out: Bitcoin went from $0 to a peak above $120,000 in 16 years, and has given back a large part of each peak along the way, including the most recent one.<sup><a href="#ref-15" style="color:var(--orange);text-decoration:none;font-size:10px;">[15]</a></sup> Every four-year cycle, its lows are higher than the previous cycle's highs. The volatility is the <em>price of admission</em> for a technology transitioning from zero to global reserve asset. Gold was volatile for decades during its monetary adoption too. The dollar itself lost 97% of its purchasing power - that's not stability, it's a slow, one-directional crash. Bitcoin's volatility is two-directional and decreasing over time as adoption grows.</p>
       </div>
 
       <!-- Myth 5 -->
@@ -4655,7 +4652,7 @@
     <!-- ════ THE QUANTUM QUESTION ════ -->
     <div class="section-content" id="sec-quantum">
       <h2 class="section-title">&#9883;&#65039; <span class="glow-text">The Quantum Question</span></h2>
-      <div class="section-subtitle">// Will quantum computers break Bitcoin? (No. Here's why.)  ·  ~5 min read</div>
+      <div class="section-subtitle">// Will quantum computers break Bitcoin? (Not yet, and here's the plan.)  ·  ~5 min read</div>
       <div class="lesson-goal"><span class="lesson-goal-label">After this lesson you can explain</span>how real the quantum threat is, and what would be done about it.</div>
       <!-- Section illustration: Quantum vs Bitcoin -->
       <div style="margin:24px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(245,158,11,0.15);">
@@ -4726,7 +4723,7 @@
 
           <div style="padding:14px;border-radius:12px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.15);">
             <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);margin-bottom:8px;">What does "error-corrected" mean?</div>
-            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Current qubits are incredibly fragile - they lose their quantum state within microseconds due to thermal noise and environmental interference. To get one <em>reliable</em> logical qubit, you need hundreds to thousands of physical qubits working together for error correction. Running Shor's algorithm to break 256-bit elliptic curve cryptography requires ~1,500 logical qubits sustained for hours of computation. That translates to <strong style="color:var(--orange);">millions of physical qubits</strong> with error rates orders of magnitude lower than anything that exists today.</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">Current qubits are incredibly fragile - they lose their quantum state within microseconds due to thermal noise and environmental interference. To get one <em>reliable</em> logical qubit, you need hundreds to thousands of physical qubits working together for error correction. Running Shor's algorithm to break 256-bit elliptic curve cryptography requires ~1,500 logical qubits sustained for hours of computation. That translates to <strong style="color:var(--orange);">millions of physical qubits</strong> with error rates orders of magnitude lower than anything that exists today. The target is moving, though. A March 2026 paper from Google Quantum AI cut the estimate to roughly 1,200 logical qubits and, under optimistic hardware assumptions, fewer than a million physical ones. No machine is close to that today, but the gap is shrinking from both sides, which is exactly why the upgrade work described below has started.</div>
           </div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
@@ -4874,7 +4871,7 @@
         <div style="padding:14px;border-radius:10px;background:rgba(248,113,113,0.06);border-left:3px solid #f87171;margin-bottom:12px;">
           <div style="font-size:13px;color:var(--text);line-height:1.7;font-style:italic;">"A currency that loses 75% of its value four separate times in fifteen years is not a store of value. It is a casino chip. Nobody prices a mortgage, a salary, or a pension in something that can halve in a quarter."</div>
         </div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px;"><strong style="color:var(--orange);">What the data says:</strong> This is simply true. Bitcoin fell roughly 93% in 2011, 85% in 2013-15, 84% in 2017-18, and 77% in 2021-22.<sup><a href="#ref-44" style="color:var(--orange);text-decoration:none;font-size:10px;">[44]</a></sup> Anyone who bought a cycle top waited two to four years just to break even. Volatility has declined as the asset has grown, and each drawdown has bottomed higher than the last, but Bitcoin today is still several times more volatile than gold or major currencies.</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:10px;"><strong style="color:var(--orange);">What the data says:</strong> This is simply true. Bitcoin fell roughly 93% in 2011, 85% in 2013-15, 84% in 2017-18, and 77% in 2021-22. As this was last checked in November 2026 it was in another one, trading near $74,000, roughly 40% below its October 2025 peak.<sup><a href="#ref-44" style="color:var(--orange);text-decoration:none;font-size:10px;">[44]</a></sup> Anyone who bought a cycle top waited two to four years just to break even. Volatility has declined as the asset has grown, and each drawdown has bottomed higher than the last, but Bitcoin today is still several times more volatile than gold or major currencies.</div>
         <div style="font-size:12px;color:var(--text3);line-height:1.6;"><strong style="color:#fbbf24;">What remains unresolved:</strong> Whether volatility keeps declining until Bitcoin is stable enough to price bread in, or plateaus as a permanently violent asset. Seventeen years of data suggests the former. It does not prove it.</div>
       </div>
 
@@ -5166,8 +5163,13 @@
             <div style="width:100%;height:140px;background:linear-gradient(180deg,#f59e0b,rgba(245,158,11,0.3));border-radius:6px 6px 0 0;box-shadow:0 0 12px rgba(245,158,11,0.2);"></div>
             <div style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;">2024</div>
           </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="font-family:'Space Mono',monospace;font-size:12px;color:var(--orange);font-weight:700;" data-live="goldOzShort">~18 oz</div>
+            <div style="width:100%;height:84px;background:linear-gradient(180deg,#f59e0b,rgba(245,158,11,0.3));border-radius:6px 6px 0 0;"></div>
+            <div style="font-size:12px;color:var(--muted);font-family:'Space Mono',monospace;">Now</div>
+          </div>
         </div>
-        <div class="text-xs text-center" style="color:var(--muted);">In 2011, one Bitcoin could not buy a single ounce of gold. Today it buys <strong style="color:var(--orange);">dozens</strong>. This is adoption measured against hard money - not against inflating paper.</div>
+        <div class="text-xs text-center" style="color:var(--muted);">In 2011, one Bitcoin could not buy a single ounce of gold. Today it buys <strong style="color:var(--orange);" data-live="goldOz">about 18</strong>. Be honest about the last stretch, though: the ratio peaked near 40 ounces in late 2024 and has roughly halved since, because gold ran to record highs above $5,000 in early 2026 while bitcoin fell. Measured against hard money, Bitcoin has lost ground for two years. This is adoption measured against hard money - not against inflating paper.</div>
       </div>
 
       <!-- The mental model -->
@@ -5213,7 +5215,7 @@
           <circle cx="400" cy="90" r="5" fill="#f59e0b"/>
           <text x="400" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="rgba(245,158,11,0.6)">El Salvador</text>
           <circle cx="500" cy="42" r="5" fill="#f59e0b"/>
-          <text x="500" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="rgba(245,158,11,0.6)">Strategy 762K BTC</text>
+          <text x="500" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="rgba(245,158,11,0.6)">Strategy 850K BTC</text>
           <circle cx="600" cy="25" r="5" fill="#f59e0b"/>
           <text x="600" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="rgba(245,158,11,0.6)">BlackRock IBIT</text>
           <circle cx="700" cy="20" r="6" fill="#f59e0b" opacity="0.5"/>
@@ -5244,7 +5246,7 @@
           <span style="background:rgba(74,222,128,0.15);color:#4ade80;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;">LIGHTNING</span>
           <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Lightning Network: Instant, Nearly Free Payments</span>
         </div>
-        <p class="body-text" style="margin-bottom:10px;">The <span class="tooltip-word" tabindex="0">Lightning Network<span class="tooltip-box">A "Layer 2" protocol built on top of Bitcoin that enables instant, high-volume micropayments. Transactions settle in milliseconds for fractions of a penny.</span></span> has turned Bitcoin into a real-time payment rail. Transactions settle in <strong style="color:#4ade80;">milliseconds</strong> for fractions of a penny. El Salvador's Chivo wallet runs on Lightning. Strike uses it for cross-border remittances that are faster and cheaper than Western Union. Businesses like Fold, Bitrefill, and thousands of merchants worldwide accept Lightning payments daily. What Visa does for the dollar, Lightning does for Bitcoin - but without the middlemen taking 2-3% of every transaction.</p>
+        <p class="body-text" style="margin-bottom:10px;">The <span class="tooltip-word" tabindex="0">Lightning Network<span class="tooltip-box">A "Layer 2" protocol built on top of Bitcoin that enables instant, high-volume micropayments. Transactions settle in milliseconds for fractions of a penny.</span></span> has turned Bitcoin into a real-time payment rail. Transactions settle in <strong style="color:#4ade80;">milliseconds</strong> for fractions of a penny. El Salvador built its national Chivo wallet on Lightning in 2021 (the wallet passed to a private operator in 2026). Strike uses it for cross-border remittances that are faster and cheaper than Western Union. Businesses like Fold, Bitrefill, and thousands of merchants worldwide accept Lightning payments daily. What Visa does for the dollar, Lightning does for Bitcoin - but without the middlemen taking 2-3% of every transaction.</p>
       </div>
 
       <!-- MicroStrategy -->
@@ -5253,7 +5255,7 @@
           <span style="background:rgba(96,165,250,0.15);color:#60a5fa;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;">TREASURY</span>
           <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Strategy (MicroStrategy): Bitcoin as a Treasury Reserve</span>
         </div>
-        <p class="body-text" style="margin-bottom:10px;">Michael Saylor's Strategy (formerly MicroStrategy) has accumulated over <strong style="color:#60a5fa;">762,000 BTC</strong><sup><a href="#ref-22" style="color:var(--orange);text-decoration:none;font-size:10px;">[22]</a></sup>, making it by far the largest corporate holder of Bitcoin in the world. At current prices, that's tens of billions of dollars in Bitcoin on a single corporate balance sheet. Why? Because holding cash means losing 7-10% of purchasing power per year to real inflation. Bitcoin offers a treasury asset with a <em>fixed supply</em>, <em>no counterparty risk</em>, <em>24/7 global liquidity</em>, and a 17-year track record of outperforming every other asset class. The playbook is simple: instead of watching your cash reserves melt, convert them to the hardest money ever created. Strategy has continued to aggressively accumulate - issuing convertible notes, at-the-market equity offerings, and preferred stock specifically to acquire more Bitcoin. Since adopting this strategy, dozens of other public companies - including Tesla, Marathon Digital, Metaplanet, and Semler Scientific - have followed suit.</p>
+        <p class="body-text" style="margin-bottom:10px;">Michael Saylor's Strategy (formerly MicroStrategy) has accumulated more than <strong style="color:#60a5fa;">850,000 BTC</strong> (850,364 as of November 8, 2026, about 4% of all bitcoin that will ever exist)<sup><a href="#ref-22" style="color:var(--orange);text-decoration:none;font-size:10px;">[22]</a></sup>, making it by far the largest corporate holder of Bitcoin in the world. At current prices, that's tens of billions of dollars in Bitcoin on a single corporate balance sheet. Why? Because holding cash means losing 7-10% of purchasing power per year to real inflation. Bitcoin offers a treasury asset with a <em>fixed supply</em>, <em>no counterparty risk</em>, <em>24/7 global liquidity</em>, and the best long-run return of any major asset since 2009, punctuated by brutal drawdowns. The playbook is simple: instead of watching your cash reserves melt, convert them to the hardest money ever created. Strategy has continued to aggressively accumulate - issuing convertible notes, at-the-market equity offerings, and preferred stock specifically to acquire more Bitcoin. Since adopting this strategy, dozens of other public companies - including Metaplanet (44,000 BTC, now the second-largest corporate holder), MARA, Tesla (11,509 BTC, unsold through 2026) and Strive, which absorbed Semler Scientific in January 2026 - have followed suit. Not all of them only buy: MARA sold 13,597 BTC in October 2026 to repay a loan.</p>
       </div>
 
       <!-- Why Bitcoin is a strong treasury asset -->
@@ -5289,7 +5291,7 @@
           <span style="background:rgba(167,139,250,0.15);color:#a78bfa;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;">WALL STREET</span>
           <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">IBIT: The Most Successful ETP Launch in History</span>
         </div>
-        <p class="body-text" style="margin-bottom:10px;">When the SEC approved spot Bitcoin ETFs in January 2024<sup><a href="#ref-21" style="color:var(--orange);text-decoration:none;font-size:10px;">[21]</a></sup>, BlackRock's <strong style="color:#a78bfa;">iShares Bitcoin Trust (IBIT)</strong> shattered every record in ETP history. It reached $10 billion in assets faster than any ETF ever launched<sup><a href="#ref-21" style="color:var(--orange);text-decoration:none;font-size:10px;">[21]</a></sup> - faster than gold ETFs, S&amp;P 500 ETFs, bond ETFs, everything. Within months, the Bitcoin spot ETFs collectively held more Bitcoin than Satoshi Nakamoto's estimated stash. This wasn't retail speculation - this was pension funds, endowments, and sovereign wealth funds gaining exposure to Bitcoin through the world's most trusted financial infrastructure. Wall Street didn't kill Bitcoin. Wall Street <em>adopted</em> it.</p>
+        <p class="body-text" style="margin-bottom:10px;">When the SEC approved spot Bitcoin ETFs in January 2024<sup><a href="#ref-21" style="color:var(--orange);text-decoration:none;font-size:10px;">[21]</a></sup>, BlackRock's <strong style="color:#a78bfa;">iShares Bitcoin Trust (IBIT)</strong> shattered every record in ETP history. It reached $10 billion in assets faster than any ETF ever launched<sup><a href="#ref-21" style="color:var(--orange);text-decoration:none;font-size:10px;">[21]</a></sup> - faster than gold ETFs, S&amp;P 500 ETFs, bond ETFs, everything. Within months, the Bitcoin spot ETFs collectively held more Bitcoin than Satoshi Nakamoto's estimated stash. By November 2026 IBIT alone held about 800,000 BTC and the US spot ETFs together roughly 1.2 million, close to 6% of the total supply. The money flows both ways: the funds took in about $6 billion in the third quarter of 2026 and lost about $2 billion in the first weeks of the fourth. This wasn't retail speculation - this was pension funds, endowments, and sovereign wealth funds gaining exposure to Bitcoin through the world's most trusted financial infrastructure. Wall Street didn't kill Bitcoin. Wall Street <em>adopted</em> it.</p>
       </div>
 
       <!-- Strike -->
@@ -5298,7 +5300,7 @@
           <span style="background:rgba(251,191,36,0.15);color:#fbbf24;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;">FINANCIAL PRODUCTS</span>
           <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Strike: Borrow Against Your Bitcoin, Never Sell</span>
         </div>
-        <p class="body-text" style="margin-bottom:10px;">Strike has built lending products that let you <strong style="color:#fbbf24;">borrow against your Bitcoin</strong> without ever selling it. Need cash for a house, a car, or an emergency? Put up your BTC as collateral, get a loan in dollars, and keep your upside exposure. When the loan is paid off, your Bitcoin comes back - and it may be worth far more than when you borrowed against it. This is the <span class="tooltip-word" tabindex="0">"never sell" strategy<span class="tooltip-box">By borrowing against Bitcoin instead of selling, you avoid triggering capital gains taxes, keep your long-term position intact, and benefit from future appreciation. This is how the wealthy have always managed assets - borrow against, never sell.</span></span> that the ultra-wealthy have used for generations with stocks and real estate - now available to anyone with Bitcoin.</p>
+        <p class="body-text" style="margin-bottom:10px;">Strike has built lending products that let you <strong style="color:#fbbf24;">borrow against your Bitcoin</strong> without ever selling it. Need cash for a house, a car, or an emergency? Put up your BTC as collateral, get a loan in dollars, and keep your upside exposure. When the loan is paid off, your Bitcoin comes back - and it may be worth far more than when you borrowed against it. The catch is real: if the price falls far enough, as it did by about 40% in 2026, the lender sells your collateral unless you add more. This is the <span class="tooltip-word" tabindex="0">"never sell" strategy<span class="tooltip-box">By borrowing against Bitcoin instead of selling, you avoid triggering capital gains taxes, keep your long-term position intact, and benefit from future appreciation. This is how the wealthy have always managed assets - borrow against, never sell.</span></span> that the ultra-wealthy have used for generations with stocks and real estate - now available to anyone with Bitcoin.</p>
       </div>
 
       <!-- STRC - Strategy Preferred Stock -->
@@ -5307,7 +5309,7 @@
           <span style="background:rgba(52,211,153,0.15);color:#34d399;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;">FIXED INCOME</span>
           <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Bitcoin-Backed Financial Products Enter Wall Street</span>
         </div>
-        <p class="body-text" style="margin-bottom:10px;">Strategy (the company holding 762,000+ BTC) has started issuing traditional Wall Street instruments - <span class="tooltip-word" tabindex="0">preferred stock<span class="tooltip-box">Preferred stock sits between common stock and bonds. It pays a fixed dividend (like a bond) but represents ownership in the company (like a stock). It's a core instrument used by pensions, endowments, and insurance companies.</span></span> (STRC) and convertible notes - all backed by a corporate treasury denominated in Bitcoin. This is a big deal: for the first time, the <strong style="color:#34d399;">$130+ trillion bond market</strong> has a bridge into Bitcoin. Pensions, endowments, and sovereign wealth funds that are <em>required</em> to hold fixed income instruments can now get Bitcoin exposure through products that fit their existing frameworks. Bitcoin is being <strong style="color:#34d399;">embedded into the infrastructure of global capital markets</strong>.</p>
+        <p class="body-text" style="margin-bottom:10px;">Strategy (the company holding 850,000+ BTC) has started issuing traditional Wall Street instruments - <span class="tooltip-word" tabindex="0">preferred stock<span class="tooltip-box">Preferred stock sits between common stock and bonds. It pays a fixed dividend (like a bond) but represents ownership in the company (like a stock). It's a core instrument used by pensions, endowments, and insurance companies.</span></span> (STRC) and convertible notes - all backed by a corporate treasury denominated in Bitcoin. This is a big deal: for the first time, the <strong style="color:#34d399;">$130+ trillion bond market</strong> has a bridge into Bitcoin. Pensions, endowments, and sovereign wealth funds that are <em>required</em> to hold fixed income instruments can now get Bitcoin exposure through products that fit their existing frameworks. Bitcoin is being <strong style="color:#34d399;">embedded into the infrastructure of global capital markets</strong>.</p>
       </div>
 
       <!-- Summary visual -->
@@ -5320,7 +5322,7 @@
           </div>
           <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
             <span style="color:var(--orange);font-weight:700;min-width:90px;">Treasuries</span>
-            <span style="color:var(--text2);">Strategy (762K BTC), Tesla, Marathon, Metaplanet, Semler Scientific</span>
+            <span style="color:var(--text2);">Strategy (850K BTC), Metaplanet (44K), MARA, Tesla (11.5K), Strive</span>
           </div>
           <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
             <span style="color:var(--orange);font-weight:700;min-width:90px;">Wall Street</span>
@@ -5328,7 +5330,7 @@
           </div>
           <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
             <span style="color:var(--orange);font-weight:700;min-width:90px;">Nations</span>
-            <span style="color:var(--text2);">El Salvador (legal tender), US Strategic Bitcoin Reserve</span>
+            <span style="color:var(--text2);">El Salvador (national reserve; mandatory acceptance dropped in 2025), US Strategic Bitcoin Reserve (seized coins held under a 2025 executive order, no purchases so far)</span>
           </div>
           <div class="flex items-center gap-3 text-xs p-2 rounded-lg" style="background:rgba(245,158,11,0.06);">
             <span style="color:var(--orange);font-weight:700;min-width:90px;">Lending</span>
@@ -7023,7 +7025,7 @@
         <span class="font-bold" style="color:#60a5fa;">Real example:</span> A family in the Philippines receives $200/month from a relative working in the US. Through Western Union, that costs $12 in fees and takes 3-5 business days. Through Lightning, it costs less than a penny and arrives in two seconds. Remittances are a $700 billion per year market. Lightning is eating it.
       </div>
 
-      <p class="body-text">This is already happening. <strong style="color:#60a5fa;">El Salvador</strong> runs its national Bitcoin payment system on Lightning. <strong style="color:#60a5fa;">Steak 'n Shake</strong> accepts Lightning at every location, saving 50% on processing fees vs credit cards. <strong style="color:#60a5fa;">Coinbase, Cash App, Kraken, and Strike</strong> all support Lightning withdrawals.</p>
+      <p class="body-text">This is already happening. <strong style="color:#60a5fa;">El Salvador</strong> launched a national Bitcoin wallet on Lightning in 2021. <strong style="color:#60a5fa;">Steak 'n Shake</strong> accepts Lightning at every location, saving 50% on processing fees vs credit cards. <strong style="color:#60a5fa;">Coinbase, Cash App, Kraken, and Strike</strong> all support Lightning withdrawals.</p>
 
       <p class="body-text">The key insight: Bitcoin doesn't need to compete with Visa at Layer 1. It needs to be <strong>more secure than any vault</strong> at Layer 1, and <strong style="color:#60a5fa;">faster than any card</strong> at Layer 2. Lightning delivers both - without compromising Bitcoin's core principles of decentralization and fixed supply.</p>
 
@@ -7050,8 +7052,8 @@
             <rect x="0" y="22" width="12" height="40" rx="3" fill="#f59e0b" fill-opacity="0.8"/>
             <line x1="12" y1="68" x2="12" y2="85" stroke="#f59e0b" stroke-width="0.5" opacity="0.5"/>
             <text x="12" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#f59e0b">₿itcoin</text>
-            <text x="12" y="107" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">~$1.7T</text>
-            <text x="12" y="118" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280">(0.19%)</text>
+            <text x="12" y="107" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280" data-live="mcap">~$1.5T</text>
+            <text x="12" y="118" text-anchor="middle" font-family="monospace" font-size="7" fill="#6b7280" data-live="mcapShare">(0.17%)</text>
             <!-- Labels for other assets -->
             <text x="200" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">Real Estate $330T</text>
             <text x="400" y="95" text-anchor="middle" font-family="monospace" font-size="8" fill="#6b7280">Fixed Income $130T</text>
@@ -7069,7 +7071,7 @@
         <span class="font-bold" style="color:var(--orange);">Where are we on the adoption curve?</span> Less than 5% of the global population holds any Bitcoin. For comparison, the internet hit 5% adoption around 1997. Email hit 5% around 1995. Smartphones hit 5% around 2008. In each case, the next decade brought 50%+ adoption. If Bitcoin follows the same S-curve, you are reading this at the equivalent of dial-up internet. The infrastructure is being built. The institutions are arriving. But the average person has not yet bought their first satoshi.
       </div>
 
-      <p class="body-text">The world holds roughly <strong style="color:var(--orange);">$900 trillion</strong><sup><a href="#ref-38" style="color:var(--orange);text-decoration:none;font-size:10px;">[38]</a></sup> in store-of-value assets - real estate, bonds, equities, gold, art, treasuries. Bitcoin's entire market cap is around <strong style="color:var(--orange);">$1.7 trillion</strong>. That's less than <strong>0.2%</strong>. If you walked into a room of 500 people representing global wealth, Bitcoin wouldn't even be a full person yet.</p>
+      <p class="body-text">The world holds roughly <strong style="color:var(--orange);">$900 trillion</strong><sup><a href="#ref-38" style="color:var(--orange);text-decoration:none;font-size:10px;">[38]</a></sup> in store-of-value assets - real estate, bonds, equities, gold, art, treasuries. Bitcoin's entire market cap is around <strong style="color:var(--orange);"><span data-live="mcapWords">$1.5 trillion</span></strong>. That's less than <strong>0.2%</strong>. If you walked into a room of 500 people representing global wealth, Bitcoin wouldn't even be a full person yet.</p>
 
       <!-- ── Asset Comparison Grid ── -->
       <div class="glass p-5 my-6" style="border:2px solid rgba(245,158,11,0.2);">
@@ -7139,7 +7141,7 @@
           <div>
             <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;">
               <span style="font-family:'Space Mono',monospace;font-size:12px;color:var(--orange);font-weight:700;">&#8383; Bitcoin</span>
-              <span style="font-family:'Space Mono',monospace;font-size:12px;color:var(--orange);font-weight:700;" id="btcMarketCapLabel">~$1.7T</span>
+              <span style="font-family:'Space Mono',monospace;font-size:12px;color:var(--orange);font-weight:700;" id="btcMarketCapLabel" data-live="mcap">~$1.5T</span>
             </div>
             <div style="height:18px;background:rgba(245,158,11,0.06);border-radius:9px;overflow:hidden;">
               <div style="width:0.5%;min-width:4px;height:100%;background:linear-gradient(90deg,var(--orange),var(--orange-bright));border-radius:9px;box-shadow:0 0 8px var(--orange-glow);"></div>
@@ -7221,7 +7223,7 @@
         <!-- Results display -->
         <div style="text-align:center;">
           <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Implied Bitcoin Market Cap</div>
-          <div style="font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:var(--orange);margin-bottom:4px;" id="impliedMarketCap">$1.7T</div>
+          <div style="font-family:'Space Mono',monospace;font-size:28px;font-weight:700;color:var(--orange);margin-bottom:4px;" id="impliedMarketCap">$1.5T</div>
           <div style="display:flex;justify-content:center;gap:24px;margin-top:12px;">
             <div style="text-align:center;">
               <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Price per Bitcoin</div>
@@ -7232,7 +7234,7 @@
               <div style="font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:#4ade80;" id="impliedMultiple">1.0x</div>
             </div>
           </div>
-          <div style="font-size:12px;color:var(--muted);margin-top:12px;">Based on 19.8M BTC in circulation (of 21M max supply)</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:12px;">Based on <span data-live="supplyM">20.1M</span> BTC in circulation (of 21M max supply) at the live price</div>
         </div>
 
         <div class="neon-divider" style="margin:20px 0;"></div>
@@ -7453,7 +7455,7 @@
 
           <div style="padding:12px 14px;border-radius:10px;background:rgba(245,158,11,0.06);border-left:3px solid var(--orange);border:1px solid rgba(245,158,11,0.15);">
             <div style="display:flex;justify-content:space-between;align-items:center;"><div style="font-size:12px;font-weight:700;color:var(--orange);">&#127829; May 22, 2010 - Bitcoin Pizza Day</div></div>
-            <div style="font-size:12px;color:var(--text3);line-height:1.5;margin-top:4px;">Laszlo Hanyecz pays <strong style="color:var(--orange);">10,000 BTC for two Papa John's pizzas</strong>. The first real-world Bitcoin purchase. At today's prices, that's roughly $1 billion per pizza. Celebrated every May 22nd by Bitcoiners worldwide.</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.5;margin-top:4px;">Laszlo Hanyecz pays <strong style="color:var(--orange);">10,000 BTC for two Papa John's pizzas</strong>. The first real-world Bitcoin purchase. At today's prices, that's <span data-btc="5000">hundreds of millions of dollars</span> per pizza. Celebrated every May 22nd by Bitcoiners worldwide.</div>
           </div>
 
           <div style="padding:12px 14px;border-radius:10px;background:rgba(245,158,11,0.04);border-left:3px solid var(--orange);">
@@ -7473,7 +7475,7 @@
 
           <div style="padding:12px 14px;border-radius:10px;background:rgba(245,158,11,0.04);border-left:3px solid var(--orange);">
             <div style="display:flex;justify-content:space-between;align-items:center;"><div style="font-size:12px;font-weight:700;color:var(--orange);">Sep 7, 2021 - El Salvador Makes History</div></div>
-            <div style="font-size:12px;color:var(--text3);line-height:1.5;margin-top:4px;">El Salvador becomes the <strong style="color:var(--orange);">first country to adopt Bitcoin as legal tender</strong>. President Bukele's "Bitcoin Law" means every business must accept it. Love it or hate it, a nation-state just validated a 12-year-old open-source project.</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.5;margin-top:4px;">El Salvador becomes the <strong style="color:var(--orange);">first country to adopt Bitcoin as legal tender</strong>. President Bukele's "Bitcoin Law" means every business must accept it. Love it or hate it, a nation-state just validated a 12-year-old open-source project. In January 2025, as a condition of an IMF loan, acceptance became voluntary and the state wound down its wallet business, though the government has kept its bitcoin reserve.</div>
           </div>
 
           <div style="padding:12px 14px;border-radius:10px;background:rgba(245,158,11,0.04);border-left:3px solid var(--orange);">
@@ -7495,7 +7497,7 @@
         <div style="display:grid;gap:10px;">
           <div style="padding:14px;border-radius:12px;background:rgba(167,139,250,0.04);border:1px solid rgba(167,139,250,0.15);">
             <div style="font-size:12px;font-weight:700;color:#a78bfa;margin-bottom:4px;">&#127793; The Bitcoin Faucet</div>
-            <div style="font-size:12px;color:var(--text3);line-height:1.6;">In 2010, developer Gavin Andresen created a website that gave away <strong style="color:#a78bfa;">5 BTC to anyone who visited</strong> - for free. The goal was to spread Bitcoin adoption. He gave away over 19,700 BTC total. At today's prices, each visitor's gift would be worth ~$500,000. The faucet ran until 2012, when 5 BTC was no longer pocket change.</div>
+            <div style="font-size:12px;color:var(--text3);line-height:1.6;">In 2010, developer Gavin Andresen created a website that gave away <strong style="color:#a78bfa;">5 BTC to anyone who visited</strong> - for free. The goal was to spread Bitcoin adoption. He gave away over 19,700 BTC total. At today's prices, each visitor's gift would be worth <span data-btc="5">roughly $370,000</span>. The faucet ran until 2012, when 5 BTC was no longer pocket change.</div>
           </div>
 
           <div style="padding:14px;border-radius:12px;background:rgba(167,139,250,0.04);border:1px solid rgba(167,139,250,0.15);">
@@ -7711,7 +7713,7 @@
           </div>
           <div id="ref-22" style="display:flex;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--glass-border);background:rgba(0,0,0,0.2);">
             <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--orange);">[22]</div>
-            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Strategy (MicroStrategy) SEC Form 8-K filings; Bitcoin holdings tracker by bitcointreasuries.net</div>
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Strategy (MicroStrategy) SEC Form 8-K filings, most recently November 9, 2026 (850,364 BTC at an average cost of $75,456); Tesla and MARA Form 10-Q for Q3 2026; Metaplanet treasury disclosures; Strive press release on the Semler Scientific acquisition, January 16, 2026; Glassnode US spot ETF balances, November 2026; Bitcoin holdings tracker by bitcointreasuries.net</div>
           </div>
           <div id="ref-23" style="display:flex;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--glass-border);background:rgba(0,0,0,0.2);">
             <div style="min-width:28px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:var(--orange);">[23]</div>
@@ -7849,7 +7851,7 @@
       </div>
 
       <div class="text-xs text-center mt-6" style="color:var(--muted);line-height:1.7;">
-        This guide is educational and open source. Static figures were last verified in November 2026. Price, debt, hash rate and fee figures update live.<br>
+        This guide is educational and open source. Static figures were last verified on November 14, 2026. Price, debt, hash rate and fee figures update live.<br>
         Live statistics update automatically from public APIs. All claims are independently verifiable.<br>
         <span style="color:var(--orange);">Don&rsquo;t trust. Verify.</span>
       </div>
@@ -7871,7 +7873,7 @@
       <div class="space-y-2">
         <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Block Height</span>
-          <span id="blockHeight" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">898,421</span>
+          <span id="blockHeight" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">976,000</span>
         </div>
         <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Mempool Txs</span>
@@ -7887,7 +7889,7 @@
         </div>
         <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Mined So Far</span>
-          <span id="minedSupply" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">19,847,300</span>
+          <span id="minedSupply" style="color:var(--orange-bright);font-family:'Space Mono',monospace;">20,112,500</span>
         </div>
         <div class="flex justify-between text-xs">
           <span style="color:var(--muted);">Hash Rate</span>

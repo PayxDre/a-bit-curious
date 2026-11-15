@@ -90,7 +90,7 @@
     },
     {
       "q": "Can governments ban Bitcoin?",
-      "a": "Multiple governments have tried. China banned Bitcoin mining and trading twice; the hash rate recovered in weeks as miners relocated. India threatened a complete ban, then reversed course. Nigeria banned bank transfers to crypto exchanges; peer-to-peer adoption surged. Meanwhile, El Salvador made Bitcoin legal tender, and the US approved spot Bitcoin ETFs. Bitcoin is a protocol transmitting information between computers. Banning it would require banning mathematics and peer-to-peer networking.",
+      "a": "Multiple governments have tried. China banned Bitcoin mining and trading twice; the hash rate recovered in weeks as miners relocated. India threatened a complete ban, then reversed course. Nigeria banned bank transfers to crypto exchanges; peer-to-peer adoption surged. Meanwhile, El Salvador made Bitcoin legal tender in 2021 (acceptance became voluntary in 2025), and the US approved spot Bitcoin ETFs. Bitcoin is a protocol transmitting information between computers. Banning it would require banning mathematics and peer-to-peer networking.",
       "sources": ["Country-specific regulatory actions", "Hash rate migration data"],
       "section": "myths"
     },
@@ -132,7 +132,7 @@
     },
     {
       "q": "Is it too late to buy Bitcoin?",
-      "a": "Bitcoin's market capitalization is approximately 0.19% of global store-of-value assets (roughly $900 trillion in real estate, bonds, equities, gold, and art). Less than 5% of the global population holds any Bitcoin. For comparison, the internet hit 5% adoption around 1997, and the following decade brought 50%+ adoption. If Bitcoin follows a similar S-curve, current adoption is equivalent to dial-up internet. Bitcoin has gone from $0 to approximately $100,000 in 16 years with every cycle low exceeding the previous cycle high.",
+      "a": "Bitcoin's market capitalization is under 0.2% of global store-of-value assets (roughly $900 trillion in real estate, bonds, equities, gold, and art). Less than 5% of the global population holds any Bitcoin. For comparison, the internet hit 5% adoption around 1997, and the following decade brought 50%+ adoption. If Bitcoin follows a similar S-curve, current adoption is equivalent to dial-up internet. Bitcoin has gone from $0 to approximately $100,000 in 16 years with every cycle low exceeding the previous cycle high.",
       "sources": ["Global asset market estimates", "Adoption surveys", "Bitcoin price history"],
       "section": "toolate"
     },

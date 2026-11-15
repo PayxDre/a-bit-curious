@@ -539,3 +539,49 @@ renderHome();
   };
   mountWhenVisible(currentSection);
 })();
+
+// ═══════════════════════════════════════════════════════════════
+//   LIVE FIGURES: anything that depends on price, supply or the
+//   gold ratio is computed, with dated fallbacks when offline.
+// ═══════════════════════════════════════════════════════════════
+const LIVE_FALLBACK = {price: 74000, gold: 4000, height: 976000}; // mid-November 2026
+function supplyAtHeight(h){
+  let supply = 0, reward = 50, left = h + 1;
+  while(left > 0 && reward > 0){ const n = Math.min(left, 210000); supply += n * reward; left -= n; reward /= 2; }
+  return supply;
+}
+let liveHeight = 0;
+window.liveBtc = function(){
+  const price = (typeof btcPrice !== 'undefined' && btcPrice > 0) ? btcPrice : LIVE_FALLBACK.price;
+  const gold = (typeof goldPrice !== 'undefined' && goldPrice > 0) ? goldPrice : LIVE_FALLBACK.gold;
+  const height = liveHeight || LIVE_FALLBACK.height;
+  return {price: price, gold: gold, height: height, supply: supplyAtHeight(height)};
+};
+function usdWords(n){
+  if(n >= 1e12) return '$' + (n / 1e12).toFixed(2).replace(/\.?0+$/, '') + ' trillion';
+  if(n >= 1e9) return '$' + (n / 1e9).toFixed(n >= 1e10 ? 0 : 1) + ' billion';
+  if(n >= 1e6) return '$' + Math.round(n / 1e6) + ' million';
+  return '$' + (n >= 10000 ? Math.round(n / 1000) * 1000 : Math.round(n)).toLocaleString('en-US');
+}
+function renderLiveFigures(){
+  const v = window.liveBtc(), mcap = v.price * v.supply;
+  const GLOBAL_STORE_OF_VALUE = 9e14; // ~$900T, see reference [38]
+  document.querySelectorAll('[data-btc]').forEach(function(el){ el.textContent = 'about ' + usdWords(parseFloat(el.dataset.btc) * v.price); });
+  const set = function(key, text){ document.querySelectorAll('[data-live="' + key + '"]').forEach(function(el){ el.textContent = text; }); };
+  set('mcap', '~$' + (mcap / 1e12).toFixed(1) + 'T');
+  set('mcapWords', usdWords(mcap));
+  set('mcapShare', '(' + (mcap / GLOBAL_STORE_OF_VALUE * 100).toFixed(2) + '%)');
+  set('supplyM', (v.supply / 1e6).toFixed(2) + 'M');
+  set('goldOz', 'about ' + Math.round(v.price / v.gold));
+  set('goldOzShort', '~' + Math.round(v.price / v.gold) + ' oz');
+  const ms = document.getElementById('minedSupply'); if(ms) ms.textContent = Math.floor(v.supply).toLocaleString('en-US');
+  if(typeof window.updateCaptureCalc === 'function') window.updateCaptureCalc();
+}
+(function(){
+  const bh = document.getElementById('blockHeight');
+  const read = function(){ const n = bh ? parseInt(bh.textContent.replace(/[^\d]/g, ''), 10) : 0; if(n > 900000) liveHeight = n; renderLiveFigures(); };
+  if(bh) new MutationObserver(read).observe(bh, {childList: true, characterData: true, subtree: true});
+  const bp = document.getElementById('btcPrice');
+  if(bp) new MutationObserver(renderLiveFigures).observe(bp, {childList: true, characterData: true, subtree: true});
+  renderLiveFigures();
+})();
